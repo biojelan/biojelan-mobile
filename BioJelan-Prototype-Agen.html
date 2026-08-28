@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BioJelan — Agen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF2E8;
+    --paper: #F7F9F3;
+    --surface: #FFFFFF;
+    --ink: #16261F;
+    --ink-soft: #3C4A41;
+    --muted: #6E7C71;
+    --line: #DCE3D5;
+    --primary: #1F4D3A;
+    --primary-deep: #143329;
+    --primary-tint: #DCEADF;
+    --amber: #D69A2E;
+    --amber-deep: #A8701D;
+    --amber-tint: #F7E9CB;
+    --rust: #B85C2A;
+    --rust-tint: #F3DFCF;
+    --shadow: 0 18px 40px -18px rgba(20,45,35,.35);
+    --radius-lg: 26px;
+    --radius-md: 16px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh; min-height:100dvh;
+    background:
+      radial-gradient(60% 50% at 15% 0%, #E3ECD8 0%, transparent 60%),
+      radial-gradient(50% 40% at 100% 100%, #E1E9DA 0%, transparent 60%),
+      var(--bg);
+    font-family:'Manrope',sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    padding:40px 16px; color:var(--ink);
+  }
+  h1,h2,h3,.display{font-family:'Sora',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:.01em;}
+
+  /* ---------- iPhone-style device frame ---------- */
+  .device{
+    position:relative; width:393px; max-width:100%;
+    background:linear-gradient(155deg,#3a3a3d 0%,#1c1c1e 45%,#0b0b0c 100%);
+    border-radius:56px; padding:12px;
+    box-shadow:var(--shadow), 0 0 0 1.5px rgba(0,0,0,.5), inset 0 0 1.5px 1px rgba(255,255,255,.12);
+  }
+  .device::before{content:""; position:absolute; left:-3px; top:132px; width:3px; height:58px; background:#141416; border-radius:2px 0 0 2px; box-shadow:0 74px 0 #141416;}
+  .device::after{content:""; position:absolute; right:-3px; top:172px; width:3px; height:88px; background:#141416; border-radius:0 2px 2px 0;}
+  .screen-frame{position:relative; width:100%; height:852px; background:var(--paper); border-radius:44px; overflow:hidden; display:flex; flex-direction:column;}
+  .dynamic-island{position:absolute; top:14px; left:50%; transform:translateX(-50%); width:104px; height:31px; background:#000; border-radius:18px; z-index:50;}
+  .cam-hole{display:none;}
+  .statusbar{height:50px; flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; font-size:13px; font-weight:700; color:var(--ink); position:relative; z-index:40;}
+  .statusbar .icons{display:flex; align-items:center; gap:6px;}
+
+  .content{flex:1 1 auto; min-height:0; overflow-y:auto; -ms-overflow-style:none; scrollbar-width:none; padding-bottom:14px;}
+  .content::-webkit-scrollbar{display:none;}
+  .screen{display:none; flex-direction:column; flex:1; min-height:0; overflow:hidden;}
+  .screen.active{display:flex;}
+
+  /* ---------- Full-bleed on real phones — the mockup frame above is for desktop/Figma capture only ---------- */
+  @media (max-width:480px){
+    body{display:block; padding:0; background:var(--paper);}
+    body > div{width:100%;}
+    .device{width:100%; background:transparent; border-radius:0; padding:0; box-shadow:none;}
+    .device::before, .device::after{display:none;}
+    .screen-frame{height:100vh; height:100dvh; border-radius:0;}
+    .dynamic-island{display:none;}
+    .statusbar{padding-top:env(safe-area-inset-top);}
+    .modal-overlay{border-radius:0;}
+  }
+
+  .tabbar{display:none; flex:0 0 auto; background:var(--surface); border-top:1px solid var(--line); padding:9px 4px calc(25px + env(safe-area-inset-bottom)); justify-content:space-between; gap:2px; position:relative; z-index:40;}
+  .tabbar.visible{display:flex;}
+  .tab{flex:1; border:none; background:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; padding:5px 2px 2px; color:var(--muted); font-size:10px; font-weight:700; border-radius:12px;}
+  .tab svg{width:20px; height:20px; stroke:var(--muted); fill:none; stroke-width:1.8;}
+  .tab.active{color:var(--primary);}
+  .tab.active svg{stroke:var(--primary);}
+  .dot{width:4px;height:4px;border-radius:50%;background:var(--primary);opacity:0;margin-top:-2px;}
+  .tab.active .dot{opacity:1;}
+
+  .topbar{padding:6px 22px 16px; display:flex; align-items:center; justify-content:space-between;}
+  .topbar h2{margin:0; font-size:19px; font-weight:700; letter-spacing:-.01em;}
+  .iconbtn{width:36px; height:36px; border-radius:50%; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto; cursor:pointer;}
+  .iconbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;}
+
+  .btn{border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-weight:800; font-size:14.5px; border-radius:14px; padding:14px 18px; display:flex; align-items:center; justify-content:center; gap:8px; width:100%;}
+  .btn-primary{background:var(--primary); color:#EFF6EF;}
+  .btn-primary:active{background:var(--primary-deep);}
+  .btn-outline{background:var(--surface); color:var(--ink); border:1.5px solid var(--line);}
+  .btn-ghost{background:transparent; color:var(--primary); border:1.5px solid var(--primary-tint);}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:12px; font-weight:700; color:var(--ink-soft); margin-bottom:6px;}
+  .field input{width:100%; padding:13px 14px; border-radius:12px; border:1.5px solid var(--line); background:var(--surface); font-family:'Manrope',sans-serif; font-size:14px; color:var(--ink); outline:none;}
+  .field input:focus{border-color:var(--primary);}
+  .field input[readonly]{background:var(--primary-tint); color:var(--primary); font-weight:800; border-color:var(--primary-tint);}
+  .field .hint{font-size:11px; color:var(--muted); margin-top:5px;}
+
+  .chip{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px;}
+  .chip-open{background:var(--primary-tint); color:var(--primary);}
+  .chip-closed{background:var(--rust-tint); color:var(--rust);}
+  .drip{width:7px;height:7px;border-radius:50% 50% 50% 0; transform:rotate(45deg); display:inline-block;}
+  .drip-open{background:var(--primary);}
+  .drip-closed{background:var(--rust);}
+
+  /* ---------- Auth ---------- */
+  #screen-auth .content{display:flex; flex-direction:column; justify-content:center; padding:0 26px;}
+  .brandmark{width:56px;height:56px;border-radius:16px; background:linear-gradient(155deg,var(--amber) 0%, var(--amber-deep) 100%); display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:0 10px 22px -8px rgba(168,112,29,.55);}
+  .brandmark svg{width:28px;height:28px;fill:#fff;}
+  .auth-title{font-size:24px; font-weight:800; margin:0 0 6px; letter-spacing:-.02em;}
+  .auth-sub{font-size:13.5px; color:var(--muted); margin:0 0 22px; line-height:1.5;}
+  .role-note{display:flex; align-items:center; gap:9px; background:var(--amber-tint); border-radius:14px; padding:11px 13px; margin-bottom:20px;}
+  .role-note svg{width:17px;height:17px; stroke:var(--amber-deep); fill:none; stroke-width:1.9; flex:0 0 auto;}
+  .role-note span{font-size:11.5px; color:#5C4419; font-weight:700; line-height:1.4;}
+  .auth-foot{text-align:center; font-size:12.5px; color:var(--muted); margin-top:16px;}
+  .auth-foot a{color:var(--primary); font-weight:800; text-decoration:none;}
+
+  /* ---------- Home ---------- */
+  .hello{padding:20px 22px 4px; display:flex; align-items:flex-start; justify-content:space-between;}
+  .hello .eyebrow{font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--amber-deep); margin:0 0 4px;}
+  .hello h2{margin:0; font-size:19px; font-weight:800; letter-spacing:-.02em;}
+  .status-toggle{display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:6px 12px 6px 6px; cursor:pointer;}
+  .status-toggle .knob{width:20px;height:20px;border-radius:50%; background:var(--primary); transition:background .15s;}
+  .status-toggle.closed .knob{background:var(--rust);}
+  .status-toggle span{font-size:11.5px; font-weight:800;}
+
+  .price-band{margin:16px 22px 6px; background:linear-gradient(160deg, var(--primary) 0%, var(--primary-deep) 100%); border-radius:var(--radius-lg); padding:18px 18px 16px; display:flex; align-items:center; gap:14px; color:#EFF6EF; position:relative; overflow:hidden;}
+  .price-band::after{content:""; position:absolute; right:-30px; top:-40px; width:150px; height:150px; border-radius:50%; background:rgba(214,154,46,.18);}
+  .drop-gauge{flex:0 0 auto; position:relative; z-index:2;}
+  .drop-gauge svg{width:66px; height:82px; display:block;}
+  .price-info{position:relative; z-index:2;}
+  .price-info .label{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; opacity:.75; margin:0 0 2px;}
+  .price-info .amount{font-size:23px; font-weight:800; margin:0; font-family:'Sora',sans-serif; letter-spacing:-.01em;}
+  .price-info .amount span{font-size:12.5px; font-weight:600; opacity:.75;}
+  .price-info .updated{font-size:11px; opacity:.7; margin:5px 0 0;}
+
+  .stat-row{display:flex; gap:10px; padding:16px 22px 4px;}
+  .stat-card{flex:1; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px;}
+  .stat-card .n{font-size:18px; font-weight:800; font-family:'Sora',sans-serif;}
+  .stat-card .l{font-size:10.5px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.03em; margin-top:2px;}
+
+  .stock-card{margin:16px 22px 0; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:16px; display:flex; gap:14px; align-items:center;}
+  .stock-mini-gauge{flex:0 0 auto; width:54px; height:66px; position:relative;}
+  .stock-mini-gauge svg{width:100%; height:100%;}
+  .stock-body{flex:1;}
+  .stock-body .row1{display:flex; align-items:center; justify-content:space-between;}
+  .stock-body h4{margin:0; font-size:14px; font-weight:800;}
+  .stock-body .sub{font-size:11.5px; color:var(--muted); margin-top:2px;}
+  .progress-track{height:7px; border-radius:99px; background:var(--line); margin-top:10px; overflow:hidden;}
+  .progress-fill{height:100%; border-radius:99px; background:linear-gradient(90deg,var(--amber),var(--primary));}
+
+  .cta-row{padding:18px 22px 4px;}
+
+  .section-head{display:flex; align-items:center; justify-content:space-between; padding:20px 22px 10px;}
+  .section-head h3{margin:0; font-size:15.5px; font-weight:800; letter-spacing:-.01em;}
+  .section-head a{font-size:12px; font-weight:800; color:var(--primary); text-decoration:none; cursor:pointer;}
+
+  /* ---------- Transaksi ---------- */
+  .summary-strip{display:flex; gap:10px; padding:6px 22px 16px;}
+  .sum-card{flex:1; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px;}
+  .sum-card .n{font-size:16.5px; font-weight:800; font-family:'Sora',sans-serif;}
+  .sum-card .l{font-size:10.5px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.03em;}
+
+  .tx-list{padding:0 22px 90px; display:flex; flex-direction:column; gap:10px;}
+  .tx-row{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px 14px; display:flex; gap:12px; align-items:center;}
+  .tx-avatar{width:38px;height:38px; border-radius:11px; background:var(--primary-tint); color:var(--primary); display:flex; align-items:center; justify-content:center; flex:0 0 auto; font-weight:800; font-size:13px;}
+  .tx-avatar.cancel{background:var(--rust-tint); color:var(--rust);}
+  .tx-mid{flex:1; min-width:0;}
+  .tx-mid h4{margin:0 0 3px; font-size:13.5px; font-weight:800;}
+  .tx-mid .d{font-size:11.5px; color:var(--muted);}
+  .tx-right{text-align:right; flex:0 0 auto;}
+  .tx-right .amt{font-size:13px; font-weight:800; font-family:'IBM Plex Mono',monospace;}
+  .tx-right .st{font-size:10.5px; font-weight:800; margin-top:4px;}
+  .tx-right .st.ok{color:var(--primary);}
+  .tx-right .st.no{color:var(--rust);}
+
+  .fab{position:absolute; right:22px; bottom:96px; width:56px; height:56px; border-radius:18px; background:var(--amber-deep); box-shadow:0 14px 26px -10px rgba(168,112,29,.6); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:30;}
+  .fab svg{width:24px;height:24px; stroke:#fff; fill:none; stroke-width:2.4;}
+
+  /* ---------- Stok ---------- */
+  .gauge-big-wrap{display:flex; flex-direction:column; align-items:center; padding:14px 22px 6px;}
+  .gauge-big{width:150px; height:184px; position:relative;}
+  .gauge-big svg{width:100%; height:100%;}
+  .gauge-label{text-align:center; margin-top:10px;}
+  .gauge-label .n{font-size:26px; font-weight:800; font-family:'Sora',sans-serif;}
+  .gauge-label .l{font-size:12px; color:var(--muted); font-weight:700;}
+  .threshold-note{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px;}
+
+  .stock-history{padding:0 22px 16px; display:flex; flex-direction:column; gap:8px;}
+  .stock-hrow{display:flex; align-items:center; gap:11px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:11px 13px;}
+  .stock-hrow svg{width:16px;height:16px; stroke:var(--primary); fill:none; stroke-width:2; flex:0 0 auto;}
+  .stock-hrow .k{font-size:12.5px; font-weight:700; flex:1;}
+  .stock-hrow .v{font-size:12.5px; font-weight:800; font-family:'IBM Plex Mono',monospace; color:var(--primary);}
+  .stock-hrow .t{font-size:10.5px; color:var(--muted);}
+
+  .issue-link{margin:4px 22px 18px; text-align:center; font-size:12px; font-weight:800; color:var(--rust); padding:12px; border-radius:14px; border:1.5px dashed var(--rust-tint); cursor:pointer;}
+
+  /* ---------- Pickup ---------- */
+  .pickup-hero{margin:16px 22px 0; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:18px;}
+  .pickup-hero .top-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .pickup-hero .pid{font-size:11px; color:var(--muted); font-weight:700;}
+  .pickup-hero .pid span{font-family:'IBM Plex Mono',monospace; color:var(--ink);}
+
+  .stepper{display:flex; margin:6px 0 4px;}
+  .step{flex:1; display:flex; flex-direction:column; align-items:center; position:relative;}
+  .step .circ{width:26px;height:26px;border-radius:50%; background:var(--line); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; color:var(--muted); z-index:2;}
+  .step.done .circ{background:var(--primary); color:#fff;}
+  .step.now .circ{background:var(--amber-deep); color:#fff; box-shadow:0 0 0 4px var(--amber-tint);}
+  .step .lbl{font-size:9px; font-weight:800; color:var(--muted); margin-top:6px; text-align:center;}
+  .step.done .lbl, .step.now .lbl{color:var(--ink);}
+  .step::before{content:""; position:absolute; top:13px; left:-50%; width:100%; height:2px; background:var(--line); z-index:1;}
+  .step:first-child::before{display:none;}
+  .step.done::before{background:var(--primary);}
+
+  .driver-card{margin:16px 22px 0; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:15px; display:flex; gap:13px; align-items:center;}
+  .driver-avatar{width:46px;height:46px; border-radius:13px; background:var(--amber-tint); color:var(--amber-deep); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px;}
+  .driver-card h4{margin:0 0 3px; font-size:13.5px; font-weight:800;}
+  .driver-card .sub{font-size:11.5px; color:var(--muted);}
+
+  .info-grid{margin:14px 22px 0; display:flex; flex-direction:column; gap:9px;}
+  .info-item{display:flex; gap:12px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 13px;}
+  .info-item svg{width:16px;height:16px;stroke:var(--primary);fill:none;stroke-width:1.9;flex:0 0 auto;margin-top:1px;}
+  .info-item .k{font-size:10.5px;color:var(--muted);font-weight:700;margin:0 0 2px;}
+  .info-item .v{font-size:12.5px;font-weight:700;margin:0;}
+
+  .route-agents{padding:0 22px; margin-top:4px;}
+  .route-agent{display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line); font-size:12px;}
+  .route-agent:last-child{border-bottom:none;}
+  .route-agent .num{width:20px;height:20px;border-radius:50%;background:var(--primary-tint); color:var(--primary); font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .route-agent .nm{flex:1; font-weight:700;}
+  .route-agent .st{font-size:10.5px; color:var(--muted); font-weight:700;}
+
+  /* ---------- Profile ---------- */
+  .profile-top{padding:24px 22px 18px; display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .avatar-big{width:74px;height:74px;border-radius:20px; background:linear-gradient(155deg,var(--amber),var(--amber-deep)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px; font-weight:800; font-family:'Sora',sans-serif; box-shadow:0 12px 24px -10px rgba(168,112,29,.5); margin-bottom:12px;}
+  .profile-top h3{margin:0 0 3px; font-size:16.5px; font-weight:800;}
+  .profile-top .sub{font-size:12px; color:var(--muted);}
+  .profile-block{padding:0 22px 4px;}
+  .profile-block .label-sm{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:16px 0 8px;}
+  .prow{display:flex; align-items:center; gap:12px; padding:13px 14px; background:var(--surface); border:1px solid var(--line); border-radius:14px; margin-bottom:8px;}
+  .prow svg{width:17px;height:17px; stroke:var(--primary); fill:none; stroke-width:1.9; flex:0 0 auto;}
+  .prow .k{font-size:10.5px; color:var(--muted); font-weight:700; margin:0 0 2px;}
+  .prow .v{font-size:13px; font-weight:700; margin:0;}
+  .prow .chev{margin-left:auto; stroke:var(--muted); width:15px; height:15px;}
+  .logout{margin:18px 22px 4px; color:var(--rust); font-weight:800; font-size:13.5px; text-align:center; padding:12px; border-radius:14px; border:1.5px solid var(--rust-tint); cursor:pointer;}
+
+  /* ---------- Sheet / modal ---------- */
+  .modal-overlay{position:absolute; inset:0; background:rgba(15,28,22,.42); z-index:80; display:none; align-items:flex-end; border-radius:44px; overflow:hidden;}
+  .modal-overlay.open{display:flex;}
+  .modal-sheet{width:100%; background:var(--paper); border-radius:24px 24px 0 0; padding:10px 22px calc(26px + env(safe-area-inset-bottom)); max-height:86%; overflow-y:auto;}
+  .sheet-handle{width:38px;height:4px;border-radius:99px; background:var(--line); margin:6px auto 16px;}
+  .sheet-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .sheet-head h3{margin:0; font-size:16px; font-weight:800;}
+  .sheet-close{width:30px;height:30px;border-radius:50%; background:var(--surface); border:1px solid var(--line); display:flex;align-items:center;justify-content:center; cursor:pointer;}
+  .sheet-close svg{width:14px;height:14px; stroke:var(--ink); fill:none; stroke-width:2.2;}
+  .total-preview{background:var(--primary-tint); border-radius:14px; padding:14px; display:flex; align-items:center; justify-content:space-between; margin:6px 0 20px;}
+  .total-preview .k{font-size:12px; font-weight:800; color:var(--primary);}
+  .total-preview .v{font-size:19px; font-weight:800; color:var(--primary); font-family:'IBM Plex Mono',monospace;}
+
+  .toast{position:absolute; left:22px; right:22px; bottom:96px; background:var(--ink); color:#F2F5EF; padding:13px 16px; border-radius:14px; display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:700; z-index:90; opacity:0; transform:translateY(8px); transition:all .2s; pointer-events:none;}
+  .toast.show{opacity:1; transform:translateY(0);}
+  .toast svg{width:17px;height:17px; stroke:var(--amber); fill:none; stroke-width:2.2; flex:0 0 auto;}
+
+
+  /* ---------- Narrow phones (SE-size, ~360px and under) ---------- */
+  @media (max-width: 360px){
+    .topbar, .hello, .section-head, .profile-block, .info-grid, .summary-strip, .route-agents{padding-left:16px; padding-right:16px;}
+  }
+</style>
+</head>
+<body>
+<div>
+<div class="device">
+  <div class="screen-frame">
+    <div class="dynamic-island"></div>
+    <div class="statusbar">
+      <span>09:41</span>
+      <div class="icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M1 4c4-4 10-4 14 0M3.2 6.6c2.6-2.6 7-2.6 9.6 0M5.6 9c1.4-1.4 3.4-1.4 4.8 0" stroke="#16261F" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#16261F"/></svg>
+        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#16261F" stroke-width="1.2"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.2" fill="#16261F"/><rect x="20" y="4" width="1.5" height="4" rx="0.7" fill="#16261F"/></svg>
+      </div>
+    </div>
+
+    <!-- ===================== AUTH ===================== -->
+    <section class="screen active" id="screen-auth">
+      <div class="content">
+        <div class="brandmark"><svg viewBox="0 0 24 24"><path d="M12 2C8 8 4 12.2 4 16a8 8 0 0016 0c0-3.8-4-8-8-14z"/></svg></div>
+        <h1 class="auth-title">Masuk sebagai Agen</h1>
+        <p class="auth-sub">Kelola transaksi pembelian, stok, dan pickup minyak jelantah dari satu tempat.</p>
+        <div class="role-note">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+          <span>Akun Agen baru perlu disetujui Kilang sebelum bisa digunakan.</span>
+        </div>
+        <form onsubmit="return login(event)">
+          <div class="field"><label>Email</label><input type="email" value="barokahjaya@biojelan.id"></div>
+          <div class="field"><label>Kata sandi</label><input type="password" value="••••••••"></div>
+          <button class="btn btn-primary" type="submit">Masuk</button>
+        </form>
+        <p class="auth-foot">Belum jadi mitra Agen? <a href="#">Daftar sebagai Agen</a></p>
+      </div>
+    </section>
+
+    <!-- ===================== HOME ===================== -->
+    <section class="screen" id="screen-home">
+      <div class="content">
+        <div class="hello">
+          <div>
+            <p class="eyebrow">Agen</p>
+            <h2>Barokah Jaya</h2>
+          </div>
+          <div class="status-toggle" id="statusToggle" onclick="toggleStatus()">
+            <div class="knob"></div>
+            <span id="statusLabel">Buka</span>
+          </div>
+        </div>
+
+        <div class="price-band">
+          <div class="drop-gauge">
+            <svg viewBox="0 0 100 124">
+              <defs><linearGradient id="dropfill1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E9BA55"/><stop offset="100%" stop-color="#A8701D"/></linearGradient></defs>
+              <path d="M50 4 C24 40 10 64 10 82 C10 105 28 120 50 120 C72 120 90 105 90 82 C90 64 76 40 50 4 Z" fill="url(#dropfill1)"/>
+            </svg>
+          </div>
+          <div class="price-info">
+            <p class="label">Harga aktif dari Kilang</p>
+            <p class="amount">Rp 6.500<span>/liter</span></p>
+            <p class="updated">Diperbarui 07.00 &middot; berlaku untuk transaksi hari ini</p>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="n">6</div><div class="l">Transaksi hari ini</div></div>
+          <div class="stat-card"><div class="n">42 L</div><div class="l">Liter terkumpul</div></div>
+          <div class="stat-card"><div class="n mono" style="font-size:14px">Rp 273rb</div><div class="l">Nilai hari ini</div></div>
+        </div>
+
+        <div class="stock-card">
+          <div class="stock-mini-gauge">
+            <svg viewBox="0 0 60 74">
+              <defs><clipPath id="fillclip1"><rect x="0" y="15" width="60" height="59"/></clipPath></defs>
+              <path d="M30 2 C14 24 6 38 6 49 C6 63 17 72 30 72 C43 72 54 63 54 49 C54 38 46 24 30 2 Z" fill="none" stroke="var(--line)" stroke-width="3"/>
+              <path d="M30 2 C14 24 6 38 6 49 C6 63 17 72 30 72 C43 72 54 63 54 49 C54 38 46 24 30 2 Z" fill="var(--primary)" clip-path="url(#fillclip1)"/>
+            </svg>
+          </div>
+          <div class="stock-body">
+            <div class="row1"><h4>Stok saat ini</h4><span class="chip chip-open">Siap Pickup</span></div>
+            <div class="sub">620 L &middot; Ambang batas 500 L</div>
+            <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn btn-primary" onclick="openTxSheet()">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#EFF6EF" stroke-width="2.3"><path d="M12 5v14M5 12h14"/></svg>
+            Input Transaksi Baru
+          </button>
+        </div>
+
+        <div class="section-head">
+          <h3>Aktivitas terbaru</h3>
+          <a onclick="showScreen('transaksi')">Lihat semua</a>
+        </div>
+        <div class="tx-list" style="padding-bottom:8px">
+          <div class="tx-row">
+            <div class="tx-avatar">RW</div>
+            <div class="tx-mid"><h4>Rini Wulandari</h4><div class="d">10.42 &middot; 6 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 39.000</div><div class="st ok">Selesai</div></div>
+          </div>
+          <div class="tx-row">
+            <div class="tx-avatar">DP</div>
+            <div class="tx-mid"><h4>Dedi Prasetyo</h4><div class="d">09.15 &middot; 10 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 65.000</div><div class="st ok">Selesai</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRANSAKSI ===================== -->
+    <section class="screen" id="screen-transaksi">
+      <div class="content">
+        <div class="topbar">
+          <h2>Transaksi</h2>
+          <div class="iconbtn" onclick="alert('Filter tanggal, status, dan pencarian klien')"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg></div>
+        </div>
+        <div class="summary-strip">
+          <div class="sum-card"><div class="n">6</div><div class="l">Hari ini</div></div>
+          <div class="sum-card"><div class="n">42 L</div><div class="l">Volume</div></div>
+          <div class="sum-card"><div class="n mono" style="font-size:14px">Rp 273rb</div><div class="l">Total</div></div>
+        </div>
+
+        <div class="tx-list" id="txListFull">
+          <div class="tx-row">
+            <div class="tx-avatar">RW</div>
+            <div class="tx-mid"><h4>Rini Wulandari</h4><div class="d">Hari ini, 10.42 &middot; 6 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 39.000</div><div class="st ok">Selesai</div></div>
+          </div>
+          <div class="tx-row">
+            <div class="tx-avatar">DP</div>
+            <div class="tx-mid"><h4>Dedi Prasetyo</h4><div class="d">Hari ini, 09.15 &middot; 10 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 65.000</div><div class="st ok">Selesai</div></div>
+          </div>
+          <div class="tx-row">
+            <div class="tx-avatar">AS</div>
+            <div class="tx-mid"><h4>Ahmad Solihin</h4><div class="d">Hari ini, 08.50 &middot; 4 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 26.000</div><div class="st ok">Selesai</div></div>
+          </div>
+          <div class="tx-row">
+            <div class="tx-avatar cancel">NF</div>
+            <div class="tx-mid"><h4>Nia Fitriani</h4><div class="d">Kemarin, 16.20 &middot; 5 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 32.500</div><div class="st no">Dibatalkan</div></div>
+          </div>
+          <div class="tx-row">
+            <div class="tx-avatar">BS</div>
+            <div class="tx-mid"><h4>Bambang Santoso</h4><div class="d">Kemarin, 14.05 &middot; 12 L</div></div>
+            <div class="tx-right"><div class="amt">Rp 75.600</div><div class="st ok">Selesai</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fab" onclick="openTxSheet()">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </div>
+    </section>
+
+    <!-- ===================== STOK ===================== -->
+    <section class="screen" id="screen-stok">
+      <div class="content">
+        <div class="topbar"><h2>Stok Minyak</h2>
+          <div class="iconbtn" onclick="alert('Riwayat lengkap pergerakan stok')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4l3 2"/></svg></div>
+        </div>
+
+        <div class="gauge-big-wrap">
+          <div class="gauge-big">
+            <svg viewBox="0 0 100 124">
+              <defs><clipPath id="fillclipbig"><rect x="0" y="20" width="100" height="104"/></clipPath></defs>
+              <path d="M50 4 C24 40 10 64 10 82 C10 105 28 120 50 120 C72 120 90 105 90 82 C90 64 76 40 50 4 Z" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+              <path d="M50 4 C24 40 10 64 10 82 C10 105 28 120 50 120 C72 120 90 105 90 82 C90 64 76 40 50 4 Z" fill="var(--primary)" clip-path="url(#fillclipbig)" opacity="0.92"/>
+            </svg>
+          </div>
+          <div class="gauge-label">
+            <div class="n">620 L</div>
+            <div class="l">dari ambang batas 500 L</div>
+          </div>
+          <div class="threshold-note"><span class="chip chip-open"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Sudah lewati ambang &middot; menunggu jadwal Kilang</span></div>
+        </div>
+
+        <div class="section-head"><h3>Riwayat pergerakan stok</h3></div>
+        <div class="stock-history">
+          <div class="stock-hrow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><div class="k">Transaksi — Rini Wulandari</div><div><div class="v">+6 L</div><div class="t" style="text-align:right">10.42</div></div></div>
+          <div class="stock-hrow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><div class="k">Transaksi — Dedi Prasetyo</div><div><div class="v">+10 L</div><div class="t" style="text-align:right">09.15</div></div></div>
+          <div class="stock-hrow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><div class="k">Transaksi — Ahmad Solihin</div><div><div class="v">+4 L</div><div class="t" style="text-align:right">08.50</div></div></div>
+          <div class="stock-hrow" style="opacity:.7"><svg viewBox="0 0 24 24" stroke="var(--rust)"><path d="M6 6l12 12M18 6L6 18"/></svg><div class="k">Transaksi dibatalkan — Nia Fitriani</div><div><div class="v" style="color:var(--rust)">0 L</div><div class="t" style="text-align:right">Kemarin</div></div></div>
+        </div>
+
+        <!-- Stock correction authority + weighing-discrepancy handling: open question (PRD Q13/Q14), not yet assigned to a role -->
+        <div class="issue-link" onclick="alert('Fitur koreksi stok belum tersedia — hubungi Kilang untuk perbaikan catatan.')">
+          Ada selisih catatan stok? Laporkan di sini
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PICKUP ===================== -->
+    <section class="screen" id="screen-pickup">
+      <div class="content">
+        <div class="topbar"><h2>Info Pickup</h2><div></div></div>
+
+        <div class="pickup-hero">
+          <div class="top-row"><div class="pid">ID Pickup <span>PU-20260811-06</span></div><span class="chip chip-open">Scheduled</span></div>
+          <div class="stepper">
+            <div class="step done"><div class="circ">✓</div><div class="lbl">Waiting</div></div>
+            <div class="step now"><div class="circ">2</div><div class="lbl">Scheduled</div></div>
+            <div class="step"><div class="circ">3</div><div class="lbl">Assigned</div></div>
+            <div class="step"><div class="circ">4</div><div class="lbl">In Progress</div></div>
+            <div class="step"><div class="circ">5</div><div class="lbl">Completed</div></div>
+          </div>
+        </div>
+
+        <div class="driver-card">
+          <div class="driver-avatar">AF</div>
+          <div><h4>Ahmad Fauzi</h4><div class="sub">Driver &middot; L 1234 AB &middot; Menunggu penugasan akhir</div></div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><div class="k">Jadwal pickup</div><div class="v">Besok, 12 Agu 2026 &middot; mulai 08.00 WIB</div></div></div>
+          <div class="info-item"><svg viewBox="0 0 24 24"><path d="M12 2C8 8 4 12.2 4 16a8 8 0 0016 0c0-3.8-4-8-8-14z"/></svg><div><div class="k">Estimasi volume diambil</div><div class="v">620 L dari lokasi Anda</div></div></div>
+          <div class="info-item"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0114 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg><div><div class="k">Rute</div><div class="v">1 dari 3 Agen dalam perjalanan ini</div></div></div>
+        </div>
+
+        <div class="section-head"><h3>Agen dalam satu rute</h3></div>
+        <div class="route-agents">
+          <div class="route-agent"><div class="num">1</div><div class="nm">Agen Barokah Jaya (Anda)</div><div class="st">620 L</div></div>
+          <div class="route-agent"><div class="num">2</div><div class="nm">Agen Sumber Rezeki</div><div class="st">540 L</div></div>
+          <div class="route-agent"><div class="num">3</div><div class="nm">Agen Tunas Asri</div><div class="st">510 L</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROFIL ===================== -->
+    <section class="screen" id="screen-profil">
+      <div class="content">
+        <div class="profile-top">
+          <div class="avatar-big">BJ</div>
+          <h3>Agen Barokah Jaya</h3>
+          <div class="sub">Pemilik: Pak Joko &middot; Mitra sejak Feb 2026</div>
+        </div>
+        <div class="profile-block">
+          <div class="label-sm">Data Agen</div>
+          <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0114 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg><div><div class="k">Alamat</div><div class="v">Jl. Merdeka No. 12, Kotabumi</div></div></div>
+          <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><div class="k">Jam operasional</div><div class="v">08.00 – 17.00 WIB, Senin–Sabtu</div></div></div>
+          <div class="prow"><svg viewBox="0 0 24 24"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-2-1-4-3-5-5l2-2-2-5z"/></svg><div><div class="k">No. telepon</div><div class="v">0813-9988-0021</div></div></div>
+
+          <div class="label-sm">Pengaturan</div>
+          <div class="prow" style="cursor:pointer"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><div><div class="k">Ambang batas stok</div><div class="v">500 L &middot; ditentukan Kilang</div></div></div>
+          <div class="prow" style="cursor:pointer"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><div><div class="k">Bantuan</div><div class="v">Pusat bantuan BioJelan</div></div><svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+        </div>
+        <div class="logout" onclick="showScreen('auth-out')">Keluar akun</div>
+      </div>
+    </section>
+
+    <!-- ===================== INPUT TRANSAKSI SHEET ===================== -->
+    <div class="modal-overlay" id="txSheet">
+      <div class="modal-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head"><h3>Input Transaksi Baru</h3><div class="sheet-close" onclick="closeTxSheet()"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+        <div class="field"><label>Nama Klien</label><input type="text" id="txName" placeholder="Nama sesuai identitas"></div>
+        <div class="field">
+          <label>Volume (liter)</label>
+          <input type="number" id="txVol" placeholder="Contoh: 8" oninput="calcTotal()">
+          <div class="hint">Ditimbang langsung oleh Agen di lokasi.</div>
+        </div>
+        <div class="field"><label>Harga per liter</label><input type="text" value="Rp 6.500 (dari Kilang)" readonly></div>
+        <div class="total-preview"><span class="k">Total dibayar tunai</span><span class="v" id="txTotal">Rp 0</span></div>
+        <button class="btn btn-primary" onclick="saveTx()">Simpan Transaksi</button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg">Transaksi tersimpan</span></div>
+
+    <!-- ===================== TAB BAR ===================== -->
+    <nav class="tabbar" id="tabbar">
+      <button class="tab active" data-tab="home" onclick="showScreen('home')">
+        <svg viewBox="0 0 24 24"><path d="M4 11.5L12 4l8 7.5"/><path d="M6 10v9a1 1 0 001 1h4v-6h2v6h4a1 1 0 001-1v-9"/></svg>Beranda<span class="dot"></span>
+      </button>
+      <button class="tab" data-tab="transaksi" onclick="showScreen('transaksi')">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Transaksi<span class="dot"></span>
+      </button>
+      <button class="tab" data-tab="stok" onclick="showScreen('stok')">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 14h16"/></svg>Stok<span class="dot"></span>
+      </button>
+      <button class="tab" data-tab="pickup" onclick="showScreen('pickup')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="9" width="13" height="8" rx="1.5"/><path d="M16 12h3l2 3v2h-5z"/><circle cx="7.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/></svg>Pickup<span class="dot"></span>
+      </button>
+      <button class="tab" data-tab="profil" onclick="showScreen('profil')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4"/></svg>Profil<span class="dot"></span>
+      </button>
+    </nav>
+
+  </div>
+</div>
+</div>
+
+<script>
+  function showScreen(name){
+    if(name === 'auth-out'){
+      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+      document.getElementById('screen-auth').classList.add('active');
+      document.getElementById('tabbar').classList.remove('visible');
+      return;
+    }
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-'+name).classList.add('active');
+    document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+    document.getElementById('screen-'+name).querySelector('.content').scrollTop = 0;
+  }
+
+  function login(e){
+    e.preventDefault();
+    showScreen('home');
+    document.getElementById('tabbar').classList.add('visible');
+    return false;
+  }
+
+  function toggleStatus(){
+    const el = document.getElementById('statusToggle');
+    const lbl = document.getElementById('statusLabel');
+    const closed = el.classList.toggle('closed');
+    lbl.textContent = closed ? 'Tutup' : 'Buka';
+  }
+
+  function openTxSheet(){
+    document.getElementById('txName').value = '';
+    document.getElementById('txVol').value = '';
+    document.getElementById('txTotal').textContent = 'Rp 0';
+    document.getElementById('txSheet').classList.add('open');
+  }
+  function closeTxSheet(){ document.getElementById('txSheet').classList.remove('open'); }
+
+  function calcTotal(){
+    const vol = parseFloat(document.getElementById('txVol').value) || 0;
+    const total = vol * 6500;
+    document.getElementById('txTotal').textContent = 'Rp ' + total.toLocaleString('id-ID');
+  }
+
+  function saveTx(){
+    const name = document.getElementById('txName').value.trim() || 'Klien';
+    const vol = parseFloat(document.getElementById('txVol').value) || 0;
+    if(vol <= 0){ alert('Isi volume terlebih dahulu.'); return; }
+    const total = vol * 6500;
+    const initials = name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+
+    const row = document.createElement('div');
+    row.className = 'tx-row';
+    row.innerHTML = '<div class="tx-avatar">'+initials+'</div>'
+      + '<div class="tx-mid"><h4>'+name+'</h4><div class="d">Baru saja &middot; '+vol+' L</div></div>'
+      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div><div class="st ok">Selesai</div></div>';
+    document.getElementById('txListFull').prepend(row);
+
+    closeTxSheet();
+    showScreen('transaksi');
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = 'Transaksi '+name+' tersimpan';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2400);
+  }
+</script>
+</body>
+</html>
