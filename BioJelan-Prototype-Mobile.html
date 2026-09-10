@@ -1068,7 +1068,7 @@
       </div>
     </div>
 
-    <!-- ===================== AGEN: DETAIL TRANSAKSI / AJUKAN PEMBATALAN SHEET ===================== -->
+    <!-- ===================== AGEN: DETAIL TRANSAKSI / AJUKAN KOMPLAIN SHEET ===================== -->
     <div class="modal-overlay" id="txDetailSheet">
       <div class="modal-sheet">
         <div class="sheet-handle"></div>
@@ -1085,22 +1085,22 @@
         <div class="detail-row"><span class="k">Status</span><span class="v" id="tdStatus">Selesai</span></div>
 
         <div id="tdCancelBlock" style="display:none;">
-          <div class="field" style="margin-top:14px;"><label>Alasan pengajuan pembatalan</label><input type="text" id="tdReason" placeholder="cth. Transaksi tercatat dobel, atau salah input volume"></div>
-          <button class="btn btn-rust" onclick="confirmCancelTx()">Ajukan Pembatalan ke Kilang</button>
-          <p style="font-size:11px; color:var(--muted); margin:8px 0 0; line-height:1.5;">Hanya Kilang yang dapat memutuskan pembatalan transaksi. Pengajuan Anda akan ditinjau terlebih dahulu sebelum status berubah.</p>
+          <div class="field" style="margin-top:14px;"><label>Alasan komplain</label><input type="text" id="tdReason" placeholder="cth. Transaksi tercatat dobel, atau salah input volume"></div>
+          <button class="btn btn-rust" onclick="confirmComplainTx()">Ajukan Komplain ke Kilang</button>
+          <p style="font-size:11px; color:var(--muted); margin:8px 0 0; line-height:1.5;">Hanya Kilang yang dapat memutuskan tindak lanjut komplain. Pengajuan Anda akan ditinjau terlebih dahulu sebelum status berubah.</p>
         </div>
 
         <div id="tdLockedNote" class="note-mini" style="display:none;">
           <svg viewBox="0 0 24 24" width="15" height="15" style="stroke:var(--muted); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
-          <span>Transaksi dari hari sebelumnya sudah tidak bisa diajukan pembatalan lewat app — kalau ada kesalahan pencatatan, hubungi Kilang.</span>
+          <span>Transaksi dari hari sebelumnya sudah tidak bisa diajukan komplain lewat app — kalau ada kesalahan pencatatan, hubungi Kilang.</span>
         </div>
         <div id="tdPendingNote" class="note-mini" style="display:none; background:var(--amber-tint); color:#6b4a14;">
           <svg viewBox="0 0 24 24" width="15" height="15" style="stroke:var(--amber-deep); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
-          <span id="tdPendingReason">Menunggu persetujuan Kilang.</span>
+          <span id="tdPendingReason">Menunggu tinjauan Kilang.</span>
         </div>
         <div id="tdCancelledNote" class="note-mini rust" style="display:none;">
           <svg viewBox="0 0 24 24" width="15" height="15" style="stroke:var(--rust); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;"><path d="M6 6l12 12M18 6L6 18"/></svg>
-          <span id="tdCancelledReason">Transaksi ini sudah dibatalkan.</span>
+          <span id="tdCancelledReason">Komplain telah ditinjau Kilang.</span>
         </div>
       </div>
     </div>
@@ -1566,12 +1566,12 @@
       statusEl.textContent = 'Dibatalkan';
       statusEl.style.color = 'var(--rust)';
       cancelledNote.style.display = 'flex';
-      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Disetujui Kilang — ' + el.dataset.reason) : 'Transaksi ini sudah dibatalkan.';
-    } else if(el.dataset.status === 'pending_cancel'){
+      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Ditinjau Kilang — ' + el.dataset.reason) : 'Komplain telah ditinjau Kilang.';
+    } else if(el.dataset.status === 'pending_complaint'){
       statusEl.textContent = 'Menunggu Persetujuan';
       statusEl.style.color = 'var(--amber-deep)';
       pendingNote.style.display = 'flex';
-      document.getElementById('tdPendingReason').textContent = 'Menunggu persetujuan Kilang — alasan: ' + (el.dataset.reason || '-');
+      document.getElementById('tdPendingReason').textContent = 'Menunggu tinjauan Kilang — alasan: ' + (el.dataset.reason || '-');
     } else {
       statusEl.style.color = 'var(--primary)';
       if(el.dataset.day === 'today'){
@@ -1585,26 +1585,26 @@
     openSheet('txDetailSheet');
   }
 
-  function confirmCancelTx(){
+  function confirmComplainTx(){
     const reason = document.getElementById('tdReason').value.trim();
-    if(!reason){ showToast('Isi alasan pengajuan pembatalan dulu.'); return; }
+    if(!reason){ showToast('Isi alasan komplain dulu.'); return; }
     const row = activeTxRow;
     if(!row) return;
 
-    // Hanya Kilang yang dapat memutuskan pembatalan — Agen hanya mengajukan.
+    // Hanya Kilang yang dapat memutuskan tindak lanjut — Agen hanya mengajukan komplain.
     // Status & angka (ringkasan hari ini, stok) baru berubah kalau Kilang
     // menyetujui pengajuan ini lewat BioJelan Kilang Web.
-    row.dataset.status = 'pending_cancel';
+    row.dataset.status = 'pending_complaint';
     row.dataset.reason = reason;
     const stEl = row.querySelector('.st');
-    stEl.textContent = 'Menunggu Persetujuan';
+    stEl.textContent = 'Menunggu Tinjauan';
     stEl.classList.remove('ok', 'no');
     stEl.classList.add('pending');
     const hintEl = row.querySelector('.cancel-hint');
     if(hintEl) hintEl.remove();
 
     closeSheet('txDetailSheet');
-    showToast('Pengajuan pembatalan ' + row.dataset.name + ' dikirim ke Kilang');
+    showToast('Komplain ' + row.dataset.name + ' dikirim ke Kilang untuk ditinjau');
   }
 
   function calcTotal(){

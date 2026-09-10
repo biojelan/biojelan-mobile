@@ -653,7 +653,7 @@
             <div id="fnVerifyPreview"></div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Pengajuan pembatalan</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
+            <div class="card-head"><h3>Komplain dari Agen</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
             <div id="fnCancelReqPreview"></div>
           </div>
         </div>
@@ -1019,8 +1019,8 @@
           <div id="txVerifyQueue"></div>
         </div>
         <div class="card" style="margin-bottom:18px;">
-          <div class="card-head"><h3>Pengajuan pembatalan dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
-          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen hanya dapat mengajukan — Kilang yang memutuskan untuk menyetujui atau menolak.</p>
+          <div class="card-head"><h3>Komplain dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
+          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen hanya dapat mengajukan komplain — Kilang yang memutuskan tindak lanjutnya.</p>
           <div id="txCancelReqQueue"></div>
         </div>
         <div class="table-wrap">
@@ -1361,8 +1361,8 @@
     <div id="mCancelReqBlock" style="display:none;">
       <p id="mCancelReason" style="font-size:12.5px; color:var(--ink-soft); background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:14px 0; line-height:1.6; font-weight:600;"></p>
       <div class="dialog-actions" style="margin-top:0;">
-        <button class="btn btn-outline" onclick="rejectCancelRequest()">Tolak Pengajuan</button>
-        <button class="btn btn-rust" onclick="approveCancelRequest()">Setujui Pembatalan</button>
+        <button class="btn btn-outline" onclick="rejectComplaint()">Tolak Komplain</button>
+        <button class="btn btn-rust" onclick="approveComplaint()">Setujui & Koreksi</button>
       </div>
     </div>
   </div>
@@ -1744,7 +1744,7 @@ const DATA = {
     {id:'TX-20260811-14', date:'11 Agu 2026, 10.05', from:'Kilang', to:'Agen Barokah Jaya', ini:'BJ', vol:'620 L', price:'Rp 6.500', total:'Rp 4.030.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260811-13', date:'11 Agu 2026, 09.40', from:'Kilang', to:'Agen Tunas Asri', ini:'TA', vol:'510 L', price:'Rp 6.500', total:'Rp 3.315.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260810-08', date:'10 Agu 2026, 08.10', from:'Kilang', to:'Agen Wahyu Karya', ini:'WK', vol:'480 L', price:'Rp 6.500', total:'Rp 3.120.000', status:'Terverifikasi', needsVerify:false, cat:'kilang-agen', verifiedBy:'Melati Wijaya'},
-    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Menunggu Persetujuan', needsVerify:false, cat:'agen-klien', pendingCancel:true, cancelReason:'Transaksi tercatat dobel'},
+    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Menunggu Tinjauan', needsVerify:false, cat:'agen-klien', pendingComplaint:true, complaintReason:'Transaksi tercatat dobel'},
     {id:'TX-20260811-11', date:'11 Agu 2026, 08.50', from:'Agen Tunas Asri', to:'Ahmad Solihin', ini:'AS', vol:'4 L', price:'Rp 6.500', total:'Rp 26.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
     {id:'TX-20260811-10', date:'11 Agu 2026, 08.20', from:'Agen Sumber Rezeki', to:'Bambang Santoso', ini:'BS', vol:'12 L', price:'Rp 6.500', total:'Rp 78.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
   ],
@@ -2201,7 +2201,7 @@ function resolveSengketa(action){
 
 /* ---------- Transaksi (Finance) ---------- */
 function txChipClass(t){
-  if(t.pendingCancel) return 'chip-amber';
+  if(t.pendingComplaint) return 'chip-amber';
   if(t.needsVerify) return 'chip-amber';
   if(t.status==='Tercatat') return 'chip-open';
   return 'chip-closed';
@@ -2219,11 +2219,11 @@ function renderTxLists(){
   const cntEls = ['txVerifyCount','fnVerifyStat']; cntEls.forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent = queue.length; });
   const fnPrev = document.getElementById('fnVerifyPreview'); if(fnPrev) fnPrev.innerHTML = qEl ? qEl.innerHTML : '';
 
-  const cancelQueue = DATA.transactions.filter(t=>t.pendingCancel);
+  const complaintQueue = DATA.transactions.filter(t=>t.pendingComplaint);
   const cqEl = document.getElementById('txCancelReqQueue');
-  if(cqEl) cqEl.innerHTML = cancelQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada pengajuan pembatalan.</p>';
-  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = cancelQueue.length;
-  document.getElementById('txActionCount').textContent = queue.length + cancelQueue.length;
+  if(cqEl) cqEl.innerHTML = complaintQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada komplain dari Agen.</p>';
+  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = complaintQueue.length;
+  document.getElementById('txActionCount').textContent = queue.length + complaintQueue.length;
   const fnCancelPrev = document.getElementById('fnCancelReqPreview'); if(fnCancelPrev) fnCancelPrev.innerHTML = cqEl ? cqEl.innerHTML : '';
 
   renderTxTable();
@@ -2266,14 +2266,14 @@ function openTx(id){
   document.getElementById('mStatus').textContent = t.status;
   const vr = document.getElementById('mVerifiedRow');
   if(t.verifiedBy){ vr.style.display='flex'; document.getElementById('mVerifiedBy').textContent = t.verifiedBy; } else { vr.style.display='none'; }
-  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingCancel) ? 'block' : 'none';
+  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingComplaint) ? 'block' : 'none';
 
   const vBtn = document.getElementById('mVerifyBtn');
   const cancelReqBlock = document.getElementById('mCancelReqBlock');
-  if(t.pendingCancel){
+  if(t.pendingComplaint){
     vBtn.style.display = 'none';
     cancelReqBlock.style.display = 'block';
-    document.getElementById('mCancelReason').textContent = 'Alasan dari Agen: ' + (t.cancelReason || '-');
+    document.getElementById('mCancelReason').textContent = 'Alasan komplain dari Agen: ' + (t.complaintReason || '-');
   } else {
     vBtn.style.display = t.needsVerify ? 'flex' : 'none';
     cancelReqBlock.style.display = 'none';
@@ -2287,19 +2287,19 @@ function verifyTx(){
   closeDialog('txDialog');
   toast('Pembayaran diverifikasi.');
 }
-function approveCancelRequest(){
+function approveComplaint(){
   const t = DATA.transactions.find(x=>x.id===activeTxId);
-  if(t){ t.pendingCancel=false; t.status='Dibatalkan'; }
+  if(t){ t.pendingComplaint=false; t.status='Dikoreksi'; }
   renderTxLists();
   closeDialog('txDialog');
-  toast('Pembatalan '+(t?t.from+' → '+t.to:'')+' disetujui.');
+  toast('Komplain '+(t?t.from+' → '+t.to:'')+' disetujui — transaksi dikoreksi.');
 }
-function rejectCancelRequest(){
+function rejectComplaint(){
   const t = DATA.transactions.find(x=>x.id===activeTxId);
-  if(t){ t.pendingCancel=false; t.status='Tercatat'; }
+  if(t){ t.pendingComplaint=false; t.status='Tercatat'; }
   renderTxLists();
   closeDialog('txDialog');
-  toast('Pengajuan pembatalan ditolak — transaksi tetap tercatat.');
+  toast('Komplain ditolak — transaksi tetap tercatat.');
 }
 
 /* ---------- Laporan / Midtrans ---------- */
