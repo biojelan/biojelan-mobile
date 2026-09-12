@@ -102,18 +102,6 @@
   .btn:disabled{opacity:.45; cursor:not-allowed;}
   .btn svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2.2;}
 
-  .demo-divider{display:flex; align-items:center; gap:10px; margin:22px 0 16px; font-size:10.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--muted);}
-  .demo-divider::before,.demo-divider::after{content:""; flex:1; height:1px; background:var(--line);}
-  .demo-note{display:flex; gap:9px; align-items:flex-start; background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin-bottom:14px;}
-  .demo-note svg{width:15px; height:15px; stroke:var(--amber-deep); fill:none; stroke-width:2.1; flex:0 0 auto; margin-top:1px;}
-  .demo-note span{font-size:11.5px; color:#6b4a14; line-height:1.55; font-weight:600;}
-  .demo-grid{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
-  .demo-acct{display:flex; align-items:center; gap:10px; background:var(--paper); border:1.5px solid var(--line); border-radius:12px; padding:10px 11px; cursor:pointer; text-align:left; transition:border-color .15s, background .15s;}
-  .demo-acct:hover{border-color:var(--primary); background:var(--surface);}
-  .demo-acct .di{width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; flex:0 0 auto; color:#fff;}
-  .demo-acct .dt{min-width:0;}
-  .demo-acct .dt b{display:block; font-size:11.5px; font-weight:800; line-height:1.3;}
-  .demo-acct .dt span{font-size:10px; color:var(--muted); font-weight:600;}
 
   /* ============================================================
      APP SHELL
@@ -429,6 +417,16 @@
     .login-side{display:flex; background:linear-gradient(160deg,var(--primary) 0%,var(--primary-deep) 100%); color:#EAF3EC; padding:44px 40px; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;}
     .login-form-col{padding:44px 42px;}
   }
+
+  /* ---------- DEV TOOL (not part of product design — see comment in body) ---------- */
+  .dev-fab{position:fixed; right:20px; bottom:20px; width:46px; height:46px; border-radius:12px; background:#2B2E33; box-shadow:0 8px 20px -6px rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:500;}
+  .dev-fab svg{width:20px; height:20px; stroke:#F2C744; fill:none; stroke-width:1.8;}
+  .dev-panel{position:fixed; right:20px; bottom:74px; width:210px; background:#1E2024; border-radius:14px; padding:8px; box-shadow:0 16px 36px -12px rgba(0,0,0,.5); z-index:500; display:none;}
+  .dev-panel.open{display:block;}
+  .dev-panel-head{font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#8A8F98; padding:7px 9px 8px;}
+  .dev-item{display:block; width:100%; text-align:left; background:transparent; border:none; color:#E6E8EB; font-family:'Manrope',sans-serif; font-size:13px; font-weight:700; padding:9px 9px; border-radius:8px; cursor:pointer;}
+  .dev-item:hover{background:#2B2E33;}
+  .dev-item small{display:block; font-size:10.5px; font-weight:600; color:#8A8F98; margin-top:1px;}
 </style>
 </head>
 <body>
@@ -450,7 +448,7 @@
         <div class="login-feat">
           <div class="lf"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Pemisahan wewenang built-in — satu role tidak bisa memutuskan &amp; mencairkan uang sendirian.</span></div>
           <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg><span>Tabel, matriks akses, dan laporan dirancang untuk layar lebar — bukan versi mobile yang dipaksa muat.</span></div>
-          <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="13" height="8" rx="1.5"/><path d="M16 12h3l2 3v2h-5z"/><circle cx="7.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/></svg><span>Driver tetap pakai aplikasi mobile terpisah untuk eksekusi lapangan.</span></div>
+          <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="13" height="8" rx="1.5"/><path d="M16 12h3l2 3v2h-5z"/><circle cx="7.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/></svg><span>Klien, Agen, dan Driver satu aplikasi mobile — dashboard di sini khusus untuk tim Kilang.</span></div>
         </div>
       </div>
       <div class="login-foot">© 2026 BioJelan · Kotabumi, Lampung Utara</div>
@@ -470,13 +468,6 @@
         </div>
         <button class="btn btn-primary btn-block" type="submit">Masuk</button>
       </form>
-
-      <div class="demo-divider">Mode pratinjau</div>
-      <div class="demo-note">
-        <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
-        <span>Prototipe ini menampilkan 4 role sekaligus. Di produksi, satu akun otomatis masuk ke role-nya sendiri — pilih akun demo untuk melihat tiap dashboard.</span>
-      </div>
-      <div class="demo-grid" id="demoAcctGrid"></div>
     </div>
   </div>
 </div>
@@ -555,7 +546,7 @@
         </div>
         <div class="two-col">
           <div class="card">
-            <div class="card-head"><h3>Menunggu approval</h3><a onclick="navigateTo('agen')">Lihat semua</a></div>
+            <div class="card-head"><h3>Upgrade ke Agen</h3><a onclick="navigateTo('agen')">Lihat semua</a></div>
             <div id="saApprovalPreview"></div>
           </div>
           <div class="card">
@@ -587,7 +578,7 @@
         </div>
         <div class="two-col">
           <div class="card">
-            <div class="card-head"><h3>Menunggu approval</h3><a onclick="navigateTo('agen')">Lihat semua</a></div>
+            <div class="card-head"><h3>Upgrade ke Agen</h3><a onclick="navigateTo('agen')">Lihat semua</a></div>
             <div id="adApprovalPreview"></div>
           </div>
           <div class="card">
@@ -611,11 +602,13 @@
             <div class="qt"><h4>Harga aktif hari ini</h4><span id="opsPriceLabel">Rp 6.500 / liter · dasar dari Superadmin Rp 6.300–6.800</span></div>
             <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
           </div>
+          <!-- NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2 (Q9 masih 1 kualitas saja). Uncomment kalau fitur ini sudah di-scope.
           <div class="qlink" onclick="navigateTo('qc')">
             <div class="qi" style="background:var(--rust-tint);"><svg style="stroke:var(--rust)" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
             <div class="qt"><h4>QC Harian</h4><span>Uji pooling &amp; sengketa denda</span></div>
             <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
           </div>
+          -->
           <div class="qlink" onclick="openKoreksiStok()">
             <div class="qi" style="background:var(--steel-tint);"><svg style="stroke:var(--steel-deep)" viewBox="0 0 24 24"><path d="M12 2C8 8 4 12.2 4 16a8 8 0 0016 0c0-3.8-4-8-8-14z"/></svg></div>
             <div class="qt"><h4>Koreksi Stok</h4><span>Ada laporan selisih dari Agen</span></div>
@@ -660,10 +653,18 @@
             <div id="fnVerifyPreview"></div>
           </div>
           <div class="card">
+            <div class="card-head"><h3>Komplain dari Agen</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
+            <div id="fnCancelReqPreview"></div>
+          </div>
+        </div>
+        <!-- NEXT DEV — kartu denda QC menunggu eksekusi: belum ada di scope PRD v2, lihat catatan di halaman QC Harian.
+        <div class="two-col">
+          <div class="card">
             <div class="card-head"><h3>Denda menunggu eksekusi (<span id="fnDendaCount">0</span>)</h3></div>
             <div id="fnDendaList"><p class="empty-note">Belum ada denda diajukan Manajer Operasional hari ini.</p></div>
           </div>
         </div>
+        -->
       </section>
 
       <!-- ===================== AGEN (Superadmin + Admin) ===================== -->
@@ -672,7 +673,8 @@
           <div><p class="eyebrow">Kelola</p><h1>Agen</h1><p class="sub">24 Agen terdaftar di wilayah Kotabumi.</p></div>
         </div>
         <div class="card" style="margin-bottom:18px;">
-          <div class="card-head"><h3>Menunggu approval (<span id="agenApprovalCount">2</span>)</h3></div>
+          <div class="card-head"><h3>Upgrade ke Agen (<span id="agenApprovalCount">2</span>)</h3></div>
+          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Akun ini mulai sebagai Klien, lalu mengajukan upgrade lewat menu Profil di app mobile.</p>
           <div id="agenApprovalList"></div>
         </div>
         <div class="toolbar">
@@ -700,9 +702,11 @@
           <div class="perm-ledger">
             <table>
               <tr><th>Aksi</th><th>Superadmin</th><th>Admin</th><th>Manajer Ops</th><th>Finance</th><th>Driver</th></tr>
-              <tr><td>Daftarkan Agen baru</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
+              <tr><td>Setujui upgrade Klien &rarr; Agen</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
               <tr><td>Tentukan harga beli</td><td class="yes">✓</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
+              <!-- NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2 (Q9 masih 1 kualitas saja).
               <tr><td>Putuskan kualitas / denda</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td></tr>
+              -->
               <tr><td>Cairkan uang ke Agen</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
               <tr><td>Tambah akun staf</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td></tr>
               <tr><td>Lihat log &amp; saldo Kilang</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td></tr>
@@ -711,7 +715,7 @@
           </div>
           <div class="perm-legend">
             <div class="pl"><b style="color:var(--primary)">✓</b> Eksekusi penuh</div>
-            <div class="pl"><b style="color:var(--amber-deep)">•</b> Terbatas — harga: SA tentukan dasar, MO eksekusi harian · denda: Driver cuma input data · staf: MO cuma bisa tambah Driver · log: SA lihat aktivitas saja, bukan saldo</div>
+            <div class="pl"><b style="color:var(--amber-deep)">•</b> Terbatas — harga: SA tentukan dasar, MO eksekusi harian · staf: MO hanya dapat menambah Driver · log: SA lihat aktivitas saja, bukan saldo</div>
             <div class="pl"><b style="color:var(--line)">–</b> Tidak punya akses</div>
           </div>
           <p style="font-size:11px; color:var(--amber-deep); margin:14px 0 0; line-height:1.6; font-weight:700;">Riwayat transaksi tidak bisa dihapus siapa pun — Superadmin hanya bisa backup/restore.</p>
@@ -767,14 +771,16 @@
             </div>
             <div class="card">
               <div class="card-head"><h3>Notifikasi</h3></div>
-              <div class="detail-row"><span class="k">Approval baru — Agen mendaftar / QC gagal</span><span class="chip chip-open">Aktif</span></div>
+              <div class="detail-row"><span class="k">Approval baru — Agen mendaftar</span><span class="chip chip-open">Aktif</span></div>
               <div class="detail-row"><span class="k">Pengaduan — keluhan Agen masuk</span><span class="chip chip-open">Aktif</span></div>
+              <!-- NEXT DEV — notifikasi denda QC: belum ada di scope PRD v2.
               <div class="detail-row"><span class="k">Denda QC — pengajuan denda dari Ops</span><span class="chip chip-open">Aktif</span></div>
+              -->
             </div>
             <div class="card">
               <div class="card-head"><h3>Backup &amp; Restore</h3></div>
               <div style="display:flex; gap:10px;">
-                <button class="btn btn-outline" style="flex:1" onclick="toast('Backup database dimulai — kamu akan dinotifikasi setelah selesai.')">Backup Sekarang</button>
+                <button class="btn btn-outline" style="flex:1" onclick="toast('Backup database dimulai — Anda akan menerima notifikasi setelah selesai.')">Backup Sekarang</button>
                 <button class="btn btn-outline" style="flex:1" onclick="toast('Pilih file backup untuk direstore.')">Restore</button>
               </div>
             </div>
@@ -847,7 +853,7 @@
           <div>
             <div class="card">
               <div class="card-head"><h3>Stok gudang Kilang</h3></div>
-              <p style="font-size:11.5px; color:var(--muted); margin:-6px 0 14px; line-height:1.5;">Dirigen kosong siap kirim — disiapkan buat Agen baru / pengganti rusak.</p>
+              <p style="font-size:11.5px; color:var(--muted); margin:-6px 0 14px; line-height:1.5;">Dirigen kosong siap kirim — disiapkan untuk Agen baru atau pengganti yang rusak.</p>
               <div class="counter-row">
                 <span style="font-size:12.5px; font-weight:700;">Dirigen kosong</span>
                 <div class="ctr-controls">
@@ -938,6 +944,12 @@
       </section>
 
       <!-- ===================== QC HARIAN (Ops) ===================== -->
+      <!-- NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2.
+           Q9 (PRD Q&A v2): harga masih 1 kualitas saja untuk saat ini, jadi belum ada
+           dasar untuk alur uji kualitas/denda ini. Simpan sebagai referensi, aktifkan
+           lagi (hapus komentar ini + nav item 'qc' di ROLE_META.ops + panggilan
+           renderQcSengketa()/renderQcHistory() di renderDashboardData()) begitu
+           fitur QC resmi di-scope stakeholder.
       <section class="page" id="page-qc">
         <div class="page-head">
           <div><p class="eyebrow">Operasional</p><h1>QC Harian</h1><p class="sub">Uji kualitas pooling harian dan tinjauan sengketa denda.</p></div>
@@ -981,6 +993,7 @@
           </div>
         </div>
       </section>
+      -->
 
       <!-- ===================== TRANSAKSI (Finance) ===================== -->
       <section class="page" id="page-transaksi">
@@ -1004,6 +1017,11 @@
         <div class="card" style="margin-bottom:18px;">
           <div class="card-head"><h3>Perlu verifikasi (<span id="txVerifyCount">2</span>)</h3></div>
           <div id="txVerifyQueue"></div>
+        </div>
+        <div class="card" style="margin-bottom:18px;">
+          <div class="card-head"><h3>Komplain dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
+          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen hanya dapat mengajukan komplain — Kilang yang memutuskan tindak lanjutnya.</p>
+          <div id="txCancelReqQueue"></div>
         </div>
         <div class="table-wrap">
           <table class="dtable">
@@ -1059,7 +1077,7 @@
       <!-- ===================== SALDO MIDTRANS (Finance) ===================== -->
       <section class="page" id="page-midtrans">
         <div class="page-head">
-          <div><p class="eyebrow">Keuangan</p><h1>Saldo Midtrans</h1><p class="sub">Dipakai buat transfer otomatis ke rekening Agen.</p></div>
+          <div><p class="eyebrow">Keuangan</p><h1>Saldo Midtrans</h1><p class="sub">Digunakan untuk transfer otomatis ke rekening Agen.</p></div>
         </div>
         <div class="two-col">
           <div>
@@ -1142,6 +1160,20 @@
 
     </main>
   </div>
+</div>
+
+<!-- ============================================================
+     DEV TOOL — role switcher untuk testing/review, BUKAN bagian
+     desain produk. Style-nya sengaja berbeda (netral gelap) agar
+     tidak ikut terfoto saat screenshot atau share-screen layar
+     login maupun dashboard. Dapat dihapus sebelum handoff final.
+     ============================================================ -->
+<div class="dev-fab" id="devFab" onclick="toggleDevPanel(event)">
+  <svg viewBox="0 0 24 24"><path d="M9 3v6.5L4.5 18a1.8 1.8 0 001.6 2.6h11.8a1.8 1.8 0 001.6-2.6L15 9.5V3M9 3h6M9.5 14h5"/></svg>
+</div>
+<div class="dev-panel" id="devPanel">
+  <div class="dev-panel-head">Dev · ganti akun cepat</div>
+  <div id="devPanelList"></div>
 </div>
 
 <!-- ============================================================
@@ -1242,7 +1274,7 @@
     <div class="dialog-head"><h3>Atur Harga Hari Ini</h3><div class="dialog-close" onclick="closeDialog('priceDialog')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
     <div class="note-banner" style="background:var(--amber-tint);">
       <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
-      <p>Harga dasar dari Superadmin: <strong>Rp 6.300 – Rp 6.800</strong> / liter. Harga harian yang kamu atur harus di rentang ini.</p>
+      <p>Harga dasar dari Superadmin: <strong>Rp 6.300 – Rp 6.800</strong> / liter. Harga harian yang Anda tetapkan harus berada dalam rentang ini.</p>
     </div>
     <div class="field"><label>Harga per liter hari ini (Rp)</label><input id="priceInput" type="number" value="6500" step="50"></div>
     <button class="btn btn-primary btn-block" onclick="savePrice()">Simpan Harga Hari Ini</button>
@@ -1261,13 +1293,14 @@
 </div>
 
 <!-- ===================== SENGKETA DIALOG (Ops) ===================== -->
+<!-- NEXT DEV — bagian dari QC pooling & sengketa denda, belum ada di scope PRD v2. Lihat catatan di #page-qc.
 <div class="dialog-wrap" id="sengketaDialog">
   <div class="dialog">
     <div class="dialog-head"><h3>Tinjau Sengketa</h3><div class="dialog-close" onclick="closeDialog('sengketaDialog')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
-    <div class="detail-row"><span class="k">Agen</span><span class="v">Agen Tunas Asri</span></div>
-    <div class="detail-row"><span class="k">Tanggal denda</span><span class="v">8 Agu 2026</span></div>
-    <div class="detail-row"><span class="k">Potongan diajukan</span><span class="v mono">153 L (30%)</span></div>
-    <p style="font-size:12.5px; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 13px; margin:12px 0;">Protes Agen: "Minyak masih bagus pas diambil, mungkin tercampur pas pooling di Kilang."</p>
+    <div class="detail-row"><span class="k">Agen</span><span class="v" id="skAgen">Agen Tunas Asri</span></div>
+    <div class="detail-row"><span class="k">Tanggal denda</span><span class="v" id="skTanggal">8 Agu 2026</span></div>
+    <div class="detail-row"><span class="k">Potongan diajukan</span><span class="v mono" id="skPotongan">153 L (30%)</span></div>
+    <p id="skProtes" style="font-size:12.5px; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 13px; margin:12px 0;">Protes Agen: "Minyak masih bagus pas diambil, mungkin tercampur pas pooling di Kilang."</p>
     <div class="camera-box" onclick="toast('Bukti foto/video Driver ditampilkan.')">
       <svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
       <span>Lihat foto/video bukti Driver</span>
@@ -1278,6 +1311,7 @@
     </div>
   </div>
 </div>
+-->
 
 <!-- ===================== KOREKSI STOK DIALOG (semua role Kilang kecuali Driver) ===================== -->
 <div class="dialog-wrap" id="koreksiStokDialog">
@@ -1297,10 +1331,15 @@
     <div class="dialog-head"><h3>Detail Pengaduan</h3><div class="dialog-close" onclick="closeDialog('complaintDialog')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
     <div class="detail-row"><span class="k">Agen</span><span class="v" id="cpAgen"></span></div>
     <div class="detail-row"><span class="k">Waktu</span><span class="v" id="cpTime"></span></div>
+    <div class="detail-row"><span class="k">Status</span><span class="v" id="cpStatus"></span></div>
     <p id="cpText" style="font-size:13px; color:var(--ink-soft); line-height:1.6; background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 13px; margin:12px 0 16px;"></p>
-    <div class="dialog-actions" style="margin-top:0;">
+    <div class="dialog-actions" id="cpActions" style="margin-top:0;">
       <button class="btn btn-outline" onclick="forwardComplaint()">Teruskan ke Ops</button>
       <button class="btn btn-primary" onclick="resolveComplaint()">Tandai Selesai</button>
+    </div>
+    <div class="note-banner good" id="cpResolvedNote" style="display:none; margin-bottom:0;">
+      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+      <p>Pengaduan ini sudah ditandai selesai.</p>
     </div>
   </div>
 </div>
@@ -1319,11 +1358,19 @@
     <div class="detail-row" id="mVerifiedRow" style="display:none"><span class="k">Diverifikasi oleh</span><span class="v" id="mVerifiedBy"></span></div>
     <div id="mProofNote" style="display:none; font-size:11px; color:var(--muted); background:var(--paper); border:1px dashed var(--line); border-radius:12px; padding:10px 12px; margin-top:10px; line-height:1.5;">Pembayaran di luar sistem, dicatat manual untuk minimalkan fee. Bukti transfer/kuitansi terlampir di aplikasi Agen.</div>
     <button class="btn btn-primary btn-block" id="mVerifyBtn" style="margin-top:16px;" onclick="verifyTx()">Verifikasi Pembayaran</button>
+    <div id="mCancelReqBlock" style="display:none;">
+      <p id="mCancelReason" style="font-size:12.5px; color:var(--ink-soft); background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:14px 0; line-height:1.6; font-weight:600;"></p>
+      <div class="dialog-actions" style="margin-top:0;">
+        <button class="btn btn-outline" onclick="rejectComplaint()">Tolak Komplain</button>
+        <button class="btn btn-rust" onclick="approveComplaint()">Setujui & Koreksi</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg">Berhasil</span></div>
 <span id="pengaduanCount" style="display:none">0</span>
+<span id="txActionCount" style="display:none">0</span>
 
 <script>
 /* ============================================================
@@ -1370,7 +1417,7 @@ const ROLE_META = {
       {group:'Operasional', items:[
         {id:'pickup', label:'Jadwal Pickup', icon:'clock'},
         {id:'driver', label:'Driver', icon:'truck'},
-        {id:'qc', label:'QC Harian', icon:'check'},
+        /* NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2. {id:'qc', label:'QC Harian', icon:'check'}, */
       ]},
     ]},
   finance:{ label:'Finance', name:'Melati Wijaya', badgeClass:'badge-steel', avatarBg:'linear-gradient(155deg,var(--steel),var(--steel-deep))', initials:'MW', email:'melati@biojelan.id', phone:'0856-1122-3344', joined:'Mar 2026',
@@ -1379,7 +1426,7 @@ const ROLE_META = {
         {id:'home', label:'Beranda', icon:'home'},
       ]},
       {group:'Keuangan', items:[
-        {id:'transaksi', label:'Transaksi', icon:'card', badge:'txVerifyCount'},
+        {id:'transaksi', label:'Transaksi', icon:'card', badge:'txActionCount'},
         {id:'labarugi', label:'Laba-Rugi', icon:'chart'},
         {id:'midtrans', label:'Saldo Midtrans', icon:'wallet'},
         {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check'},
@@ -1407,19 +1454,16 @@ const ICONS = {
 
 function svgIcon(name){ return '<svg viewBox="0 0 24 24">'+(ICONS[name]||'')+'</svg>'; }
 
-const DEMO_COLORS = { superadmin:'linear-gradient(155deg,var(--amber),var(--amber-deep))', admin:'linear-gradient(155deg,var(--primary),var(--primary-deep))', ops:'linear-gradient(155deg,var(--rust),#8a431c)', finance:'linear-gradient(155deg,var(--steel),var(--steel-deep))' };
-
-function buildDemoGrid(){
-  const wrap = document.getElementById('demoAcctGrid');
-  wrap.innerHTML = Object.keys(ROLE_META).map(role=>{
-    const m = ROLE_META[role];
-    return '<button type="button" class="demo-acct" onclick="loginAsDemo(\''+role+'\')"><div class="di" style="background:'+DEMO_COLORS[role]+'">'+m.initials+'</div><div class="dt"><b>'+m.label+'</b><span>'+m.name+'</span></div></button>';
-  }).join('');
-}
+// Role akun ditentukan dari email yang login — bukan dari tombol pilihan.
+// Dibangun otomatis dari ROLE_META supaya satu sumber data aja (tidak duplikat daftar email).
+const STAFF_EMAIL_ROLE = {};
+Object.keys(ROLE_META).forEach(role => { STAFF_EMAIL_ROLE[ROLE_META[role].email.toLowerCase()] = role; });
 
 function handleLogin(e){
   e.preventDefault();
-  loginAsDemo('superadmin');
+  const email = (document.getElementById('loginEmail').value || '').trim().toLowerCase();
+  const role = STAFF_EMAIL_ROLE[email] || 'superadmin';
+  loginAsDemo(role);
   return false;
 }
 
@@ -1432,7 +1476,26 @@ function loginAsDemo(role){
   renderDashboardData(role);
   navigateTo('home');
   toast('Masuk sebagai '+ROLE_META[role].label+' — '+ROLE_META[role].name);
+  closeDevPanel();
 }
+
+function buildDevPanel(){
+  const wrap = document.getElementById('devPanelList');
+  wrap.innerHTML = Object.keys(ROLE_META).map(role=>{
+    const m = ROLE_META[role];
+    return '<button type="button" class="dev-item" onclick="loginAsDemo(\''+role+'\')">'+m.label+'<small>'+m.name+'</small></button>';
+  }).join('') + '<button type="button" class="dev-item" onclick="doLogout(); closeDevPanel();">Keluar / layar login</button>';
+}
+function toggleDevPanel(e){
+  if(e) e.stopPropagation();
+  document.getElementById('devPanel').classList.toggle('open');
+}
+function closeDevPanel(){ document.getElementById('devPanel').classList.remove('open'); }
+document.addEventListener('click', function(e){
+  const panel = document.getElementById('devPanel');
+  const fab = document.getElementById('devFab');
+  if(panel.classList.contains('open') && !panel.contains(e.target) && !fab.contains(e.target)) closeDevPanel();
+});
 
 function doLogout(){
   currentRole = null;
@@ -1524,7 +1587,7 @@ const PAGE_META = {
   broadcast:{eyebrow:'Kelola', title:'Broadcast'},
   pickup:{eyebrow:'Operasional', title:'Jadwal Pickup'},
   driver:{eyebrow:'Operasional', title:'Driver'},
-  qc:{eyebrow:'Operasional', title:'QC Harian'},
+  /* NEXT DEV qc:{eyebrow:'Operasional', title:'QC Harian'}, */
   transaksi:{eyebrow:'Keuangan', title:'Transaksi'},
   labarugi:{eyebrow:'Keuangan', title:'Laporan Laba-Rugi'},
   midtrans:{eyebrow:'Keuangan', title:'Saldo Midtrans'},
@@ -1628,8 +1691,8 @@ const DATA = {
     {id:'WK', name:'Agen Wahyu Karya', status:'Tutup', stock:180, stockState:'safe', stockLabel:'Aman', addr:'Jl. Sudirman No. 21, Kotabumi', phone:'0857-2233-4455', bank:'BNI 0288-1145-90', dirigen:5, invLengkap:true},
   ],
   approvals: [
-    {id:'MS', name:'Agen Mekar Sari', meta:'Daftar 10 Agu 2026 · Kotabumi · rek. BCA 8801-2234-51 · foto investasi ✓ lengkap (5 dirigen + banner)'},
-    {id:'CA', name:'Agen Cahaya Abadi', meta:'Daftar 9 Agu 2026 · Kotabumi · rek. BRI 0091-77-002211 · foto investasi belum lengkap', warn:true},
+    {id:'MS', name:'Agen Mekar Sari', meta:'Upgrade dari Klien "Sari Wulandari" · diajukan 10 Agu 2026 · Kotabumi · rek. BCA 8801-2234-51 · foto investasi ✓ lengkap (5 dirigen + banner)'},
+    {id:'CA', name:'Agen Cahaya Abadi', meta:'Upgrade dari Klien "Budi Santoso" · diajukan 9 Agu 2026 · Kotabumi · rek. BRI 0091-77-002211 · foto investasi belum lengkap', warn:true},
   ],
   staff: {
     superadmin:[{name:'Yusuf Hartono', email:'yusuf@biojelan.id', phone:'0812-3456-7890', joined:'Jan 2026', badge:'badge-amber', ini:'YH', bg:'var(--amber-tint)', fg:'var(--amber-deep)'}],
@@ -1643,7 +1706,7 @@ const DATA = {
   },
   activityLog:[
     {ini:'MW', bg:'var(--steel-tint)', fg:'var(--steel-deep)', text:'Melati Wijaya memverifikasi pembayaran TX-20260811-14', time:'Hari ini, 11.20'},
-    {ini:'BP', bg:'var(--rust-tint)', fg:'var(--rust)', text:'Bagas Prakoso mengajukan denda Agen Tunas Asri', time:'Hari ini, 09.15'},
+    {ini:'BP', bg:'var(--rust-tint)', fg:'var(--rust)', text:'Bagas Prakoso menugaskan Ahmad Fauzi ke rute PU-20260811-05', time:'Hari ini, 09.15'},
     {ini:'SR', bg:'var(--primary-tint)', fg:'var(--primary)', text:'Siti Rahma menyetujui pendaftaran Agen Mekar Sari', time:'Kemarin, 14.02'},
     {ini:'AF', bg:'var(--primary-tint)', fg:'var(--primary)', text:'Ahmad Fauzi login ke aplikasi Driver', time:'Kemarin, 07.48'},
     {ini:'YH', bg:'var(--amber-tint)', fg:'var(--amber-deep)', text:'Yusuf Hartono menambahkan akun staf Finance', time:'3 Agu 2026, 10.30'},
@@ -1668,15 +1731,20 @@ const DATA = {
     {id:'RH', name:'Rudi Hidayat', plat:'BE 5678 CD', live:false, statusText:'Standby di Kilang', route:null,
       checkpoints:[{label:'Standby di Kilang', time:'—', state:'now'}]},
   ],
+  /* NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2 (Q9 masih 1 kualitas saja).
   qcHistory:[
     {date:'10 Agu 2026', ok:true, note:'Lolos · 3 Agen'},
     {date:'8 Agu 2026', ok:false, note:'Gagal · Agen Tunas Asri kena denda'},
   ],
+  sengketa:[
+    {id:'TA', agen:'Agen Tunas Asri', tanggal:'8 Agu 2026', potongan:'153 L (30%)', protes:'"Minyak masih bagus pas diambil, mungkin tercampur pas pooling di Kilang."', status:'pending'},
+  ],
+  */
   transactions:[
     {id:'TX-20260811-14', date:'11 Agu 2026, 10.05', from:'Kilang', to:'Agen Barokah Jaya', ini:'BJ', vol:'620 L', price:'Rp 6.500', total:'Rp 4.030.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260811-13', date:'11 Agu 2026, 09.40', from:'Kilang', to:'Agen Tunas Asri', ini:'TA', vol:'510 L', price:'Rp 6.500', total:'Rp 3.315.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260810-08', date:'10 Agu 2026, 08.10', from:'Kilang', to:'Agen Wahyu Karya', ini:'WK', vol:'480 L', price:'Rp 6.500', total:'Rp 3.120.000', status:'Terverifikasi', needsVerify:false, cat:'kilang-agen', verifiedBy:'Melati Wijaya'},
-    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
+    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Menunggu Tinjauan', needsVerify:false, cat:'agen-klien', pendingComplaint:true, complaintReason:'Transaksi tercatat dobel'},
     {id:'TX-20260811-11', date:'11 Agu 2026, 08.50', from:'Agen Tunas Asri', to:'Ahmad Solihin', ini:'AS', vol:'4 L', price:'Rp 6.500', total:'Rp 26.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
     {id:'TX-20260811-10', date:'11 Agu 2026, 08.20', from:'Agen Sumber Rezeki', to:'Bambang Santoso', ini:'BS', vol:'12 L', price:'Rp 6.500', total:'Rp 78.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
   ],
@@ -1717,7 +1785,7 @@ function approveRow(btn, counterId){
   DATA.approvals = DATA.approvals.filter(a=>a.id!==id);
   row.classList.add('fade-out');
   setTimeout(renderApprovalLists, 220);
-  toast('Agen disetujui');
+  toast('Upgrade ke Agen disetujui');
   refreshSidebarBadges();
 }
 function rejectRow(btn, counterId){
@@ -1726,7 +1794,7 @@ function rejectRow(btn, counterId){
   DATA.approvals = DATA.approvals.filter(a=>a.id!==id);
   row.classList.add('fade-out');
   setTimeout(renderApprovalLists, 220);
-  toast('Pendaftaran Agen ditolak');
+  toast('Pengajuan upgrade ke Agen ditolak');
   refreshSidebarBadges();
 }
 
@@ -1895,11 +1963,10 @@ function renderPengaduanList(){
   const el = document.getElementById('pengaduanList');
   if(!el) return;
   el.innerHTML = DATA.pengaduan.map((p,i)=>{
-    const clickable = p.status==='Baru';
-    return '<div class="cell-entity" style="padding:13px 0; border-bottom:1px dashed var(--line); '+(clickable?'cursor:pointer;':'')+'" '+(clickable?'onclick="openComplaint('+i+')"':'')+'>'+
+    return '<div class="cell-entity" style="padding:13px 0; border-bottom:1px dashed var(--line); cursor:pointer;" onclick="openComplaint('+i+')">'+
       '<div class="avatar-tag" style="'+(p.status==='Selesai'?'background:var(--line); color:var(--ink-soft);':'')+'">'+p.id+'</div>'+
       '<div class="et" style="flex:1;"><h4>'+p.agen+'</h4><span>'+p.title+' <span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="margin-left:6px;">'+p.status+'</span></span></div>'+
-      (clickable?'<svg style="width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>':'')+
+      '<svg style="width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'+
     '</div>';
   }).join('');
   const newCount = DATA.pengaduan.filter(p=>p.status==='Baru').length;
@@ -1914,6 +1981,11 @@ function openComplaint(i){
   document.getElementById('cpAgen').textContent = p.agen;
   document.getElementById('cpTime').textContent = p.time;
   document.getElementById('cpText').textContent = p.text;
+  const statusEl = document.getElementById('cpStatus');
+  statusEl.innerHTML = '<span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="font-size:10px;">'+p.status+'</span>';
+  const isResolved = p.status === 'Selesai';
+  document.getElementById('cpActions').style.display = isResolved ? 'none' : 'flex';
+  document.getElementById('cpResolvedNote').style.display = isResolved ? 'flex' : 'none';
   openDialog('complaintDialog');
 }
 function forwardComplaint(){ toast('Pengaduan diteruskan ke Manajer Operasional.'); closeDialog('complaintDialog'); }
@@ -2053,7 +2125,13 @@ function addDriverRow(){
   document.getElementById('drvAddName').value=''; document.getElementById('drvAddPhone').value=''; document.getElementById('drvAddPlat').value='';
 }
 
-/* ---------- QC Harian (Ops) ---------- */
+/* NEXT DEV — QC Harian (Ops): uji pooling & sengketa denda.
+   Belum ada di scope PRD v2 (Q9: harga masih 1 kualitas saja untuk saat ini).
+   Fungsi-fungsi ini disimpan sebagai referensi, bukan dihapus — begitu fitur QC
+   resmi di-scope stakeholder, hapus komentar ini beserta yang di HTML (#page-qc,
+   #sengketaDialog) dan di ROLE_META.ops.nav, lalu aktifkan lagi 2 baris
+   renderQcSengketa()/renderQcHistory() di renderDashboardData().
+
 function setQC(result){
   const chip = document.getElementById('qcStatusChip');
   if(result==='lolos'){
@@ -2078,11 +2156,19 @@ function submitDenda(){
 function renderQcSengketa(){
   const el = document.getElementById('qcSengketaList');
   if(!el) return;
-  el.innerHTML = '<div class="cell-entity" style="padding:6px 0; cursor:pointer;" onclick="openSengketa()">'+
-    '<div class="avatar-tag" style="background:var(--rust-tint); color:var(--rust);">TA</div>'+
-    '<div class="et"><h4>Agen Tunas Asri memprotes denda 8 Agu</h4><span>Menunggu tinjauan bukti Driver</span></div>'+
-    '<svg style="width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'+
-  '</div>';
+  const pending = DATA.sengketa.filter(s=>s.status==='pending');
+  if(pending.length===0){
+    el.innerHTML = '<p class="empty-note">Tidak ada sengketa yang perlu ditinjau.</p>';
+    return;
+  }
+  el.innerHTML = pending.map(s=>{
+    const idx = DATA.sengketa.indexOf(s);
+    return '<div class="cell-entity" style="padding:6px 0; cursor:pointer;" onclick="openSengketa('+idx+')">'+
+      '<div class="avatar-tag" style="background:var(--rust-tint); color:var(--rust);">'+s.id+'</div>'+
+      '<div class="et"><h4>'+s.agen+' memprotes denda '+s.tanggal+'</h4><span>Menunggu tinjauan bukti Driver</span></div>'+
+      '<svg style="width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'+
+    '</div>';
+  }).join('');
 }
 function renderQcHistory(){
   const el = document.getElementById('qcHistoryList');
@@ -2091,17 +2177,39 @@ function renderQcHistory(){
     '<div class="cell-entity" style="padding:11px 0; border-bottom:1px dashed var(--line);"><div class="avatar-tag" style="'+(h.ok?'background:var(--primary-tint); color:var(--primary);':'background:var(--rust-tint); color:var(--rust);')+'">'+(h.ok?'✓':'✕')+'</div><div class="et"><h4>'+h.date+'</h4><span>'+h.note+'</span></div></div>'
   ).join('');
 }
-function openSengketa(){ openDialog('sengketaDialog'); }
+let activeSengketaIdx = null;
+function openSengketa(idx){
+  activeSengketaIdx = idx;
+  const s = DATA.sengketa[idx];
+  document.getElementById('skAgen').textContent = s.agen;
+  document.getElementById('skTanggal').textContent = s.tanggal;
+  document.getElementById('skPotongan').textContent = s.potongan;
+  document.getElementById('skProtes').textContent = 'Protes Agen: ' + s.protes;
+  openDialog('sengketaDialog');
+}
 function resolveSengketa(action){
+  if(activeSengketaIdx===null) return;
+  const s = DATA.sengketa[activeSengketaIdx];
+  s.status = action === 'cancel' ? 'dibatalkan' : 'dipertahankan';
+  DATA.qcHistory.unshift({date:s.tanggal, ok:false, note:'Sengketa '+s.agen+' diselesaikan · denda '+(action==='cancel'?'dibatalkan':'dipertahankan')});
+  renderQcSengketa();
+  renderQcHistory();
   toast(action==='cancel' ? 'Denda dibatalkan.' : 'Denda dipertahankan.');
   closeDialog('sengketaDialog');
 }
+*/
 
 /* ---------- Transaksi (Finance) ---------- */
+function txChipClass(t){
+  if(t.pendingComplaint) return 'chip-amber';
+  if(t.needsVerify) return 'chip-amber';
+  if(t.status==='Tercatat') return 'chip-open';
+  return 'chip-closed';
+}
 function txRowHtml(t, forQueue){
   return '<div class="cell-entity" style="padding:12px 0; border-bottom:1px dashed var(--line); cursor:pointer;" onclick="openTx(\''+t.id+'\')">'+
     '<div class="avatar-tag" style="'+(t.cat==='agen-klien'?'background:var(--steel-tint); color:var(--steel-deep);':'')+'">'+t.ini+'</div>'+
-    '<div class="et" style="flex:1;"><h4>'+t.from+' → '+t.to+'</h4><span>'+t.vol+' · '+t.total+' <span class="chip '+(t.needsVerify?'chip-amber':(t.status==='Tercatat'?'chip-open':'chip-closed'))+'" style="margin-left:4px;">'+t.status+'</span></span></div>'+
+    '<div class="et" style="flex:1;"><h4>'+t.from+' → '+t.to+'</h4><span>'+t.vol+' · '+t.total+' <span class="chip '+txChipClass(t)+'" style="margin-left:4px;">'+t.status+'</span></span></div>'+
   '</div>';
 }
 function renderTxLists(){
@@ -2110,6 +2218,14 @@ function renderTxLists(){
   if(qEl) qEl.innerHTML = queue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada transaksi menunggu verifikasi.</p>';
   const cntEls = ['txVerifyCount','fnVerifyStat']; cntEls.forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent = queue.length; });
   const fnPrev = document.getElementById('fnVerifyPreview'); if(fnPrev) fnPrev.innerHTML = qEl ? qEl.innerHTML : '';
+
+  const complaintQueue = DATA.transactions.filter(t=>t.pendingComplaint);
+  const cqEl = document.getElementById('txCancelReqQueue');
+  if(cqEl) cqEl.innerHTML = complaintQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada komplain dari Agen.</p>';
+  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = complaintQueue.length;
+  document.getElementById('txActionCount').textContent = queue.length + complaintQueue.length;
+  const fnCancelPrev = document.getElementById('fnCancelReqPreview'); if(fnCancelPrev) fnCancelPrev.innerHTML = cqEl ? cqEl.innerHTML : '';
+
   renderTxTable();
 }
 function renderTxTable(activeFilter){
@@ -2122,7 +2238,7 @@ function renderTxTable(activeFilter){
       '<td><div class="cell-entity"><div class="avatar-tag" style="'+(t.cat==='agen-klien'?'background:var(--steel-tint); color:var(--steel-deep);':'')+'">'+t.ini+'</div><div class="et"><h4>'+t.from+' → '+t.to+'</h4><span>'+t.id+' · '+t.date+'</span></div></div></td>'+
       '<td class="num mono">'+t.vol+'</td>'+
       '<td class="num mono">'+t.total+'</td>'+
-      '<td><span class="chip '+(t.needsVerify?'chip-amber':(t.status==='Tercatat'?'chip-open':'chip-closed'))+'">'+t.status+'</span></td>'+
+      '<td><span class="chip '+txChipClass(t)+'">'+t.status+'</span></td>'+
     '</tr>'
   ).join('');
 }
@@ -2150,9 +2266,18 @@ function openTx(id){
   document.getElementById('mStatus').textContent = t.status;
   const vr = document.getElementById('mVerifiedRow');
   if(t.verifiedBy){ vr.style.display='flex'; document.getElementById('mVerifiedBy').textContent = t.verifiedBy; } else { vr.style.display='none'; }
-  document.getElementById('mProofNote').style.display = t.cat==='agen-klien' ? 'block' : 'none';
+  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingComplaint) ? 'block' : 'none';
+
   const vBtn = document.getElementById('mVerifyBtn');
-  vBtn.style.display = t.needsVerify ? 'flex' : 'none';
+  const cancelReqBlock = document.getElementById('mCancelReqBlock');
+  if(t.pendingComplaint){
+    vBtn.style.display = 'none';
+    cancelReqBlock.style.display = 'block';
+    document.getElementById('mCancelReason').textContent = 'Alasan komplain dari Agen: ' + (t.complaintReason || '-');
+  } else {
+    vBtn.style.display = t.needsVerify ? 'flex' : 'none';
+    cancelReqBlock.style.display = 'none';
+  }
   openDialog('txDialog');
 }
 function verifyTx(){
@@ -2161,6 +2286,20 @@ function verifyTx(){
   renderTxLists();
   closeDialog('txDialog');
   toast('Pembayaran diverifikasi.');
+}
+function approveComplaint(){
+  const t = DATA.transactions.find(x=>x.id===activeTxId);
+  if(t){ t.pendingComplaint=false; t.status='Dikoreksi'; }
+  renderTxLists();
+  closeDialog('txDialog');
+  toast('Komplain '+(t?t.from+' → '+t.to:'')+' disetujui — transaksi dikoreksi.');
+}
+function rejectComplaint(){
+  const t = DATA.transactions.find(x=>x.id===activeTxId);
+  if(t){ t.pendingComplaint=false; t.status='Tercatat'; }
+  renderTxLists();
+  closeDialog('txDialog');
+  toast('Komplain ditolak — transaksi tetap tercatat.');
 }
 
 /* ---------- Laporan / Midtrans ---------- */
@@ -2229,8 +2368,7 @@ function renderDashboardData(role){
   renderBroadcastHistory();
   renderPickupTable();
   renderDriverTable();
-  renderQcSengketa();
-  renderQcHistory();
+  // NEXT DEV: renderQcSengketa(); renderQcHistory(); — nonaktif bareng fitur QC, lihat catatan di atas.
   renderTxLists();
   renderMidtransHistory();
   applySystemConfig();
@@ -2254,10 +2392,7 @@ window.addEventListener('resize', function(){
     if(!document.querySelector('.drawer.open, .dialog-wrap.open')) document.getElementById('overlay').classList.remove('open');
   }
 });
-
-document.addEventListener('DOMContentLoaded', function(){
-  buildDemoGrid();
-});
+document.addEventListener('DOMContentLoaded', buildDevPanel);
 </script>
 </body>
 </html>
