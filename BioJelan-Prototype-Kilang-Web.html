@@ -210,6 +210,15 @@
   .cell-entity .et h4{margin:0 0 2px; font-size:12.5px; font-weight:800; white-space:nowrap;}
   .cell-entity .et span{font-size:11px; color:var(--muted); white-space:nowrap;}
   .row-actions{display:flex; gap:6px; justify-content:flex-end;}
+  .staff-table tbody tr:nth-child(even) td{background:var(--paper);}
+  .pill-action{border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-weight:700; font-size:11.5px; border-radius:6px; padding:7px 12px; display:inline-flex; align-items:center; gap:5px; color:#fff; white-space:nowrap;}
+  .pill-action svg{width:13px; height:13px; stroke:#fff; fill:none; stroke-width:2.3;}
+  .pill-show{background:#17A2B8;}
+  .pill-show:hover{background:#138A9C;}
+  .pill-edit{background:#F4B740;}
+  .pill-edit:hover{background:#E0A62C;}
+  .pill-delete{background:#E4544A;}
+  .pill-delete:hover{background:#D1443A;}
 
   .chip{display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:800; padding:4px 10px; border-radius:999px; white-space:nowrap;}
   .chip-open{background:var(--primary-tint); color:var(--primary);}
@@ -446,7 +455,7 @@
         <h1>Satu login, satu kursi kerja untuk seluruh operasional Kilang.</h1>
         <p class="lede">Superadmin, Admin, Manajer Operasional, dan Finance masuk lewat form yang sama — dashboard, menu, dan hak akses langsung menyesuaikan role akun masing-masing.</p>
         <div class="login-feat">
-          <div class="lf"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Pemisahan wewenang built-in — satu role tidak bisa memutuskan &amp; mencairkan uang sendirian.</span></div>
+          <div class="lf"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Pemisahan wewenang built-in untuk staf internal — satu role staf tidak bisa memutuskan &amp; mencairkan uang sendirian.</span></div>
           <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg><span>Tabel, matriks akses, dan laporan dirancang untuk layar lebar — bukan versi mobile yang dipaksa muat.</span></div>
           <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="13" height="8" rx="1.5"/><path d="M16 12h3l2 3v2h-5z"/><circle cx="7.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/></svg><span>Klien, Agen, dan Driver satu aplikasi mobile — dashboard di sini khusus untuk tim Kilang.</span></div>
         </div>
@@ -653,7 +662,7 @@
             <div id="fnVerifyPreview"></div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Komplain dari Agen</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
+            <div class="card-head"><h3>Komplain transaksi</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
             <div id="fnCancelReqPreview"></div>
           </div>
         </div>
@@ -698,7 +707,7 @@
 
         <div class="card" style="margin-bottom:22px;">
           <div class="card-head"><h3>Matriks Hak Akses</h3></div>
-          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Prinsip pemisahan wewenang: satu role tidak bisa memutuskan &amp; mencairkan uang sendirian.</p>
+          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Superadmin adalah 1 akun khusus dengan akses penuh ke seluruh sistem (PRD v2 &sect;4.3 &amp; &sect;9). Pemisahan wewenang berlaku untuk staf internal di bawahnya — satu role staf tidak bisa memutuskan &amp; mencairkan uang sendirian.</p>
           <div class="perm-ledger">
             <table>
               <tr><th>Aksi</th><th>Superadmin</th><th>Admin</th><th>Manajer Ops</th><th>Finance</th><th>Driver</th></tr>
@@ -707,18 +716,18 @@
               <!-- NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2 (Q9 masih 1 kualitas saja).
               <tr><td>Putuskan kualitas / denda</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td></tr>
               -->
-              <tr><td>Cairkan uang ke Agen</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+              <tr><td>Cairkan uang ke Agen</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
               <tr><td>Tambah akun staf</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td></tr>
-              <tr><td>Lihat log &amp; saldo Kilang</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td></tr>
+              <tr><td>Lihat log &amp; saldo Kilang</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td></tr>
               <tr><td>Hapus riwayat transaksi</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
             </table>
           </div>
           <div class="perm-legend">
             <div class="pl"><b style="color:var(--primary)">✓</b> Eksekusi penuh</div>
-            <div class="pl"><b style="color:var(--amber-deep)">•</b> Terbatas — harga: SA tentukan dasar, MO eksekusi harian · staf: MO hanya dapat menambah Driver · log: SA lihat aktivitas saja, bukan saldo</div>
+            <div class="pl"><b style="color:var(--amber-deep)">•</b> Terbatas — harga: SA tentukan dasar (rentang), MO eksekusi harian dalam rentang itu · staf: MO hanya dapat menambah akun Driver</div>
             <div class="pl"><b style="color:var(--line)">–</b> Tidak punya akses</div>
           </div>
-          <p style="font-size:11px; color:var(--amber-deep); margin:14px 0 0; line-height:1.6; font-weight:700;">Riwayat transaksi tidak bisa dihapus siapa pun — Superadmin hanya bisa backup/restore.</p>
+          <p style="font-size:11px; color:var(--amber-deep); margin:14px 0 0; line-height:1.6; font-weight:700;">Riwayat transaksi tidak bisa dihapus siapa pun, termasuk Superadmin — demi menjaga audit trail (NFR Reliability, PRD &sect;11). Superadmin hanya bisa backup/restore.</p>
         </div>
 
         <div id="timGroups"></div>
@@ -1019,8 +1028,8 @@
           <div id="txVerifyQueue"></div>
         </div>
         <div class="card" style="margin-bottom:18px;">
-          <div class="card-head"><h3>Komplain dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
-          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen hanya dapat mengajukan komplain — Kilang yang memutuskan tindak lanjutnya.</p>
+          <div class="card-head"><h3>Komplain transaksi dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
+          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen mengajukan komplain atas transaksi yang sudah tercatat (mis. dobel input, salah volume) — Kilang yang meninjau dan memutuskan tindak lanjutnya.</p>
           <div id="txCancelReqQueue"></div>
         </div>
         <div class="table-wrap">
@@ -1361,8 +1370,8 @@
     <div id="mCancelReqBlock" style="display:none;">
       <p id="mCancelReason" style="font-size:12.5px; color:var(--ink-soft); background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:14px 0; line-height:1.6; font-weight:600;"></p>
       <div class="dialog-actions" style="margin-top:0;">
-        <button class="btn btn-outline" onclick="rejectComplaint()">Tolak Komplain</button>
-        <button class="btn btn-rust" onclick="approveComplaint()">Setujui & Koreksi</button>
+        <button class="btn btn-outline" onclick="rejectCancelRequest()">Tolak Komplain</button>
+        <button class="btn btn-rust" onclick="approveCancelRequest()">Setujui &amp; Batalkan Transaksi</button>
       </div>
     </div>
   </div>
@@ -1385,12 +1394,31 @@ let sysConfig = { ambangStok: 500, ambangDirigen: 5, jamMulai: '08:00' };
 
 const ROLE_META = {
   superadmin:{ label:'Superadmin', name:'Yusuf Hartono', badgeClass:'badge-amber', avatarBg:'linear-gradient(155deg,var(--amber),var(--amber-deep))', initials:'YH', email:'yusuf@biojelan.id', phone:'0812-3456-7890', joined:'Jan 2026',
+    // Superadmin = 1 akun akses penuh (PRD v2 §4.3 & §9) — bisa intervensi semua menu
+    // Admin, Manajer Operasional, dan Finance. Driver tetap di luar: itu app mobile
+    // terpisah (Q22), bukan menu di dashboard web ini.
     nav:[
       {group:'Utama', items:[
         {id:'home', label:'Beranda', icon:'home'},
       ]},
-      {group:'Kelola', items:[
+      {group:'Agen', items:[
         {id:'agen', label:'Agen', icon:'agen', badge:'agenApprovalCount'},
+        {id:'stok', label:'Stok Agen', icon:'drop'},
+        {id:'dirigen', label:'Dirigen', icon:'box'},
+        {id:'pengaduan', label:'Pengaduan', icon:'flag', badge:'pengaduanCount'},
+        {id:'broadcast', label:'Broadcast', icon:'radio'},
+      ]},
+      {group:'Operasional', items:[
+        {id:'pickup', label:'Jadwal Pickup', icon:'clock'},
+        {id:'driver', label:'Driver', icon:'truck'},
+      ]},
+      {group:'Keuangan', items:[
+        {id:'transaksi', label:'Transaksi', icon:'card', badge:'txActionCount'},
+        {id:'labarugi', label:'Laba-Rugi', icon:'chart'},
+        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet'},
+        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check'},
+      ]},
+      {group:'Kelola Sistem', items:[
         {id:'tim', label:'Tim &amp; Akses', icon:'tim'},
         {id:'konfigurasi', label:'Konfigurasi Sistem', icon:'gear'},
         {id:'logaktivitas', label:'Log Aktivitas', icon:'clock'},
@@ -1744,7 +1772,7 @@ const DATA = {
     {id:'TX-20260811-14', date:'11 Agu 2026, 10.05', from:'Kilang', to:'Agen Barokah Jaya', ini:'BJ', vol:'620 L', price:'Rp 6.500', total:'Rp 4.030.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260811-13', date:'11 Agu 2026, 09.40', from:'Kilang', to:'Agen Tunas Asri', ini:'TA', vol:'510 L', price:'Rp 6.500', total:'Rp 3.315.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260810-08', date:'10 Agu 2026, 08.10', from:'Kilang', to:'Agen Wahyu Karya', ini:'WK', vol:'480 L', price:'Rp 6.500', total:'Rp 3.120.000', status:'Terverifikasi', needsVerify:false, cat:'kilang-agen', verifiedBy:'Melati Wijaya'},
-    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Menunggu Tinjauan', needsVerify:false, cat:'agen-klien', pendingComplaint:true, complaintReason:'Transaksi tercatat dobel'},
+    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Dalam Peninjauan', needsVerify:false, cat:'agen-klien', pendingCancel:true, cancelReason:'Transaksi tercatat dobel'},
     {id:'TX-20260811-11', date:'11 Agu 2026, 08.50', from:'Agen Tunas Asri', to:'Ahmad Solihin', ini:'AS', vol:'4 L', price:'Rp 6.500', total:'Rp 26.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
     {id:'TX-20260811-10', date:'11 Agu 2026, 08.20', from:'Agen Sumber Rezeki', to:'Bambang Santoso', ini:'BS', vol:'12 L', price:'Rp 6.500', total:'Rp 78.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
   ],
@@ -1840,23 +1868,54 @@ function openAgenDetail(id){
 /* ---------- Tim & Akses ---------- */
 const ROLE_LABELS = {superadmin:'Superadmin', admin:'Admin', ops:'Manajer Operasional', finance:'Finance', driver:'Driver'};
 function staffRowHtml(role, s){
-  return '<div class="table-wrap" style="border:none; border-bottom:1px dashed var(--line); border-radius:0;"></div>';
+  const safeName = s.name.replace(/'/g,"\\'");
+  return '<tr data-role="'+role+'">'+
+    '<td><div class="cell-entity"><div class="avatar-tag" style="background:'+s.bg+'; color:'+s.fg+';">'+s.ini+'</div>'+
+      '<div class="et"><h4>'+s.name+'</h4>'+(s.plat ? '<span>'+s.plat+'</span>' : '')+'</div></div></td>'+
+    '<td>'+s.email+'</td>'+
+    '<td><span class="badge '+s.badge+'" style="padding:4px 10px; font-size:10.5px;">'+ROLE_LABELS[role]+'</span></td>'+
+    '<td>'+s.phone+'</td>'+
+    '<td>'+s.joined+'</td>'+
+    '<td><div class="row-actions" style="justify-content:flex-start;">'+
+      '<button class="pill-action pill-show" onclick="openStaffView(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/></svg>Detail</button>'+
+      '<button class="pill-action pill-edit" onclick="toast(\'Fitur edit staf belum tersedia di prototipe ini.\')"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit</button>'+
+      '<button class="pill-action pill-delete" onclick="hapusStaf(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Hapus</button>'+
+    '</div></td>'+
+  '</tr>';
 }
 function renderTimGroups(){
   const wrap = document.getElementById('timGroups');
   if(!wrap) return;
   const order = ['superadmin','admin','ops','finance','driver'];
-  wrap.innerHTML = order.map(role=>{
-    const list = DATA.staff[role];
-    const rows = list.map(s=>{
-      const extra = s.plat ? ' · '+s.plat : '';
-      return '<div class="cell-entity" style="padding:12px 0; border-bottom:1px dashed var(--line); cursor:pointer;" onclick="openStaffView(\''+role+'\',\''+s.name.replace(/'/g,"\\'")+'\')">'+
-        '<div class="avatar-tag" style="background:'+s.bg+'; color:'+s.fg+';">'+s.ini+'</div>'+
-        '<div class="et"><h4>'+s.name+'</h4><span><span class="badge '+s.badge+'" style="padding:2px 8px; font-size:9.5px;">'+ROLE_LABELS[role]+'</span>'+extra+'</span></div>'+
-      '</div>';
-    }).join('');
-    return '<div class="card"><div class="card-head"><h3>'+ROLE_LABELS[role]+'</h3></div>'+rows+'</div>';
-  }).join('');
+  const total = order.reduce((n,r)=>n+DATA.staff[r].length, 0);
+  const rows = order.map(role=>DATA.staff[role].map(s=>staffRowHtml(role,s)).join('')).join('')
+    || '<tr><td colspan="6" style="text-align:center; color:var(--muted); padding:22px 16px;">Belum ada akun.</td></tr>';
+  const pills = '<button class="filter-pill active" onclick="pill(this); filterTimTable(\'all\')">Semua ('+total+')</button>'+
+    order.map(role=>'<button class="filter-pill" onclick="pill(this); filterTimTable(\''+role+'\')">'+ROLE_LABELS[role]+' ('+DATA.staff[role].length+')</button>').join('');
+  wrap.innerHTML = '<div class="card">'+
+      '<div class="card-head"><h3>Akun Staf (<span>'+total+'</span>)</h3></div>'+
+      '<div class="filter-row" style="margin-bottom:14px;">'+pills+'</div>'+
+      '<div class="table-wrap">'+
+        '<table class="dtable staff-table">'+
+          '<thead><tr><th>Nama</th><th>Email</th><th>Role</th><th>Telepon</th><th>Bergabung</th><th>Aksi</th></tr></thead>'+
+          '<tbody id="timTableBody">'+rows+'</tbody>'+
+        '</table>'+
+      '</div>'+
+    '</div>';
+}
+function filterTimTable(role){
+  document.querySelectorAll('#timTableBody tr').forEach(r=>{
+    r.style.display = (role==='all' || r.dataset.role===role) ? '' : 'none';
+  });
+}
+function hapusStaf(role, name){
+  const list = DATA.staff[role];
+  const idx = list.findIndex(x=>x.name===name);
+  if(idx===-1) return;
+  if(!confirm('Hapus akun "'+name+'" ('+ROLE_LABELS[role]+')? Tindakan ini tidak bisa dibatalkan.')) return;
+  list.splice(idx,1);
+  renderTimGroups();
+  toast('Akun '+name+' dihapus.');
 }
 function openStaffAdd(){
   activeStaffMode = 'add';
@@ -2201,7 +2260,7 @@ function resolveSengketa(action){
 
 /* ---------- Transaksi (Finance) ---------- */
 function txChipClass(t){
-  if(t.pendingComplaint) return 'chip-amber';
+  if(t.pendingCancel) return 'chip-amber';
   if(t.needsVerify) return 'chip-amber';
   if(t.status==='Tercatat') return 'chip-open';
   return 'chip-closed';
@@ -2219,11 +2278,11 @@ function renderTxLists(){
   const cntEls = ['txVerifyCount','fnVerifyStat']; cntEls.forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent = queue.length; });
   const fnPrev = document.getElementById('fnVerifyPreview'); if(fnPrev) fnPrev.innerHTML = qEl ? qEl.innerHTML : '';
 
-  const complaintQueue = DATA.transactions.filter(t=>t.pendingComplaint);
+  const cancelQueue = DATA.transactions.filter(t=>t.pendingCancel);
   const cqEl = document.getElementById('txCancelReqQueue');
-  if(cqEl) cqEl.innerHTML = complaintQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada komplain dari Agen.</p>';
-  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = complaintQueue.length;
-  document.getElementById('txActionCount').textContent = queue.length + complaintQueue.length;
+  if(cqEl) cqEl.innerHTML = cancelQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada komplain transaksi.</p>';
+  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = cancelQueue.length;
+  document.getElementById('txActionCount').textContent = queue.length + cancelQueue.length;
   const fnCancelPrev = document.getElementById('fnCancelReqPreview'); if(fnCancelPrev) fnCancelPrev.innerHTML = cqEl ? cqEl.innerHTML : '';
 
   renderTxTable();
@@ -2266,14 +2325,14 @@ function openTx(id){
   document.getElementById('mStatus').textContent = t.status;
   const vr = document.getElementById('mVerifiedRow');
   if(t.verifiedBy){ vr.style.display='flex'; document.getElementById('mVerifiedBy').textContent = t.verifiedBy; } else { vr.style.display='none'; }
-  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingComplaint) ? 'block' : 'none';
+  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingCancel) ? 'block' : 'none';
 
   const vBtn = document.getElementById('mVerifyBtn');
   const cancelReqBlock = document.getElementById('mCancelReqBlock');
-  if(t.pendingComplaint){
+  if(t.pendingCancel){
     vBtn.style.display = 'none';
     cancelReqBlock.style.display = 'block';
-    document.getElementById('mCancelReason').textContent = 'Alasan komplain dari Agen: ' + (t.complaintReason || '-');
+    document.getElementById('mCancelReason').textContent = 'Alasan komplain dari Agen: ' + (t.cancelReason || '-');
   } else {
     vBtn.style.display = t.needsVerify ? 'flex' : 'none';
     cancelReqBlock.style.display = 'none';
@@ -2287,16 +2346,16 @@ function verifyTx(){
   closeDialog('txDialog');
   toast('Pembayaran diverifikasi.');
 }
-function approveComplaint(){
+function approveCancelRequest(){
   const t = DATA.transactions.find(x=>x.id===activeTxId);
-  if(t){ t.pendingComplaint=false; t.status='Dikoreksi'; }
+  if(t){ t.pendingCancel=false; t.status='Dibatalkan'; }
   renderTxLists();
   closeDialog('txDialog');
-  toast('Komplain '+(t?t.from+' → '+t.to:'')+' disetujui — transaksi dikoreksi.');
+  toast('Komplain '+(t?t.from+' → '+t.to:'')+' disetujui — transaksi dibatalkan.');
 }
-function rejectComplaint(){
+function rejectCancelRequest(){
   const t = DATA.transactions.find(x=>x.id===activeTxId);
-  if(t){ t.pendingComplaint=false; t.status='Tercatat'; }
+  if(t){ t.pendingCancel=false; t.status='Tercatat'; }
   renderTxLists();
   closeDialog('txDialog');
   toast('Komplain ditolak — transaksi tetap tercatat.');
