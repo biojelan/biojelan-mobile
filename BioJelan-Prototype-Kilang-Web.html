@@ -109,11 +109,13 @@
   .app{display:none; min-height:100vh;}
   .app.active{display:flex;}
 
-  .sidebar{width:var(--sidebar-w); max-width:82vw; flex:0 0 auto; background:linear-gradient(180deg,var(--primary-deep) 0%, #0F241C 100%); color:#EAF3EC; display:flex; flex-direction:column; height:100vh; position:fixed; top:0; left:0; z-index:250; transform:translateX(-100%); transition:transform .22s ease; box-shadow:var(--shadow-lg);}
+  .sidebar{width:var(--sidebar-w); max-width:82vw; flex:0 0 auto; background:linear-gradient(180deg,var(--primary-deep) 0%, #0F241C 100%); color:#EAF3EC; display:flex; flex-direction:column; height:100vh; position:fixed; top:0; left:0; z-index:302; transform:translateX(-100%); transition:transform .22s ease; box-shadow:var(--shadow-lg);}
   .sidebar.open{transform:translateX(0);}
   .hamburger-btn{width:38px; height:38px; border-radius:11px; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;}
   .hamburger-btn svg{width:18px; height:18px; stroke:var(--ink); fill:none; stroke-width:2.1;}
   .sb-brand{display:flex; align-items:center; gap:11px; padding:22px 20px 18px;}
+  .sb-close{margin-left:auto; width:32px; height:32px; border-radius:9px; background:rgba(255,255,255,.08); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;}
+  .sb-close svg{width:15px; height:15px; stroke:rgba(234,243,236,.85); fill:none; stroke-width:2.2;}
   .sb-brand .brandmark{background:rgba(255,255,255,.10);}
   .sb-brand .bname{font-size:15px;}
   .sb-brand .btag{font-size:9.5px;}
@@ -333,7 +335,7 @@
      ============================================================ */
   .overlay{position:fixed; inset:0; background:rgba(15,28,22,.42); z-index:300; display:none; opacity:0; transition:opacity .18s;}
   .overlay.open{display:block; opacity:1;}
-  .drawer{position:fixed; top:0; right:0; height:100vh; width:460px; max-width:92vw; background:var(--paper); z-index:301; box-shadow:-24px 0 60px -20px rgba(20,45,35,.4); transform:translateX(100%); transition:transform .22s ease; display:flex; flex-direction:column;}
+  .drawer{position:fixed; top:0; right:0; height:100vh; width:460px; max-width:92vw; background:var(--paper); z-index:303; box-shadow:-24px 0 60px -20px rgba(20,45,35,.4); transform:translateX(100%); transition:transform .22s ease; display:flex; flex-direction:column;}
   .drawer.open{transform:translateX(0);}
   .drawer-head{display:flex; align-items:center; gap:12px; padding:20px 22px; border-bottom:1px solid var(--line); flex:0 0 auto; background:var(--surface);}
   .drawer-head h3{margin:0; font-size:16px; font-weight:800; flex:1;}
@@ -402,6 +404,7 @@
   @media (min-width:1024px){
     :root{ --sidebar-w:264px; }
     .hamburger-btn{display:none;}
+    .sb-close{display:none;}
     .sidebar{position:sticky; top:0; transform:none; box-shadow:none; max-width:none;}
     .overlay.sidebar-scrim{display:none !important;}
 
@@ -490,6 +493,7 @@
     <div class="sb-brand">
       <div class="brandmark"><svg viewBox="0 0 24 24"><path d="M12 2C8 8 4 12.2 4 16a8 8 0 0016 0c0-3.8-4-8-8-14z"/></svg></div>
       <div><div class="bname">BioJelan</div><div class="btag">Kilang</div></div>
+      <button class="sb-close" onclick="closeMobileSidebar()" aria-label="Tutup menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <div class="sb-role-banner"><div class="lbl">Masuk sebagai</div><div class="val" id="sbRoleVal">Superadmin</div></div>
 
@@ -702,33 +706,8 @@
       <!-- ===================== TIM & AKSES (Superadmin) ===================== -->
       <section class="page" id="page-tim">
         <div class="page-head">
-          <div><p class="eyebrow">Kelola</p><h1>Tim &amp; Akses</h1><p class="sub">Akun staf back-office dan matriks hak akses per role.</p></div>
+          <div><p class="eyebrow">Kelola</p><h1>Tim &amp; Akses</h1><p class="sub">Akun staf back-office BioJelan Kilang.</p></div>
           <div class="page-head-actions"><button class="btn btn-primary" onclick="openStaffAdd()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Tambah Staf</button></div>
-        </div>
-
-        <div class="card" style="margin-bottom:22px;">
-          <div class="card-head"><h3>Matriks Hak Akses</h3></div>
-          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Superadmin adalah 1 akun khusus dengan akses penuh ke seluruh sistem (PRD v2 &sect;4.3 &amp; &sect;9). Pemisahan wewenang berlaku untuk staf internal di bawahnya — satu role staf tidak bisa memutuskan &amp; mencairkan uang sendirian.</p>
-          <div class="perm-ledger">
-            <table>
-              <tr><th>Aksi</th><th>Superadmin</th><th>Admin</th><th>Manajer Ops</th><th>Finance</th><th>Driver</th></tr>
-              <tr><td>Setujui upgrade Klien &rarr; Agen</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
-              <tr><td>Tentukan harga beli</td><td class="yes">✓</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
-              <!-- NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2 (Q9 masih 1 kualitas saja).
-              <tr><td>Putuskan kualitas / denda</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td></tr>
-              -->
-              <tr><td>Cairkan uang ke Agen</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-              <tr><td>Tambah akun staf</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td></tr>
-              <tr><td>Lihat log &amp; saldo Kilang</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td></tr>
-              <tr><td>Hapus riwayat transaksi</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
-            </table>
-          </div>
-          <div class="perm-legend">
-            <div class="pl"><b style="color:var(--primary)">✓</b> Eksekusi penuh</div>
-            <div class="pl"><b style="color:var(--amber-deep)">•</b> Terbatas — harga: SA tentukan dasar (rentang), MO eksekusi harian dalam rentang itu · staf: MO hanya dapat menambah akun Driver</div>
-            <div class="pl"><b style="color:var(--line)">–</b> Tidak punya akses</div>
-          </div>
-          <p style="font-size:11px; color:var(--amber-deep); margin:14px 0 0; line-height:1.6; font-weight:700;">Riwayat transaksi tidak bisa dihapus siapa pun, termasuk Superadmin — demi menjaga audit trail (NFR Reliability, PRD &sect;11). Superadmin hanya bisa backup/restore.</p>
         </div>
 
         <div id="timGroups"></div>
@@ -1282,6 +1261,27 @@
       <div class="field"><label>Email</label><input id="stAddEmail" type="email" placeholder="nama@biojelan.id"></div>
       <div class="field"><label>No. telepon</label><input id="stAddPhone" placeholder="08xx-xxxx-xxxx"></div>
       <button class="btn btn-primary btn-block" onclick="addStaff()">Tambahkan Staf</button>
+    </div>
+    <div id="stEditWrap" style="display:none">
+      <div class="field" id="stEditRoleField">
+        <label>Peran / Akses</label>
+        <div class="role-chip-row" id="stEditRoleChips">
+          <div class="role-chip" onclick="chip(this)">Admin</div>
+          <div class="role-chip" onclick="chip(this)">Manajer Operasional</div>
+          <div class="role-chip" onclick="chip(this)">Finance</div>
+          <div class="role-chip" onclick="chip(this)">Driver</div>
+        </div>
+        <div class="hint">Ganti peran di sini akan langsung mengubah menu &amp; hak akses akun ini sesuai role barunya.</div>
+      </div>
+      <div class="field" id="stEditRoleLocked" style="display:none;">
+        <label>Peran / Akses</label>
+        <div class="detail-row" style="background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:0;"><span class="k" style="color:var(--amber-deep); font-weight:700;">Superadmin</span></div>
+        <div class="hint">Akun Superadmin cuma 1 &amp; nggak bisa diturunkan/dipindah role dari sini (permintaan langsung klien).</div>
+      </div>
+      <div class="field"><label>Nama lengkap</label><input id="stEditName" placeholder="cth. Dewi Anggraini"></div>
+      <div class="field"><label>Email</label><input id="stEditEmail" type="email" placeholder="nama@biojelan.id"></div>
+      <div class="field"><label>No. telepon</label><input id="stEditPhone" placeholder="08xx-xxxx-xxxx"></div>
+      <button class="btn btn-primary btn-block" onclick="saveStaffEdit()">Simpan Perubahan</button>
     </div>
   </div>
 </div>
@@ -1881,6 +1881,13 @@ function openAgenDetail(id){
 
 /* ---------- Tim & Akses ---------- */
 const ROLE_LABELS = {superadmin:'Superadmin', admin:'Admin', ops:'Manajer Operasional', finance:'Finance', driver:'Driver'};
+const ROLE_STYLE = {
+  superadmin:{badge:'badge-amber', bg:'var(--amber-tint)', fg:'var(--amber-deep)'},
+  admin:{badge:'badge-primary', bg:'var(--primary-tint)', fg:'var(--primary)'},
+  ops:{badge:'badge-rust', bg:'var(--rust-tint)', fg:'var(--rust)'},
+  finance:{badge:'badge-steel', bg:'var(--steel-tint)', fg:'var(--steel-deep)'},
+  driver:{badge:'badge-muted', bg:'var(--line)', fg:'var(--ink-soft)'},
+};
 function staffRowHtml(role, s){
   const safeName = s.name.replace(/'/g,"\\'");
   return '<tr data-role="'+role+'">'+
@@ -1892,7 +1899,7 @@ function staffRowHtml(role, s){
     '<td>'+s.joined+'</td>'+
     '<td><div class="row-actions" style="justify-content:flex-start;">'+
       '<button class="pill-action pill-show" onclick="openStaffView(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/></svg>Detail</button>'+
-      '<button class="pill-action pill-edit" onclick="toast(\'Fitur edit staf belum tersedia di prototipe ini.\')"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit</button>'+
+      '<button class="pill-action pill-edit" onclick="openStaffEdit(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit</button>'+
       '<button class="pill-action pill-delete" onclick="hapusStaf(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Hapus</button>'+
     '</div></td>'+
   '</tr>';
@@ -1936,6 +1943,7 @@ function openStaffAdd(){
   document.getElementById('stTitle').textContent = 'Tambah Staf';
   document.getElementById('stViewWrap').style.display = 'none';
   document.getElementById('stAddWrap').style.display = 'block';
+  document.getElementById('stEditWrap').style.display = 'none';
   openDialog('staffDialog');
 }
 function openStaffView(role, name){
@@ -1945,12 +1953,63 @@ function openStaffView(role, name){
   document.getElementById('stTitle').textContent = 'Detail Staf';
   document.getElementById('stViewWrap').style.display = 'block';
   document.getElementById('stAddWrap').style.display = 'none';
+  document.getElementById('stEditWrap').style.display = 'none';
   document.getElementById('stName').textContent = s.name;
   document.getElementById('stRole').textContent = ROLE_LABELS[role];
   document.getElementById('stEmail').textContent = s.email;
   document.getElementById('stPhone').textContent = s.phone;
   document.getElementById('stJoined').textContent = s.joined;
   openDialog('staffDialog');
+}
+let activeEditRole = null;
+let activeEditOriginalName = null;
+function openStaffEdit(role, name){
+  const s = DATA.staff[role].find(x=>x.name===name);
+  if(!s) return;
+  activeStaffMode = 'edit';
+  activeEditRole = role;
+  activeEditOriginalName = name;
+  document.getElementById('stTitle').textContent = 'Edit Akses Staf';
+  document.getElementById('stViewWrap').style.display = 'none';
+  document.getElementById('stAddWrap').style.display = 'none';
+  document.getElementById('stEditWrap').style.display = 'block';
+  document.getElementById('stEditName').value = s.name;
+  document.getElementById('stEditEmail').value = s.email;
+  document.getElementById('stEditPhone').value = s.phone;
+  const isSuperadmin = role === 'superadmin';
+  document.getElementById('stEditRoleField').style.display = isSuperadmin ? 'none' : 'block';
+  document.getElementById('stEditRoleLocked').style.display = isSuperadmin ? 'block' : 'none';
+  if(!isSuperadmin){
+    document.querySelectorAll('#stEditRoleChips .role-chip').forEach(el=>{
+      el.classList.toggle('active', el.textContent.trim() === ROLE_LABELS[role]);
+    });
+  }
+  openDialog('staffDialog');
+}
+function saveStaffEdit(){
+  const name = document.getElementById('stEditName').value.trim();
+  if(!name){ toast('Isi nama lengkap staf dulu.'); return; }
+  const email = document.getElementById('stEditEmail').value.trim() || 'staf@biojelan.id';
+  const phone = document.getElementById('stEditPhone').value.trim() || '08xx-xxxx-xxxx';
+  const oldRole = activeEditRole;
+  const list = DATA.staff[oldRole];
+  const idx = list.findIndex(x=>x.name===activeEditOriginalName);
+  if(idx===-1) return;
+  const original = list[idx];
+  let newRole = oldRole;
+  if(oldRole !== 'superadmin'){
+    const roleChip = document.querySelector('#stEditRoleChips .role-chip.active');
+    const roleLabel = roleChip ? roleChip.textContent.trim() : ROLE_LABELS[oldRole];
+    newRole = Object.keys(ROLE_LABELS).find(k=>ROLE_LABELS[k]===roleLabel) || oldRole;
+  }
+  const ini = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const style = ROLE_STYLE[newRole];
+  const updated = Object.assign({}, original, {name, email, phone, ini, badge:style.badge, bg:style.bg, fg:style.fg});
+  list.splice(idx,1);
+  DATA.staff[newRole].push(updated);
+  renderTimGroups();
+  closeDialog('staffDialog');
+  toast(newRole===oldRole ? 'Perubahan akun '+name+' disimpan.' : 'Akun '+name+' dipindah ke role '+ROLE_LABELS[newRole]+'.');
 }
 function addStaff(){
   const name = document.getElementById('stAddName').value.trim();
@@ -1961,7 +2020,8 @@ function addStaff(){
   const email = document.getElementById('stAddEmail').value.trim() || 'staf@biojelan.id';
   const phone = document.getElementById('stAddPhone').value.trim() || '08xx-xxxx-xxxx';
   const ini = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  DATA.staff[roleKey].push({name, email, phone, joined:'Agu 2026', badge:'badge-muted', ini, bg:'var(--line)', fg:'var(--ink-soft)'});
+  const style = ROLE_STYLE[roleKey];
+  DATA.staff[roleKey].push({name, email, phone, joined:'Agu 2026', badge:style.badge, ini, bg:style.bg, fg:style.fg});
   renderTimGroups();
   closeDialog('staffDialog');
   toast('Staf '+name+' ditambahkan sebagai '+roleLabel);
