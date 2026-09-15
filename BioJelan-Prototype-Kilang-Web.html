@@ -129,6 +129,7 @@
   .sb-item.active{background:rgba(214,154,46,.16); color:#F7E9CB;}
   .sb-item.active svg{stroke:var(--amber);}
   .sb-badge{margin-left:auto; background:var(--rust); color:#fff; font-size:9.5px; font-weight:800; padding:2px 6px; border-radius:99px; min-width:16px; text-align:center;}
+  .sb-tag{margin-left:auto; background:rgba(214,154,46,.22); color:var(--amber); font-size:8px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; padding:3px 7px; border-radius:99px; white-space:nowrap;}
 
   .sb-foot{padding:14px 16px 18px; border-top:1px solid rgba(255,255,255,.08);}
   .sb-user{display:flex; align-items:center; gap:10px; padding:9px; border-radius:12px; cursor:pointer; position:relative;}
@@ -1088,6 +1089,10 @@
         <div class="page-head">
           <div><p class="eyebrow">Keuangan</p><h1>Saldo Midtrans</h1><p class="sub">Digunakan untuk transfer otomatis ke rekening Agen.</p></div>
         </div>
+        <div class="note-banner warn">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <p><strong>Preview next dev — belum termasuk MVP.</strong> Pembayaran BioJelan saat ini 100% tunai/offline (PRD v2 &sect;4.2 &amp; Q5, Q6); payment gateway masuk Out of Scope &amp; Future Consideration. Saldo dan tombol top up di bawah masih simulasi tampilan, belum tersambung ke uang sungguhan.</p>
+        </div>
         <div class="two-col">
           <div>
             <div class="card">
@@ -1120,6 +1125,10 @@
         <div class="page-head">
           <div><p class="eyebrow">Keuangan</p><h1>Rekonsiliasi Harian</h1><p class="sub">Hari ini · 11 Agu 2026</p></div>
           <div class="page-head-actions"><span class="chip chip-open" style="font-size:12px; padding:8px 14px;">Cocok</span></div>
+        </div>
+        <div class="note-banner warn">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <p><strong>Preview next dev — belum termasuk MVP.</strong> Baris "Transfer Midtrans" di bawah ilustratif. Untuk saat ini seluruh transaksi BioJelan tercatat tunai/offline (PRD v2 Q5 &amp; Q6) — belum ada uang yang benar-benar lewat gateway.</p>
         </div>
         <div class="stat-grid" style="grid-template-columns:repeat(2,1fr); max-width:520px;">
           <div class="stat-card"><div class="n">3.240 L</div><div class="l">Volume masuk</div></div>
@@ -1342,8 +1351,11 @@
     <div class="detail-row"><span class="k">Waktu</span><span class="v" id="cpTime"></span></div>
     <div class="detail-row"><span class="k">Status</span><span class="v" id="cpStatus"></span></div>
     <p id="cpText" style="font-size:13px; color:var(--ink-soft); line-height:1.6; background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 13px; margin:12px 0 16px;"></p>
+    <div class="note-banner warn" id="cpNextDevNote" style="display:none;">
+      <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <p>Verifikasi otomatis status transfer baru bisa kalau Midtrans sudah terintegrasi (Next Dev). Untuk sekarang, pengecekan tetap manual oleh Finance.</p>
+    </div>
     <div class="dialog-actions" id="cpActions" style="margin-top:0;">
-      <button class="btn btn-outline" onclick="forwardComplaint()">Teruskan ke Ops</button>
       <button class="btn btn-primary" onclick="resolveComplaint()">Tandai Selesai</button>
     </div>
     <div class="note-banner good" id="cpResolvedNote" style="display:none; margin-bottom:0;">
@@ -1369,6 +1381,7 @@
     <button class="btn btn-primary btn-block" id="mVerifyBtn" style="margin-top:16px;" onclick="verifyTx()">Verifikasi Pembayaran</button>
     <div id="mCancelReqBlock" style="display:none;">
       <p id="mCancelReason" style="font-size:12.5px; color:var(--ink-soft); background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:14px 0; line-height:1.6; font-weight:600;"></p>
+      <p style="font-size:11.5px; color:var(--muted); margin:0 0 14px; line-height:1.6;">Sistem hanya mencatat status transaksi. Kalau ada uang yang perlu dikembalikan, itu dilakukan tunai/offline langsung antara Agen &amp; Klien — belum ada refund otomatis (payment gateway belum jadi bagian MVP).</p>
       <div class="dialog-actions" style="margin-top:0;">
         <button class="btn btn-outline" onclick="rejectCancelRequest()">Tolak Komplain</button>
         <button class="btn btn-rust" onclick="approveCancelRequest()">Setujui &amp; Batalkan Transaksi</button>
@@ -1415,8 +1428,8 @@ const ROLE_META = {
       {group:'Keuangan', items:[
         {id:'transaksi', label:'Transaksi', icon:'card', badge:'txActionCount'},
         {id:'labarugi', label:'Laba-Rugi', icon:'chart'},
-        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet'},
-        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check'},
+        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet', tag:'Next Dev'},
+        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check', tag:'Next Dev'},
       ]},
       {group:'Kelola Sistem', items:[
         {id:'tim', label:'Tim &amp; Akses', icon:'tim'},
@@ -1456,8 +1469,8 @@ const ROLE_META = {
       {group:'Keuangan', items:[
         {id:'transaksi', label:'Transaksi', icon:'card', badge:'txActionCount'},
         {id:'labarugi', label:'Laba-Rugi', icon:'chart'},
-        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet'},
-        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check'},
+        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet', tag:'Next Dev'},
+        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check', tag:'Next Dev'},
       ]},
     ]},
 };
@@ -1551,7 +1564,8 @@ function renderSidebarForRole(role){
     const items = group.items.map(it=>{
       const badgeVal = it.badge ? getBadgeCount(it.badge) : 0;
       const badgeHtml = badgeVal>0 ? '<span class="sb-badge" data-badgekey="'+it.badge+'">'+badgeVal+'</span>' : '<span class="sb-badge" data-badgekey="'+(it.badge||'')+'" style="display:none"></span>';
-      return '<button class="sb-item" data-page="'+it.id+'" onclick="navigateTo(\''+it.id+'\')">'+svgIcon(it.icon)+'<span>'+it.label+'</span>'+(it.badge?badgeHtml:'')+'</button>';
+      const tagHtml = it.tag ? '<span class="sb-tag">'+it.tag+'</span>' : '';
+      return '<button class="sb-item" data-page="'+it.id+'" onclick="navigateTo(\''+it.id+'\')">'+svgIcon(it.icon)+'<span>'+it.label+'</span>'+(it.badge?badgeHtml:'')+tagHtml+'</button>';
     }).join('');
     return '<div class="sb-group-label">'+group.group+'</div>'+items;
   }).join('') +
@@ -1741,7 +1755,7 @@ const DATA = {
   ],
   pengaduan:[
     {id:'BJ', agen:'Agen Barokah Jaya', title:'Driver telat 30 menit', text:'Driver telat 30 menit dari jadwal, Agen sudah tunggu sejak jam 8 pagi.', time:'11 Agu 2026, 08.35', status:'Baru'},
-    {id:'TA', agen:'Agen Tunas Asri', title:'Pembayaran belum masuk', text:'Pembayaran hari kemarin belum masuk ke rekening.', time:'10 Agu 2026, 16.20', status:'Baru'},
+    {id:'TA', agen:'Agen Tunas Asri', title:'Pembayaran belum masuk', text:'Pembayaran hari kemarin belum masuk ke rekening.', time:'10 Agu 2026, 16.20', status:'Baru', nextDev:true},
     {id:'SR', agen:'Agen Sumber Rezeki', title:'Dirigen rusak, minta ganti', text:'Dirigen rusak, minta ganti', time:'8 Agu 2026, 10.00', status:'Selesai'},
   ],
   broadcastHistory:[
@@ -2024,7 +2038,7 @@ function renderPengaduanList(){
   el.innerHTML = DATA.pengaduan.map((p,i)=>{
     return '<div class="cell-entity" style="padding:13px 0; border-bottom:1px dashed var(--line); cursor:pointer;" onclick="openComplaint('+i+')">'+
       '<div class="avatar-tag" style="'+(p.status==='Selesai'?'background:var(--line); color:var(--ink-soft);':'')+'">'+p.id+'</div>'+
-      '<div class="et" style="flex:1;"><h4>'+p.agen+'</h4><span>'+p.title+' <span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="margin-left:6px;">'+p.status+'</span></span></div>'+
+      '<div class="et" style="flex:1;"><h4>'+p.agen+'</h4><span>'+p.title+' <span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="margin-left:6px;">'+p.status+'</span>'+(p.nextDev?' <span class="chip chip-amber" style="margin-left:4px;">Next Dev</span>':'')+'</span></div>'+
       '<svg style="width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'+
     '</div>';
   }).join('');
@@ -2040,6 +2054,7 @@ function openComplaint(i){
   document.getElementById('cpAgen').textContent = p.agen;
   document.getElementById('cpTime').textContent = p.time;
   document.getElementById('cpText').textContent = p.text;
+  document.getElementById('cpNextDevNote').style.display = p.nextDev ? 'flex' : 'none';
   const statusEl = document.getElementById('cpStatus');
   statusEl.innerHTML = '<span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="font-size:10px;">'+p.status+'</span>';
   const isResolved = p.status === 'Selesai';
@@ -2047,9 +2062,8 @@ function openComplaint(i){
   document.getElementById('cpResolvedNote').style.display = isResolved ? 'flex' : 'none';
   openDialog('complaintDialog');
 }
-function forwardComplaint(){ toast('Pengaduan diteruskan ke Manajer Operasional.'); closeDialog('complaintDialog'); }
 function resolveComplaint(){
-  if(activeComplaintIdx!==null){ DATA.pengaduan[activeComplaintIdx].status = 'Selesai'; renderPengaduanList(); }
+  if(activeComplaintIdx!==null){ DATA.pengaduan[activeComplaintIdx].status = 'Selesai'; renderPengaduanList(); refreshSidebarBadges(); }
   closeDialog('complaintDialog');
   toast('Pengaduan ditandai selesai.');
 }
