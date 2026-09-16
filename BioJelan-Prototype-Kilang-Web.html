@@ -109,11 +109,13 @@
   .app{display:none; min-height:100vh;}
   .app.active{display:flex;}
 
-  .sidebar{width:var(--sidebar-w); max-width:82vw; flex:0 0 auto; background:linear-gradient(180deg,var(--primary-deep) 0%, #0F241C 100%); color:#EAF3EC; display:flex; flex-direction:column; height:100vh; position:fixed; top:0; left:0; z-index:250; transform:translateX(-100%); transition:transform .22s ease; box-shadow:var(--shadow-lg);}
+  .sidebar{width:var(--sidebar-w); max-width:82vw; flex:0 0 auto; background:linear-gradient(180deg,var(--primary-deep) 0%, #0F241C 100%); color:#EAF3EC; display:flex; flex-direction:column; height:100vh; position:fixed; top:0; left:0; z-index:302; transform:translateX(-100%); transition:transform .22s ease; box-shadow:var(--shadow-lg);}
   .sidebar.open{transform:translateX(0);}
   .hamburger-btn{width:38px; height:38px; border-radius:11px; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;}
   .hamburger-btn svg{width:18px; height:18px; stroke:var(--ink); fill:none; stroke-width:2.1;}
   .sb-brand{display:flex; align-items:center; gap:11px; padding:22px 20px 18px;}
+  .sb-close{margin-left:auto; width:32px; height:32px; border-radius:9px; background:rgba(255,255,255,.08); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;}
+  .sb-close svg{width:15px; height:15px; stroke:rgba(234,243,236,.85); fill:none; stroke-width:2.2;}
   .sb-brand .brandmark{background:rgba(255,255,255,.10);}
   .sb-brand .bname{font-size:15px;}
   .sb-brand .btag{font-size:9.5px;}
@@ -129,6 +131,7 @@
   .sb-item.active{background:rgba(214,154,46,.16); color:#F7E9CB;}
   .sb-item.active svg{stroke:var(--amber);}
   .sb-badge{margin-left:auto; background:var(--rust); color:#fff; font-size:9.5px; font-weight:800; padding:2px 6px; border-radius:99px; min-width:16px; text-align:center;}
+  .sb-tag{margin-left:auto; background:rgba(214,154,46,.22); color:var(--amber); font-size:8px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; padding:3px 7px; border-radius:99px; white-space:nowrap;}
 
   .sb-foot{padding:14px 16px 18px; border-top:1px solid rgba(255,255,255,.08);}
   .sb-user{display:flex; align-items:center; gap:10px; padding:9px; border-radius:12px; cursor:pointer; position:relative;}
@@ -210,6 +213,15 @@
   .cell-entity .et h4{margin:0 0 2px; font-size:12.5px; font-weight:800; white-space:nowrap;}
   .cell-entity .et span{font-size:11px; color:var(--muted); white-space:nowrap;}
   .row-actions{display:flex; gap:6px; justify-content:flex-end;}
+  .staff-table tbody tr:nth-child(even) td{background:var(--paper);}
+  .pill-action{border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-weight:700; font-size:11.5px; border-radius:6px; padding:7px 12px; display:inline-flex; align-items:center; gap:5px; color:#fff; white-space:nowrap;}
+  .pill-action svg{width:13px; height:13px; stroke:#fff; fill:none; stroke-width:2.3;}
+  .pill-show{background:#17A2B8;}
+  .pill-show:hover{background:#138A9C;}
+  .pill-edit{background:#F4B740;}
+  .pill-edit:hover{background:#E0A62C;}
+  .pill-delete{background:#E4544A;}
+  .pill-delete:hover{background:#D1443A;}
 
   .chip{display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:800; padding:4px 10px; border-radius:999px; white-space:nowrap;}
   .chip-open{background:var(--primary-tint); color:var(--primary);}
@@ -323,7 +335,7 @@
      ============================================================ */
   .overlay{position:fixed; inset:0; background:rgba(15,28,22,.42); z-index:300; display:none; opacity:0; transition:opacity .18s;}
   .overlay.open{display:block; opacity:1;}
-  .drawer{position:fixed; top:0; right:0; height:100vh; width:460px; max-width:92vw; background:var(--paper); z-index:301; box-shadow:-24px 0 60px -20px rgba(20,45,35,.4); transform:translateX(100%); transition:transform .22s ease; display:flex; flex-direction:column;}
+  .drawer{position:fixed; top:0; right:0; height:100vh; width:460px; max-width:92vw; background:var(--paper); z-index:303; box-shadow:-24px 0 60px -20px rgba(20,45,35,.4); transform:translateX(100%); transition:transform .22s ease; display:flex; flex-direction:column;}
   .drawer.open{transform:translateX(0);}
   .drawer-head{display:flex; align-items:center; gap:12px; padding:20px 22px; border-bottom:1px solid var(--line); flex:0 0 auto; background:var(--surface);}
   .drawer-head h3{margin:0; font-size:16px; font-weight:800; flex:1;}
@@ -392,6 +404,7 @@
   @media (min-width:1024px){
     :root{ --sidebar-w:264px; }
     .hamburger-btn{display:none;}
+    .sb-close{display:none;}
     .sidebar{position:sticky; top:0; transform:none; box-shadow:none; max-width:none;}
     .overlay.sidebar-scrim{display:none !important;}
 
@@ -446,7 +459,7 @@
         <h1>Satu login, satu kursi kerja untuk seluruh operasional Kilang.</h1>
         <p class="lede">Superadmin, Admin, Manajer Operasional, dan Finance masuk lewat form yang sama — dashboard, menu, dan hak akses langsung menyesuaikan role akun masing-masing.</p>
         <div class="login-feat">
-          <div class="lf"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Pemisahan wewenang built-in — satu role tidak bisa memutuskan &amp; mencairkan uang sendirian.</span></div>
+          <div class="lf"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Pemisahan wewenang built-in untuk staf internal — satu role staf tidak bisa memutuskan &amp; mencairkan uang sendirian.</span></div>
           <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg><span>Tabel, matriks akses, dan laporan dirancang untuk layar lebar — bukan versi mobile yang dipaksa muat.</span></div>
           <div class="lf"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="13" height="8" rx="1.5"/><path d="M16 12h3l2 3v2h-5z"/><circle cx="7.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/></svg><span>Klien, Agen, dan Driver satu aplikasi mobile — dashboard di sini khusus untuk tim Kilang.</span></div>
         </div>
@@ -480,6 +493,7 @@
     <div class="sb-brand">
       <div class="brandmark"><svg viewBox="0 0 24 24"><path d="M12 2C8 8 4 12.2 4 16a8 8 0 0016 0c0-3.8-4-8-8-14z"/></svg></div>
       <div><div class="bname">BioJelan</div><div class="btag">Kilang</div></div>
+      <button class="sb-close" onclick="closeMobileSidebar()" aria-label="Tutup menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <div class="sb-role-banner"><div class="lbl">Masuk sebagai</div><div class="val" id="sbRoleVal">Superadmin</div></div>
 
@@ -653,7 +667,7 @@
             <div id="fnVerifyPreview"></div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Komplain dari Agen</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
+            <div class="card-head"><h3>Komplain transaksi</h3><a onclick="navigateTo('transaksi')">Lihat semua</a></div>
             <div id="fnCancelReqPreview"></div>
           </div>
         </div>
@@ -692,33 +706,8 @@
       <!-- ===================== TIM & AKSES (Superadmin) ===================== -->
       <section class="page" id="page-tim">
         <div class="page-head">
-          <div><p class="eyebrow">Kelola</p><h1>Tim &amp; Akses</h1><p class="sub">Akun staf back-office dan matriks hak akses per role.</p></div>
+          <div><p class="eyebrow">Kelola</p><h1>Tim &amp; Akses</h1><p class="sub">Akun staf back-office BioJelan Kilang.</p></div>
           <div class="page-head-actions"><button class="btn btn-primary" onclick="openStaffAdd()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Tambah Staf</button></div>
-        </div>
-
-        <div class="card" style="margin-bottom:22px;">
-          <div class="card-head"><h3>Matriks Hak Akses</h3></div>
-          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Prinsip pemisahan wewenang: satu role tidak bisa memutuskan &amp; mencairkan uang sendirian.</p>
-          <div class="perm-ledger">
-            <table>
-              <tr><th>Aksi</th><th>Superadmin</th><th>Admin</th><th>Manajer Ops</th><th>Finance</th><th>Driver</th></tr>
-              <tr><td>Setujui upgrade Klien &rarr; Agen</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
-              <tr><td>Tentukan harga beli</td><td class="yes">✓</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
-              <!-- NEXT DEV — QC pooling & sengketa denda: belum ada di scope PRD v2 (Q9 masih 1 kualitas saja).
-              <tr><td>Putuskan kualitas / denda</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td></tr>
-              -->
-              <tr><td>Cairkan uang ke Agen</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-              <tr><td>Tambah akun staf</td><td class="yes">✓</td><td class="no">–</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td></tr>
-              <tr><td>Lihat log &amp; saldo Kilang</td><td class="partial">•</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td></tr>
-              <tr><td>Hapus riwayat transaksi</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
-            </table>
-          </div>
-          <div class="perm-legend">
-            <div class="pl"><b style="color:var(--primary)">✓</b> Eksekusi penuh</div>
-            <div class="pl"><b style="color:var(--amber-deep)">•</b> Terbatas — harga: SA tentukan dasar, MO eksekusi harian · staf: MO hanya dapat menambah Driver · log: SA lihat aktivitas saja, bukan saldo</div>
-            <div class="pl"><b style="color:var(--line)">–</b> Tidak punya akses</div>
-          </div>
-          <p style="font-size:11px; color:var(--amber-deep); margin:14px 0 0; line-height:1.6; font-weight:700;">Riwayat transaksi tidak bisa dihapus siapa pun — Superadmin hanya bisa backup/restore.</p>
         </div>
 
         <div id="timGroups"></div>
@@ -1019,8 +1008,8 @@
           <div id="txVerifyQueue"></div>
         </div>
         <div class="card" style="margin-bottom:18px;">
-          <div class="card-head"><h3>Komplain dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
-          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen hanya dapat mengajukan komplain — Kilang yang memutuskan tindak lanjutnya.</p>
+          <div class="card-head"><h3>Komplain transaksi dari Agen (<span id="txCancelReqCount">1</span>)</h3></div>
+          <p style="font-size:12px; color:var(--muted); margin:-8px 0 4px; line-height:1.6;">Agen mengajukan komplain atas transaksi yang sudah tercatat (mis. dobel input, salah volume) — Kilang yang meninjau dan memutuskan tindak lanjutnya.</p>
           <div id="txCancelReqQueue"></div>
         </div>
         <div class="table-wrap">
@@ -1079,6 +1068,10 @@
         <div class="page-head">
           <div><p class="eyebrow">Keuangan</p><h1>Saldo Midtrans</h1><p class="sub">Digunakan untuk transfer otomatis ke rekening Agen.</p></div>
         </div>
+        <div class="note-banner warn">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <p><strong>Preview next dev — belum termasuk MVP.</strong> Pembayaran BioJelan saat ini 100% tunai/offline (PRD v2 &sect;4.2 &amp; Q5, Q6); payment gateway masuk Out of Scope &amp; Future Consideration. Saldo dan tombol top up di bawah masih simulasi tampilan, belum tersambung ke uang sungguhan.</p>
+        </div>
         <div class="two-col">
           <div>
             <div class="card">
@@ -1111,6 +1104,10 @@
         <div class="page-head">
           <div><p class="eyebrow">Keuangan</p><h1>Rekonsiliasi Harian</h1><p class="sub">Hari ini · 11 Agu 2026</p></div>
           <div class="page-head-actions"><span class="chip chip-open" style="font-size:12px; padding:8px 14px;">Cocok</span></div>
+        </div>
+        <div class="note-banner warn">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <p><strong>Preview next dev — belum termasuk MVP.</strong> Baris "Transfer Midtrans" di bawah ilustratif. Untuk saat ini seluruh transaksi BioJelan tercatat tunai/offline (PRD v2 Q5 &amp; Q6) — belum ada uang yang benar-benar lewat gateway.</p>
         </div>
         <div class="stat-grid" style="grid-template-columns:repeat(2,1fr); max-width:520px;">
           <div class="stat-card"><div class="n">3.240 L</div><div class="l">Volume masuk</div></div>
@@ -1265,6 +1262,27 @@
       <div class="field"><label>No. telepon</label><input id="stAddPhone" placeholder="08xx-xxxx-xxxx"></div>
       <button class="btn btn-primary btn-block" onclick="addStaff()">Tambahkan Staf</button>
     </div>
+    <div id="stEditWrap" style="display:none">
+      <div class="field" id="stEditRoleField">
+        <label>Peran / Akses</label>
+        <div class="role-chip-row" id="stEditRoleChips">
+          <div class="role-chip" onclick="chip(this)">Admin</div>
+          <div class="role-chip" onclick="chip(this)">Manajer Operasional</div>
+          <div class="role-chip" onclick="chip(this)">Finance</div>
+          <div class="role-chip" onclick="chip(this)">Driver</div>
+        </div>
+        <div class="hint">Ganti peran di sini akan langsung mengubah menu &amp; hak akses akun ini sesuai role barunya.</div>
+      </div>
+      <div class="field" id="stEditRoleLocked" style="display:none;">
+        <label>Peran / Akses</label>
+        <div class="detail-row" style="background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:0;"><span class="k" style="color:var(--amber-deep); font-weight:700;">Superadmin</span></div>
+        <div class="hint">Akun Superadmin cuma 1 &amp; nggak bisa diturunkan/dipindah role dari sini (permintaan langsung klien).</div>
+      </div>
+      <div class="field"><label>Nama lengkap</label><input id="stEditName" placeholder="cth. Dewi Anggraini"></div>
+      <div class="field"><label>Email</label><input id="stEditEmail" type="email" placeholder="nama@biojelan.id"></div>
+      <div class="field"><label>No. telepon</label><input id="stEditPhone" placeholder="08xx-xxxx-xxxx"></div>
+      <button class="btn btn-primary btn-block" onclick="saveStaffEdit()">Simpan Perubahan</button>
+    </div>
   </div>
 </div>
 
@@ -1333,8 +1351,11 @@
     <div class="detail-row"><span class="k">Waktu</span><span class="v" id="cpTime"></span></div>
     <div class="detail-row"><span class="k">Status</span><span class="v" id="cpStatus"></span></div>
     <p id="cpText" style="font-size:13px; color:var(--ink-soft); line-height:1.6; background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 13px; margin:12px 0 16px;"></p>
+    <div class="note-banner warn" id="cpNextDevNote" style="display:none;">
+      <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <p>Verifikasi otomatis status transfer baru bisa kalau Midtrans sudah terintegrasi (Next Dev). Untuk sekarang, pengecekan tetap manual oleh Finance.</p>
+    </div>
     <div class="dialog-actions" id="cpActions" style="margin-top:0;">
-      <button class="btn btn-outline" onclick="forwardComplaint()">Teruskan ke Ops</button>
       <button class="btn btn-primary" onclick="resolveComplaint()">Tandai Selesai</button>
     </div>
     <div class="note-banner good" id="cpResolvedNote" style="display:none; margin-bottom:0;">
@@ -1360,9 +1381,10 @@
     <button class="btn btn-primary btn-block" id="mVerifyBtn" style="margin-top:16px;" onclick="verifyTx()">Verifikasi Pembayaran</button>
     <div id="mCancelReqBlock" style="display:none;">
       <p id="mCancelReason" style="font-size:12.5px; color:var(--ink-soft); background:var(--amber-tint); border-radius:12px; padding:11px 13px; margin:14px 0; line-height:1.6; font-weight:600;"></p>
+      <p style="font-size:11.5px; color:var(--muted); margin:0 0 14px; line-height:1.6;">Sistem hanya mencatat status transaksi. Kalau ada uang yang perlu dikembalikan, itu dilakukan tunai/offline langsung antara Agen &amp; Klien — belum ada refund otomatis (payment gateway belum jadi bagian MVP).</p>
       <div class="dialog-actions" style="margin-top:0;">
-        <button class="btn btn-outline" onclick="rejectComplaint()">Tolak Komplain</button>
-        <button class="btn btn-rust" onclick="approveComplaint()">Setujui & Koreksi</button>
+        <button class="btn btn-outline" onclick="rejectCancelRequest()">Tolak Komplain</button>
+        <button class="btn btn-rust" onclick="approveCancelRequest()">Setujui &amp; Batalkan Transaksi</button>
       </div>
     </div>
   </div>
@@ -1385,12 +1407,31 @@ let sysConfig = { ambangStok: 500, ambangDirigen: 5, jamMulai: '08:00' };
 
 const ROLE_META = {
   superadmin:{ label:'Superadmin', name:'Yusuf Hartono', badgeClass:'badge-amber', avatarBg:'linear-gradient(155deg,var(--amber),var(--amber-deep))', initials:'YH', email:'yusuf@biojelan.id', phone:'0812-3456-7890', joined:'Jan 2026',
+    // Superadmin = 1 akun akses penuh (PRD v2 §4.3 & §9) — bisa intervensi semua menu
+    // Admin, Manajer Operasional, dan Finance. Driver tetap di luar: itu app mobile
+    // terpisah (Q22), bukan menu di dashboard web ini.
     nav:[
       {group:'Utama', items:[
         {id:'home', label:'Beranda', icon:'home'},
       ]},
-      {group:'Kelola', items:[
+      {group:'Agen', items:[
         {id:'agen', label:'Agen', icon:'agen', badge:'agenApprovalCount'},
+        {id:'stok', label:'Stok Agen', icon:'drop'},
+        {id:'dirigen', label:'Dirigen', icon:'box'},
+        {id:'pengaduan', label:'Pengaduan', icon:'flag', badge:'pengaduanCount'},
+        {id:'broadcast', label:'Broadcast', icon:'radio'},
+      ]},
+      {group:'Operasional', items:[
+        {id:'pickup', label:'Jadwal Pickup', icon:'clock'},
+        {id:'driver', label:'Driver', icon:'truck'},
+      ]},
+      {group:'Keuangan', items:[
+        {id:'transaksi', label:'Transaksi', icon:'card', badge:'txActionCount'},
+        {id:'labarugi', label:'Laba-Rugi', icon:'chart'},
+        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet', tag:'Next Dev'},
+        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check', tag:'Next Dev'},
+      ]},
+      {group:'Kelola Sistem', items:[
         {id:'tim', label:'Tim &amp; Akses', icon:'tim'},
         {id:'konfigurasi', label:'Konfigurasi Sistem', icon:'gear'},
         {id:'logaktivitas', label:'Log Aktivitas', icon:'clock'},
@@ -1428,8 +1469,8 @@ const ROLE_META = {
       {group:'Keuangan', items:[
         {id:'transaksi', label:'Transaksi', icon:'card', badge:'txActionCount'},
         {id:'labarugi', label:'Laba-Rugi', icon:'chart'},
-        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet'},
-        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check'},
+        {id:'midtrans', label:'Saldo Midtrans', icon:'wallet', tag:'Next Dev'},
+        {id:'rekonsiliasi', label:'Rekonsiliasi', icon:'check', tag:'Next Dev'},
       ]},
     ]},
 };
@@ -1523,7 +1564,8 @@ function renderSidebarForRole(role){
     const items = group.items.map(it=>{
       const badgeVal = it.badge ? getBadgeCount(it.badge) : 0;
       const badgeHtml = badgeVal>0 ? '<span class="sb-badge" data-badgekey="'+it.badge+'">'+badgeVal+'</span>' : '<span class="sb-badge" data-badgekey="'+(it.badge||'')+'" style="display:none"></span>';
-      return '<button class="sb-item" data-page="'+it.id+'" onclick="navigateTo(\''+it.id+'\')">'+svgIcon(it.icon)+'<span>'+it.label+'</span>'+(it.badge?badgeHtml:'')+'</button>';
+      const tagHtml = it.tag ? '<span class="sb-tag">'+it.tag+'</span>' : '';
+      return '<button class="sb-item" data-page="'+it.id+'" onclick="navigateTo(\''+it.id+'\')">'+svgIcon(it.icon)+'<span>'+it.label+'</span>'+(it.badge?badgeHtml:'')+tagHtml+'</button>';
     }).join('');
     return '<div class="sb-group-label">'+group.group+'</div>'+items;
   }).join('') +
@@ -1713,7 +1755,7 @@ const DATA = {
   ],
   pengaduan:[
     {id:'BJ', agen:'Agen Barokah Jaya', title:'Driver telat 30 menit', text:'Driver telat 30 menit dari jadwal, Agen sudah tunggu sejak jam 8 pagi.', time:'11 Agu 2026, 08.35', status:'Baru'},
-    {id:'TA', agen:'Agen Tunas Asri', title:'Pembayaran belum masuk', text:'Pembayaran hari kemarin belum masuk ke rekening.', time:'10 Agu 2026, 16.20', status:'Baru'},
+    {id:'TA', agen:'Agen Tunas Asri', title:'Pembayaran belum masuk', text:'Pembayaran hari kemarin belum masuk ke rekening.', time:'10 Agu 2026, 16.20', status:'Baru', nextDev:true},
     {id:'SR', agen:'Agen Sumber Rezeki', title:'Dirigen rusak, minta ganti', text:'Dirigen rusak, minta ganti', time:'8 Agu 2026, 10.00', status:'Selesai'},
   ],
   broadcastHistory:[
@@ -1744,7 +1786,7 @@ const DATA = {
     {id:'TX-20260811-14', date:'11 Agu 2026, 10.05', from:'Kilang', to:'Agen Barokah Jaya', ini:'BJ', vol:'620 L', price:'Rp 6.500', total:'Rp 4.030.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260811-13', date:'11 Agu 2026, 09.40', from:'Kilang', to:'Agen Tunas Asri', ini:'TA', vol:'510 L', price:'Rp 6.500', total:'Rp 3.315.000', status:'Perlu verifikasi', needsVerify:true, cat:'kilang-agen'},
     {id:'TX-20260810-08', date:'10 Agu 2026, 08.10', from:'Kilang', to:'Agen Wahyu Karya', ini:'WK', vol:'480 L', price:'Rp 6.500', total:'Rp 3.120.000', status:'Terverifikasi', needsVerify:false, cat:'kilang-agen', verifiedBy:'Melati Wijaya'},
-    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Menunggu Tinjauan', needsVerify:false, cat:'agen-klien', pendingComplaint:true, complaintReason:'Transaksi tercatat dobel'},
+    {id:'TX-20260811-12', date:'11 Agu 2026, 09.15', from:'Agen Barokah Jaya', to:'Rini Wulandari', ini:'RW', vol:'6 L', price:'Rp 6.500', total:'Rp 39.000', status:'Dalam Peninjauan', needsVerify:false, cat:'agen-klien', pendingCancel:true, cancelReason:'Transaksi tercatat dobel'},
     {id:'TX-20260811-11', date:'11 Agu 2026, 08.50', from:'Agen Tunas Asri', to:'Ahmad Solihin', ini:'AS', vol:'4 L', price:'Rp 6.500', total:'Rp 26.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
     {id:'TX-20260811-10', date:'11 Agu 2026, 08.20', from:'Agen Sumber Rezeki', to:'Bambang Santoso', ini:'BS', vol:'12 L', price:'Rp 6.500', total:'Rp 78.000', status:'Tercatat', needsVerify:false, cat:'agen-klien'},
   ],
@@ -1839,30 +1881,69 @@ function openAgenDetail(id){
 
 /* ---------- Tim & Akses ---------- */
 const ROLE_LABELS = {superadmin:'Superadmin', admin:'Admin', ops:'Manajer Operasional', finance:'Finance', driver:'Driver'};
+const ROLE_STYLE = {
+  superadmin:{badge:'badge-amber', bg:'var(--amber-tint)', fg:'var(--amber-deep)'},
+  admin:{badge:'badge-primary', bg:'var(--primary-tint)', fg:'var(--primary)'},
+  ops:{badge:'badge-rust', bg:'var(--rust-tint)', fg:'var(--rust)'},
+  finance:{badge:'badge-steel', bg:'var(--steel-tint)', fg:'var(--steel-deep)'},
+  driver:{badge:'badge-muted', bg:'var(--line)', fg:'var(--ink-soft)'},
+};
 function staffRowHtml(role, s){
-  return '<div class="table-wrap" style="border:none; border-bottom:1px dashed var(--line); border-radius:0;"></div>';
+  const safeName = s.name.replace(/'/g,"\\'");
+  return '<tr data-role="'+role+'">'+
+    '<td><div class="cell-entity"><div class="avatar-tag" style="background:'+s.bg+'; color:'+s.fg+';">'+s.ini+'</div>'+
+      '<div class="et"><h4>'+s.name+'</h4>'+(s.plat ? '<span>'+s.plat+'</span>' : '')+'</div></div></td>'+
+    '<td>'+s.email+'</td>'+
+    '<td><span class="badge '+s.badge+'" style="padding:4px 10px; font-size:10.5px;">'+ROLE_LABELS[role]+'</span></td>'+
+    '<td>'+s.phone+'</td>'+
+    '<td>'+s.joined+'</td>'+
+    '<td><div class="row-actions" style="justify-content:flex-start;">'+
+      '<button class="pill-action pill-show" onclick="openStaffView(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/></svg>Detail</button>'+
+      '<button class="pill-action pill-edit" onclick="openStaffEdit(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit</button>'+
+      '<button class="pill-action pill-delete" onclick="hapusStaf(\''+role+'\',\''+safeName+'\')"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Hapus</button>'+
+    '</div></td>'+
+  '</tr>';
 }
 function renderTimGroups(){
   const wrap = document.getElementById('timGroups');
   if(!wrap) return;
   const order = ['superadmin','admin','ops','finance','driver'];
-  wrap.innerHTML = order.map(role=>{
-    const list = DATA.staff[role];
-    const rows = list.map(s=>{
-      const extra = s.plat ? ' · '+s.plat : '';
-      return '<div class="cell-entity" style="padding:12px 0; border-bottom:1px dashed var(--line); cursor:pointer;" onclick="openStaffView(\''+role+'\',\''+s.name.replace(/'/g,"\\'")+'\')">'+
-        '<div class="avatar-tag" style="background:'+s.bg+'; color:'+s.fg+';">'+s.ini+'</div>'+
-        '<div class="et"><h4>'+s.name+'</h4><span><span class="badge '+s.badge+'" style="padding:2px 8px; font-size:9.5px;">'+ROLE_LABELS[role]+'</span>'+extra+'</span></div>'+
-      '</div>';
-    }).join('');
-    return '<div class="card"><div class="card-head"><h3>'+ROLE_LABELS[role]+'</h3></div>'+rows+'</div>';
-  }).join('');
+  const total = order.reduce((n,r)=>n+DATA.staff[r].length, 0);
+  const rows = order.map(role=>DATA.staff[role].map(s=>staffRowHtml(role,s)).join('')).join('')
+    || '<tr><td colspan="6" style="text-align:center; color:var(--muted); padding:22px 16px;">Belum ada akun.</td></tr>';
+  const pills = '<button class="filter-pill active" onclick="pill(this); filterTimTable(\'all\')">Semua ('+total+')</button>'+
+    order.map(role=>'<button class="filter-pill" onclick="pill(this); filterTimTable(\''+role+'\')">'+ROLE_LABELS[role]+' ('+DATA.staff[role].length+')</button>').join('');
+  wrap.innerHTML = '<div class="card">'+
+      '<div class="card-head"><h3>Akun Staf (<span>'+total+'</span>)</h3></div>'+
+      '<div class="filter-row" style="margin-bottom:14px;">'+pills+'</div>'+
+      '<div class="table-wrap">'+
+        '<table class="dtable staff-table">'+
+          '<thead><tr><th>Nama</th><th>Email</th><th>Role</th><th>Telepon</th><th>Bergabung</th><th>Aksi</th></tr></thead>'+
+          '<tbody id="timTableBody">'+rows+'</tbody>'+
+        '</table>'+
+      '</div>'+
+    '</div>';
+}
+function filterTimTable(role){
+  document.querySelectorAll('#timTableBody tr').forEach(r=>{
+    r.style.display = (role==='all' || r.dataset.role===role) ? '' : 'none';
+  });
+}
+function hapusStaf(role, name){
+  const list = DATA.staff[role];
+  const idx = list.findIndex(x=>x.name===name);
+  if(idx===-1) return;
+  if(!confirm('Hapus akun "'+name+'" ('+ROLE_LABELS[role]+')? Tindakan ini tidak bisa dibatalkan.')) return;
+  list.splice(idx,1);
+  renderTimGroups();
+  toast('Akun '+name+' dihapus.');
 }
 function openStaffAdd(){
   activeStaffMode = 'add';
   document.getElementById('stTitle').textContent = 'Tambah Staf';
   document.getElementById('stViewWrap').style.display = 'none';
   document.getElementById('stAddWrap').style.display = 'block';
+  document.getElementById('stEditWrap').style.display = 'none';
   openDialog('staffDialog');
 }
 function openStaffView(role, name){
@@ -1872,12 +1953,63 @@ function openStaffView(role, name){
   document.getElementById('stTitle').textContent = 'Detail Staf';
   document.getElementById('stViewWrap').style.display = 'block';
   document.getElementById('stAddWrap').style.display = 'none';
+  document.getElementById('stEditWrap').style.display = 'none';
   document.getElementById('stName').textContent = s.name;
   document.getElementById('stRole').textContent = ROLE_LABELS[role];
   document.getElementById('stEmail').textContent = s.email;
   document.getElementById('stPhone').textContent = s.phone;
   document.getElementById('stJoined').textContent = s.joined;
   openDialog('staffDialog');
+}
+let activeEditRole = null;
+let activeEditOriginalName = null;
+function openStaffEdit(role, name){
+  const s = DATA.staff[role].find(x=>x.name===name);
+  if(!s) return;
+  activeStaffMode = 'edit';
+  activeEditRole = role;
+  activeEditOriginalName = name;
+  document.getElementById('stTitle').textContent = 'Edit Akses Staf';
+  document.getElementById('stViewWrap').style.display = 'none';
+  document.getElementById('stAddWrap').style.display = 'none';
+  document.getElementById('stEditWrap').style.display = 'block';
+  document.getElementById('stEditName').value = s.name;
+  document.getElementById('stEditEmail').value = s.email;
+  document.getElementById('stEditPhone').value = s.phone;
+  const isSuperadmin = role === 'superadmin';
+  document.getElementById('stEditRoleField').style.display = isSuperadmin ? 'none' : 'block';
+  document.getElementById('stEditRoleLocked').style.display = isSuperadmin ? 'block' : 'none';
+  if(!isSuperadmin){
+    document.querySelectorAll('#stEditRoleChips .role-chip').forEach(el=>{
+      el.classList.toggle('active', el.textContent.trim() === ROLE_LABELS[role]);
+    });
+  }
+  openDialog('staffDialog');
+}
+function saveStaffEdit(){
+  const name = document.getElementById('stEditName').value.trim();
+  if(!name){ toast('Isi nama lengkap staf dulu.'); return; }
+  const email = document.getElementById('stEditEmail').value.trim() || 'staf@biojelan.id';
+  const phone = document.getElementById('stEditPhone').value.trim() || '08xx-xxxx-xxxx';
+  const oldRole = activeEditRole;
+  const list = DATA.staff[oldRole];
+  const idx = list.findIndex(x=>x.name===activeEditOriginalName);
+  if(idx===-1) return;
+  const original = list[idx];
+  let newRole = oldRole;
+  if(oldRole !== 'superadmin'){
+    const roleChip = document.querySelector('#stEditRoleChips .role-chip.active');
+    const roleLabel = roleChip ? roleChip.textContent.trim() : ROLE_LABELS[oldRole];
+    newRole = Object.keys(ROLE_LABELS).find(k=>ROLE_LABELS[k]===roleLabel) || oldRole;
+  }
+  const ini = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const style = ROLE_STYLE[newRole];
+  const updated = Object.assign({}, original, {name, email, phone, ini, badge:style.badge, bg:style.bg, fg:style.fg});
+  list.splice(idx,1);
+  DATA.staff[newRole].push(updated);
+  renderTimGroups();
+  closeDialog('staffDialog');
+  toast(newRole===oldRole ? 'Perubahan akun '+name+' disimpan.' : 'Akun '+name+' dipindah ke role '+ROLE_LABELS[newRole]+'.');
 }
 function addStaff(){
   const name = document.getElementById('stAddName').value.trim();
@@ -1888,7 +2020,8 @@ function addStaff(){
   const email = document.getElementById('stAddEmail').value.trim() || 'staf@biojelan.id';
   const phone = document.getElementById('stAddPhone').value.trim() || '08xx-xxxx-xxxx';
   const ini = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  DATA.staff[roleKey].push({name, email, phone, joined:'Agu 2026', badge:'badge-muted', ini, bg:'var(--line)', fg:'var(--ink-soft)'});
+  const style = ROLE_STYLE[roleKey];
+  DATA.staff[roleKey].push({name, email, phone, joined:'Agu 2026', badge:style.badge, ini, bg:style.bg, fg:style.fg});
   renderTimGroups();
   closeDialog('staffDialog');
   toast('Staf '+name+' ditambahkan sebagai '+roleLabel);
@@ -1965,7 +2098,7 @@ function renderPengaduanList(){
   el.innerHTML = DATA.pengaduan.map((p,i)=>{
     return '<div class="cell-entity" style="padding:13px 0; border-bottom:1px dashed var(--line); cursor:pointer;" onclick="openComplaint('+i+')">'+
       '<div class="avatar-tag" style="'+(p.status==='Selesai'?'background:var(--line); color:var(--ink-soft);':'')+'">'+p.id+'</div>'+
-      '<div class="et" style="flex:1;"><h4>'+p.agen+'</h4><span>'+p.title+' <span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="margin-left:6px;">'+p.status+'</span></span></div>'+
+      '<div class="et" style="flex:1;"><h4>'+p.agen+'</h4><span>'+p.title+' <span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="margin-left:6px;">'+p.status+'</span>'+(p.nextDev?' <span class="chip chip-amber" style="margin-left:4px;">Next Dev</span>':'')+'</span></div>'+
       '<svg style="width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2.2;" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'+
     '</div>';
   }).join('');
@@ -1981,6 +2114,7 @@ function openComplaint(i){
   document.getElementById('cpAgen').textContent = p.agen;
   document.getElementById('cpTime').textContent = p.time;
   document.getElementById('cpText').textContent = p.text;
+  document.getElementById('cpNextDevNote').style.display = p.nextDev ? 'flex' : 'none';
   const statusEl = document.getElementById('cpStatus');
   statusEl.innerHTML = '<span class="chip '+(p.status==='Baru'?'chip-amber':'chip-closed')+'" style="font-size:10px;">'+p.status+'</span>';
   const isResolved = p.status === 'Selesai';
@@ -1988,9 +2122,8 @@ function openComplaint(i){
   document.getElementById('cpResolvedNote').style.display = isResolved ? 'flex' : 'none';
   openDialog('complaintDialog');
 }
-function forwardComplaint(){ toast('Pengaduan diteruskan ke Manajer Operasional.'); closeDialog('complaintDialog'); }
 function resolveComplaint(){
-  if(activeComplaintIdx!==null){ DATA.pengaduan[activeComplaintIdx].status = 'Selesai'; renderPengaduanList(); }
+  if(activeComplaintIdx!==null){ DATA.pengaduan[activeComplaintIdx].status = 'Selesai'; renderPengaduanList(); refreshSidebarBadges(); }
   closeDialog('complaintDialog');
   toast('Pengaduan ditandai selesai.');
 }
@@ -2201,7 +2334,7 @@ function resolveSengketa(action){
 
 /* ---------- Transaksi (Finance) ---------- */
 function txChipClass(t){
-  if(t.pendingComplaint) return 'chip-amber';
+  if(t.pendingCancel) return 'chip-amber';
   if(t.needsVerify) return 'chip-amber';
   if(t.status==='Tercatat') return 'chip-open';
   return 'chip-closed';
@@ -2219,11 +2352,11 @@ function renderTxLists(){
   const cntEls = ['txVerifyCount','fnVerifyStat']; cntEls.forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent = queue.length; });
   const fnPrev = document.getElementById('fnVerifyPreview'); if(fnPrev) fnPrev.innerHTML = qEl ? qEl.innerHTML : '';
 
-  const complaintQueue = DATA.transactions.filter(t=>t.pendingComplaint);
+  const cancelQueue = DATA.transactions.filter(t=>t.pendingCancel);
   const cqEl = document.getElementById('txCancelReqQueue');
-  if(cqEl) cqEl.innerHTML = complaintQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada komplain dari Agen.</p>';
-  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = complaintQueue.length;
-  document.getElementById('txActionCount').textContent = queue.length + complaintQueue.length;
+  if(cqEl) cqEl.innerHTML = cancelQueue.map(t=>txRowHtml(t,true)).join('') || '<p class="empty-note">Tidak ada komplain transaksi.</p>';
+  const cancelCntEl = document.getElementById('txCancelReqCount'); if(cancelCntEl) cancelCntEl.textContent = cancelQueue.length;
+  document.getElementById('txActionCount').textContent = queue.length + cancelQueue.length;
   const fnCancelPrev = document.getElementById('fnCancelReqPreview'); if(fnCancelPrev) fnCancelPrev.innerHTML = cqEl ? cqEl.innerHTML : '';
 
   renderTxTable();
@@ -2266,14 +2399,14 @@ function openTx(id){
   document.getElementById('mStatus').textContent = t.status;
   const vr = document.getElementById('mVerifiedRow');
   if(t.verifiedBy){ vr.style.display='flex'; document.getElementById('mVerifiedBy').textContent = t.verifiedBy; } else { vr.style.display='none'; }
-  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingComplaint) ? 'block' : 'none';
+  document.getElementById('mProofNote').style.display = (t.cat==='agen-klien' && !t.pendingCancel) ? 'block' : 'none';
 
   const vBtn = document.getElementById('mVerifyBtn');
   const cancelReqBlock = document.getElementById('mCancelReqBlock');
-  if(t.pendingComplaint){
+  if(t.pendingCancel){
     vBtn.style.display = 'none';
     cancelReqBlock.style.display = 'block';
-    document.getElementById('mCancelReason').textContent = 'Alasan komplain dari Agen: ' + (t.complaintReason || '-');
+    document.getElementById('mCancelReason').textContent = 'Alasan komplain dari Agen: ' + (t.cancelReason || '-');
   } else {
     vBtn.style.display = t.needsVerify ? 'flex' : 'none';
     cancelReqBlock.style.display = 'none';
@@ -2287,16 +2420,16 @@ function verifyTx(){
   closeDialog('txDialog');
   toast('Pembayaran diverifikasi.');
 }
-function approveComplaint(){
+function approveCancelRequest(){
   const t = DATA.transactions.find(x=>x.id===activeTxId);
-  if(t){ t.pendingComplaint=false; t.status='Dikoreksi'; }
+  if(t){ t.pendingCancel=false; t.status='Dibatalkan'; }
   renderTxLists();
   closeDialog('txDialog');
-  toast('Komplain '+(t?t.from+' → '+t.to:'')+' disetujui — transaksi dikoreksi.');
+  toast('Komplain '+(t?t.from+' → '+t.to:'')+' disetujui — transaksi dibatalkan.');
 }
-function rejectComplaint(){
+function rejectCancelRequest(){
   const t = DATA.transactions.find(x=>x.id===activeTxId);
-  if(t){ t.pendingComplaint=false; t.status='Tercatat'; }
+  if(t){ t.pendingCancel=false; t.status='Tercatat'; }
   renderTxLists();
   closeDialog('txDialog');
   toast('Komplain ditolak — transaksi tetap tercatat.');

@@ -338,6 +338,15 @@
   .cash-note{display:flex; gap:10px; align-items:flex-start; background:var(--amber-tint); border-radius:14px; padding:12px 13px; margin-bottom:16px;}
   .cash-note svg{width:17px;height:17px; stroke:var(--amber-deep); fill:none; stroke-width:1.9; flex:0 0 auto; margin-top:1px;}
   .cash-note span{font-size:11.5px; color:#5C4419; font-weight:700; line-height:1.5;}
+  .notif-banner{display:flex; align-items:flex-start; gap:12px; margin:14px 22px 0; background:linear-gradient(135deg, var(--primary-tint), var(--surface)); border:1.5px solid var(--primary-tint); border-radius:16px; padding:13px 14px;}
+  .notif-icon{width:36px; height:36px; border-radius:11px; background:var(--primary); display:flex; align-items:center; justify-content:center; flex:0 0 auto; position:relative;}
+  .notif-icon svg{width:17px; height:17px; stroke:#fff; fill:none; stroke-width:2;}
+  .notif-icon::after{content:""; position:absolute; top:-2px; right:-2px; width:9px; height:9px; border-radius:50%; background:var(--rust); border:2px solid var(--surface);}
+  .notif-body{flex:1; min-width:0;}
+  .notif-body h4{margin:0 0 2px; font-size:12.5px; font-weight:800; color:var(--primary);}
+  .notif-body p{margin:0; font-size:11.5px; color:var(--ink-soft);}
+  .notif-close{width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto;}
+  .notif-close svg{width:13px; height:13px; stroke:var(--muted); fill:none; stroke-width:2.2;}
   .stop-list{padding:0 22px 16px; display:flex; flex-direction:column; gap:10px;}
   .stop-row{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:13px; display:flex; gap:12px; align-items:center; cursor:pointer;}
   .stop-row.current{border-color:var(--amber-deep); box-shadow:0 0 0 1.5px var(--amber-deep) inset;}
@@ -789,19 +798,19 @@
           <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-1" data-name="Rini Wulandari" data-time="Hari ini, 10.42" data-vol="6 L" data-total="Rp 39.000" data-day="today" data-status="ok">
             <div class="tx-avatar">RW</div>
             <div class="tx-mid"><h4>Rini Wulandari</h4><div class="d">Hari ini, 10.42 &middot; 6 L</div></div>
-            <div class="tx-right"><div class="amt">Rp 39.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Bisa diajukan batal</div></div>
+            <div class="tx-right"><div class="amt">Rp 39.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
           <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-2" data-name="Dedi Prasetyo" data-time="Hari ini, 09.15" data-vol="10 L" data-total="Rp 65.000" data-day="today" data-status="ok">
             <div class="tx-avatar">DP</div>
             <div class="tx-mid"><h4>Dedi Prasetyo</h4><div class="d">Hari ini, 09.15 &middot; 10 L</div></div>
-            <div class="tx-right"><div class="amt">Rp 65.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Bisa diajukan batal</div></div>
+            <div class="tx-right"><div class="amt">Rp 65.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
           <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-3" data-name="Ahmad Solihin" data-time="Hari ini, 08.50" data-vol="4 L" data-total="Rp 26.000" data-day="today" data-status="ok">
             <div class="tx-avatar">AS</div>
             <div class="tx-mid"><h4>Ahmad Solihin</h4><div class="d">Hari ini, 08.50 &middot; 4 L</div></div>
-            <div class="tx-right"><div class="amt">Rp 26.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Bisa diajukan batal</div></div>
+            <div class="tx-right"><div class="amt">Rp 26.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
           <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-4" data-name="Nia Fitriani" data-time="Kemarin, 16.20" data-vol="5 L" data-total="Rp 32.500" data-day="past" data-status="cancelled" data-reason="Transaksi tercatat dobel">
@@ -922,6 +931,15 @@
           <p class="eyebrow">Selamat pagi</p>
           <h2>Ahmad Fauzi</h2>
           <div class="veh">Kendaraan L 1234 AB</div>
+        </div>
+
+        <div class="notif-banner" id="newTaskBanner">
+          <div class="notif-icon"><svg viewBox="0 0 24 24"><path d="M4 11a8 8 0 0116 0M7 11a5 5 0 0110 0M12 11v9M9 20h6"/></svg></div>
+          <div class="notif-body">
+            <h4>Tugas baru ditugaskan</h4>
+            <p>Rute <b class="mono">PU-20260811-06</b> &middot; 3 Agen &middot; est. 1.670 L</p>
+          </div>
+          <div class="notif-close" onclick="dismissNewTaskBanner()"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
         </div>
 
         <div class="gps-badge"><div class="gps-dot"></div><span>Status checkpoint terkirim ke Kilang setiap Anda melakukan pembaruan</span></div>
@@ -1068,7 +1086,7 @@
       </div>
     </div>
 
-    <!-- ===================== AGEN: DETAIL TRANSAKSI / AJUKAN KOMPLAIN SHEET ===================== -->
+    <!-- ===================== AGEN: DETAIL TRANSAKSI / AJUKAN PEMBATALAN SHEET ===================== -->
     <div class="modal-overlay" id="txDetailSheet">
       <div class="modal-sheet">
         <div class="sheet-handle"></div>
@@ -1086,21 +1104,21 @@
 
         <div id="tdCancelBlock" style="display:none;">
           <div class="field" style="margin-top:14px;"><label>Alasan komplain</label><input type="text" id="tdReason" placeholder="cth. Transaksi tercatat dobel, atau salah input volume"></div>
-          <button class="btn btn-rust" onclick="confirmComplainTx()">Ajukan Komplain ke Kilang</button>
-          <p style="font-size:11px; color:var(--muted); margin:8px 0 0; line-height:1.5;">Hanya Kilang yang dapat memutuskan tindak lanjut komplain. Pengajuan Anda akan ditinjau terlebih dahulu sebelum status berubah.</p>
+          <button class="btn btn-rust" onclick="confirmCancelTx()">Ajukan Komplain ke Kilang</button>
+          <p style="font-size:11px; color:var(--muted); margin:8px 0 0; line-height:1.5;">Kilang akan meninjau komplain ini dan menentukan apakah transaksi perlu dibatalkan.</p>
         </div>
 
         <div id="tdLockedNote" class="note-mini" style="display:none;">
           <svg viewBox="0 0 24 24" width="15" height="15" style="stroke:var(--muted); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
-          <span>Transaksi dari hari sebelumnya sudah tidak bisa diajukan komplain lewat app — kalau ada kesalahan pencatatan, hubungi Kilang.</span>
+          <span>Transaksi dari hari sebelumnya sudah tidak bisa dikomplain lewat app — kalau ada kesalahan pencatatan, hubungi Kilang.</span>
         </div>
         <div id="tdPendingNote" class="note-mini" style="display:none; background:var(--amber-tint); color:#6b4a14;">
           <svg viewBox="0 0 24 24" width="15" height="15" style="stroke:var(--amber-deep); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
-          <span id="tdPendingReason">Menunggu tinjauan Kilang.</span>
+          <span id="tdPendingReason">Sedang ditinjau Kilang.</span>
         </div>
         <div id="tdCancelledNote" class="note-mini rust" style="display:none;">
           <svg viewBox="0 0 24 24" width="15" height="15" style="stroke:var(--rust); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;"><path d="M6 6l12 12M18 6L6 18"/></svg>
-          <span id="tdCancelledReason">Komplain telah ditinjau Kilang.</span>
+          <span id="tdCancelledReason">Transaksi ini sudah dibatalkan.</span>
         </div>
       </div>
     </div>
@@ -1374,6 +1392,15 @@
     const gb = document.getElementById('guestBanner'); if(gb) gb.style.display = 'none';
     showRoleShell();
     showScreen(ROLE_HOME_SCREEN[currentMobileRole]);
+    if(currentMobileRole === 'driver'){
+      const banner = document.getElementById('newTaskBanner'); if(banner) banner.style.display = 'flex';
+      setTimeout(()=>showToast('🔔 Tugas baru: Rute PU-20260811-06 (3 Agen) ditugaskan untuk Anda'), 600);
+    }
+  }
+
+  function dismissNewTaskBanner(){
+    const el = document.getElementById('newTaskBanner');
+    if(el) el.style.display = 'none';
   }
 
   function doLogout(){
@@ -1566,12 +1593,12 @@
       statusEl.textContent = 'Dibatalkan';
       statusEl.style.color = 'var(--rust)';
       cancelledNote.style.display = 'flex';
-      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Ditinjau Kilang — ' + el.dataset.reason) : 'Komplain telah ditinjau Kilang.';
-    } else if(el.dataset.status === 'pending_complaint'){
-      statusEl.textContent = 'Menunggu Persetujuan';
+      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Komplain disetujui Kilang — ' + el.dataset.reason) : 'Transaksi ini sudah dibatalkan.';
+    } else if(el.dataset.status === 'pending_cancel'){
+      statusEl.textContent = 'Dalam Peninjauan';
       statusEl.style.color = 'var(--amber-deep)';
       pendingNote.style.display = 'flex';
-      document.getElementById('tdPendingReason').textContent = 'Menunggu tinjauan Kilang — alasan: ' + (el.dataset.reason || '-');
+      document.getElementById('tdPendingReason').textContent = 'Sedang ditinjau Kilang — alasan komplain: ' + (el.dataset.reason || '-');
     } else {
       statusEl.style.color = 'var(--primary)';
       if(el.dataset.day === 'today'){
@@ -1585,26 +1612,27 @@
     openSheet('txDetailSheet');
   }
 
-  function confirmComplainTx(){
+  function confirmCancelTx(){
     const reason = document.getElementById('tdReason').value.trim();
     if(!reason){ showToast('Isi alasan komplain dulu.'); return; }
     const row = activeTxRow;
     if(!row) return;
 
-    // Hanya Kilang yang dapat memutuskan tindak lanjut — Agen hanya mengajukan komplain.
+    // Agen mengajukan komplain atas transaksi yang sudah tercatat (mis. dobel input,
+    // salah volume) — Kilang yang meninjau dan memutuskan apakah transaksi dibatalkan.
     // Status & angka (ringkasan hari ini, stok) baru berubah kalau Kilang
-    // menyetujui pengajuan ini lewat BioJelan Kilang Web.
-    row.dataset.status = 'pending_complaint';
+    // menyetujui komplain ini lewat BioJelan Kilang Web.
+    row.dataset.status = 'pending_cancel';
     row.dataset.reason = reason;
     const stEl = row.querySelector('.st');
-    stEl.textContent = 'Menunggu Tinjauan';
+    stEl.textContent = 'Dalam Peninjauan';
     stEl.classList.remove('ok', 'no');
     stEl.classList.add('pending');
     const hintEl = row.querySelector('.cancel-hint');
     if(hintEl) hintEl.remove();
 
     closeSheet('txDetailSheet');
-    showToast('Komplain ' + row.dataset.name + ' dikirim ke Kilang untuk ditinjau');
+    showToast('Komplain transaksi ' + row.dataset.name + ' dikirim ke Kilang');
   }
 
   function calcTotal(){
@@ -1632,7 +1660,7 @@
     row.dataset.status = 'ok';
     row.innerHTML = '<div class="tx-avatar">'+initials+'</div>'
       + '<div class="tx-mid"><h4>'+name+'</h4><div class="d">Baru saja &middot; '+vol+' L</div></div>'
-      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Bisa diajukan batal</div></div>'
+      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>'
       + '<svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>';
     document.getElementById('txListFull').prepend(row);
 
