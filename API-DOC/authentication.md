@@ -6,16 +6,16 @@ Base URL: `http://biojelan.id`
 
 | Method | Endpoint                      | Description                  |
 |--------|-------------------------------|------------------------------|
-| POST   | /api/register                 | Register new user            |
-| POST   | /api/login                    | Login user                   |
-| DELETE | /api/logout                   | Logout user                  |
-| PATCH  | /api/update-password          | Update user password         |
-| POST   | /api/forgot-password          | Forgot user password         |
-| POST   | /api/kilang-login             | Login kilang dashboard       |
+| POST   | `/api/register`                 | Register new user            |
+| POST   | `/api/login`                    | Login user                   |
+| DELETE | `/api/logout`                   | Logout user                  |
+| PATCH  | `/api/update-password`          | Update user password         |
+| POST   | `/api/forgot-password`          | Forgot user password         |
+| POST   | `/api/kilang-login`             | Login kilang dashboard       |
 
 ---
 
-## 1. Register
+### 1. Register
 
 Method: `POST`
 Endpoint: `/api/register`
@@ -33,7 +33,6 @@ Request Body:
 Response Body - Success:
 ```json
 {
-    "success": true,
     "data": {
         "token": "<token>",
         "name": "Syuhada Rantisi",
@@ -47,19 +46,22 @@ Response Body - Error:
 ```json
 // invalid password
 {
-    "data": [],
+    "data": {},
     "message": "Failed create user! Invalid password."
 }
+```
+
+```json
 // email already exists
 {
-    "data": [],
+    "data": {},
     "message": "Failed create user! Email already exists."
 }
 ```
 
 ---
 
-## 2. Login
+### 2. Login
 
 Method: `POST`
 Endpoint: `/api/login`
@@ -75,7 +77,6 @@ Request Body:
 Response Body - Success:
 ```json
 {
-    "success": true,
     "data": {
         "token": "<token>",
         "name": "Test User",
@@ -89,19 +90,22 @@ Response Body - Error:
 ```json
 // user not registered
 {
-    "data": [],
+    "data": {},
     "message": "Failed login! User not registered."
 }
+```
+
+```json
 // if wrong password
 {
-    "data": [],
+    "data": {},
     "message": "Failed login! Wrong password."
 }
 ```
 
 ---
 
-## 3. Logout
+### 3. Logout
 
 Method: `DELETE`
 Endpoint: `/api/logout`
@@ -119,14 +123,14 @@ Response Body - Error:
 ```json
 // if user not authorized
 {
-    "data": [],
+    "data": {},
     "message": "Failed logout! User unauthorized."
 }
 ```
 
 ---
 
-## 4. Update Password
+### 4. Update Password
 
 Method: `PATCH`
 Endpoint: `/api/update-password`
@@ -137,7 +141,7 @@ Request Body:
 {
   "password": "test123",
   "new_password": "123test",
-  "new_password_confirmed": "123test"
+  "password_confirmation": "123test"
 }
 ```
 
@@ -161,7 +165,7 @@ Response Body - Error:
 ```json
 {
     "data": {},
-    "message": "Failed update password! Invalid confirmed password."
+    "message": "Failed update password! Invalid password confirmation."
 }
 ```
 
@@ -174,7 +178,8 @@ Response Body - Error:
 ```
 
 
-## 5. Forgot Password
+
+### 5. Forgot Password
 
 Method: `POST`
 Endpoint: `/api/forgot-password`
@@ -205,7 +210,7 @@ Response Body - Error:
 
 ---
 
-## 6. Kilang Login
+### 6. Kilang Login (Web Dashboard)
 
 
 Method: `POST`
@@ -222,7 +227,6 @@ Request Body:
 Response Body - Success:
 ```json
 {
-	"success": true,
 	"data": {
 		"token": "<token>",
 		"name": "Admin User",
@@ -236,19 +240,24 @@ Response Body - Error:
 ```json
 // user not registered
 {
-    "data": [],
+    "data": {},
     "message": "Failed login! User not registered."
 }
+```
+
+```json
 // if wrong password
 {
-    "data": [],
+    "data": {},
     "message": "Failed login! Wrong password."
 }
+```
+
+```json
 // if not admin
 {
-    "data": [],
+    "data": {},
     "message": "Failed login! User unauthorized."
 }
 
 ```
-
