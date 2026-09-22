@@ -35,18 +35,11 @@ import id.biojelan.app.ui.components.TabItem
 import id.biojelan.app.ui.icons.BioIcons
 import id.biojelan.app.ui.klien.KlienLocatorTab
 import id.biojelan.app.ui.klien.KlienUiState
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 import org.koin.compose.viewmodel.koinViewModel
 
 private const val LOCATOR_TAB_INDEX = 1
-
-private val guestTabs = listOf(
-    TabItem("Beranda", BioIcons.Home),
-    TabItem("Cari Agen", BioIcons.Pin),
-    TabItem("Riwayat", BioIcons.Receipt),
-    TabItem("Profil", BioIcons.User),
-)
 
 /**
  * Alur untuk pengunjung yang memilih "Lihat sebagai tamu": boleh melihat lokasi Agen dan
@@ -55,17 +48,25 @@ private val guestTabs = listOf(
  */
 @Composable
 fun GuestScreen(vm: GuestViewModel = koinViewModel()) {
+    val c = BioTheme.colors
+    val s = BioText.current
+    val guestTabs = listOf(
+        TabItem(s.tabHome, BioIcons.Home),
+        TabItem(s.tabFindAgent, BioIcons.Pin),
+        TabItem(s.tabHistory, BioIcons.Receipt),
+        TabItem(s.tabProfile, BioIcons.User),
+    )
     val state by vm.state.collectAsStateWithLifecycle()
     var showUpsell by remember { mutableStateOf(false) }
 
-    Box(Modifier.fillMaxSize().background(BioColors.Paper)) {
+    Box(Modifier.fillMaxSize().background(c.paper)) {
         Column(Modifier.fillMaxSize()) {
             Box(Modifier.weight(1f).statusBarsPadding()) {
                 Column(Modifier.fillMaxSize()) {
                     GuestBanner(onClick = vm::exitToRegister)
                     PriceBand(
                         price = state.price,
-                        caption = "Harga jelantah hari ini · berlaku untuk semua Agen",
+                        caption = s.guestPriceCaption,
                         modifier = Modifier.padding(horizontal = ScreenPad, vertical = 4.dp),
                     )
                     Box(Modifier.weight(1f)) {
@@ -102,39 +103,35 @@ fun GuestScreen(vm: GuestViewModel = koinViewModel()) {
 
 @Composable
 private fun GuestBanner(onClick: () -> Unit) {
+    val c = BioTheme.colors
+    val s = BioText.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = ScreenPad, vertical = 10.dp)
-            .background(BioColors.PrimaryTint, RoundedCornerShape(14.dp))
+            .background(c.primaryTint, RoundedCornerShape(14.dp))
             .clickable(onClick = onClick)
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Icon(BioIcons.Eye, contentDescription = null, tint = BioColors.Primary, modifier = Modifier.size(20.dp))
+        Icon(BioIcons.Eye, contentDescription = null, tint = c.primary, modifier = Modifier.size(20.dp))
         Spacer(Modifier.width(10.dp))
         Column(Modifier.weight(1f)) {
-            Text("Lihat sebagai tamu.", style = BioTheme.type.bodyBold, color = BioColors.Primary)
-            Text(
-                "Daftar untuk mulai menjual minyak jelantah dan melihat riwayat transaksi Anda. Ketuk untuk mendaftar.",
-                style = BioTheme.type.small,
-                color = BioColors.Primary,
-            )
+            Text(s.guestBannerTitle, style = BioTheme.type.bodyBold, color = c.primary)
+            Text(s.guestBannerBody, style = BioTheme.type.small, color = c.primary)
         }
     }
 }
 
 @Composable
 private fun GuestUpsellSheet(onDismiss: () -> Unit, onRegister: () -> Unit) {
-    BioSheet(title = "Daftar untuk lanjut", onDismiss = onDismiss) {
-        Text(
-            "Sebagai tamu, Anda hanya dapat melihat lokasi Agen di peta dan harga jelantah terkini. Daftar terlebih dahulu untuk mulai menjual minyak jelantah, melihat riwayat transaksi, dan mengatur profil.",
-            style = BioTheme.type.body,
-            color = BioColors.InkSoft,
-        )
+    val c = BioTheme.colors
+    val s = BioText.current
+    BioSheet(title = s.guestUpsellTitle, onDismiss = onDismiss) {
+        Text(s.guestUpsellBody, style = BioTheme.type.body, color = c.inkSoft)
         Spacer(Modifier.height(18.dp))
-        BioButton("Daftar Sekarang", onClick = onRegister, modifier = Modifier.fillMaxWidth())
+        BioButton(s.registerNow, onClick = onRegister, modifier = Modifier.fillMaxWidth())
         Spacer(Modifier.height(10.dp))
-        BioButton("Nanti dulu", onClick = onDismiss, style = BtnStyle.Outline, modifier = Modifier.fillMaxWidth())
+        BioButton(s.maybeLater, onClick = onDismiss, style = BtnStyle.Outline, modifier = Modifier.fillMaxWidth())
     }
 }

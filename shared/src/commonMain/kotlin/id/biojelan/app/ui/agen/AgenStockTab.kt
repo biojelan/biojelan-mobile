@@ -39,7 +39,7 @@ import id.biojelan.app.ui.components.SectionHead
 import id.biojelan.app.ui.components.TxRow
 import id.biojelan.app.ui.counterpartName
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 /**
@@ -48,49 +48,48 @@ import id.biojelan.app.ui.theme.BioTheme
  */
 @Composable
 fun AgenStockTab(state: AgenUiState, user: UserDto, vm: AgenViewModel) {
+    val c = BioTheme.colors
+    val s = BioText.current
     val stock = user.agen?.stockLiter ?: 0.0
     val threshold = AppConfig.STOCK_THRESHOLD_LITER
     val reached = stock >= threshold
     val ratio = (stock / threshold).toFloat().coerceIn(0f, 1f)
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(bottom = 24.dp)) {
-        ScreenTopBar("Stok", actions = {
-            CircleIconButton(BioIcons.Refresh, onClick = vm::refresh, contentDescription = "Muat ulang")
+        ScreenTopBar(s.stockTitle, actions = {
+            CircleIconButton(BioIcons.Refresh, onClick = vm::refresh, contentDescription = s.reload)
         })
         Column(Modifier.padding(horizontal = ScreenPad), horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(Modifier.height(4.dp))
             DropGauge(fill = ratio, modifier = Modifier.size(width = 132.dp, height = 164.dp))
             Spacer(Modifier.height(12.dp))
-            Text(formatLiter(stock), style = BioTheme.type.title.copy(fontSize = 34.sp), color = BioColors.Ink)
-            Text("dari ambang batas ${formatLiter(threshold)}", style = BioTheme.type.body, color = BioColors.Muted)
+            Text(formatLiter(stock), style = BioTheme.type.title.copy(fontSize = 34.sp), color = c.ink)
+            Text(s.thresholdCaption(formatLiter(threshold)), style = BioTheme.type.body, color = c.muted)
             Spacer(Modifier.height(10.dp))
             BioChip(
-                if (reached) "Sudah lewati ambang — menunggu jadwal Kilang" else "${formatLiter(threshold - stock)} lagi menuju ambang",
+                if (reached) s.aboveThresholdNote else s.remainingToThreshold(formatLiter(threshold - stock)),
                 if (reached) ChipKind.Done else ChipKind.Pending,
             )
             Spacer(Modifier.height(16.dp))
-            NoteBox(
-                "Setelah stok melewati ambang, Kilang akan menjadwalkan penjemputan. Ambang batas ditentukan oleh Kilang.",
-                icon = BioIcons.Info,
-            )
+            NoteBox(s.stockThresholdInfo, icon = BioIcons.Info)
         }
 
         Column(Modifier.padding(horizontal = ScreenPad)) {
-            SectionHead("Pergerakan stok")
+            SectionHead(s.stockMovement)
             if (state.transactions.isEmpty()) {
-                NoteBox("Belum ada pergerakan. Stok bertambah saat Klien menerima transaksi.")
+                NoteBox(s.noStockMovement)
             } else {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     state.transactions.take(20).forEach { tx ->
                         val name = tx.counterpartName(Viewer.Agen)
                         val (amountText, kind, status) = when (tx.txStatus) {
-                            TxStatus.Accepted -> Triple("+" + formatNumber(tx.volumeLiter, 2) + " L", ChipKind.Done, "Masuk")
-                            TxStatus.Pending -> Triple("+" + formatNumber(tx.volumeLiter, 2) + " L", ChipKind.Pending, "Menunggu")
-                            else -> Triple("0 L", ChipKind.Cancelled, "Dibatalkan")
+                            TxStatus.Accepted -> Triple("+" + formatNumber(tx.volumeLiter, 2) + " L", ChipKind.Done, s.stockIncoming)
+                            TxStatus.Pending -> Triple("+" + formatNumber(tx.volumeLiter, 2) + " L", ChipKind.Pending, s.stockWaiting)
+                            else -> Triple("0 L", ChipKind.Cancelled, s.stockCancelled)
                         }
                         TxRow(
                             avatar = initialsOf(name),
-                            title = "Transaksi — $name",
+                            title = s.transactionDash(name),
                             subtitle = formatRelativeDateTime(tx.createdAt),
                             amount = amountText,
                             statusText = status,
@@ -100,7 +99,7 @@ fun AgenStockTab(state: AgenUiState, user: UserDto, vm: AgenViewModel) {
                 }
             }
             Spacer(Modifier.height(16.dp))
-            NoteBox("Ada selisih stok? Hubungi tim Kilang — koreksi stok belum tersedia di app.")
+            NoteBox(s.stockCorrectionNote)
         }
     }
 }

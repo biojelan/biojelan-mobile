@@ -38,7 +38,7 @@ import id.biojelan.app.ui.components.ScreenTopBar
 import id.biojelan.app.ui.components.SearchField
 import id.biojelan.app.ui.components.bioCard
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 @Composable
@@ -47,6 +47,7 @@ fun KlienLocatorTab(
     onRefresh: () -> Unit,
     onOpenAgen: (String) -> Unit,
 ) {
+    val s = BioText.current
     var query by rememberSaveable { mutableStateOf("") }
     var onlyOpen by rememberSaveable { mutableStateOf(false) }
 
@@ -64,15 +65,15 @@ fun KlienLocatorTab(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         item {
-            ScreenTopBar("Cari Agen", actions = {
-                CircleIconButton(BioIcons.Refresh, onClick = onRefresh, contentDescription = "Muat ulang")
+            ScreenTopBar(s.tabFindAgent, actions = {
+                CircleIconButton(BioIcons.Refresh, onClick = onRefresh, contentDescription = s.reload)
             })
         }
         item { SearchField(query, { query = it }, "Cari nama atau alamat Agen", Modifier.padding(horizontal = ScreenPad)) }
         item {
             Row(Modifier.padding(horizontal = ScreenPad), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterPill("Semua", selected = !onlyOpen, onClick = { onlyOpen = false })
-                FilterPill("Buka sekarang", selected = onlyOpen, onClick = { onlyOpen = true })
+                FilterPill(s.open, selected = onlyOpen, onClick = { onlyOpen = true })
             }
         }
         if (filtered.isNotEmpty()) {
@@ -98,6 +99,8 @@ fun KlienLocatorTab(
 
 @Composable
 private fun AgenRow(agen: AgenSummaryDto, modifier: Modifier = Modifier, onClick: () -> Unit) {
+    val c = BioTheme.colors
+    val s = BioText.current
     Row(
         modifier = modifier.fillMaxWidth().bioCard(16.dp).clickable(onClick = onClick).padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -105,16 +108,16 @@ private fun AgenRow(agen: AgenSummaryDto, modifier: Modifier = Modifier, onClick
     ) {
         AvatarBox(agenInitials(agen.name))
         Column(Modifier.weight(1f)) {
-            Text(agen.name, style = BioTheme.type.cardTitle, color = BioColors.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text(agen.address, style = BioTheme.type.small, color = BioColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(agen.name, style = BioTheme.type.cardTitle, color = c.ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(agen.address, style = BioTheme.type.small, color = c.muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(
                 formatOperatingHours(agen.openAt, agen.closeAt, agen.openDays),
                 style = BioTheme.type.caption,
-                color = BioColors.InkSoft,
+                color = c.inkSoft,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
         }
-        BioChip(if (agen.isOpen) "Buka" else "Tutup", if (agen.isOpen) ChipKind.Open else ChipKind.Closed)
+        BioChip(if (agen.isOpen) s.open else s.closed, if (agen.isOpen) ChipKind.Open else ChipKind.Closed)
     }
 }

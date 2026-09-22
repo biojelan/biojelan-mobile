@@ -55,7 +55,7 @@ import id.biojelan.app.ui.components.ScreenTopBar
 import id.biojelan.app.ui.components.SectionHead
 import id.biojelan.app.ui.components.bioCard
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 private enum class ProfileSheet { None, Edit, Password, Delete }
@@ -63,63 +63,65 @@ private enum class ProfileSheet { None, Edit, Password, Delete }
 /** Tab Profil untuk Klien maupun Agen (bagian Agen muncul jika `user.agen != null`). */
 @Composable
 fun ProfileTab(user: UserDto, account: AccountViewModel) {
+    val c = BioTheme.colors
+    val s = BioText.current
     var sheet by remember { mutableStateOf(ProfileSheet.None) }
     val busy by account.busy.collectAsStateWithLifecycle()
     val agen = user.agen
-    val roleLabel = if (agen != null) "Agen" else "Klien"
+    val roleLabel = if (agen != null) s.roleAgent else s.roleClient
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(bottom = 24.dp)) {
-        ScreenTopBar("Profil")
+        ScreenTopBar(s.profileTitle)
         Column(Modifier.padding(horizontal = ScreenPad)) {
 
         Column(Modifier.fillMaxWidth().padding(vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Box(Modifier.size(76.dp).background(BioColors.Primary, CircleShape), contentAlignment = Alignment.Center) {
-                Text(initialsOf(user.name), style = BioTheme.type.headline, color = BioColors.OnPrimary)
+            Box(Modifier.size(76.dp).background(c.primary, CircleShape), contentAlignment = Alignment.Center) {
+                Text(initialsOf(user.name), style = BioTheme.type.headline, color = c.onPrimary)
             }
             Spacer(Modifier.height(12.dp))
-            Text(user.name, style = BioTheme.type.subTitle, color = BioColors.Ink, textAlign = TextAlign.Center)
+            Text(user.name, style = BioTheme.type.subTitle, color = c.ink, textAlign = TextAlign.Center)
             Spacer(Modifier.height(6.dp))
             BioChip(roleLabel, ChipKind.Open)
         }
 
-        SectionHead("Data akun")
+        SectionHead(s.sectionAccountData)
         Column(Modifier.fillMaxWidth().bioCard(16.dp)) {
-            InfoItem(BioIcons.Mail, "Email", user.email.ifBlank { "-" })
+            InfoItem(BioIcons.Mail, s.fieldEmail, user.email.ifBlank { "-" })
             HairLine()
-            InfoItem(BioIcons.Phone, "Telepon", user.phone.ifBlank { "-" })
+            InfoItem(BioIcons.Phone, s.labelPhone, user.phone.ifBlank { "-" })
             HairLine()
-            InfoItem(BioIcons.IdCard, if (agen != null) "ID Agen" else "ID Klien", if (agen != null) agen.agenId.ifBlank { user.userId } else user.userId)
+            InfoItem(BioIcons.IdCard, if (agen != null) s.labelIdAgent else s.labelIdClient, if (agen != null) agen.agenId.ifBlank { user.userId } else user.userId)
         }
 
         if (agen != null) {
-            SectionHead("Data Agen")
+            SectionHead(s.sectionAgentData)
             Column(Modifier.fillMaxWidth().bioCard(16.dp)) {
-                InfoItem(BioIcons.Pin, "Alamat", agen.address.ifBlank { "-" })
+                InfoItem(BioIcons.Pin, s.labelAddress, agen.address.ifBlank { "-" })
                 HairLine()
-                InfoItem(BioIcons.Clock, "Jam operasional", formatOperatingHours(agen.openAt, agen.closeAt, agen.openDay))
+                InfoItem(BioIcons.Clock, s.labelOperatingHours, formatOperatingHours(agen.openAt, agen.closeAt, agen.openDay))
                 HairLine()
                 InfoItem(
-                    BioIcons.Bank, "Rekening",
-                    if (agen.bankName.isBlank() && agen.accountNumber.isBlank()) "Belum diisi" else "${agen.bankName} · ${agen.accountNumber}",
+                    BioIcons.Bank, s.labelBankAccount,
+                    if (agen.bankName.isBlank() && agen.accountNumber.isBlank()) s.notFilled else "${agen.bankName} · ${agen.accountNumber}",
                 )
                 HairLine()
-                InfoItem(BioIcons.Drop, "Ambang stok", formatLiter(AppConfig.STOCK_THRESHOLD_LITER) + " · ditentukan Kilang")
+                InfoItem(BioIcons.Drop, s.labelStockThreshold, formatLiter(AppConfig.STOCK_THRESHOLD_LITER) + " · " + s.setByKilang)
             }
         }
 
-        SectionHead("Pengaturan")
+        SectionHead(s.sectionSettings)
         Column(Modifier.fillMaxWidth().bioCard(16.dp)) {
-            ProfileRow(BioIcons.Edit, "Ubah profil", onClick = { account.clearFormError(); sheet = ProfileSheet.Edit })
+            ProfileRow(BioIcons.Edit, s.editProfile, onClick = { account.clearFormError(); sheet = ProfileSheet.Edit })
             HairLine()
-            ProfileRow(BioIcons.Lock, "Ubah kata sandi", onClick = { account.clearFormError(); sheet = ProfileSheet.Password })
+            ProfileRow(BioIcons.Lock, s.changePassword, onClick = { account.clearFormError(); sheet = ProfileSheet.Password })
             HairLine()
-            ProfileRow(BioIcons.Logout, "Keluar", tint = BioColors.Rust, onClick = { if (!busy) account.logout() })
+            ProfileRow(BioIcons.Logout, s.logout, tint = c.rust, onClick = { if (!busy) account.logout() })
         }
 
         Text(
-            "Hapus akun",
+            s.deleteAccount,
             style = BioTheme.type.label,
-            color = BioColors.Rust,
+            color = c.rust,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
@@ -143,6 +145,8 @@ private val TIME_REGEX = Regex("^([01]\\d|2[0-3]):[0-5]\\d$")
 
 @Composable
 private fun EditProfileSheet(user: UserDto, account: AccountViewModel, onClose: () -> Unit) {
+    val c = BioTheme.colors
+    val s = BioText.current
     val busy by account.busy.collectAsStateWithLifecycle()
     val serverError by account.formError.collectAsStateWithLifecycle()
     val agen = user.agen
@@ -157,19 +161,19 @@ private fun EditProfileSheet(user: UserDto, account: AccountViewModel, onClose: 
     var days by remember { mutableStateOf(agen?.openDay?.map { it.lowercase() }.orEmpty()) }
     var errors by remember { mutableStateOf(emptyMap<String, String>()) }
 
-    BioSheet("Ubah profil", onDismiss = onClose) {
-        BioField("Nama", name, { name = it }, error = errors["name"])
-        BioField("Nomor telepon", phone, { phone = it }, keyboardType = KeyboardType.Phone, placeholder = "08xxxxxxxxxx")
+    BioSheet(s.editProfileTitle, onDismiss = onClose) {
+        BioField(s.fieldName, name, { name = it }, error = errors["name"])
+        BioField(s.fieldPhone, phone, { phone = it }, keyboardType = KeyboardType.Phone, placeholder = s.placeholderPhone)
 
         if (agen != null) {
-            BioField("Alamat", address, { address = it }, placeholder = "Alamat lengkap")
-            BioField("Nama bank", bank, { bank = it }, placeholder = "mis. BCA")
-            BioField("Nomor rekening", accountNumber, { accountNumber = it }, keyboardType = KeyboardType.Number)
+            BioField(s.fieldAddress, address, { address = it }, placeholder = s.placeholderAddress)
+            BioField(s.fieldBankName, bank, { bank = it }, placeholder = s.placeholderBankName)
+            BioField(s.fieldAccountNumber, accountNumber, { accountNumber = it }, keyboardType = KeyboardType.Number)
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                BioField("Buka", openAt, { openAt = it }, Modifier.weight(1f), placeholder = "08:00", error = errors["openAt"], keyboardType = KeyboardType.Number)
-                BioField("Tutup", closeAt, { closeAt = it }, Modifier.weight(1f), placeholder = "17:00", error = errors["closeAt"], keyboardType = KeyboardType.Number)
+                BioField(s.fieldOpenTime, openAt, { openAt = it }, Modifier.weight(1f), placeholder = s.placeholderOpenTime, error = errors["openAt"], keyboardType = KeyboardType.Number)
+                BioField(s.fieldCloseTime, closeAt, { closeAt = it }, Modifier.weight(1f), placeholder = s.placeholderCloseTime, error = errors["closeAt"], keyboardType = KeyboardType.Number)
             }
-            Text("Hari buka", style = BioTheme.type.label, color = BioColors.InkSoft, modifier = Modifier.padding(bottom = 6.dp))
+            Text(s.fieldOpenDays, style = BioTheme.type.label, color = c.inkSoft, modifier = Modifier.padding(bottom = 6.dp))
             Row(
                 Modifier.horizontalScroll(rememberScrollState()).padding(bottom = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -187,13 +191,13 @@ private fun EditProfileSheet(user: UserDto, account: AccountViewModel, onClose: 
         serverError?.let { NoteBox(it, tone = NoteTone.Rust, icon = BioIcons.Alert, modifier = Modifier.padding(bottom = 12.dp)) }
 
         BioButton(
-            "Simpan perubahan",
+            s.saveChanges,
             onClick = {
                 val found = buildMap {
-                    if (name.isBlank()) put("name", "Nama wajib diisi.")
+                    if (name.isBlank()) put("name", s.errorNameRequired)
                     if (agen != null) {
-                        if (openAt.isNotBlank() && !TIME_REGEX.matches(openAt.trim())) put("openAt", "Format HH:mm")
-                        if (closeAt.isNotBlank() && !TIME_REGEX.matches(closeAt.trim())) put("closeAt", "Format HH:mm")
+                        if (openAt.isNotBlank() && !TIME_REGEX.matches(openAt.trim())) put("openAt", s.errorTimeFormat)
+                        if (closeAt.isNotBlank() && !TIME_REGEX.matches(closeAt.trim())) put("closeAt", s.errorTimeFormat)
                     }
                 }
                 errors = found
@@ -217,6 +221,7 @@ private fun EditProfileSheet(user: UserDto, account: AccountViewModel, onClose: 
 
 @Composable
 private fun ChangePasswordSheet(account: AccountViewModel, onClose: () -> Unit) {
+    val s = BioText.current
     val busy by account.busy.collectAsStateWithLifecycle()
     val serverError by account.formError.collectAsStateWithLifecycle()
     var current by remember { mutableStateOf("") }
@@ -226,47 +231,48 @@ private fun ChangePasswordSheet(account: AccountViewModel, onClose: () -> Unit) 
 
     fun submit() {
         val found = buildMap {
-            if (current.isEmpty()) put("current", "Kata sandi saat ini wajib diisi.")
-            if (next.length < 8) put("next", "Minimal 8 karakter.")
-            if (confirm != next) put("confirm", "Konfirmasi tidak cocok.")
+            if (current.isEmpty()) put("current", s.errorCurrentPasswordRequired)
+            if (next.length < 8) put("next", s.errorMinChars)
+            if (confirm != next) put("confirm", s.errorConfirmMismatch)
         }
         errors = found
         if (found.isEmpty()) account.changePassword(current, next, confirm, onSuccess = onClose)
     }
 
-    BioSheet("Ubah kata sandi", onDismiss = onClose) {
-        BioField("Kata sandi saat ini", current, { current = it }, isPassword = true, keyboardType = KeyboardType.Password, error = errors["current"])
-        BioField("Kata sandi baru", next, { next = it }, isPassword = true, keyboardType = KeyboardType.Password, hint = "Minimal 8 karakter", error = errors["next"])
+    BioSheet(s.changePasswordTitle, onDismiss = onClose) {
+        BioField(s.fieldCurrentPassword, current, { current = it }, isPassword = true, keyboardType = KeyboardType.Password, error = errors["current"])
+        BioField(s.fieldNewPassword, next, { next = it }, isPassword = true, keyboardType = KeyboardType.Password, hint = s.hintMinChars, error = errors["next"])
         BioField(
-            "Ulangi kata sandi baru", confirm, { confirm = it },
+            s.fieldRepeatNewPassword, confirm, { confirm = it },
             isPassword = true, keyboardType = KeyboardType.Password, imeAction = ImeAction.Done,
             onDone = { submit() }, error = errors["confirm"],
         )
         serverError?.let { NoteBox(it, tone = NoteTone.Rust, icon = BioIcons.Alert, modifier = Modifier.padding(bottom = 12.dp)) }
-        BioButton("Simpan kata sandi", onClick = { submit() }, loading = busy, modifier = Modifier.fillMaxWidth())
+        BioButton(s.savePassword, onClick = { submit() }, loading = busy, modifier = Modifier.fillMaxWidth())
     }
 }
 
 @Composable
 private fun DeleteAccountSheet(account: AccountViewModel, onClose: () -> Unit) {
+    val s = BioText.current
     val busy by account.busy.collectAsStateWithLifecycle()
     val serverError by account.formError.collectAsStateWithLifecycle()
     var typed by remember { mutableStateOf("") }
 
-    BioSheet("Hapus akun", onDismiss = onClose) {
+    BioSheet(s.deleteAccountTitle, onDismiss = onClose) {
         NoteBox(
-            "Akun beserta datanya akan dihapus permanen dan tidak bisa dipulihkan.",
+            s.deleteAccountWarning,
             tone = NoteTone.Rust,
             icon = BioIcons.Alert,
             modifier = Modifier.padding(bottom = 16.dp),
         )
-        BioField("Ketik HAPUS untuk melanjutkan", typed, { typed = it }, placeholder = "HAPUS")
+        BioField(s.deleteAccountConfirmLabel, typed, { typed = it }, placeholder = s.deleteAccountConfirmWord)
         serverError?.let { NoteBox(it, tone = NoteTone.Rust, icon = BioIcons.Alert, modifier = Modifier.padding(bottom = 12.dp)) }
         BioButton(
-            "Hapus akun saya",
+            s.deleteMyAccount,
             onClick = { account.deleteAccount() },
             style = BtnStyle.Rust,
-            enabled = typed.trim() == "HAPUS",
+            enabled = typed.trim() == s.deleteAccountConfirmWord,
             loading = busy,
             modifier = Modifier.fillMaxWidth(),
         )

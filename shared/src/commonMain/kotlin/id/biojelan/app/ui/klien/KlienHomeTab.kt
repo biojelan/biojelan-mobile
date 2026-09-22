@@ -51,7 +51,7 @@ import id.biojelan.app.ui.components.SectionHead
 import id.biojelan.app.ui.components.bioCard
 import id.biojelan.app.ui.counterpartName
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 @Composable
@@ -63,19 +63,21 @@ fun KlienHomeTab(
     onGoTo: (Int) -> Unit,
     onShowId: () -> Unit,
 ) {
-    val firstName = name.trim().substringBefore(' ').ifBlank { "Sobat BioJelan" }
+    val c = BioTheme.colors
+    val s = BioText.current
+    val firstName = name.trim().substringBefore(' ').ifBlank { s.defaultNickname }
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = ScreenPad).padding(bottom = 24.dp),
     ) {
         Row(Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text(greeting() + ",", style = BioTheme.type.body, color = BioColors.Muted)
-                Text(firstName, style = BioTheme.type.headline, color = BioColors.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(greeting() + ",", style = BioTheme.type.body, color = c.muted)
+                Text(firstName, style = BioTheme.type.headline, color = c.ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
-            CircleIconButton(BioIcons.Refresh, onClick = vm::refreshAll, contentDescription = "Muat ulang")
+            CircleIconButton(BioIcons.Refresh, onClick = vm::refreshAll, contentDescription = s.reload)
         }
 
-        PriceBand(state.price, "Harga acuan Kilang · berlaku untuk semua Agen")
+        PriceBand(state.price, s.priceCaption)
 
         state.pendingTx?.let { tx ->
             Spacer(Modifier.height(16.dp))
@@ -90,16 +92,16 @@ fun KlienHomeTab(
 
         Spacer(Modifier.height(16.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            QuickAction(BioIcons.Pin, "Cari Agen", Modifier.weight(1f)) { onGoTo(1) }
-            QuickAction(BioIcons.Receipt, "Riwayat", Modifier.weight(1f)) { onGoTo(2) }
-            QuickAction(BioIcons.IdCard, "ID Saya", Modifier.weight(1f), onClick = onShowId)
+            QuickAction(BioIcons.Pin, s.quickActionFindAgent, Modifier.weight(1f)) { onGoTo(1) }
+            QuickAction(BioIcons.Receipt, s.quickActionHistory, Modifier.weight(1f)) { onGoTo(2) }
+            QuickAction(BioIcons.IdCard, s.quickActionMyId, Modifier.weight(1f), onClick = onShowId)
         }
 
-        SectionHead("Agen BioJelan", action = "Lihat semua", onAction = { onGoTo(1) })
+        SectionHead(s.sectionAgenBioJelan, action = s.viewAll, onAction = { onGoTo(1) })
         when {
             state.agensLoading && state.agens.isEmpty() -> LoadingBlock()
             state.agensError != null && state.agens.isEmpty() -> ErrorBlock(state.agensError, onRetry = vm::loadAgens)
-            state.agens.isEmpty() -> Text("Belum ada Agen terdaftar.", style = BioTheme.type.body, color = BioColors.Muted)
+            state.agens.isEmpty() -> Text(s.noAgentsRegistered, style = BioTheme.type.body, color = c.muted)
             else -> Row(
                 Modifier.horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -110,7 +112,7 @@ fun KlienHomeTab(
 
         Spacer(Modifier.height(20.dp))
         NoteBox(
-            "Jual minyak jelantah Anda ke Agen. Agen mencatat transaksi, lalu Anda konfirmasi di sini — pembayaran diselesaikan langsung dengan Agen.",
+            s.klienInfoNote,
             icon = BioIcons.Info,
         )
     }
@@ -118,32 +120,35 @@ fun KlienHomeTab(
 
 @Composable
 private fun QuickAction(icon: ImageVector, label: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
+    val c = BioTheme.colors
     Column(
         modifier = modifier.bioCard(16.dp).clickable(onClick = onClick).padding(vertical = 14.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(Modifier.size(38.dp).background(BioColors.PrimaryTint, CircleShape), contentAlignment = Alignment.Center) {
-            Icon(icon, contentDescription = null, tint = BioColors.Primary, modifier = Modifier.size(19.dp))
+        Box(Modifier.size(38.dp).background(c.primaryTint, CircleShape), contentAlignment = Alignment.Center) {
+            Icon(icon, contentDescription = null, tint = c.primary, modifier = Modifier.size(19.dp))
         }
         Spacer(Modifier.height(8.dp))
-        Text(label, style = BioTheme.type.label, color = BioColors.Ink, textAlign = TextAlign.Center)
+        Text(label, style = BioTheme.type.label, color = c.ink, textAlign = TextAlign.Center)
     }
 }
 
 @Composable
 private fun AgenMiniCard(agen: AgenSummaryDto, onClick: () -> Unit) {
+    val c = BioTheme.colors
+    val s = BioText.current
     Column(
         Modifier.width(200.dp).bioCard(16.dp).clickable(onClick = onClick).padding(14.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             AvatarBox(agenInitials(agen.name), size = 40.dp)
             Column(Modifier.weight(1f)) {
-                Text(agen.name, style = BioTheme.type.cardTitle, color = BioColors.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(agen.address, style = BioTheme.type.small, color = BioColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(agen.name, style = BioTheme.type.cardTitle, color = c.ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(agen.address, style = BioTheme.type.small, color = c.muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
         Spacer(Modifier.height(10.dp))
-        BioChip(if (agen.isOpen) "Buka" else "Tutup", if (agen.isOpen) ChipKind.Open else ChipKind.Closed)
+        BioChip(if (agen.isOpen) s.open else s.closed, if (agen.isOpen) ChipKind.Open else ChipKind.Closed)
     }
 }
 
@@ -157,25 +162,27 @@ fun PendingTxCard(
     onCancel: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val c = BioTheme.colors
+    val s = BioText.current
     Column(
-        modifier.fillMaxWidth().bioCard(20.dp, background = BioColors.AmberTint, border = BioColors.Amber.copy(alpha = 0.5f)).padding(16.dp),
+        modifier.fillMaxWidth().bioCard(20.dp, background = c.amberTint, border = c.amber.copy(alpha = 0.5f)).padding(16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Icon(BioIcons.Bell, contentDescription = null, tint = BioColors.AmberDeep, modifier = Modifier.size(18.dp))
-            Text("Konfirmasi transaksi", style = BioTheme.type.sectionTitle, color = BioColors.AmberText)
+            Icon(BioIcons.Bell, contentDescription = null, tint = c.amberDeep, modifier = Modifier.size(18.dp))
+            Text(s.confirmTransaction, style = BioTheme.type.sectionTitle, color = c.amberText)
         }
         Spacer(Modifier.height(8.dp))
         Text(
-            "$agenName mencatat penjualan ${formatLiter(tx.volumeLiter)} minyak jelantah atas nama Anda.",
+            s.pendingTxBody(agenName, formatLiter(tx.volumeLiter)),
             style = BioTheme.type.body,
-            color = BioColors.AmberText,
+            color = c.amberText,
         )
         Spacer(Modifier.height(4.dp))
-        Text(formatRupiah(tx.totalPrice), style = BioTheme.type.monoLarge, color = BioColors.AmberText)
+        Text(formatRupiah(tx.totalPrice), style = BioTheme.type.monoLarge, color = c.amberText)
         Spacer(Modifier.height(14.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            BioButton("Batalkan", onCancel, Modifier.weight(1f), style = BtnStyle.Rust, enabled = !busy)
-            BioButton("Terima", onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
+            BioButton(s.cancel, onCancel, Modifier.weight(1f), style = BtnStyle.Rust, enabled = !busy)
+            BioButton(s.accept, onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
         }
     }
 }

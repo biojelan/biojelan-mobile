@@ -25,19 +25,21 @@ import id.biojelan.app.ui.components.TabItem
 import id.biojelan.app.ui.components.ToastHost
 import id.biojelan.app.ui.components.rememberToastState
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
+import id.biojelan.app.ui.theme.BioTheme
 import org.koin.compose.viewmodel.koinViewModel
-
-private val tabs = listOf(
-    TabItem("Beranda", BioIcons.Home),
-    TabItem("Transaksi", BioIcons.Receipt),
-    TabItem("Stok", BioIcons.Drop),
-    TabItem("Profil", BioIcons.User),
-)
 
 /** Alur pengguna berperan Agen: satu layar dengan 4 tab. */
 @Composable
 fun AgenFlow(vm: AgenViewModel = koinViewModel(), account: AccountViewModel = koinViewModel()) {
+    val c = BioTheme.colors
+    val s = BioText.current
+    val tabs = listOf(
+        TabItem(s.tabHome, BioIcons.Home),
+        TabItem(s.tabTransactions, BioIcons.Receipt),
+        TabItem(s.tabStock, BioIcons.Drop),
+        TabItem(s.tabProfile, BioIcons.User),
+    )
     val state by vm.state.collectAsStateWithLifecycle()
     val user by vm.user.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableStateOf(0) }
@@ -47,7 +49,7 @@ fun AgenFlow(vm: AgenViewModel = koinViewModel(), account: AccountViewModel = ko
     CollectMessages(vm.messages, toast)
     CollectMessages(account.messages, toast)
 
-    Box(Modifier.fillMaxSize().background(BioColors.Paper)) {
+    Box(Modifier.fillMaxSize().background(c.paper)) {
         Column(Modifier.fillMaxSize()) {
             Box(Modifier.weight(1f).statusBarsPadding()) {
                 val current = user

@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
@@ -34,7 +35,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
 import id.biojelan.app.ui.theme.BioTheme
 
 /** Padding horizontal standar layar (22px di prototype). */
@@ -44,13 +44,16 @@ val ScreenPad = 22.dp
 
 fun Modifier.bioCard(
     radius: Dp = 16.dp,
-    background: Color = BioColors.Surface,
-    border: Color = BioColors.Line,
-): Modifier {
+    background: Color = Color.Unspecified,
+    border: Color = Color.Unspecified,
+): Modifier = composed {
+    val c = BioTheme.colors
+    val bg = if (background == Color.Unspecified) c.surface else background
+    val bd = if (border == Color.Unspecified) c.line else border
     val shape = RoundedCornerShape(radius)
-    return this
-        .background(background, shape)
-        .border(1.dp, border, shape)
+    this
+        .background(bg, shape)
+        .border(1.dp, bd, shape)
         .clip(shape)
 }
 
@@ -68,24 +71,25 @@ fun BioButton(
     loading: Boolean = false,
     icon: ImageVector? = null,
 ) {
+    val c = BioTheme.colors
     val active = enabled && !loading
     val (bg, fg, borderColor) = when (style) {
-        BtnStyle.Primary -> Triple(BioColors.Primary, BioColors.OnPrimary, BioColors.Primary)
-        BtnStyle.Outline -> Triple(BioColors.Surface, BioColors.Primary, BioColors.Line)
-        BtnStyle.Rust -> Triple(BioColors.Surface, BioColors.Rust, BioColors.Rust)
-        BtnStyle.Amber -> Triple(BioColors.Amber, BioColors.Ink, BioColors.Amber)
+        BtnStyle.Primary -> Triple(c.primary, c.onPrimary, c.primary)
+        BtnStyle.Outline -> Triple(c.surface, c.primary, c.line)
+        BtnStyle.Rust -> Triple(c.surface, c.rust, c.rust)
+        BtnStyle.Amber -> Triple(c.amber, c.ink, c.amber)
     }
     val shape = RoundedCornerShape(14.dp)
     Box(
         modifier = modifier
             .clip(shape)
-            .background(if (active || style != BtnStyle.Primary) bg else BioColors.Line, shape)
-            .border(BorderStroke(1.5.dp, if (active || style != BtnStyle.Primary) borderColor else BioColors.Line), shape)
+            .background(if (active || style != BtnStyle.Primary) bg else c.line, shape)
+            .border(BorderStroke(1.5.dp, if (active || style != BtnStyle.Primary) borderColor else c.line), shape)
             .clickable(enabled = active, onClick = onClick)
             .padding(horizontal = 18.dp, vertical = 14.dp),
         contentAlignment = Alignment.Center,
     ) {
-        val contentColor = if (active) fg else if (style == BtnStyle.Primary) BioColors.Muted else fg.copy(alpha = 0.45f)
+        val contentColor = if (active) fg else if (style == BtnStyle.Primary) c.muted else fg.copy(alpha = 0.45f)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (loading) {
                 CircularProgressIndicator(modifier = Modifier.size(16.dp), color = contentColor, strokeWidth = 2.dp)
@@ -103,13 +107,14 @@ fun CircleIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
-    tint: Color = BioColors.Primary,
+    tint: Color = BioTheme.colors.primary,
 ) {
+    val c = BioTheme.colors
     Box(
         modifier = modifier
             .size(38.dp)
-            .background(BioColors.Surface, CircleShape)
-            .border(1.dp, BioColors.Line, CircleShape)
+            .background(c.surface, CircleShape)
+            .border(1.dp, c.line, CircleShape)
             .clip(CircleShape)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center,
@@ -124,11 +129,12 @@ enum class ChipKind { Open, Closed, Pending, Done, Cancelled, Neutral }
 
 @Composable
 fun BioChip(text: String, kind: ChipKind, modifier: Modifier = Modifier) {
+    val c = BioTheme.colors
     val (bg, fg) = when (kind) {
-        ChipKind.Open, ChipKind.Done -> BioColors.PrimaryTint to BioColors.Primary
-        ChipKind.Closed, ChipKind.Cancelled -> BioColors.RustTint to BioColors.Rust
-        ChipKind.Pending -> BioColors.AmberTint to BioColors.AmberText
-        ChipKind.Neutral -> BioColors.Line to BioColors.InkSoft
+        ChipKind.Open, ChipKind.Done -> c.primaryTint to c.primary
+        ChipKind.Closed, ChipKind.Cancelled -> c.rustTint to c.rust
+        ChipKind.Pending -> c.amberTint to c.amberText
+        ChipKind.Neutral -> c.line to c.inkSoft
     }
     Box(
         modifier = modifier.background(bg, RoundedCornerShape(50)).padding(horizontal = 10.dp, vertical = 4.dp),
@@ -153,39 +159,42 @@ fun ScreenTopBar(
     modifier: Modifier = Modifier,
     actions: @Composable () -> Unit = {},
 ) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier.fillMaxWidth().padding(start = ScreenPad, end = ScreenPad, top = 12.dp, bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(title, style = BioTheme.type.topTitle, color = BioColors.Ink, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Text(title, style = BioTheme.type.topTitle, color = c.ink, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis)
         actions()
     }
 }
 
 @Composable
 fun SubHeader(title: String, onBack: () -> Unit, modifier: Modifier = Modifier) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier.fillMaxWidth().padding(start = 16.dp, end = ScreenPad, top = 10.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         CircleIconButton(BioIcons.Back, onBack, contentDescription = "Kembali")
-        Text(title, style = BioTheme.type.subTitle, color = BioColors.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Text(title, style = BioTheme.type.subTitle, color = c.ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 
 @Composable
 fun SectionHead(title: String, modifier: Modifier = Modifier, action: String? = null, onAction: (() -> Unit)? = null) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier.fillMaxWidth().padding(top = 22.dp, bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(title, style = BioTheme.type.sectionTitle, color = BioColors.Ink, modifier = Modifier.weight(1f))
+        Text(title, style = BioTheme.type.sectionTitle, color = c.ink, modifier = Modifier.weight(1f))
         if (action != null && onAction != null) {
             Text(
                 action,
                 style = BioTheme.type.label,
-                color = BioColors.Primary,
+                color = c.primary,
                 modifier = Modifier.clip(RoundedCornerShape(8.dp)).clickable(onClick = onAction).padding(4.dp),
             )
         }
@@ -196,6 +205,7 @@ fun SectionHead(title: String, modifier: Modifier = Modifier, action: String? = 
 
 @Composable
 fun StatCard(number: String, label: String, modifier: Modifier = Modifier, mono: Boolean = false) {
+    val c = BioTheme.colors
     Column(
         modifier = modifier.bioCard(14.dp).padding(horizontal = 12.dp, vertical = 12.dp),
         horizontalAlignment = Alignment.Start,
@@ -203,11 +213,11 @@ fun StatCard(number: String, label: String, modifier: Modifier = Modifier, mono:
         Text(
             number,
             style = if (mono) BioTheme.type.mono.copy(fontSize = 15.sp) else BioTheme.type.statNumber,
-            color = BioColors.Primary,
+            color = c.primary,
             maxLines = 1,
         )
         Spacer(Modifier.height(2.dp))
-        Text(label, style = BioTheme.type.caption, color = BioColors.Muted, maxLines = 2)
+        Text(label, style = BioTheme.type.caption, color = c.muted, maxLines = 2)
     }
 }
 
@@ -216,17 +226,18 @@ fun DetailRow(
     label: String,
     value: String,
     modifier: Modifier = Modifier,
-    valueColor: Color = BioColors.Ink,
+    valueColor: Color = BioTheme.colors.ink,
     mono: Boolean = false,
     last: Boolean = false,
 ) {
+    val c = BioTheme.colors
     Column(modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 11.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.Top,
         ) {
-            Text(label, style = BioTheme.type.body, color = BioColors.Muted, modifier = Modifier.width(110.dp))
+            Text(label, style = BioTheme.type.body, color = c.muted, modifier = Modifier.width(110.dp))
             Text(
                 value,
                 style = if (mono) BioTheme.type.mono else BioTheme.type.bodyBold,
@@ -235,7 +246,7 @@ fun DetailRow(
                 modifier = Modifier.weight(1f),
             )
         }
-        if (!last) Box(Modifier.fillMaxWidth().height(1.dp).background(BioColors.Line))
+        if (!last) Box(Modifier.fillMaxWidth().height(1.dp).background(c.line))
     }
 }
 
@@ -243,10 +254,11 @@ enum class NoteTone { Neutral, Amber, Rust }
 
 @Composable
 fun NoteBox(text: String, modifier: Modifier = Modifier, tone: NoteTone = NoteTone.Neutral, icon: ImageVector = BioIcons.Info) {
+    val c = BioTheme.colors
     val (bg, fg) = when (tone) {
-        NoteTone.Neutral -> BioColors.PrimaryTint to BioColors.Primary
-        NoteTone.Amber -> BioColors.AmberTint to BioColors.AmberText
-        NoteTone.Rust -> BioColors.RustTint to BioColors.Rust
+        NoteTone.Neutral -> c.primaryTint to c.primary
+        NoteTone.Amber -> c.amberTint to c.amberText
+        NoteTone.Rust -> c.rustTint to c.rust
     }
     Row(
         modifier = modifier.fillMaxWidth().background(bg, RoundedCornerShape(14.dp)).padding(12.dp),
@@ -259,10 +271,11 @@ fun NoteBox(text: String, modifier: Modifier = Modifier, tone: NoteTone = NoteTo
 
 @Composable
 fun AvatarBox(text: String, modifier: Modifier = Modifier, size: Dp = 44.dp, shape: Shape = RoundedCornerShape(14.dp), tone: NoteTone = NoteTone.Neutral) {
+    val c = BioTheme.colors
     val (bg, fg) = when (tone) {
-        NoteTone.Neutral -> BioColors.PrimaryTint to BioColors.Primary
-        NoteTone.Amber -> BioColors.AmberTint to BioColors.AmberDeep
-        NoteTone.Rust -> BioColors.RustTint to BioColors.Rust
+        NoteTone.Neutral -> c.primaryTint to c.primary
+        NoteTone.Amber -> c.amberTint to c.amberDeep
+        NoteTone.Rust -> c.rustTint to c.rust
     }
     Box(modifier.size(size).background(bg, shape), contentAlignment = Alignment.Center) {
         Text(text, style = BioTheme.type.cardTitle, color = fg)
@@ -272,6 +285,7 @@ fun AvatarBox(text: String, modifier: Modifier = Modifier, size: Dp = 44.dp, sha
 /** Baris ikon + label kecil + nilai (dipakai di kartu detail Agen & profil). */
 @Composable
 fun InfoItem(icon: ImageVector, label: String, value: String, modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier.fillMaxWidth()
             .let { if (onClick != null) it.clickable(onClick = onClick) else it }
@@ -279,20 +293,20 @@ fun InfoItem(icon: ImageVector, label: String, value: String, modifier: Modifier
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(Modifier.size(34.dp).background(BioColors.PrimaryTint, RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
-            Icon(icon, contentDescription = null, tint = BioColors.Primary, modifier = Modifier.size(17.dp))
+        Box(Modifier.size(34.dp).background(c.primaryTint, RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
+            Icon(icon, contentDescription = null, tint = c.primary, modifier = Modifier.size(17.dp))
         }
         Column(Modifier.weight(1f)) {
-            Text(label, style = BioTheme.type.caption, color = BioColors.Muted)
-            Text(value, style = BioTheme.type.bodyBold, color = BioColors.Ink)
+            Text(label, style = BioTheme.type.caption, color = c.muted)
+            Text(value, style = BioTheme.type.bodyBold, color = c.ink)
         }
-        if (onClick != null) Icon(BioIcons.Chevron, contentDescription = null, tint = BioColors.Muted, modifier = Modifier.size(16.dp))
+        if (onClick != null) Icon(BioIcons.Chevron, contentDescription = null, tint = c.muted, modifier = Modifier.size(16.dp))
     }
 }
 
 @Composable
 fun HairLine(modifier: Modifier = Modifier) {
-    Box(modifier.fillMaxWidth().height(1.dp).background(BioColors.Line))
+    Box(modifier.fillMaxWidth().height(1.dp).background(BioTheme.colors.line))
 }
 
 fun Modifier.gradientBackground(colors: List<Color>, shape: Shape): Modifier =

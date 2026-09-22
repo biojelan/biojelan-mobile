@@ -58,11 +58,13 @@ import id.biojelan.app.ui.components.TxRow
 import id.biojelan.app.ui.counterpartName
 import id.biojelan.app.ui.icons.BioIcons
 import id.biojelan.app.ui.label
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 @Composable
 fun AgenTransactionsTab(state: AgenUiState, vm: AgenViewModel, onNewTransaction: () -> Unit) {
+    val c = BioTheme.colors
+    val s = BioText.current
     var selectedId by remember { mutableStateOf<String?>(null) }
 
     Box(Modifier.fillMaxSize()) {
@@ -72,22 +74,22 @@ fun AgenTransactionsTab(state: AgenUiState, vm: AgenViewModel, onNewTransaction:
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             item {
-                ScreenTopBar("Transaksi", actions = {
-                    CircleIconButton(BioIcons.Refresh, onClick = vm::refresh, contentDescription = "Muat ulang")
+                ScreenTopBar(s.transactionsTitle, actions = {
+                    CircleIconButton(BioIcons.Refresh, onClick = vm::refresh, contentDescription = s.reload)
                 })
             }
             item {
                 Row(Modifier.padding(horizontal = ScreenPad), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    StatCard(state.todayCount.toString(), "Hari ini", Modifier.weight(1f))
-                    StatCard(formatNumber(state.todayLiters, 1) + " L", "Volume hari ini", Modifier.weight(1f))
-                    StatCard(formatRupiahCompact(state.todayValue), "Nilai hari ini", Modifier.weight(1f))
+                    StatCard(state.todayCount.toString(), s.todayLabel, Modifier.weight(1f))
+                    StatCard(formatNumber(state.todayLiters, 1) + " L", s.volumeToday, Modifier.weight(1f))
+                    StatCard(formatRupiahCompact(state.todayValue), s.valueToday, Modifier.weight(1f))
                 }
             }
             when {
                 state.loading && state.transactions.isEmpty() -> item { LoadingBlock() }
                 state.error != null && state.transactions.isEmpty() -> item { ErrorBlock(state.error, vm::refresh) }
                 state.transactions.isEmpty() -> item {
-                    EmptyBlock(BioIcons.Receipt, "Belum ada transaksi", "Tekan tombol + untuk mencatat penjualan dari Klien.")
+                    EmptyBlock(BioIcons.Receipt, s.noTransactionsTitle, s.noTransactionsHint)
                 }
                 else -> items(state.transactions) { tx ->
                     val name = tx.counterpartName(Viewer.Agen)
@@ -110,14 +112,14 @@ fun AgenTransactionsTab(state: AgenUiState, vm: AgenViewModel, onNewTransaction:
                 .align(Alignment.BottomEnd)
                 .padding(end = 18.dp, bottom = 16.dp)
                 .clip(RoundedCornerShape(18.dp))
-                .background(BioColors.Primary, RoundedCornerShape(18.dp))
+                .background(c.primary, RoundedCornerShape(18.dp))
                 .clickable(onClick = onNewTransaction)
                 .padding(horizontal = 18.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Icon(BioIcons.Plus, contentDescription = null, tint = BioColors.OnPrimary, modifier = Modifier.size(18.dp))
-            Text("Transaksi", style = BioTheme.type.button, color = BioColors.OnPrimary)
+            Icon(BioIcons.Plus, contentDescription = null, tint = c.onPrimary, modifier = Modifier.size(18.dp))
+            Text(s.transactionButton, style = BioTheme.type.button, color = c.onPrimary)
         }
     }
 
@@ -129,29 +131,28 @@ fun AgenTransactionsTab(state: AgenUiState, vm: AgenViewModel, onNewTransaction:
 
 @Composable
 private fun AgenTxDetailSheet(tx: TransactionDto, onDismiss: () -> Unit) {
-    BioSheet("Detail transaksi", onDismiss) {
-        DetailRow("ID Transaksi", tx.transactionId, mono = true)
-        DetailRow("Tanggal", formatDateTime(tx.createdAt))
-        DetailRow("Klien", tx.counterpartName(Viewer.Agen))
-        DetailRow("ID Klien", tx.klienId, mono = true)
-        DetailRow("Volume", formatLiter(tx.volumeLiter))
-        DetailRow("Harga / liter", formatRupiah(tx.price))
-        DetailRow("Total", formatRupiah(tx.totalPrice), mono = true, valueColor = BioColors.Primary)
+    val c = BioTheme.colors
+    val s = BioText.current
+    BioSheet(s.transactionDetailTitle, onDismiss) {
+        DetailRow(s.labelTransactionId, tx.transactionId, mono = true)
+        DetailRow(s.labelDate, formatDateTime(tx.createdAt))
+        DetailRow(s.labelClient, tx.counterpartName(Viewer.Agen))
+        DetailRow(s.labelClientId, tx.klienId, mono = true)
+        DetailRow(s.labelVolume, formatLiter(tx.volumeLiter))
+        DetailRow(s.labelPricePerLiter, formatRupiah(tx.price))
+        DetailRow(s.labelTotal, formatRupiah(tx.totalPrice), mono = true, valueColor = c.primary)
         DetailRow(
-            "Status", tx.txStatus.label(Viewer.Agen), last = true,
+            s.labelStatus, tx.txStatus.label(Viewer.Agen), last = true,
             valueColor = when (tx.txStatus) {
-                TxStatus.Cancelled -> BioColors.Rust
-                TxStatus.Pending -> BioColors.AmberDeep
-                else -> BioColors.Primary
+                TxStatus.Cancelled -> c.rust
+                TxStatus.Pending -> c.amberDeep
+                else -> c.primary
             },
         )
         Spacer(Modifier.height(14.dp))
         when (tx.txStatus) {
-            TxStatus.Pending -> NoteBox(
-                "Menunggu Klien menerima atau membatalkan di app-nya. Stok Anda bertambah setelah Klien menerima.",
-                tone = NoteTone.Amber,
-            )
-            TxStatus.Cancelled -> NoteBox("Klien membatalkan transaksi ini. Stok Anda tidak berubah.", tone = NoteTone.Rust, icon = BioIcons.Alert)
+            TxStatus.Pending -> NoteBox(s.pendingAgenNote, tone = NoteTone.Amber)
+            TxStatus.Cancelled -> NoteBox(s.cancelledAgenNote, tone = NoteTone.Rust, icon = BioIcons.Alert)
             else -> Unit
         }
     }
@@ -164,6 +165,8 @@ fun NewTransactionSheet(
     onSubmit: (klienId: String, klienName: String, volumeLiter: Double) -> Unit,
     onDismiss: () -> Unit,
 ) {
+    val c = BioTheme.colors
+    val s = BioText.current
     var klienId by remember { mutableStateOf("") }
     var klienName by remember { mutableStateOf("") }
     var volumeText by remember { mutableStateOf("") }
@@ -174,43 +177,42 @@ fun NewTransactionSheet(
 
     fun submit() {
         val found = buildMap {
-            if (klienId.isBlank()) put("klienId", "ID Klien wajib diisi.")
-            if (klienName.isBlank()) put("klienName", "Nama Klien wajib diisi.")
-            if (volume == null || volume <= 0) put("volume", "Masukkan volume lebih dari 0.")
-            else if (volume > 1000) put("volume", "Volume terlalu besar — periksa kembali.")
+            if (klienId.isBlank()) put("klienId", s.errorClientIdRequired)
+            if (klienName.isBlank()) put("klienName", s.errorClientNameRequired)
+            if (volume == null || volume <= 0) put("volume", s.errorVolumeRequired)
+            else if (volume > 1000) put("volume", s.errorVolumeTooLarge)
         }
         errors = found
         if (found.isEmpty() && volume != null) onSubmit(klienId.trim(), klienName.trim(), volume)
     }
 
-    BioSheet("Input Transaksi Baru", onDismiss) {
+    BioSheet(s.newTransactionTitle, onDismiss) {
         NoteBox(
-            "Minta ID Klien dari menu \"ID Saya\" di app Klien. Setelah dikirim, Klien akan diminta menerima atau membatalkan.",
+            s.newTransactionNote,
             icon = BioIcons.IdCard,
             modifier = Modifier.padding(bottom = 16.dp),
         )
-        BioField("ID Klien", klienId, { klienId = it }, placeholder = "ID dari app Klien", error = errors["klienId"])
-        BioField("Nama Klien", klienName, { klienName = it }, placeholder = "Nama Klien", error = errors["klienName"])
+        BioField(s.fieldClientId, klienId, { klienId = it }, placeholder = s.placeholderClientId, error = errors["klienId"])
+        BioField(s.fieldClientName, klienName, { klienName = it }, placeholder = s.placeholderClientName, error = errors["klienName"])
         BioField(
-            "Volume minyak (liter)", volumeText, { volumeText = it },
-            placeholder = "mis. 12,5",
+            s.fieldVolume, volumeText, { volumeText = it },
+            placeholder = s.placeholderVolume,
             keyboardType = KeyboardType.Decimal,
             imeAction = ImeAction.Done,
             onDone = { submit() },
             error = errors["volume"],
         )
-        BioField("Harga per liter", formatRupiah(price), {}, readOnly = true, hint = "Harga acuan Kilang")
+        BioField(s.fieldPricePerLiter, formatRupiah(price), {}, readOnly = true, hint = s.hintReferencePriceKilang)
 
         Row(
-            Modifier.fillMaxWidth().background(BioColors.PrimaryTint, RoundedCornerShape(14.dp)).padding(14.dp),
+            Modifier.fillMaxWidth().background(c.primaryTint, RoundedCornerShape(14.dp)).padding(14.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text("Total", style = BioTheme.type.bodyBold, color = BioColors.Primary)
-            Text(formatRupiah(total), style = BioTheme.type.monoLarge, color = BioColors.Primary)
+            Text(s.total, style = BioTheme.type.bodyBold, color = c.primary)
+            Text(formatRupiah(total), style = BioTheme.type.monoLarge, color = c.primary)
         }
         Spacer(Modifier.height(16.dp))
-        BioButton("Kirim ke Klien", onClick = { submit() }, loading = creating, modifier = Modifier.fillMaxWidth())
+        BioButton(s.submitToClient, onClick = { submit() }, loading = creating, modifier = Modifier.fillMaxWidth())
     }
 }
-

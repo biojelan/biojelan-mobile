@@ -47,11 +47,12 @@ import id.biojelan.app.ui.components.TxRow
 import id.biojelan.app.ui.counterpartName
 import id.biojelan.app.ui.icons.BioIcons
 import id.biojelan.app.ui.label
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 @Composable
 fun KlienHistoryTab(state: KlienUiState, vm: KlienViewModel) {
+    val s = BioText.current
     var selectedId by remember { mutableStateOf<String?>(null) }
     val agenName: (String) -> String? = { id -> state.agens.firstOrNull { it.agenId == id }?.name }
 
@@ -65,22 +66,22 @@ fun KlienHistoryTab(state: KlienUiState, vm: KlienViewModel) {
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         item {
-            ScreenTopBar("Riwayat", actions = {
-                CircleIconButton(BioIcons.Refresh, onClick = vm::loadTransactions, contentDescription = "Muat ulang")
+            ScreenTopBar(s.historyTitle, actions = {
+                CircleIconButton(BioIcons.Refresh, onClick = vm::loadTransactions, contentDescription = s.reload)
             })
         }
         item {
             Row(Modifier.padding(horizontal = ScreenPad), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                StatCard(state.transactions.size.toString(), "Transaksi", Modifier.weight(1f))
-                StatCard(formatNumber(totalLiters, 1) + " L", "Minyak terjual", Modifier.weight(1f))
-                StatCard(formatRupiahCompact(totalValue), "Total diterima", Modifier.weight(1f))
+                StatCard(state.transactions.size.toString(), s.transactionsCount, Modifier.weight(1f))
+                StatCard(formatNumber(totalLiters, 1) + " L", s.oilSold, Modifier.weight(1f))
+                StatCard(formatRupiahCompact(totalValue), s.totalReceived, Modifier.weight(1f))
             }
         }
         when {
             state.txLoading && state.transactions.isEmpty() -> item { LoadingBlock() }
             state.txError != null && state.transactions.isEmpty() -> item { ErrorBlock(state.txError, vm::loadTransactions) }
             state.transactions.isEmpty() -> item {
-                EmptyBlock(BioIcons.Receipt, "Belum ada transaksi", "Transaksi dengan Agen akan muncul di sini.")
+                EmptyBlock(BioIcons.Receipt, s.noHistoryTitle, s.noHistoryHint)
             }
             else -> items(state.transactions) { tx ->
                 val name = tx.counterpartName(Viewer.Klien, agenName)
@@ -120,41 +121,43 @@ private fun KlienTxDetailSheet(
     onCancel: () -> Unit,
     onDismiss: () -> Unit,
 ) {
+    val c = BioTheme.colors
+    val s = BioText.current
     var confirmCancel by remember { mutableStateOf(false) }
-    BioSheet("Detail transaksi", onDismiss) {
-        DetailRow("ID Transaksi", tx.transactionId, mono = true)
-        DetailRow("Tanggal", formatDateTime(tx.createdAt))
-        DetailRow("Agen", agenName)
-        DetailRow("Volume", formatLiter(tx.volumeLiter))
-        DetailRow("Harga / liter", formatRupiah(tx.price))
-        DetailRow("Total", formatRupiah(tx.totalPrice), mono = true, valueColor = BioColors.Primary)
-        DetailRow("Status", tx.txStatus.label(Viewer.Klien), last = true, valueColor = when (tx.txStatus) {
-            TxStatus.Cancelled -> BioColors.Rust
-            TxStatus.Pending -> BioColors.AmberDeep
-            else -> BioColors.Primary
+    BioSheet(s.transactionDetailTitle, onDismiss) {
+        DetailRow(s.labelTransactionId, tx.transactionId, mono = true)
+        DetailRow(s.labelDate, formatDateTime(tx.createdAt))
+        DetailRow(s.labelAgent, agenName)
+        DetailRow(s.labelVolume, formatLiter(tx.volumeLiter))
+        DetailRow(s.labelPricePerLiter, formatRupiah(tx.price))
+        DetailRow(s.labelTotal, formatRupiah(tx.totalPrice), mono = true, valueColor = c.primary)
+        DetailRow(s.labelStatus, tx.txStatus.label(Viewer.Klien), last = true, valueColor = when (tx.txStatus) {
+            TxStatus.Cancelled -> c.rust
+            TxStatus.Pending -> c.amberDeep
+            else -> c.primary
         })
 
         if (tx.txStatus == TxStatus.Pending) {
             Spacer(Modifier.height(14.dp))
             NoteBox(
-                "Periksa jumlah dan harga. Terima jika sudah sesuai dengan yang Anda serahkan ke Agen; batalkan jika tidak.",
+                s.pendingKlienNote,
                 tone = NoteTone.Amber,
                 icon = BioIcons.Info,
             )
             Spacer(Modifier.height(14.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 BioButton(
-                    if (confirmCancel) "Ya, batalkan" else "Batalkan",
+                    if (confirmCancel) s.yesCancel else s.cancel,
                     onClick = { if (confirmCancel) onCancel() else confirmCancel = true },
                     modifier = Modifier.weight(1f),
                     style = BtnStyle.Rust,
                     enabled = !busy,
                 )
-                BioButton("Terima", onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
+                BioButton(s.accept, onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
             }
             if (confirmCancel) {
                 Spacer(Modifier.height(8.dp))
-                Text("Pembatalan tidak dapat diurungkan.", style = BioTheme.type.small, color = BioColors.Rust)
+                Text(s.cancelNotUndoable, style = BioTheme.type.small, color = c.rust)
             }
         }
     }

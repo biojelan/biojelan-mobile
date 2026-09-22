@@ -31,16 +31,9 @@ import id.biojelan.app.ui.components.TabItem
 import id.biojelan.app.ui.components.ToastHost
 import id.biojelan.app.ui.components.rememberToastState
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 import org.koin.compose.viewmodel.koinViewModel
-
-private val tabs = listOf(
-    TabItem("Beranda", BioIcons.Home),
-    TabItem("Cari Agen", BioIcons.Pin),
-    TabItem("Riwayat", BioIcons.Receipt),
-    TabItem("Profil", BioIcons.User),
-)
 
 @Composable
 fun KlienMainScreen(
@@ -48,6 +41,14 @@ fun KlienMainScreen(
     vm: KlienViewModel = koinViewModel(),
     account: AccountViewModel = koinViewModel(),
 ) {
+    val c = BioTheme.colors
+    val s = BioText.current
+    val tabs = listOf(
+        TabItem(s.tabHome, BioIcons.Home),
+        TabItem(s.tabFindAgent, BioIcons.Pin),
+        TabItem(s.tabHistory, BioIcons.Receipt),
+        TabItem(s.tabProfile, BioIcons.User),
+    )
     val state by vm.state.collectAsStateWithLifecycle()
     val user by vm.user.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableStateOf(0) }
@@ -57,7 +58,7 @@ fun KlienMainScreen(
     CollectMessages(vm.messages, toast)
     CollectMessages(account.messages, toast)
 
-    Box(Modifier.fillMaxSize().background(BioColors.Paper)) {
+    Box(Modifier.fillMaxSize().background(c.paper)) {
         Column(Modifier.fillMaxSize()) {
             Box(Modifier.weight(1f).statusBarsPadding()) {
                 when (tab) {
@@ -80,20 +81,20 @@ fun KlienMainScreen(
     }
 
     if (showId) {
-        BioSheet("ID Klien Anda", onDismiss = { showId = false }) {
+        BioSheet(s.myIdTitle, onDismiss = { showId = false }) {
             Text(
                 "Tunjukkan atau bacakan ID ini ke Agen saat menjual minyak jelantah. Agen memakainya untuk mencatat transaksi atas nama Anda.",
                 style = BioTheme.type.body,
-                color = BioColors.Muted,
+                color = c.muted,
             )
             Spacer(Modifier.height(16.dp))
             SelectionContainer {
                 Text(
                     user?.userId.orEmpty(),
                     style = BioTheme.type.monoLarge,
-                    color = BioColors.Primary,
+                    color = c.primary,
                     modifier = Modifier
-                        .background(BioColors.PrimaryTint, androidx.compose.foundation.shape.RoundedCornerShape(14.dp))
+                        .background(c.primaryTint, androidx.compose.foundation.shape.RoundedCornerShape(14.dp))
                         .padding(16.dp),
                 )
             }

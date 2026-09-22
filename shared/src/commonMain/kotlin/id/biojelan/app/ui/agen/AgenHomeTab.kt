@@ -53,7 +53,7 @@ import id.biojelan.app.ui.components.bioCard
 import id.biojelan.app.ui.counterpartName
 import id.biojelan.app.ui.icons.BioIcons
 import id.biojelan.app.ui.label
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 @Composable
@@ -64,6 +64,8 @@ fun AgenHomeTab(
     onNewTransaction: () -> Unit,
     onGoTo: (Int) -> Unit,
 ) {
+    val c = BioTheme.colors
+    val s = BioText.current
     val agen = user.agen
     val stock = agen?.stockLiter ?: 0.0
     val threshold = AppConfig.STOCK_THRESHOLD_LITER
@@ -74,21 +76,21 @@ fun AgenHomeTab(
     ) {
         Row(Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text(greeting() + ",", style = BioTheme.type.body, color = BioColors.Muted)
-                Text(user.name, style = BioTheme.type.headline, color = BioColors.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(greeting() + ",", style = BioTheme.type.body, color = c.muted)
+                Text(user.name, style = BioTheme.type.headline, color = c.ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
             OpenTogglePill(isOpen = agen?.isOpen == true, busy = state.togglingOpen, onClick = vm::toggleOpen)
             Spacer(Modifier.padding(start = 8.dp))
-            CircleIconButton(BioIcons.Refresh, onClick = vm::refresh, contentDescription = "Muat ulang")
+            CircleIconButton(BioIcons.Refresh, onClick = vm::refresh, contentDescription = s.reload)
         }
 
-        PriceBand(state.price, "Harga acuan Kilang · dipakai saat mencatat transaksi")
+        PriceBand(state.price, s.priceCaptionAgen)
 
         Spacer(Modifier.height(16.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            StatCard(state.todayCount.toString(), "Transaksi hari ini", Modifier.weight(1f))
-            StatCard(formatNumber(state.todayLiters, 1) + " L", "Terkumpul hari ini", Modifier.weight(1f))
-            StatCard(formatRupiahCompact(state.todayValue), "Nilai hari ini", Modifier.weight(1f))
+            StatCard(state.todayCount.toString(), s.todayTransactions, Modifier.weight(1f))
+            StatCard(formatNumber(state.todayLiters, 1) + " L", s.collectedToday, Modifier.weight(1f))
+            StatCard(formatRupiahCompact(state.todayValue), s.valueToday, Modifier.weight(1f))
         }
 
         Spacer(Modifier.height(16.dp))
@@ -99,26 +101,26 @@ fun AgenHomeTab(
         ) {
             DropGauge(fill = (stock / threshold).toFloat(), modifier = Modifier.size(width = 46.dp, height = 57.dp))
             Column(Modifier.weight(1f)) {
-                Text("STOK SAAT INI", style = BioTheme.type.eyebrow, color = BioColors.Muted)
-                Text(formatLiter(stock), style = BioTheme.type.display, color = BioColors.Ink)
+                Text(s.currentStockLabel, style = BioTheme.type.eyebrow, color = c.muted)
+                Text(formatLiter(stock), style = BioTheme.type.display, color = c.ink)
                 Spacer(Modifier.height(6.dp))
                 BioChip(
-                    if (reached) "Siap dijemput Kilang" else "${formatLiter(threshold - stock)} lagi menuju ambang",
+                    if (reached) s.readyForPickup else s.remainingToThreshold(formatLiter(threshold - stock)),
                     if (reached) ChipKind.Done else ChipKind.Pending,
                 )
             }
         }
 
         Spacer(Modifier.height(14.dp))
-        BioButton("Input Transaksi Baru", onNewTransaction, Modifier.fillMaxWidth(), icon = BioIcons.Plus)
+        BioButton(s.newTransaction, onNewTransaction, Modifier.fillMaxWidth(), icon = BioIcons.Plus)
 
-        SectionHead("Aktivitas terakhir", action = "Semua", onAction = { onGoTo(1) })
+        SectionHead(s.recentActivity, action = s.seeAll, onAction = { onGoTo(1) })
         when {
             state.loading && state.transactions.isEmpty() -> Row(Modifier.fillMaxWidth().padding(24.dp), horizontalArrangement = Arrangement.Center) {
-                CircularProgressIndicator(color = BioColors.Primary, strokeWidth = 3.dp, modifier = Modifier.size(24.dp))
+                CircularProgressIndicator(color = c.primary, strokeWidth = 3.dp, modifier = Modifier.size(24.dp))
             }
             state.error != null && state.transactions.isEmpty() -> ErrorBlock(state.error, onRetry = vm::refresh)
-            state.transactions.isEmpty() -> NoteBox("Belum ada transaksi. Catat penjualan pertama dari Klien lewat tombol di atas.")
+            state.transactions.isEmpty() -> NoteBox(s.noTransactionsAgenHint)
             else -> Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 state.transactions.take(3).forEach { tx ->
                     val name = tx.counterpartName(Viewer.Agen)
@@ -139,8 +141,10 @@ fun AgenHomeTab(
 
 @Composable
 private fun OpenTogglePill(isOpen: Boolean, busy: Boolean, onClick: () -> Unit) {
-    val bg = if (isOpen) BioColors.PrimaryTint else BioColors.RustTint
-    val fg = if (isOpen) BioColors.Primary else BioColors.Rust
+    val c = BioTheme.colors
+    val s = BioText.current
+    val bg = if (isOpen) c.primaryTint else c.rustTint
+    val fg = if (isOpen) c.primary else c.rust
     Row(
         Modifier
             .clip(RoundedCornerShape(50))
@@ -151,6 +155,6 @@ private fun OpenTogglePill(isOpen: Boolean, busy: Boolean, onClick: () -> Unit) 
         horizontalArrangement = Arrangement.spacedBy(7.dp),
     ) {
         Drip(fg)
-        Text(if (isOpen) "Buka" else "Tutup", style = BioTheme.type.chip, color = fg)
+        Text(if (isOpen) s.open else s.closed, style = BioTheme.type.chip, color = fg)
     }
 }

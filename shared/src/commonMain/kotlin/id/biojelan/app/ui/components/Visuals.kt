@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import id.biojelan.app.core.formatRupiah
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 
 // ------------------------------------------------------------------ tetesan minyak
@@ -57,12 +57,13 @@ fun DropGauge(
     modifier: Modifier = Modifier,
     outline: Boolean = true,
 ) {
+    val c = BioTheme.colors
     val path = remember { PathParser().parsePathString(DROP_PATH).toPath() }
     val level = fill.coerceIn(0f, 1f)
     Canvas(modifier) {
         scale(size.width / 100f, size.height / 124f, pivot = Offset.Zero) {
             if (outline) {
-                drawPath(path, color = BioColors.PrimaryTint)
+                drawPath(path, color = c.primaryTint)
             }
             if (level > 0f) {
                 val top = 120f - 116f * level
@@ -70,7 +71,7 @@ fun DropGauge(
                     drawPath(
                         path,
                         brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFFE9BA55), BioColors.AmberDeep),
+                            colors = listOf(Color(0xFFE9BA55), c.amberDeep),
                             startY = 4f,
                             endY = 120f,
                         ),
@@ -78,7 +79,7 @@ fun DropGauge(
                 }
             }
             if (outline) {
-                drawPath(path, color = BioColors.Primary.copy(alpha = 0.35f), style = Stroke(width = 2.5f))
+                drawPath(path, color = c.primary.copy(alpha = 0.35f), style = Stroke(width = 2.5f))
             }
         }
     }
@@ -88,23 +89,24 @@ fun DropGauge(
 
 @Composable
 fun PriceBand(price: Long, caption: String, modifier: Modifier = Modifier) {
+    val c = BioTheme.colors
     val shape = RoundedCornerShape(22.dp)
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Brush.linearGradient(listOf(BioColors.PrimaryDeep, BioColors.Primary)), shape)
+            .background(Brush.linearGradient(listOf(c.primaryDeep, c.primary)), shape)
             .padding(horizontal = 20.dp, vertical = 18.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
-            Text("HARGA JELANTAH", style = BioTheme.type.eyebrow, color = BioColors.OnPrimary.copy(alpha = 0.7f))
+            Text("HARGA JELANTAH", style = BioTheme.type.eyebrow, color = c.onPrimary.copy(alpha = 0.7f))
             Spacer(Modifier.height(4.dp))
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(formatRupiah(price), style = BioTheme.type.display.copy(fontSize = 28.sp), color = Color.White)
-                Text(" / liter", style = BioTheme.type.bodyBold, color = BioColors.OnPrimary.copy(alpha = 0.75f), modifier = Modifier.padding(bottom = 4.dp))
+                Text(" / liter", style = BioTheme.type.bodyBold, color = c.onPrimary.copy(alpha = 0.75f), modifier = Modifier.padding(bottom = 4.dp))
             }
             Spacer(Modifier.height(4.dp))
-            Text(caption, style = BioTheme.type.small, color = BioColors.OnPrimary.copy(alpha = 0.7f))
+            Text(caption, style = BioTheme.type.small, color = c.onPrimary.copy(alpha = 0.7f))
         }
         DropGauge(fill = 1f, outline = false, modifier = Modifier.size(width = 44.dp, height = 55.dp))
     }
@@ -126,21 +128,22 @@ fun MapPreview(
     height: Dp = 150.dp,
     highlight: Int = -1,
 ) {
+    val c = BioTheme.colors
     val pin = remember { PathParser().parsePathString(PIN_PATH).toPath() }
     val shape = RoundedCornerShape(20.dp)
     Box(
-        modifier = modifier.fillMaxWidth().height(height).clip(shape).background(BioColors.MapBase, shape).border(1.dp, BioColors.Line, shape),
+        modifier = modifier.fillMaxWidth().height(height).clip(shape).background(c.mapBase, shape).border(1.dp, c.line, shape),
     ) {
         Canvas(Modifier.fillMaxSize()) {
             val step = 26.dp.toPx()
             var x = step
             while (x < size.width) {
-                drawLine(BioColors.MapGrid, Offset(x, 0f), Offset(x, size.height), strokeWidth = 1.dp.toPx())
+                drawLine(c.mapGrid, Offset(x, 0f), Offset(x, size.height), strokeWidth = 1.dp.toPx())
                 x += step
             }
             var y = step
             while (y < size.height) {
-                drawLine(BioColors.MapGrid, Offset(0f, y), Offset(size.width, y), strokeWidth = 1.dp.toPx())
+                drawLine(c.mapGrid, Offset(0f, y), Offset(size.width, y), strokeWidth = 1.dp.toPx())
                 y += step
             }
             // "sungai" dekoratif
@@ -166,7 +169,7 @@ fun MapPreview(
                 val active = highlight < 0 || highlight == index
                 translate(left = px - pinPx / 2f, top = py - pinPx) {
                     scale(s, s, pivot = Offset.Zero) {
-                        drawPath(pin, color = if (active) BioColors.Primary else BioColors.Primary.copy(alpha = 0.45f))
+                        drawPath(pin, color = if (active) c.primary else c.primary.copy(alpha = 0.45f))
                         drawCircle(Color.White, radius = 3f, center = Offset(12f, 9f))
                     }
                 }
@@ -181,12 +184,13 @@ data class TabItem(val label: String, val icon: ImageVector)
 
 @Composable
 fun BioTabBar(items: List<TabItem>, selected: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(BioColors.Surface)
+            .background(c.surface)
             .drawBehind {
-                drawLine(BioColors.Line, Offset(0f, 0f), Offset(size.width, 0f), strokeWidth = 1.dp.toPx())
+                drawLine(c.line, Offset(0f, 0f), Offset(size.width, 0f), strokeWidth = 1.dp.toPx())
             }
             .navigationBarsPadding()
             .padding(top = 8.dp, bottom = 6.dp),
@@ -197,11 +201,11 @@ fun BioTabBar(items: List<TabItem>, selected: Int, onSelect: (Int) -> Unit, modi
                 modifier = Modifier.weight(1f).clickable { onSelect(index) }.padding(vertical = 2.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Icon(item.icon, contentDescription = item.label, tint = if (on) BioColors.Primary else BioColors.Muted, modifier = Modifier.size(22.dp))
+                Icon(item.icon, contentDescription = item.label, tint = if (on) c.primary else c.muted, modifier = Modifier.size(22.dp))
                 Spacer(Modifier.height(3.dp))
-                Text(item.label, style = BioTheme.type.tab, color = if (on) BioColors.Primary else BioColors.Muted, maxLines = 1)
+                Text(item.label, style = BioTheme.type.tab, color = if (on) c.primary else c.muted, maxLines = 1)
                 Spacer(Modifier.height(3.dp))
-                Box(Modifier.size(4.dp).background(if (on) BioColors.Amber else Color.Transparent, RoundedCornerShape(50)))
+                Box(Modifier.size(4.dp).background(if (on) c.amber else Color.Transparent, RoundedCornerShape(50)))
             }
         }
     }
@@ -220,6 +224,7 @@ fun TxRow(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
 ) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -238,11 +243,11 @@ fun TxRow(
             },
         )
         Column(Modifier.weight(1f)) {
-            Text(title, style = BioTheme.type.cardTitle, color = BioColors.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text(subtitle, style = BioTheme.type.small, color = BioColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(title, style = BioTheme.type.cardTitle, color = c.ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(subtitle, style = BioTheme.type.small, color = c.muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
         Column(horizontalAlignment = Alignment.End) {
-            Text(amount, style = BioTheme.type.mono, color = BioColors.Ink)
+            Text(amount, style = BioTheme.type.mono, color = c.ink)
             Spacer(Modifier.height(4.dp))
             BioChip(statusText, statusKind)
         }
@@ -255,9 +260,10 @@ fun ProfileRow(
     label: String,
     value: String? = null,
     modifier: Modifier = Modifier,
-    tint: Color = BioColors.Primary,
+    tint: Color = BioTheme.colors.primary,
     onClick: (() -> Unit)? = null,
 ) {
+    val c = BioTheme.colors
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -268,9 +274,9 @@ fun ProfileRow(
     ) {
         Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.size(20.dp))
         Column(Modifier.weight(1f)) {
-            Text(label, style = BioTheme.type.bodyBold, color = if (tint == BioColors.Rust) BioColors.Rust else BioColors.Ink)
-            if (value != null) Text(value, style = BioTheme.type.small, color = BioColors.Muted)
+            Text(label, style = BioTheme.type.bodyBold, color = if (tint == c.rust) c.rust else c.ink)
+            if (value != null) Text(value, style = BioTheme.type.small, color = c.muted)
         }
-        if (onClick != null) Icon(BioIcons.Chevron, contentDescription = null, tint = BioColors.Muted, modifier = Modifier.size(16.dp))
+        if (onClick != null) Icon(BioIcons.Chevron, contentDescription = null, tint = c.muted, modifier = Modifier.size(16.dp))
     }
 }

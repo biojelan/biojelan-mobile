@@ -12,6 +12,21 @@ object AppConfig {
     const val REQUEST_TIMEOUT_MS = 20_000L
 
     /**
+     * Aktifkan mode fallback: API call yang gagal (network/server error)
+     * akan otomatis dijawab dengan mock data, supaya app tetap bisa
+     * dipakai meski backend belum di-deploy.
+     *
+     * Set ke `false` begitu backend sudah live dan stabil.
+     */
+    const val ENABLE_FALLBACK = true
+
+    /** Mode tema default: "system" (ikut OS), "light", atau "dark". */
+    const val DEFAULT_THEME = "system"
+
+    /** Kode bahasa default: "id" (Indonesia) atau "en" (English). */
+    const val DEFAULT_LANGUAGE = "id"
+
+    /**
      * TODO(backend): belum ada endpoint harga. Prototype menampilkan "harga aktif dari Kilang".
      * Sampai ada, dipakai nilai default ini (lihat [id.biojelan.app.data.repository.PriceProvider]).
      */

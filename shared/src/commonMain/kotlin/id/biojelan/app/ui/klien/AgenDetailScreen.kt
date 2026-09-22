@@ -37,18 +37,20 @@ import id.biojelan.app.ui.components.ScreenPad
 import id.biojelan.app.ui.components.SubHeader
 import id.biojelan.app.ui.components.bioCard
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 import org.koin.compose.koinInject
 
 /** Detail Agen — memakai cache dari GET /api/user/agen (tidak ada endpoint detail di API-DOC). */
 @Composable
 fun AgenDetailScreen(agenId: String, onBack: () -> Unit, users: UserRepository = koinInject()) {
+    val c = BioTheme.colors
+    val s = BioText.current
     val agens by users.agens.collectAsStateWithLifecycle()
     val agen = agens.firstOrNull { it.agenId == agenId }
     val uriHandler = LocalUriHandler.current
 
-    Column(Modifier.fillMaxSize().background(BioColors.Paper).statusBarsPadding().navigationBarsPadding()) {
+    Column(Modifier.fillMaxSize().background(c.paper).statusBarsPadding().navigationBarsPadding()) {
         SubHeader("Detail Agen", onBack)
         if (agen == null) {
             EmptyBlock(BioIcons.Store, "Agen tidak ditemukan", "Kembali dan muat ulang daftar Agen.")
@@ -61,17 +63,17 @@ fun AgenDetailScreen(agenId: String, onBack: () -> Unit, users: UserRepository =
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
                 AvatarBox(agenInitials(agen.name), size = 56.dp)
                 Column(Modifier.weight(1f)) {
-                    Text(agen.name, style = BioTheme.type.headline, color = BioColors.Ink)
+                    Text(agen.name, style = BioTheme.type.headline, color = c.ink)
                     Spacer(Modifier.height(4.dp))
-                    BioChip(if (agen.isOpen) "Buka sekarang" else "Tutup", if (agen.isOpen) ChipKind.Open else ChipKind.Closed)
+                    BioChip(if (agen.isOpen) s.open else s.closed, if (agen.isOpen) ChipKind.Open else ChipKind.Closed)
                 }
             }
 
             Spacer(Modifier.height(16.dp))
             Column(Modifier.fillMaxWidth().bioCard(16.dp)) {
-                InfoItem(BioIcons.Pin, "Alamat", agen.address.ifBlank { "-" })
-                InfoItem(BioIcons.Clock, "Jam operasional", formatOperatingHours(agen.openAt, agen.closeAt, agen.openDays))
-                InfoItem(BioIcons.Phone, "Telepon", agen.phone.ifBlank { "-" })
+                InfoItem(BioIcons.Pin, s.labelAddress, agen.address.ifBlank { "-" })
+                InfoItem(BioIcons.Clock, s.labelOperatingHours, formatOperatingHours(agen.openAt, agen.closeAt, agen.openDays))
+                InfoItem(BioIcons.Phone, s.labelPhone, agen.phone.ifBlank { "-" })
             }
             Spacer(Modifier.height(14.dp))
             NoteBox("Bawa minyak jelantah dalam wadah tertutup. Agen akan mencatat transaksi dan Anda konfirmasi di app.")

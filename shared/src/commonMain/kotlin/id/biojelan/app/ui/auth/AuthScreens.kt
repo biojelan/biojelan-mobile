@@ -49,7 +49,7 @@ import id.biojelan.app.ui.components.ScreenPad
 import id.biojelan.app.ui.components.SegmentedTabs
 import id.biojelan.app.ui.components.SubHeader
 import id.biojelan.app.ui.icons.BioIcons
-import id.biojelan.app.ui.theme.BioColors
+import id.biojelan.app.ui.strings.BioText
 import id.biojelan.app.ui.theme.BioTheme
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
@@ -76,10 +76,11 @@ fun AuthFlow() {
 
 @Composable
 fun BrandMark(modifier: Modifier = Modifier, size: Int = 56) {
+    val c = BioTheme.colors
     Box(
         modifier = modifier
             .size(size.dp)
-            .background(Brush.linearGradient(listOf(Color(0xFFE9BA55), BioColors.AmberDeep)), RoundedCornerShape((size * 0.3f).dp)),
+            .background(Brush.linearGradient(listOf(Color(0xFFE9BA55), c.amberDeep)), RoundedCornerShape((size * 0.3f).dp)),
         contentAlignment = Alignment.Center,
     ) {
         Icon(BioIcons.DropFilled, contentDescription = null, tint = Color.White, modifier = Modifier.size((size * 0.5f).dp))
@@ -88,6 +89,8 @@ fun BrandMark(modifier: Modifier = Modifier, size: Int = 56) {
 
 @Composable
 fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
+    val c = BioTheme.colors
+    val s = BioText.current
     val state by vm.state.collectAsStateWithLifecycle()
     var mode by rememberSaveable { mutableStateOf(0) } // 0 = masuk, 1 = daftar
     var name by rememberSaveable { mutableStateOf("") }
@@ -100,7 +103,7 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
         if (isRegister) vm.register(name, email, password, confirmation) else vm.login(email, password)
     }
 
-    Box(Modifier.fillMaxSize().background(BioColors.Paper).systemBarsPadding().imePadding()) {
+    Box(Modifier.fillMaxSize().background(c.paper).systemBarsPadding().imePadding()) {
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = ScreenPad, vertical = 24.dp),
         ) {
@@ -108,21 +111,20 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
             BrandMark()
             Spacer(Modifier.height(18.dp))
             Text(
-                if (isRegister) "Buat akun BioJelan" else "Selamat datang di BioJelan",
+                if (isRegister) s.createAccountTitle else s.welcomeTitle,
                 style = BioTheme.type.title,
-                color = BioColors.Ink,
+                color = c.ink,
             )
             Spacer(Modifier.height(6.dp))
             Text(
-                if (isRegister) "Akun Anda terdaftar sebagai Klien. Untuk menjadi Agen, hubungi tim Kilang"
-                else "Tampilan akan menyesuaikan peran Anda",
+                if (isRegister) s.createAccountSubtitle else s.welcomeSubtitle,
                 style = BioTheme.type.body,
-                color = BioColors.Muted,
+                color = c.muted,
             )
             Spacer(Modifier.height(22.dp))
 
             SegmentedTabs(
-                options = listOf("Masuk", "Daftar"),
+                options = listOf(s.signIn, s.signUp),
                 selected = mode,
                 onSelect = {
                     mode = it
@@ -132,17 +134,17 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
             Spacer(Modifier.height(20.dp))
 
             if (isRegister) {
-                BioField("Nama lengkap", name, { name = it }, placeholder = "Nama Anda", error = state.fieldErrors["name"])
+                BioField(s.fieldFullName, name, { name = it }, placeholder = s.placeholderName, error = state.fieldErrors["name"])
             }
             BioField(
-                "Email", email, { email = it },
-                placeholder = "nama@email.com",
+                s.fieldEmail, email, { email = it },
+                placeholder = s.placeholderEmail,
                 keyboardType = KeyboardType.Email,
                 error = state.fieldErrors["email"],
             )
             BioField(
-                "Kata sandi", password, { password = it },
-                placeholder = if (isRegister) "Minimal 8 karakter" else "Kata sandi Anda",
+                s.fieldPassword, password, { password = it },
+                placeholder = if (isRegister) s.placeholderPasswordMin else s.placeholderPasswordYours,
                 isPassword = true,
                 keyboardType = KeyboardType.Password,
                 imeAction = if (isRegister) ImeAction.Next else ImeAction.Done,
@@ -151,8 +153,8 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
             )
             if (isRegister) {
                 BioField(
-                    "Ulangi kata sandi", confirmation, { confirmation = it },
-                    placeholder = "Ketik ulang kata sandi",
+                    s.fieldRepeatPassword, confirmation, { confirmation = it },
+                    placeholder = s.placeholderRepeatPassword,
                     isPassword = true,
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done,
@@ -166,7 +168,7 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
             }
 
             BioButton(
-                text = if (isRegister) "Daftar" else "Masuk",
+                text = if (isRegister) s.signUp else s.signIn,
                 onClick = { submit() },
                 loading = state.loading,
                 modifier = Modifier.fillMaxWidth(),
@@ -174,9 +176,9 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
 
             if (!isRegister) {
                 Text(
-                    "Lupa kata sandi?",
+                    s.forgotPasswordLink,
                     style = BioTheme.type.label,
-                    color = BioColors.Primary,
+                    color = c.primary,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -202,23 +204,25 @@ fun LoginScreen(onForgot: () -> Unit, vm: AuthViewModel = koinViewModel()) {
  */
 @Composable
 private fun GuestEntryButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val c = BioTheme.colors
+    val s = BioText.current
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(BioColors.PrimaryTint)
-            .border(1.5.dp, BioColors.PrimaryTint, RoundedCornerShape(14.dp))
+            .background(c.primaryTint)
+            .border(1.5.dp, c.primaryTint, RoundedCornerShape(14.dp))
             .clickable(onClick = onClick)
             .padding(vertical = 14.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Icon(BioIcons.Eye, contentDescription = null, tint = BioColors.Primary, modifier = Modifier.size(18.dp))
+        Icon(BioIcons.Eye, contentDescription = null, tint = c.primary, modifier = Modifier.size(18.dp))
         Spacer(Modifier.width(9.dp))
         Text(
-            "Masuk sebagai tamu",
+            s.guestEntry,
             style = BioTheme.type.label,
-            color = BioColors.Primary,
+            color = c.primary,
             textAlign = TextAlign.Center,
         )
     }
@@ -226,24 +230,26 @@ private fun GuestEntryButton(onClick: () -> Unit, modifier: Modifier = Modifier)
 
 @Composable
 fun ForgotPasswordScreen(onBack: () -> Unit, vm: AuthViewModel = koinViewModel()) {
+    val c = BioTheme.colors
+    val s = BioText.current
     val state by vm.state.collectAsStateWithLifecycle()
     var email by rememberSaveable { mutableStateOf("") }
 
-    Box(Modifier.fillMaxSize().background(BioColors.Paper).systemBarsPadding().imePadding()) {
+    Box(Modifier.fillMaxSize().background(c.paper).systemBarsPadding().imePadding()) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-            SubHeader("Lupa kata sandi", onBack)
+            SubHeader(s.forgotPasswordTitle, onBack)
             Column(Modifier.padding(horizontal = ScreenPad, vertical = 12.dp)) {
-                Text("Kami kirim tautan reset ke email Anda", style = BioTheme.type.headline, color = BioColors.Ink)
+                Text(s.forgotPasswordHeadline, style = BioTheme.type.headline, color = c.ink)
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    "Masukkan email yang terdaftar. Tautan untuk membuat kata sandi baru akan dikirim ke sana.",
+                    s.forgotPasswordBody,
                     style = BioTheme.type.body,
-                    color = BioColors.Muted,
+                    color = c.muted,
                 )
                 Spacer(Modifier.height(22.dp))
                 BioField(
-                    "Email", email, { email = it },
-                    placeholder = "nama@email.com",
+                    s.fieldEmail, email, { email = it },
+                    placeholder = s.placeholderEmail,
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Done,
                     onDone = { vm.forgotPassword(email) },
@@ -254,13 +260,13 @@ fun ForgotPasswordScreen(onBack: () -> Unit, vm: AuthViewModel = koinViewModel()
                 }
                 if (state.resetSent) {
                     NoteBox(
-                        "Jika email terdaftar, tautan reset sudah dikirim. Cek kotak masuk (dan folder spam).",
+                        s.resetSentNote,
                         icon = BioIcons.Mail,
                         modifier = Modifier.padding(bottom = 14.dp),
                     )
                 }
                 BioButton(
-                    "Kirim tautan reset",
+                    s.sendResetLink,
                     onClick = { vm.forgotPassword(email) },
                     loading = state.loading,
                     modifier = Modifier.fillMaxWidth(),
@@ -272,18 +278,20 @@ fun ForgotPasswordScreen(onBack: () -> Unit, vm: AuthViewModel = koinViewModel()
 
 @Composable
 fun SplashScreen(error: String? = null, onRetry: (() -> Unit)? = null) {
-    Box(Modifier.fillMaxSize().background(BioColors.Paper).systemBarsPadding(), contentAlignment = Alignment.Center) {
+    val c = BioTheme.colors
+    val s = BioText.current
+    Box(Modifier.fillMaxSize().background(c.paper).systemBarsPadding(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(32.dp)) {
             BrandMark(size = 72)
             Spacer(Modifier.height(16.dp))
-            Text("BioJelan", style = BioTheme.type.title, color = BioColors.Ink)
+            Text(s.appName, style = BioTheme.type.title, color = c.ink)
             Spacer(Modifier.height(20.dp))
             if (error == null) {
-                CircularProgressIndicator(color = BioColors.Primary, strokeWidth = 3.dp, modifier = Modifier.size(28.dp))
+                CircularProgressIndicator(color = c.primary, strokeWidth = 3.dp, modifier = Modifier.size(28.dp))
             } else {
-                Text(error, style = BioTheme.type.body, color = BioColors.Muted, textAlign = TextAlign.Center)
+                Text(error, style = BioTheme.type.body, color = c.muted, textAlign = TextAlign.Center)
                 Spacer(Modifier.height(16.dp))
-                if (onRetry != null) BioButton("Coba lagi", onRetry, icon = BioIcons.Refresh)
+                if (onRetry != null) BioButton(s.retryButton, onRetry, icon = BioIcons.Refresh)
             }
         }
     }

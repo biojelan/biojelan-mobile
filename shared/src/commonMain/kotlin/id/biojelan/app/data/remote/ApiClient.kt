@@ -2,6 +2,7 @@ package id.biojelan.app.data.remote
 
 import id.biojelan.app.core.AppConfig
 import id.biojelan.app.data.local.SessionStore
+import id.biojelan.app.data.mock.MockApiClient
 import io.ktor.client.HttpClient
 import io.ktor.client.request.accept
 import io.ktor.client.request.bearerAuth
@@ -33,6 +34,7 @@ class ApiClient(
     private val http: HttpClient,
     private val json: Json,
     private val store: SessionStore,
+    private val mockClient: MockApiClient,
 ) {
     /** Dipanggil saat server menolak token (sesi berakhir). Di-set oleh SessionManager. */
     var onUnauthorized: (() -> Unit)? = null
@@ -68,7 +70,11 @@ class ApiClient(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            ApiResult.Failure(MSG_NETWORK, ApiResult.Kind.Network)
+            if (AppConfig.ENABLE_FALLBACK) {
+                mockClient.handle(method, path, token, bodyJson, parse)
+            } else {
+                ApiResult.Failure(MSG_NETWORK, ApiResult.Kind.Network)
+            }
         }
     }
 
