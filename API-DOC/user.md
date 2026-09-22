@@ -6,6 +6,14 @@ Base URL: `http://biojelan.id`
 
 | Method | Endpoint       | Description                  |
 |--------|----------------|------------------------------|
+| GET    | /api/user      | Get a specific user            |
+| PATCH  | /api/user      | Update authenticated user      |
+| DELETE | /api/user      | Remove authenticated user      |
+| GET    | /api/user/agen      | Get user agen      |
+
+---
+
+## 1. Get User
 | GET    | `/api/user`      | Get a specific user            |
 | PATCH  | `/api/user`      | Update authenticated user      |
 | DELETE | `/api/user`      | Remove authenticated user      |
@@ -27,6 +35,7 @@ Response Body - Success: (klien and kilang)
         "role_id": 7,
         "name": "Syuhada Rantisi",
         "email": "oda@mail.com",
+        "password": "xxxx",
         "phone": "081319306262",
         "is_verified": true,
         "is_active": true,
@@ -44,6 +53,7 @@ Response Body - Success: (agen)
         "role_id": 7,
         "name": "Syuhada Rantisi",
         "email": "oda@mail.com",
+        "password": "xxxx",
         "phone": "081319306262",
         "is_verified": true,
         "is_active": true,
@@ -77,6 +87,7 @@ Response Body - Error:
 ```json
 // user unauthorized
 {
+    "data": [],
     "data": {},
     "message": "Failed get user! User unauthorized."
 }
@@ -84,6 +95,7 @@ Response Body - Error:
 
 ---
 
+## 2. Update User
 ### 2. Update User
 
 Method: `PATCH`
@@ -109,6 +121,8 @@ Request Body: (agen)
     "phone": "081319306263",
     "agen": {
         "address": "xxx",
+        "latitude": "101.111",
+        "longitude": "102.222",
         "latitude": 101.111,
         "longitude": 102.222,
         "bank_name": "MANDIRI",
@@ -125,6 +139,7 @@ Request Body: (agen)
             "minggu"
         ],
         "is_open": true,
+        "stock_liter": 50
     }
 }
 ```
@@ -134,6 +149,10 @@ Response Body - Success: (klien and kilang)
 {
     "data": {
         "user_id": "userid123",
+    "role_id": 7,
+        "name": "Test Update",
+        "email": "testupdate@mail.com",
+        "password": "xxxx",
         "role_id": 7,
         "name": "Test Update",
         "email": "testupdate@mail.com",
@@ -154,6 +173,7 @@ Response Body - Success: (agen)
         "role_id": 7,
         "name": "Test Update",
         "email": "testupdate@mail.com",
+        "password": "xxxx",
         "phone": "081319306263",
         "is_verified": true,
         "is_active": true,
@@ -187,6 +207,7 @@ Response Body - Error:
 ```json
 // user unauthorized
 {
+    "data": [],
     "data": {},
     "message": "Failed update user! User unauthorized."
 }
@@ -194,6 +215,7 @@ Response Body - Error:
 
 ---
 
+## 3. Delete User
 ### 3. Delete User
 
 Method: `DELETE`
@@ -203,6 +225,7 @@ Authorization: `Bearer <token>`
 Response Body - Success:
 ```json
 {
+    "data": [],
     "data": {},
     "message": "Success delete user!"
 }
@@ -212,11 +235,13 @@ Response Body - Error:
 ```json
 // user unauthorized
 {
+    "data": [],
     "data": {},
     "message": "Failed delete user! User unauthorized."
 }
 ```
 
+4. Get User Agen
 ### 4. Get User Agen
 
 Method: `GET`
@@ -238,6 +263,7 @@ Response Body - Success:
             "open_at": "08:00",
             "close_at": "20:00",
             "is_open": true,
+            "open_days": [
             "open_day": [
                 "senin",
                 "selasa",
@@ -246,6 +272,7 @@ Response Body - Success:
                 "jumat",
                 "sabtu",
                 "minggu"
+            ],
             ]
         },
         {
@@ -259,6 +286,7 @@ Response Body - Success:
             "open_at": "08:00",
             "close_at": "20:00",
             "is_open": true,
+            "open_days": [
             "open_day": [
                 "senin",
                 "selasa",
@@ -267,6 +295,8 @@ Response Body - Success:
                 "jumat",
                 "sabtu",
                 "minggu"
+            ],
+        },
             ]
         }
     ],
@@ -278,6 +308,7 @@ Response Body - Error:
 ```json
 // user unauthorized
 {
+    "data": [],
     "data": {},
     "message": "Failed get user agen! User unauthorized."
 }
