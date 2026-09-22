@@ -16,6 +16,16 @@ Base URL: `http://biojelan.id`
 ---
 
 ## 1. Register
+| POST   | `/api/register`                 | Register new user            |
+| POST   | `/api/login`                    | Login user                   |
+| DELETE | `/api/logout`                   | Logout user                  |
+| PATCH  | `/api/update-password`          | Update user password         |
+| POST   | `/api/forgot-password`          | Forgot user password         |
+| POST   | `/api/kilang-login`             | Login kilang dashboard       |
+
+---
+
+### 1. Register
 
 Method: `POST`
 Endpoint: `/api/register`
@@ -53,6 +63,15 @@ Response Body - Error:
 // email already exists
 {
     "data": [],
+    "data": {},
+    "message": "Failed create user! Invalid password."
+}
+```
+
+```json
+// email already exists
+{
+    "data": {},
     "message": "Failed create user! Email already exists."
 }
 ```
@@ -60,6 +79,7 @@ Response Body - Error:
 ---
 
 ## 2. Login
+### 2. Login
 
 Method: `POST`
 Endpoint: `/api/login`
@@ -95,6 +115,15 @@ Response Body - Error:
 // if wrong password
 {
     "data": [],
+    "data": {},
+    "message": "Failed login! User not registered."
+}
+```
+
+```json
+// if wrong password
+{
+    "data": {},
     "message": "Failed login! Wrong password."
 }
 ```
@@ -102,6 +131,7 @@ Response Body - Error:
 ---
 
 ## 3. Logout
+### 3. Logout
 
 Method: `DELETE`
 Endpoint: `/api/logout`
@@ -120,6 +150,7 @@ Response Body - Error:
 // if user not authorized
 {
     "data": [],
+    "data": {},
     "message": "Failed logout! User unauthorized."
 }
 ```
@@ -127,6 +158,7 @@ Response Body - Error:
 ---
 
 ## 4. Update Password
+### 4. Update Password
 
 Method: `PATCH`
 Endpoint: `/api/update-password`
@@ -138,6 +170,7 @@ Request Body:
   "password": "test123",
   "new_password": "123test",
   "new_password_confirmed": "123test"
+  "password_confirmation": "123test"
 }
 ```
 
@@ -162,6 +195,7 @@ Response Body - Error:
 {
     "data": {},
     "message": "Failed update password! Invalid confirmed password."
+    "message": "Failed update password! Invalid password confirmation."
 }
 ```
 
@@ -175,6 +209,8 @@ Response Body - Error:
 
 
 ## 5. Forgot Password
+
+### 5. Forgot Password
 
 Method: `POST`
 Endpoint: `/api/forgot-password`
@@ -206,6 +242,7 @@ Response Body - Error:
 ---
 
 ## 6. Kilang Login
+### 6. Kilang Login (Web Dashboard)
 
 
 Method: `POST`
@@ -247,6 +284,23 @@ Response Body - Error:
 // if not admin
 {
     "data": [],
+    "data": {},
+    "message": "Failed login! User not registered."
+}
+```
+
+```json
+// if wrong password
+{
+    "data": {},
+    "message": "Failed login! Wrong password."
+}
+```
+
+```json
+// if not admin
+{
+    "data": {},
     "message": "Failed login! User unauthorized."
 }
 
