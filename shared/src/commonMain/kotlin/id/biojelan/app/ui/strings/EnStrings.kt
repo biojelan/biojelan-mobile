@@ -92,6 +92,18 @@ object EnStrings : BioStrings {
     override val stockCancelled = "Cancelled"
     override fun transactionDash(name: String) = "Transaction — $name"
 
+    // ============================================================ Agen Pickup
+    override val pickupSectionTitle = "Pickup status"
+    override val pickupNoneScheduled = "No pickup scheduled by Kilang yet."
+    override val pickupStatusAssigned = "Driver assigned"
+    override val pickupStatusOtw = "Driver on the way"
+    override val pickupStatusCompleted = "Pickup completed"
+    override val pickupStatusCancelled = "Pickup cancelled"
+    override val pickupNoteAssigned = "Kilang has assigned a driver. Have your jerrycans ready."
+    override val pickupNoteOtw = "The driver is heading to your location."
+    override val pickupNoteCompleted = "Your oil has been collected — Kilang will update your stock."
+    override fun pickupUpdatedAt(time: String) = "Updated $time"
+
     // ============================================================ Agen Transactions
     override val transactionsTitle = "Transactions"
     override val transactionDetailTitle = "Transaction detail"

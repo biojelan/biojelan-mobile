@@ -98,6 +98,18 @@ interface BioStrings {
     val stockCancelled: String
     fun transactionDash(name: String): String
 
+    // ============================================================ Agen Pickup
+    val pickupSectionTitle: String
+    val pickupNoneScheduled: String
+    val pickupStatusAssigned: String
+    val pickupStatusOtw: String
+    val pickupStatusCompleted: String
+    val pickupStatusCancelled: String
+    val pickupNoteAssigned: String
+    val pickupNoteOtw: String
+    val pickupNoteCompleted: String
+    fun pickupUpdatedAt(time: String): String
+
     // ============================================================ Agen Transactions
     val transactionsTitle: String
     val transactionDetailTitle: String

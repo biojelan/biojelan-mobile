@@ -27,15 +27,29 @@ Paket utama `id.biojelan.app`: `core/` (config, format), `data/remote` (DTO + `A
 |---|---|
 | Semua | Masuk, Daftar, Lupa kata sandi, Profil (ubah profil, ubah kata sandi, keluar, hapus akun) |
 | Klien | Beranda (harga, konfirmasi transaksi, agen), Cari Agen, Detail Agen, Riwayat + detail (Terima / Batalkan) |
-| Agen | Beranda (buka/tutup, statistik, stok), Transaksi + input transaksi, Stok |
+| Agen | Beranda (buka/tutup, statistik, stok), Transaksi + input transaksi, Stok (+ status penjemputan Driver) |
 
 Peran ditentukan otomatis dari `GET /api/user`: ada objek `agen` → Agen, selain itu → Klien.
 
+## Status penjemputan Driver (pickup.md)
+
+Sisi Agen dari `pickup.md` sudah terhubung: `GET /api/agen/pickup/status` dibaca lewat
+`PickupRepository`, ditampilkan sebagai kartu di tab Stok (dan sebagai chip ringkas di Beranda saat
+status `ASSIGNED`/`OTW`). Sisi Kilang (`POST /api/kilang/pickup/status`, buat penugasan) dan sisi
+Driver (app lapangan terpisah, `PATCH`/`GET /api/driver/pickup/status`) di luar cakupan app mobile
+Klien/Agen ini.
+
 ## Belum ada di API-DOC (sengaja tidak dibuat / memakai placeholder)
 
-Driver & rute jemput, tab Pickup Agen, upgrade Klien→Agen, mode tamu (`/api/user/agen` butuh token), OTP,
-harga jelantah, ambang stok, riwayat stok, koreksi stok, jarak/lokasi pengguna. Nilai harga & ambang
-sementara ada di `AppConfig.kt`.
+Rute jemput (assignment Kilang→Driver di luar app ini), upgrade Klien→Agen, mode tamu
+(`/api/user/agen` butuh token), OTP, harga jelantah, ambang stok, riwayat stok, koreksi stok,
+jarak/lokasi pengguna. Nilai harga & ambang sementara ada di `AppConfig.kt`.
+
+## Catatan struktur proyek
+
+Kalau paket ini diambil dari arsip lama: folder `shared/` sempat berisi salinan ganda seluruh
+proyek (root ter-nested di dalam `shared/shared/`). Sudah dirapikan di sini — `shared/`
+sekarang cuma berisi `build.gradle.kts` modul KMP + `src/`, seperti struktur normal.
 
 ## Font
 

@@ -7,6 +7,7 @@ import id.biojelan.app.data.mock.MockApiClient
 import id.biojelan.app.data.remote.ApiClient
 import id.biojelan.app.data.repository.AuthRepository
 import id.biojelan.app.data.repository.ConfigPriceProvider
+import id.biojelan.app.data.repository.PickupRepository
 import id.biojelan.app.data.repository.PriceProvider
 import id.biojelan.app.data.repository.SessionManager
 import id.biojelan.app.data.repository.TransactionRepository
@@ -51,6 +52,7 @@ private val dataModule = module {
     single { AuthRepository(get(), get(), get()) }
     single { UserRepository(get(), get(), get()) }
     single { TransactionRepository(get(), get()) }
+    single { PickupRepository(get(), get()) }
 }
 
 private val viewModelModule = module {

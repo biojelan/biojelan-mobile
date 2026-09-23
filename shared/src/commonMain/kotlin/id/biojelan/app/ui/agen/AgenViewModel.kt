@@ -5,8 +5,10 @@ import id.biojelan.app.core.AppConfig
 import id.biojelan.app.core.isToday
 import id.biojelan.app.core.parseIsoMillis
 import id.biojelan.app.data.remote.ApiResult
+import id.biojelan.app.data.remote.PickupStatusDto
 import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.remote.UserDto
+import id.biojelan.app.data.repository.PickupRepository
 import id.biojelan.app.data.repository.PriceProvider
 import id.biojelan.app.data.repository.SessionManager
 import id.biojelan.app.data.repository.SessionState
@@ -32,6 +34,8 @@ data class AgenUiState(
     val price: Long = AppConfig.DEFAULT_PRICE_PER_LITER,
     val creating: Boolean = false,
     val togglingOpen: Boolean = false,
+    val pickup: PickupStatusDto? = null,
+    val pickupLoading: Boolean = true,
 ) {
     private val todays get() = transactions.filter { isToday(it.createdAt) && it.txStatus != TxStatus.Cancelled }
     val todayCount: Int get() = todays.size
@@ -44,6 +48,7 @@ class AgenViewModel(
     private val transactions: TransactionRepository,
     private val session: SessionManager,
     private val priceProvider: PriceProvider,
+    private val pickups: PickupRepository,
 ) : BaseViewModel() {
     private val _state = MutableStateFlow(AgenUiState())
     val state: StateFlow<AgenUiState> = _state.asStateFlow()
@@ -66,6 +71,7 @@ class AgenViewModel(
                 val price = priceProvider.pricePerLiter()
                 _state.update { it.copy(price = price) }
             }
+            launch { refreshPickup() }
             val agenId = session.currentUser?.agen?.agenId
             if (agenId.isNullOrBlank()) {
                 _state.update { it.copy(loading = false, error = "Data Agen tidak ditemukan pada akun ini.") }
@@ -113,6 +119,18 @@ class AgenViewModel(
                 is ApiResult.Failure -> toast(result.message)
             }
             _state.update { it.copy(togglingOpen = false) }
+        }
+    }
+
+    /**
+     * GET /api/agen/pickup/status. Dipanggil bersamaan dengan [refresh]; kegagalan di sini tidak
+     * memblokir tampilan transaksi/profil — status penjemputan cuma disembunyikan (null).
+     */
+    private suspend fun refreshPickup() {
+        _state.update { it.copy(pickupLoading = true) }
+        when (val result = pickups.agenStatus()) {
+            is ApiResult.Success -> _state.update { it.copy(pickup = result.data, pickupLoading = false) }
+            is ApiResult.Failure -> _state.update { it.copy(pickup = null, pickupLoading = false) }
         }
     }
 }
