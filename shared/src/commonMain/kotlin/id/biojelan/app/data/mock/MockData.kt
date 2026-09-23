@@ -4,6 +4,7 @@ import id.biojelan.app.core.AppConfig
 import id.biojelan.app.data.remote.AgenDto
 import id.biojelan.app.data.remote.AgenSummaryDto
 import id.biojelan.app.data.remote.AuthPayload
+import id.biojelan.app.data.remote.PickupStatusDto
 import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.remote.UserDto
 
@@ -234,4 +235,16 @@ object MockData {
 
     /** Transaksi pending terbaru untuk Klien (dipakai di klien-transaction/status). */
     val klienLatestPending: TransactionDto? = klienTransactions.firstOrNull { it.status == "pending" }
+
+    // ========================= Pickup (Driver) =========================
+
+    /** Dipakai di GET /api/agen/pickup/status untuk Agen mock (agenId "101"). */
+    val agenPickupStatus = PickupStatusDto(
+        pickupId = "pkp-mock-001",
+        driverId = "driver-001",
+        agenId = "101",
+        date = "2026-09-23",
+        status = "OTW",
+        updatedAt = "2026-09-23 09:40:00",
+    )
 }

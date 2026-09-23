@@ -4,6 +4,7 @@ import id.biojelan.app.data.remote.AgenSummaryDto
 import id.biojelan.app.data.remote.ApiResult
 import id.biojelan.app.data.remote.AuthPayload
 import id.biojelan.app.data.remote.LoginRequest
+import id.biojelan.app.data.remote.PickupStatusDto
 import id.biojelan.app.data.remote.RegisterRequest
 import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.remote.TransactionStatusDto
@@ -121,6 +122,12 @@ class MockApiClient(private val json: Json) {
 
         method == HttpMethod.Get && path == "/api/klien-transactions" -> {
             MockData.klienTransactions
+        }
+
+        // ============ Pickup (Driver) ============
+
+        method == HttpMethod.Get && path == "/api/agen/pickup/status" -> {
+            MockData.agenPickupStatus
         }
 
         // ============ Fallback ============
