@@ -14,6 +14,14 @@ Base URL: `http://biojelan.id`
 ---
 
 ## 1. Get User
+| GET    | `/api/user`      | Get a specific user            |
+| PATCH  | `/api/user`      | Update authenticated user      |
+| DELETE | `/api/user`      | Remove authenticated user      |
+| GET    | `/api/user/agen` | Get user agen      |
+
+---
+
+### 1. Get User
 
 Method: `GET`
 Endpoint: `/api/user`
@@ -80,6 +88,7 @@ Response Body - Error:
 // user unauthorized
 {
     "data": [],
+    "data": {},
     "message": "Failed get user! User unauthorized."
 }
 ```
@@ -87,6 +96,7 @@ Response Body - Error:
 ---
 
 ## 2. Update User
+### 2. Update User
 
 Method: `PATCH`
 Endpoint: `/api/user`
@@ -113,6 +123,8 @@ Request Body: (agen)
         "address": "xxx",
         "latitude": "101.111",
         "longitude": "102.222",
+        "latitude": 101.111,
+        "longitude": 102.222,
         "bank_name": "MANDIRI",
         "account_number": "xxx",
         "open_at": "08:00",
@@ -141,6 +153,9 @@ Response Body - Success: (klien and kilang)
         "name": "Test Update",
         "email": "testupdate@mail.com",
         "password": "xxxx",
+        "role_id": 7,
+        "name": "Test Update",
+        "email": "testupdate@mail.com",
         "phone": "081319306263",
         "is_verified": true,
         "is_active": true,
@@ -193,6 +208,7 @@ Response Body - Error:
 // user unauthorized
 {
     "data": [],
+    "data": {},
     "message": "Failed update user! User unauthorized."
 }
 ```
@@ -200,6 +216,7 @@ Response Body - Error:
 ---
 
 ## 3. Delete User
+### 3. Delete User
 
 Method: `DELETE`
 Endpoint: `/api/user`
@@ -209,6 +226,7 @@ Response Body - Success:
 ```json
 {
     "data": [],
+    "data": {},
     "message": "Success delete user!"
 }
 ```
@@ -218,11 +236,13 @@ Response Body - Error:
 // user unauthorized
 {
     "data": [],
+    "data": {},
     "message": "Failed delete user! User unauthorized."
 }
 ```
 
 4. Get User Agen
+### 4. Get User Agen
 
 Method: `GET`
 Endpoint: `/api/user/agen`
@@ -244,6 +264,7 @@ Response Body - Success:
             "close_at": "20:00",
             "is_open": true,
             "open_days": [
+            "open_day": [
                 "senin",
                 "selasa",
                 "rabu",
@@ -252,6 +273,7 @@ Response Body - Success:
                 "sabtu",
                 "minggu"
             ],
+            ]
         },
         {
             "agen_id": "userid222",
@@ -265,6 +287,7 @@ Response Body - Success:
             "close_at": "20:00",
             "is_open": true,
             "open_days": [
+            "open_day": [
                 "senin",
                 "selasa",
                 "rabu",
@@ -274,6 +297,8 @@ Response Body - Success:
                 "minggu"
             ],
         },
+            ]
+        }
     ],
     "message": "Success get user agen!"
 }
@@ -284,6 +309,7 @@ Response Body - Error:
 // user unauthorized
 {
     "data": [],
+    "data": {},
     "message": "Failed get user agen! User unauthorized."
 }
 ```
