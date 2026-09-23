@@ -1,0 +1,172 @@
+---
+tags: [biojelan, changelog]
+---
+
+# Changelog
+
+Riwayat semua perubahan pada prototype, urut dari awal. File yang terlibat disebut di tiap entri.
+
+## 1. Kilang app dibangun dari nol
+
+*File: `BioJelan-Prototype-Kilang.html`*
+
+- Role picker (Superadmin / Admin / Manajer Operasional / Finance) — prototype tunggal yang bisa preview 4 tampilan role sekaligus, karena satu akun asli = satu role.
+- Superadmin: Beranda, Agen (approve pendaftaran), Tim (kelola staf), Profil.
+- Admin: Beranda, Agen, Stok, Profil.
+- Manajer Operasional: Beranda, Pickup (jadwal & assign Driver), Driver (tracking), Profil.
+- Finance: Beranda, Transaksi, Laba-Rugi, Profil.
+- Desain diselaraskan dengan sistem yang sudah ada di `Klien`/`Agen`/`Driver` (token warna, tipografi, komponen kartu/modal/stepper).
+
+## 2. Penguatan role Finance
+
+*File: `BioJelan-Prototype-Kilang.html`*
+
+- Filter arah transaksi (Kilang → Agen / Agen → Klien) beneran jalan, bukan cuma visual.
+- Antrean "Perlu Verifikasi" dipisah dari daftar transaksi lengkap.
+- Verifikasi pembayaran lewat modal update status transaksi secara real-time di UI (chip berubah, baris di antrean hilang).
+- Laba-Rugi: toggle periode, ranking Top Agen, tombol unduh laporan.
+
+## 3. Mode Tamu di Klien
+
+*File: `BioJelan-Prototype-Klien.html`*
+
+- Tambah opsi "Lihat sebagai tamu" di layar login — sesuai jawaban PRD Q31 (bisa buka app tanpa akun, tapi cuma lihat lokasi Agen di peta).
+- Tab Beranda/Riwayat/Profil dikunci buat tamu — coba dibuka, muncul sheet ajakan daftar.
+- Tombol "Jemput ke rumah" di detail Agen juga dikunci buat tamu (aksi transaksional, butuh akun).
+
+## 4. Integrasi dokumen pemisahan wewenang (update besar)
+
+Dokumen detail tugas per role (segregation of duty) dari stakeholder diintegrasikan ke seluruh sistem.
+
+*File: `BioJelan-Prototype-Kilang.html`*
+- Matriks hak akses di Tim screen diganti total, dari asumsi jadi versi terkonfirmasi (lihat [[01 - Struktur Role & Hak Akses]]).
+- **QC Harian** (fitur baru, Manajer Operasional): input hasil uji Lolos/Gagal, kalau Gagal pilih Agen tersangka dan ajukan denda 50% ke Finance.
+- **Antrean Denda** (fitur baru, Finance): denda dari Ops otomatis masuk sini, ada tombol Eksekusi.
+- Tracking Driver diubah dari framing "real-time GPS" jadi **checkpoint-based** (kayak resi kurir) — sesuai klarifikasi stakeholder.
+- Harga: dipisah jadi harga dasar (Superadmin, rentang) dan harga harian (Manajer Operasional, eksekusi dalam rentang itu).
+- Agen: field rekening bank & status verifikasi foto investasi (5 dirigen + banner) ditambahkan ke approval dan detail Agen.
+
+*File: `BioJelan-Prototype-Driver.html`*
+- Alur pickup diubah total dari 1 langkah ("upload bukti") jadi 2 tahap:
+  1. **Hitung Dirigen & Cek Kualitas** — counter dirigen (otomatis hitung liter), pilih Layak Angkut/Tolak. Tolak = stop ditandai gagal, gak lanjut.
+  2. **Foto & Pembayaran** — foto 5 dirigen + banner, pilih metode Tunai (OTP dari Agen sebagai bukti terima) atau Transfer Midtrans (langsung trigger, gak pegang uang fisik).
+- Volume terkunci setelah dikonfirmasi, ada link "ajukan revisi ke Manajer".
+- Semua copy "real-time GPS" diganti checkpoint-based, konsisten sama sisi Kilang.
+
+## 5. Role Driver ditambahkan sebagai kartu info di role picker Kilang
+
+*File: `BioJelan-Prototype-Kilang.html`*
+
+- Driver itu bagian dari 5 role Kilang tapi app-nya terpisah (beda kebutuhan UX — task lapangan vs dashboard back-office). Ditambahkan kartu ke-5 (dashed border) di role picker yang menjelaskan ini, bukan dashboard baru.
+
+## 6. Responsivitas mobile
+
+*File: semua (`Klien`, `Agen`, `Driver`, `Kilang`)*
+
+- Awalnya device-frame mockup fixed 390×812px, gak menyesuaikan device asli.
+- Ditambah mode full-bleed di layar ≤480px (device asli): bezel hilang, isi 100% lebar+tinggi layar pakai `100dvh`.
+- Breakpoint tambahan ≤360px buat HP kecil (padding kartu dikecilin dikit).
+- Safe-area insets (`env(safe-area-inset-*)`) buat notch/dynamic island/home-indicator.
+
+## 7. Bug fixes
+
+- **Tab bar "tenggelam"** (Agen, layar Stok) — root cause: `.screen` pakai `height:100%` yang bentrok sama flex layout status bar + tab bar, ketutup kalau kontennya panjang. Fix: `.screen{flex:1; min-height:0; overflow:hidden}` di semua 4 file app.
+- **Posisi FAB salah** (Kilang, layar Tim) — efek samping dari fix di atas: `.screen` di Kilang punya `position:relative` peninggalan lama, bikin tombol "+" ikut salah hitung posisi. Dihapus, FAB balik ngukur dari frame yang benar.
+
+## 8. iPhone device frame
+
+*File: semua (5 file)*
+
+- Bezel dihapus dulu buat testing di HP asli, lalu diminta balik lagi khusus buat kebutuhan import ke Figma (`html.to.design`).
+- Solusi: frame kondisional. Desktop (>480px) = device-frame lengkap dengan Dynamic Island, sudut rounded, detail tombol volume/power (393×852, rasio iPhone 15/16 Pro). Layar ≤480px (HP asli) = full-bleed, gak ada frame.
+
+## 9. Halaman Home / launcher
+
+*File baru: `BioJelan-Prototype-0-Home.html`*
+
+- Portal pemilihan awal: Klien, Agen, Kilang (3 kartu utama) + Driver (kartu sekunder, dashed, "Tim Kilang").
+- Tiap kartu adalah link relatif ke file HTML masing-masing — semua file harus ada di folder yang sama.
+
+## 10. Bersih-bersih copy UI (hapus bahasa dev/prototype dari tampilan)
+
+*File: semua*
+
+- Semua referensi nomor pertanyaan PRD (Q13, Q28, dst), kata "prototype", "demo", "preview", dan nama file (`.html`) yang tadinya nempel di teks UI (banner, toast, judul layar) dipindah jadi komentar kode atau dihapus.
+- Deskripsi role di role picker Kilang dipotong jadi satu baris (sebelumnya 3-4 baris bikin logo ke-misalign).
+- `<title>` tab browser dirapikan (hapus kata "Prototype").
+- Caption di bawah frame (sudah `display:none` dari awal, gak kelihatan) dihapus total dari markup.
+
+## 11. Fitur lengkap per role Kilang
+
+*File: `BioJelan-Prototype-Kilang.html`*
+
+**Admin:**
+- Tab **Dirigen** baru: stok gudang Kilang (+/-), daftar dirigen per Agen + status foto investasi.
+- **Pengaduan** (quicklink dari Beranda): daftar keluhan Agen, bisa diteruskan ke Ops atau ditandai selesai.
+- **Broadcast** (quicklink dari Beranda): kirim pesan ke semua Agen, ada template cepat, masuk riwayat.
+
+**Superadmin:**
+- **Konfigurasi Sistem** (quicklink dari Beranda): nama app, logo, rentang harga dasar, limit transaksi harian, toggle izin cash, notifikasi, backup/restore.
+- **Log Aktivitas** (quicklink dari Beranda): daftar aktivitas staf, view-only, dengan filter kategori.
+
+**Manajer Operasional:**
+- **Tambah Driver**: tombol "+" di layar Driver buka form beneran (nama, telepon, plat).
+- **Mediasi Sengketa**: tap baris sengketa di QC buka detail (protes Agen + bukti), bisa Batalkan atau Pertahankan denda.
+
+**Finance:**
+- **Saldo Midtrans** (quicklink dari Beranda): top up manual atau lewat chip cepat, update saldo + riwayat.
+- **Rekonsiliasi Harian** (quicklink dari Beranda): perbandingan volume vs uang keluar, breakdown metode bayar, riwayat harian.
+
+## 12. Tab bar dinaikkan untuk nav bar Android
+
+*File: semua (4 file app)*
+
+- Permintaan client: tab bar kebawah kekecilan jaraknya dari tombol navigasi sistem Android (Home/Back/Recent atau gesture pill).
+- Padding bawah dasar tab bar dinaikkan dari ~15-16px jadi ~25-26px di semua file, terlepas dari `safe-area-inset-bottom` (yang nilainya 0 di kebanyakan Android, cuma kepake di iPhone bernotch).
+
+## 13. Jawaban Kilang atas 4 pertanyaan terbuka
+
+*File: `BioJelan-Prototype-Driver.html`, `BioJelan-Prototype-Kilang.html`*
+
+Detail jawaban ada di [[03 - Pertanyaan Terbuka untuk Kilang]]. Ringkasan perubahan:
+
+- **Koreksi stok** dibuka untuk semua role Kilang (bukan cuma Admin) — modal koreksi beneran jalan, plus quicklink ditambahkan di Beranda Manajer Operasional & Finance.
+- **Ambang 50L/5 dirigen** ditambahkan ke sheet QC Driver — di bawah itu, Agen otomatis dilewati (skip), gak masuk ke pilihan Layak Angkut/Tolak.
+- **Persentase denda QC** diubah dari hardcode 50% jadi input manual (Manajer Operasional isi sendiri tiap kasus), karena formula bakunya belum ditentukan Kilang.
+- Override rute manual dan notifikasi denda ke app Agen: dikonfirmasi **tidak berubah** untuk sekarang.
+
+## 14. Angka operasional dijadikan konfigurasi, bukan hardcode
+
+*File: `BioJelan-Prototype-Kilang.html`, `BioJelan-Prototype-Driver.html`*
+
+Beberapa angka bisnis yang berpotensi berubah sebelumnya tertanam langsung di teks/kode. Dipindah jadi pengaturan yang bisa diubah Superadmin lewat Konfigurasi Sistem:
+
+- **Ambang batas stok Agen** (default 500 L) — dulu ditulis manual di 8 tempat berbeda (list Agen, detail Agen, modal koreksi stok), sekarang satu sumber (`sysConfig.ambangStok`), berubah di semua tempat sekaligus begitu Superadmin simpan.
+- **Ambang minimum pickup** (default 5 dirigen / 50L) — pengaturan ini juga ditambahkan di Konfigurasi Sistem, meski di app Driver sendiri (file terpisah, gak ada backend) nilainya tetap konstanta lokal — dikasih komentar jelas kalau di implementasi asli ini bakal sinkron lewat server.
+- **Jam mulai rute harian** (default 08.00) — dulu teks statis, sekarang ikut field konfigurasi.
+- **Fee transaksi luar sistem** (default 0.7%) — field baru di Konfigurasi Sistem, disiapkan untuk kebutuhan ke depan (teks UI yang nyebut fee ini sendiri sudah digeneralisasi di update sebelumnya, jadi belum ada tempat lain yang perlu disinkronkan).
+
+## 15. Diagram teknis (alur, swimlane, ERD)
+
+*File baru: `06 - Diagram Alur Bisnis.mermaid`, `07 - Diagram Swimlane per Role.mermaid`, `08 - Diagram ERD.mermaid`, `09 - Diagram Sistem.md`*
+
+- **Alur Bisnis** — flowchart end-to-end dari Klien jual minyak sampai jadi biodiesel, termasuk semua percabangan keputusan yang udah dikonfirmasi (ambang stok, ambang 50L/5 dirigen, QC, denda, sengketa).
+- **Swimlane per Role** — sequence diagram alur yang sama, dipisah per aktor (Klien/Agen/Sistem/Manajer Ops/Driver/Finance/Admin), buat cek kesesuaian sama prinsip pemisahan wewenang.
+- **ERD** — skema database turunan dari semua fitur di prototype: akun & role, transaksi, dirigen, pickup & rute, pembayaran, QC & denda, sengketa, pengaduan, broadcast, konfigurasi sistem, log aktivitas, top up Midtrans.
+
+## 16. Revisi Agen: notelp transaksi, tamu, link Gmaps, dan pembayaran tunai tanpa serah HP
+
+*File: `BioJelan-Prototype-Mobile.html`*
+
+Revisi mingguan dari chat internal (Rafly/oda), diterapkan dulu di prototype HTML sebelum masuk ke KMP. Item cashless (Kilang → Agen, approval admin buat payout) sengaja belum digarap — masuk next dev.
+
+- **Input Transaksi (Agen)**: tambah field No. Telepon (wajib di semua transaksi), plus tab baru "Tamu (Belum Punya Akun)" — Agen bisa catat transaksi walk-in cukup pakai nama + no. telepon, tanpa email/akun terdaftar. Riwayat & detail transaksi nampilin badge "Tamu" buat jenis transaksi ini.
+- **Upgrade ke Agen (Klien)**: tambah field wajib Link Google Maps lokasi usaha, dengan hint cara ambil link share dari app Maps.
+- **Verifikasi pembayaran tunai Driver → Agen dirombak total.** Rencana awal: ganti OTP jadi toggle Ya/Tidak yang ditekan Agen langsung di HP Driver (biar gak perlu ketik kode). Direvisi lagi setelah masukan bahwa serah-HP dari Driver ke Agen tetap gak realistis — jadi dipindah ke app Agen sendiri:
+  - Driver: abis foto bukti & pilih metode Tunai, tombolnya jadi "Kirim ke Agen untuk Konfirmasi" (bukan langsung selesai). Status stop baru **Menunggu Konfirmasi** — Driver gak bisa lanjut ke stop berikutnya sebelum Agen konfirmasi.
+  - Agen: banner muncul di Beranda begitu ada laporan tunai masuk ("Driver [nama] baru saja lapor bayar tunai Rp [jumlah]..."). Diketuk, buka sheet dengan toggle **Ya, Sudah Diterima** / **Belum · Ada Masalah**. Pilihan "Ya" nyelesaiin stop Driver jadi Completed; "Belum/Ada Masalah" dikirim ke Kilang sebagai sengketa dan stop Driver balik ke status sebelum bayar biar bisa diulang.
+  - Metode Transfer (Midtrans) gak berubah — tetap otomatis, gak butuh konfirmasi manual dari Agen.
+  - Catatan teknis: karena prototype ini satu file/satu sesi browser (Driver & Agen belum benar-benar dua device terpisah), sinkronisasi status stop dilakuin lewat variabel JS bersama supaya demonya kelihatan nyambung. Di implementasi KMP asli, ini bakal lewat notifikasi/API real per akun, bukan shared state kayak di prototype.
+
+---
+Lihat juga: [[00 - Overview]] · [[05 - Struktur File Prototype]]

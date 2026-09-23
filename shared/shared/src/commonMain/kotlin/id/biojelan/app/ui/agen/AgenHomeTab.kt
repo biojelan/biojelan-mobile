@@ -32,6 +32,8 @@ import id.biojelan.app.core.formatRupiahCompact
 import id.biojelan.app.core.greeting
 import id.biojelan.app.core.initialsOf
 import id.biojelan.app.data.remote.UserDto
+import id.biojelan.app.data.repository.PickupStatus
+import id.biojelan.app.data.repository.pickupStatus
 import id.biojelan.app.data.repository.txStatus
 import id.biojelan.app.ui.Viewer
 import id.biojelan.app.ui.chipKind
@@ -104,10 +106,17 @@ fun AgenHomeTab(
                 Text(s.currentStockLabel, style = BioTheme.type.eyebrow, color = c.muted)
                 Text(formatLiter(stock), style = BioTheme.type.display, color = c.ink)
                 Spacer(Modifier.height(6.dp))
-                BioChip(
-                    if (reached) s.readyForPickup else s.remainingToThreshold(formatLiter(threshold - stock)),
-                    if (reached) ChipKind.Done else ChipKind.Pending,
-                )
+                // Kalau Kilang sudah menugaskan Driver, tampilkan status itu — lebih akurat
+                // daripada sekadar "siap dijemput" begitu stok lewat ambang.
+                val pickupStatus = state.pickup?.pickupStatus
+                when (pickupStatus) {
+                    PickupStatus.Assigned -> BioChip(s.pickupStatusAssigned, ChipKind.Pending)
+                    PickupStatus.OnTheWay -> BioChip(s.pickupStatusOtw, ChipKind.Pending)
+                    else -> BioChip(
+                        if (reached) s.readyForPickup else s.remainingToThreshold(formatLiter(threshold - stock)),
+                        if (reached) ChipKind.Done else ChipKind.Pending,
+                    )
+                }
             }
         }
 

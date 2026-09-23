@@ -99,6 +99,9 @@
   .btn-rust{background:var(--rust); color:#fff;} .btn-rust:active{background:#8f471e;}
   .btn-ghost{background:transparent; color:var(--primary); border:1.5px solid var(--primary-tint);}
   .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .btn-refresh{display:flex; width:fit-content; align-items:center; justify-content:center; gap:6px; margin:8px auto 4px; padding:9px 18px; font-family:'Manrope',sans-serif; font-weight:700; font-size:12.5px; color:var(--ink-soft); background:var(--surface); border:1.5px solid var(--line); border-radius:999px; cursor:pointer;}
+  .btn-refresh:active{background:var(--bg);}
+  .btn-refresh:disabled{opacity:.5; cursor:default;}
 
   .field{margin-bottom:14px;}
   .field label{display:block; font-size:12px; font-weight:700; color:var(--ink-soft); margin-bottom:6px;}
@@ -339,6 +342,15 @@
   .cash-note{display:flex; gap:10px; align-items:flex-start; background:var(--amber-tint); border-radius:14px; padding:12px 13px; margin-bottom:16px;}
   .cash-note svg{width:17px;height:17px; stroke:var(--amber-deep); fill:none; stroke-width:1.9; flex:0 0 auto; margin-top:1px;}
   .cash-note span{font-size:11.5px; color:#5C4419; font-weight:700; line-height:1.5;}
+  .approval-note{display:flex; flex-direction:column; gap:11px; background:var(--amber-deep); border-radius:16px; padding:13px 14px 14px;}
+  .approval-note-head{display:flex; gap:9px; align-items:flex-start; cursor:pointer;}
+  .approval-note-head svg{width:17px;height:17px; stroke:var(--amber-tint); fill:none; stroke-width:2; flex:0 0 auto; margin-top:1px;}
+  .approval-note-head span{font-size:11.5px; color:var(--amber-tint); font-weight:700; line-height:1.5;}
+  .approval-note-actions{display:flex; gap:8px;}
+  .approval-btn{flex:1; display:flex; align-items:center; justify-content:center; gap:6px; border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-weight:800; font-size:12.5px; padding:9px 10px; border-radius:999px;}
+  .approval-btn svg{width:14px;height:14px; stroke:currentColor; fill:none; flex:0 0 auto;}
+  .approval-yes{background:var(--primary); color:#EFF6EF;} .approval-yes:active{background:var(--primary-deep);}
+  .approval-no{background:var(--rust); color:#fff;} .approval-no:active{background:#8f471e;}
   .notif-banner{display:flex; align-items:flex-start; gap:12px; margin:14px 22px 0; background:linear-gradient(135deg, var(--primary-tint), var(--surface)); border:1.5px solid var(--primary-tint); border-radius:16px; padding:13px 14px;}
   .notif-icon{width:36px; height:36px; border-radius:11px; background:var(--primary); display:flex; align-items:center; justify-content:center; flex:0 0 auto; position:relative;}
   .notif-icon svg{width:17px; height:17px; stroke:#fff; fill:none; stroke-width:2;}
@@ -546,7 +558,7 @@
           <div class="price-info">
             <p class="label">Harga jelantah hari ini</p>
             <p class="amount">Rp 6.500<span>/liter</span></p>
-            <p class="updated"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Diperbarui 07.00 oleh Kilang</p>
+            <p class="updated"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span id="klienUpdatedTime">Diperbarui 07.00 oleh Kilang</span></p>
           </div>
         </div>
 
@@ -584,6 +596,28 @@
         <div class="tip-card">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
           <p><strong>Bawa langsung ke Agen</strong> untuk transaksi tercepat. Layanan jemput ke rumah dikenakan biaya terpisah dan diatur lewat WhatsApp.</p>
+        </div>
+
+        <button class="btn-refresh" id="klienRefreshBtn" onclick="refreshKlienBeranda()">
+          <svg id="klienRefreshIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 4v5h-5"/></svg>
+          Refresh Halaman
+        </button>
+
+        <div class="approval-note" id="klienApprovalBanner" style="display:none; margin:10px 22px 4px;">
+          <div class="approval-note-head" onclick="openKlienApprovalSheet()">
+            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+            <span><b id="klienApprovalAgen">Agen Barokah Jaya</b> mencatat Anda menjual <b class="mono" id="klienApprovalVol">6 L</b> jelantah seharga <b class="mono" id="klienApprovalTotal">Rp 39.000</b>.</span>
+          </div>
+          <div class="approval-note-actions">
+            <button type="button" class="approval-btn approval-yes" onclick="quickKlienApproval(true)">
+              <svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M5 12l5 5L19 7"/></svg>
+              Terima
+            </button>
+            <button type="button" class="approval-btn approval-no" onclick="quickKlienApproval(false)">
+              <svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              Tolak
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -1106,6 +1140,30 @@
       </div>
     </div>
 
+    <!-- ===================== KLIEN: KONFIRMASI TRANSAKSI DARI AGEN ===================== -->
+    <div class="modal-overlay" id="klienApprovalSheet">
+      <div class="modal-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head"><h3>Konfirmasi Transaksi</h3><div class="sheet-close" onclick="closeSheet('klienApprovalSheet')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+        <p style="font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 16px;"><b id="kaAgenName">Agen Barokah Jaya</b> mencatat transaksi penjualan minyak jelantah berikut atas nama Anda. Cek dulu sebelum konfirmasi.</p>
+        <div class="detail-row"><span class="k">Volume</span><span class="v mono" id="kaVol">6 L</span></div>
+        <div class="detail-row"><span class="k">Harga per liter</span><span class="v mono">Rp 6.500</span></div>
+        <div class="total-preview" style="margin-bottom:18px;"><span class="k">Total diterima</span><span class="v" id="kaTotal">Rp 39.000</span></div>
+        <div class="qc-toggle" style="margin-bottom:6px;">
+          <div class="qc-opt" id="kaYesOpt" onclick="setKlienApprovalChoice(true)">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Terima Transaksi</span>
+          </div>
+          <div class="qc-opt" id="kaNoOpt" onclick="setKlienApprovalChoice(false)">
+            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Batalkan</span>
+          </div>
+        </div>
+        <p style="font-size:11px; color:var(--muted); margin:-2px 0 16px; line-height:1.5;">Kalau ini bukan transaksi Anda atau datanya salah, pilih "Batalkan".</p>
+        <button class="btn btn-primary" id="kaConfirmBtn" onclick="confirmKlienApproval()" disabled>Kirim Konfirmasi</button>
+      </div>
+    </div>
+
     <!-- ===================== AGEN: DETAIL TRANSAKSI / AJUKAN PEMBATALAN SHEET ===================== -->
     <div class="modal-overlay" id="txDetailSheet">
       <div class="modal-sheet">
@@ -1379,12 +1437,24 @@
     closeDevPanel();
   }
 
+  // Shortcut testing: langsung masuk sbg Klien dgn 2 transaksi dari Agen yg lagi nunggu approval,
+  // biar gak perlu manual login-Agen > input transaksi > logout > login-Klien tiap mau cek kondisi ini.
+  function simulateKlienApproval(){
+    pendingKlienApprovals.push(
+      { rowEl: null, klienName: 'Siti Rahayu', vol: '6 L', total: 'Rp 39.000' },
+      { rowEl: null, klienName: 'Siti Rahayu', vol: '3 L', total: 'Rp 19.500' }
+    );
+    loginAsDemo('klien');
+  }
+
   function buildDevPanel(){
     const wrap = document.getElementById('devPanelList');
     wrap.innerHTML = Object.keys(DEMO_META).map(role=>{
       const m = DEMO_META[role];
       return '<button type="button" class="dev-item" onclick="loginAsDemo(\''+role+'\')">'+m.label+'<small>'+m.name+'</small></button>';
-    }).join('') + '<button type="button" class="dev-item" onclick="doLogout(); closeDevPanel();">Keluar / layar login</button>';
+    }).join('')
+      + '<button type="button" class="dev-item" onclick="simulateKlienApproval()">🔔 Simulasi approval Klien<small>Login Klien + 2 transaksi antre dari Agen</small></button>'
+      + '<button type="button" class="dev-item" onclick="doLogout(); closeDevPanel();">Keluar / layar login</button>';
   }
   function toggleDevPanel(e){
     if(e) e.stopPropagation();
@@ -1417,6 +1487,7 @@
     const c = el.querySelector('.content'); if(c) c.scrollTop = 0;
     if(currentMobileRole==='driver' && name==='route') renderStopList();
     if(currentMobileRole==='agen' && name==='home') refreshAgenPaymentBanner();
+    if(currentMobileRole==='klien' && name==='home') refreshKlienApprovalBanner();
   }
 
   function tabTap(name){
@@ -1569,6 +1640,30 @@
     showToast('Redirect ke WhatsApp Agen untuk atur jemput ke rumah');
   }
 
+  function refreshKlienBeranda(){
+    const icon = document.getElementById('klienRefreshIcon');
+    const btn = document.getElementById('klienRefreshBtn');
+    btn.disabled = true;
+    icon.style.transition = 'transform .6s ease';
+    icon.style.transform = 'rotate(360deg)';
+    setTimeout(()=>{
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      document.getElementById('klienUpdatedTime').textContent = 'Diperbarui ' + hh + '.' + mm + ' oleh Kilang';
+      icon.style.transform = 'rotate(0deg)';
+      btn.disabled = false;
+      // Refresh juga jadi kesempatan buat cek transaksi Agen->Klien yang menunggu approval
+      // (di app KMP nanti ini poll ke API, bukan cuma baca array in-memory kayak di prototipe ini).
+      refreshKlienApprovalBanner();
+      if(pendingKlienApprovals.length > 0){
+        showToast('Ada transaksi baru menunggu konfirmasi Anda');
+      } else {
+        showToast('Harga, Agen terdekat, & status approval diperbarui');
+      }
+    }, 650);
+  }
+
   /* ---------- Upgrade ke Agen (baru) ---------- */
   function openUpgradeAgenSheet(){
     if(klienAgenStatus === 'pending'){ showToast('Pengajuan Anda masih ditinjau Kilang.'); return; }
@@ -1668,12 +1763,17 @@
       statusEl.textContent = 'Dibatalkan';
       statusEl.style.color = 'var(--rust)';
       cancelledNote.style.display = 'flex';
-      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Komplain disetujui Kilang — ' + el.dataset.reason) : 'Transaksi ini sudah dibatalkan.';
+      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Alasan: ' + el.dataset.reason) : 'Transaksi ini sudah dibatalkan.';
     } else if(el.dataset.status === 'pending_cancel'){
       statusEl.textContent = 'Dalam Peninjauan';
       statusEl.style.color = 'var(--amber-deep)';
       pendingNote.style.display = 'flex';
       document.getElementById('tdPendingReason').textContent = 'Sedang ditinjau Kilang — alasan komplain: ' + (el.dataset.reason || '-');
+    } else if(el.dataset.status === 'pending_klien'){
+      statusEl.textContent = 'Menunggu Klien';
+      statusEl.style.color = 'var(--amber-deep)';
+      pendingNote.style.display = 'flex';
+      document.getElementById('tdPendingReason').textContent = 'Menunggu Klien menekan Terima/Batalkan di app-nya sendiri.';
     } else {
       statusEl.style.color = 'var(--primary)';
       if(el.dataset.day === 'today'){
@@ -1749,16 +1849,99 @@
     row.dataset.vol = vol + ' L';
     row.dataset.total = 'Rp ' + total.toLocaleString('id-ID');
     row.dataset.day = 'today';
-    row.dataset.status = 'ok';
+    row.dataset.status = isGuestTx ? 'ok' : 'pending_klien';
+    const stBadge = isGuestTx ? '<div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div>' : '<div class="st pending">Menunggu Klien</div>';
     row.innerHTML = '<div class="tx-avatar">'+initials+'</div>'
       + '<div class="tx-mid"><h4>'+name+guestTag+'</h4><div class="d">Baru saja &middot; '+vol+' L</div></div>'
-      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>'
+      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div>'+stBadge+'</div>'
       + '<svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>';
     document.getElementById('txListFull').prepend(row);
 
+    if(!isGuestTx){
+      pendingKlienApprovals.push({ rowEl: row, klienName: name, vol: vol+' L', total: 'Rp '+total.toLocaleString('id-ID') });
+      refreshKlienApprovalBanner();
+    }
+
     closeSheet('txSheet');
     showScreen('transaksi');
-    showToast('Transaksi '+name+' tersimpan');
+    showToast(isGuestTx ? 'Transaksi '+name+' tersimpan' : 'Transaksi terkirim — menunggu konfirmasi Klien');
+  }
+
+  /* ---------- Konfirmasi transaksi dari sisi Klien (approval Agen -> Klien) ---------- */
+  let pendingKlienApprovals = []; // queue: {rowEl, klienName, vol, total} — transaksi input Agen yang menunggu Terima/Batalkan dari Klien
+  let klienApprovalChoice = null;
+
+  function refreshKlienApprovalBanner(){
+    const banner = document.getElementById('klienApprovalBanner');
+    if(!banner) return;
+    if(pendingKlienApprovals.length > 0){
+      const next = pendingKlienApprovals[0];
+      document.getElementById('klienApprovalVol').textContent = next.vol;
+      document.getElementById('klienApprovalTotal').textContent = next.total;
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+  function openKlienApprovalSheet(){
+    if(pendingKlienApprovals.length === 0) return;
+    const next = pendingKlienApprovals[0];
+    document.getElementById('kaVol').textContent = next.vol;
+    document.getElementById('kaTotal').textContent = next.total;
+    klienApprovalChoice = null;
+    document.getElementById('kaYesOpt').className = 'qc-opt';
+    document.getElementById('kaNoOpt').className = 'qc-opt';
+    document.getElementById('kaConfirmBtn').disabled = true;
+    openSheet('klienApprovalSheet');
+  }
+  function setKlienApprovalChoice(val){
+    klienApprovalChoice = val;
+    document.getElementById('kaYesOpt').className = 'qc-opt' + (val === true ? ' sel-good' : '');
+    document.getElementById('kaNoOpt').className = 'qc-opt' + (val === false ? ' sel-bad' : '');
+    document.getElementById('kaConfirmBtn').disabled = false;
+  }
+  // Tap Terima/Tolak langsung di banner Beranda: buka sheet review dgn pilihan itu udah ke-pilih,
+  // Klien tetep lihat detail (volume/harga/total) sebelum tap "Kirim Konfirmasi" buat finalisasi.
+  function quickKlienApproval(val){
+    openKlienApprovalSheet();
+    setKlienApprovalChoice(val);
+  }
+  function confirmKlienApproval(){
+    if(klienApprovalChoice === null) return;
+    const pending = pendingKlienApprovals.shift();
+    refreshKlienApprovalBanner();
+    // Catatan prototipe: baris transaksi Agen (rowEl) dimutasi langsung di sini karena satu
+    // sesi browser dipakai buat semua role. Di app KMP nanti ini lewat API accept/cancel,
+    // bukan referensi DOM seperti ini.
+    const row = pending ? pending.rowEl : null;
+    if(row){
+      const stEl = row.querySelector('.st');
+      if(klienApprovalChoice === true){
+        row.dataset.status = 'ok';
+        stEl.textContent = 'Tercatat';
+        stEl.className = 'st ok';
+        const rightWrap = row.querySelector('.tx-right');
+        if(rightWrap && !rightWrap.querySelector('.cancel-hint')){
+          rightWrap.insertAdjacentHTML('beforeend', '<div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div>');
+        }
+      } else {
+        row.dataset.status = 'cancelled';
+        row.dataset.reason = 'Dibatalkan oleh Klien';
+        stEl.textContent = 'Dibatalkan';
+        stEl.className = 'st no';
+        const hintEl = row.querySelector('.cancel-hint');
+        if(hintEl) hintEl.remove();
+        row.querySelector('.tx-avatar').classList.add('cancel');
+      }
+    }
+    showToast(klienApprovalChoice === true ? 'Transaksi diterima' : 'Transaksi dibatalkan');
+    // Kalau masih ada transaksi lain yang antre, langsung lanjut ke sheet berikutnya
+    // daripada nyuruh Klien nutup lalu tap banner lagi satu-satu.
+    if(pendingKlienApprovals.length > 0){
+      openKlienApprovalSheet();
+    } else {
+      closeSheet('klienApprovalSheet');
+    }
   }
 
   /* ============================================================

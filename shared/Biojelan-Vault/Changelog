@@ -154,19 +154,5 @@ Beberapa angka bisnis yang berpotensi berubah sebelumnya tertanam langsung di te
 - **Swimlane per Role** — sequence diagram alur yang sama, dipisah per aktor (Klien/Agen/Sistem/Manajer Ops/Driver/Finance/Admin), buat cek kesesuaian sama prinsip pemisahan wewenang.
 - **ERD** — skema database turunan dari semua fitur di prototype: akun & role, transaksi, dirigen, pickup & rute, pembayaran, QC & denda, sengketa, pengaduan, broadcast, konfigurasi sistem, log aktivitas, top up Midtrans.
 
-## 16. Revisi Agen: notelp transaksi, tamu, link Gmaps, dan pembayaran tunai tanpa serah HP
-
-*File: `BioJelan-Prototype-Mobile.html`*
-
-Revisi mingguan dari chat internal (Rafly/oda), diterapkan dulu di prototype HTML sebelum masuk ke KMP. Item cashless (Kilang → Agen, approval admin buat payout) sengaja belum digarap — masuk next dev.
-
-- **Input Transaksi (Agen)**: tambah field No. Telepon (wajib di semua transaksi), plus tab baru "Tamu (Belum Punya Akun)" — Agen bisa catat transaksi walk-in cukup pakai nama + no. telepon, tanpa email/akun terdaftar. Riwayat & detail transaksi nampilin badge "Tamu" buat jenis transaksi ini.
-- **Upgrade ke Agen (Klien)**: tambah field wajib Link Google Maps lokasi usaha, dengan hint cara ambil link share dari app Maps.
-- **Verifikasi pembayaran tunai Driver → Agen dirombak total.** Rencana awal: ganti OTP jadi toggle Ya/Tidak yang ditekan Agen langsung di HP Driver (biar gak perlu ketik kode). Direvisi lagi setelah masukan bahwa serah-HP dari Driver ke Agen tetap gak realistis — jadi dipindah ke app Agen sendiri:
-  - Driver: abis foto bukti & pilih metode Tunai, tombolnya jadi "Kirim ke Agen untuk Konfirmasi" (bukan langsung selesai). Status stop baru **Menunggu Konfirmasi** — Driver gak bisa lanjut ke stop berikutnya sebelum Agen konfirmasi.
-  - Agen: banner muncul di Beranda begitu ada laporan tunai masuk ("Driver [nama] baru saja lapor bayar tunai Rp [jumlah]..."). Diketuk, buka sheet dengan toggle **Ya, Sudah Diterima** / **Belum · Ada Masalah**. Pilihan "Ya" nyelesaiin stop Driver jadi Completed; "Belum/Ada Masalah" dikirim ke Kilang sebagai sengketa dan stop Driver balik ke status sebelum bayar biar bisa diulang.
-  - Metode Transfer (Midtrans) gak berubah — tetap otomatis, gak butuh konfirmasi manual dari Agen.
-  - Catatan teknis: karena prototype ini satu file/satu sesi browser (Driver & Agen belum benar-benar dua device terpisah), sinkronisasi status stop dilakuin lewat variabel JS bersama supaya demonya kelihatan nyambung. Di implementasi KMP asli, ini bakal lewat notifikasi/API real per akun, bukan shared state kayak di prototype.
-
 ---
 Lihat juga: [[00 - Overview]] · [[05 - Struktur File Prototype]]

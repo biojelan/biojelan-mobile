@@ -67,4 +67,13 @@ object BioIcons {
     val Map by lazy { icon("map", "M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3z", "M8 3v15M16 6v15") }
     val Calendar by lazy { icon("calendar", "M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2z", "M3 10h18M8 2v4M16 2v4") }
     val Gauge by lazy { icon("gauge", "M12 3C8 8 5 11.5 5 15a7 7 0 0 0 14 0c0-3.5-3-7-7-12z", "M9 16a3 3 0 0 0 3 3") }
+    val Truck by lazy {
+        icon(
+            "truck",
+            "M2 8h11v9H2z",
+            "M13 11h4l4 3.5V17h-8z",
+            "M6.5 20a2 2 0 1 0 0-4 2 2 0 1 0 0 4z",
+            "M16.5 20a2 2 0 1 0 0-4 2 2 0 1 0 0 4z",
+        )
+    }
 }

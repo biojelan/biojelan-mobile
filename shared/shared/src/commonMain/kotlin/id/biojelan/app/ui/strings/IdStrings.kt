@@ -93,6 +93,18 @@ object IdStrings : BioStrings {
     override val stockCancelled = "Dibatalkan"
     override fun transactionDash(name: String) = "Transaksi — $name"
 
+    // ============================================================ Agen Pickup
+    override val pickupSectionTitle = "Status penjemputan"
+    override val pickupNoneScheduled = "Belum ada penjemputan yang dijadwalkan Kilang."
+    override val pickupStatusAssigned = "Driver ditugaskan"
+    override val pickupStatusOtw = "Driver dalam perjalanan"
+    override val pickupStatusCompleted = "Penjemputan selesai"
+    override val pickupStatusCancelled = "Penjemputan dibatalkan"
+    override val pickupNoteAssigned = "Kilang sudah menugaskan Driver. Siapkan dirigen Anda."
+    override val pickupNoteOtw = "Driver sedang menuju lokasi Anda."
+    override val pickupNoteCompleted = "Minyak sudah diambil Driver — stok akan diperbarui Kilang."
+    override fun pickupUpdatedAt(time: String) = "Diperbarui $time"
+
     // ============================================================ Agen Transactions
     override val transactionsTitle = "Transaksi"
     override val transactionDetailTitle = "Detail transaksi"

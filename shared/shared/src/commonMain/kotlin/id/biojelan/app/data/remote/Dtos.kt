@@ -171,3 +171,23 @@ data class TransactionStatusDto(
     val transactionId: String = "",
     val status: String = "",
 )
+
+// ============================================================ Pickup (Driver)
+
+/**
+ * GET /api/agen/pickup/status (pickup.md). Sisi Kilang (create) dan Driver
+ * (update/get) di luar cakupan app mobile ini — lihat README.
+ */
+@Serializable
+data class PickupStatusDto(
+    @SerialName("pickup_id") @Serializable(with = FlexibleStringSerializer::class)
+    val pickupId: String = "",
+    @SerialName("driver_id") @Serializable(with = FlexibleStringSerializer::class)
+    val driverId: String = "",
+    @SerialName("agen_id") @Serializable(with = FlexibleStringSerializer::class)
+    val agenId: String = "",
+    val date: String = "",
+    /** ASSIGNED, OTW, COMPLETED, CANCELLED. */
+    val status: String = "",
+    @SerialName("updated_at") val updatedAt: String = "",
+)
