@@ -548,6 +548,23 @@
           <h2>Siti Rahayu 👋</h2>
         </div>
 
+        <div class="approval-note" id="klienApprovalBanner" style="display:none; margin:0 0 14px;">
+          <div class="approval-note-head" onclick="openKlienApprovalSheet()">
+            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+            <span><b id="klienApprovalAgen">Agen Barokah Jaya</b> mencatat Anda menjual <b class="mono" id="klienApprovalVol">6 L</b> jelantah seharga <b class="mono" id="klienApprovalTotal">Rp 39.000</b>.</span>
+          </div>
+          <div class="approval-note-actions">
+            <button type="button" class="approval-btn approval-yes" onclick="quickKlienApproval(true)">
+              <svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M5 12l5 5L19 7"/></svg>
+              Terima
+            </button>
+            <button type="button" class="approval-btn approval-no" onclick="quickKlienApproval(false)">
+              <svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              Tolak
+            </button>
+          </div>
+        </div>
+
         <div class="price-band">
           <div class="drop-gauge">
             <svg viewBox="0 0 100 124">
@@ -602,23 +619,6 @@
           <svg id="klienRefreshIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 4v5h-5"/></svg>
           Refresh Halaman
         </button>
-
-        <div class="approval-note" id="klienApprovalBanner" style="display:none; margin:10px 22px 4px;">
-          <div class="approval-note-head" onclick="openKlienApprovalSheet()">
-            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
-            <span><b id="klienApprovalAgen">Agen Barokah Jaya</b> mencatat Anda menjual <b class="mono" id="klienApprovalVol">6 L</b> jelantah seharga <b class="mono" id="klienApprovalTotal">Rp 39.000</b>.</span>
-          </div>
-          <div class="approval-note-actions">
-            <button type="button" class="approval-btn approval-yes" onclick="quickKlienApproval(true)">
-              <svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M5 12l5 5L19 7"/></svg>
-              Terima
-            </button>
-            <button type="button" class="approval-btn approval-no" onclick="quickKlienApproval(false)">
-              <svg viewBox="0 0 24 24" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
-              Tolak
-            </button>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -772,6 +772,13 @@
         <div class="cash-note" id="agenPayBanner" style="display:none; cursor:pointer;" onclick="openAgenPayConfirmSheet()">
           <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
           <span>Driver <b id="agenPayDriverName">Ahmad Fauzi</b> baru saja lapor bayar tunai <b class="mono" id="agenPayAmount">Rp 3.510.000</b> untuk pickup hari ini. Ketuk untuk konfirmasi penerimaan.</span>
+        </div>
+
+        <div class="approval-note" id="agenPendingBanner" style="display:none; margin:0 0 14px;">
+          <div class="approval-note-head" onclick="showScreen('transaksi')">
+            <svg viewBox="0 0 24 24" stroke="var(--amber-tint)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <span><b class="mono" id="agenPendingCount">1</b> <span id="agenPendingLabel">transaksi menunggu konfirmasi dari Klien</span> — status masih bisa berubah sampai Klien merespons. Ketuk untuk lihat.</span>
+          </div>
         </div>
 
         <div class="price-band">
@@ -1486,7 +1493,7 @@
     document.querySelectorAll('.tab[data-role="'+currentMobileRole+'"]').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
     const c = el.querySelector('.content'); if(c) c.scrollTop = 0;
     if(currentMobileRole==='driver' && name==='route') renderStopList();
-    if(currentMobileRole==='agen' && name==='home') refreshAgenPaymentBanner();
+    if(currentMobileRole==='agen' && name==='home'){ refreshAgenPaymentBanner(); refreshAgenPendingBanner(); }
     if(currentMobileRole==='klien' && name==='home') refreshKlienApprovalBanner();
   }
 
@@ -1860,6 +1867,7 @@
     if(!isGuestTx){
       pendingKlienApprovals.push({ rowEl: row, klienName: name, vol: vol+' L', total: 'Rp '+total.toLocaleString('id-ID') });
       refreshKlienApprovalBanner();
+      refreshAgenPendingBanner();
     }
 
     closeSheet('txSheet');
@@ -1878,6 +1886,18 @@
       const next = pendingKlienApprovals[0];
       document.getElementById('klienApprovalVol').textContent = next.vol;
       document.getElementById('klienApprovalTotal').textContent = next.total;
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+  function refreshAgenPendingBanner(){
+    const banner = document.getElementById('agenPendingBanner');
+    if(!banner) return;
+    const n = pendingKlienApprovals.length;
+    if(n > 0){
+      document.getElementById('agenPendingCount').textContent = n;
+      document.getElementById('agenPendingLabel').textContent = n === 1 ? 'transaksi menunggu konfirmasi dari Klien' : 'transaksi menunggu konfirmasi dari Klien';
       banner.style.display = 'flex';
     } else {
       banner.style.display = 'none';
@@ -1910,6 +1930,7 @@
     if(klienApprovalChoice === null) return;
     const pending = pendingKlienApprovals.shift();
     refreshKlienApprovalBanner();
+    refreshAgenPendingBanner();
     // Catatan prototipe: baris transaksi Agen (rowEl) dimutasi langsung di sini karena satu
     // sesi browser dipakai buat semua role. Di app KMP nanti ini lewat API accept/cancel,
     // bukan referensi DOM seperti ini.

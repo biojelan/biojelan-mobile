@@ -122,6 +122,12 @@ class AgenViewModel(
         }
     }
 
+    /** Ikon jam di topbar tab Stok (`#screen-agen-stok`) — di prototype cuma munculin info, bukan aksi nyata. */
+    fun infoStockHistory() = toast("Riwayat lengkap pergerakan stok")
+
+    /** Link "Ada selisih catatan stok?" di bawah tab Stok — koreksi stok belum ada endpoint-nya. */
+    fun infoStockCorrection() = toast("Fitur koreksi stok belum tersedia — hubungi Kilang untuk perbaikan catatan.")
+
     /**
      * GET /api/agen/pickup/status. Dipanggil bersamaan dengan [refresh]; kegagalan di sini tidak
      * memblokir tampilan transaksi/profil — status penjemputan cuma disembunyikan (null).

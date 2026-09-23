@@ -132,6 +132,39 @@ private fun two(n: Int) = n.toString().padStart(2, '0')
 private fun datePart(p: LocalParts) = "${p.day} ${MONTHS_ID[p.month - 1]} ${p.year}"
 private fun timePart(p: LocalParts) = "${two(p.hour)}.${two(p.minute)}"
 
+/** "Hari ini" / "Besok" / "Kemarin" / "12 Agu 2026" — untuk field tanggal tanpa jam (mis. `pickup.date`). */
+fun formatDateOnly(
+    iso: String?,
+    nowMillis: Long = nowEpochMillis(),
+    offsetSeconds: Int = localUtcOffsetSeconds(),
+): String {
+    val ms = parseIsoMillis(iso) ?: return iso.orEmpty()
+    val p = localParts(ms, offsetSeconds)
+    val today = localParts(nowMillis, offsetSeconds).epochDay
+    return when (p.epochDay) {
+        today -> "Hari ini"
+        today + 1 -> "Besok"
+        today - 1 -> "Kemarin"
+        else -> datePart(p)
+    }
+}
+
+/** "10.42" hari ini / "Kemarin" kemarin / "7 Agu 2026" selainnya — dipakai di riwayat stok yang ringkas. */
+fun formatStockTime(
+    iso: String?,
+    nowMillis: Long = nowEpochMillis(),
+    offsetSeconds: Int = localUtcOffsetSeconds(),
+): String {
+    val ms = parseIsoMillis(iso) ?: return iso.orEmpty()
+    val p = localParts(ms, offsetSeconds)
+    val today = localParts(nowMillis, offsetSeconds).epochDay
+    return when (p.epochDay) {
+        today -> timePart(p)
+        today - 1 -> "Kemarin"
+        else -> datePart(p)
+    }
+}
+
 /** "2024-06-01T12:00:00Z" -> "1 Jun 2024, 19.00" (WIB). Gagal parse -> teks asli. */
 fun formatDateTime(iso: String?, offsetSeconds: Int = localUtcOffsetSeconds()): String {
     val ms = parseIsoMillis(iso) ?: return iso.orEmpty()

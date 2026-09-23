@@ -43,7 +43,6 @@ import id.biojelan.app.ui.components.ChipKind
 import id.biojelan.app.ui.components.CircleIconButton
 import id.biojelan.app.ui.components.ErrorBlock
 import id.biojelan.app.ui.components.LoadingBlock
-import id.biojelan.app.ui.components.NoteBox
 import id.biojelan.app.ui.components.NoteTone
 import id.biojelan.app.ui.components.PriceBand
 import id.biojelan.app.ui.components.ScreenPad
@@ -109,12 +108,6 @@ fun KlienHomeTab(
                 state.agens.take(8).forEach { agen -> AgenMiniCard(agen) { onOpenAgen(agen.agenId) } }
             }
         }
-
-        Spacer(Modifier.height(20.dp))
-        NoteBox(
-            s.klienInfoNote,
-            icon = BioIcons.Info,
-        )
     }
 }
 

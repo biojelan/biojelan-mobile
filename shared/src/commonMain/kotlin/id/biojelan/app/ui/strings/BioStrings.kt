@@ -54,6 +54,7 @@ interface BioStrings {
     val tabFindAgent: String
     val tabTransactions: String
     val tabStock: String
+    val tabPickup: String
     val tabHistory: String
     val tabProfile: String
 
@@ -92,13 +93,16 @@ interface BioStrings {
     val stockThresholdInfo: String
     val stockMovement: String
     val noStockMovement: String
-    val stockCorrectionNote: String
+    val stockCorrectionLink: String
+    val stockCorrectionToast: String
+    val stockHistoryToast: String
     val stockIncoming: String
     val stockWaiting: String
     val stockCancelled: String
     fun transactionDash(name: String): String
 
     // ============================================================ Agen Pickup
+    val pickupTitle: String
     val pickupSectionTitle: String
     val pickupNoneScheduled: String
     val pickupStatusAssigned: String
@@ -109,6 +113,11 @@ interface BioStrings {
     val pickupNoteOtw: String
     val pickupNoteCompleted: String
     fun pickupUpdatedAt(time: String): String
+    val pickupStepAssigned: String
+    val pickupStepOtw: String
+    val pickupStepCompleted: String
+    val pickupIdLabel: String
+    val pickupScheduleLabel: String
 
     // ============================================================ Agen Transactions
     val transactionsTitle: String

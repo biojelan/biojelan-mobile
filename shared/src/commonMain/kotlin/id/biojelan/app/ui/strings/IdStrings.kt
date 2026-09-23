@@ -48,6 +48,7 @@ object IdStrings : BioStrings {
     override val tabFindAgent = "Cari Agen"
     override val tabTransactions = "Transaksi"
     override val tabStock = "Stok"
+    override val tabPickup = "Pickup"
     override val tabHistory = "Riwayat"
     override val tabProfile = "Profil"
 
@@ -81,19 +82,22 @@ object IdStrings : BioStrings {
     override val noTransactionsAgenHint = "Belum ada transaksi. Catat penjualan pertama dari Klien lewat tombol di atas."
 
     // ============================================================ Agen Stock
-    override val stockTitle = "Stok"
+    override val stockTitle = "Stok Minyak"
     override fun thresholdCaption(threshold: String) = "dari ambang batas $threshold"
     override val aboveThresholdNote = "Sudah lewati ambang — menunggu jadwal Kilang"
     override val stockThresholdInfo = "Setelah stok melewati ambang, Kilang akan menjadwalkan penjemputan. Ambang batas ditentukan oleh Kilang."
-    override val stockMovement = "Pergerakan stok"
+    override val stockMovement = "Riwayat pergerakan stok"
     override val noStockMovement = "Belum ada pergerakan. Stok bertambah saat Klien menerima transaksi."
-    override val stockCorrectionNote = "Ada selisih stok? Hubungi tim Kilang — koreksi stok belum tersedia di app."
+    override val stockCorrectionLink = "Ada selisih catatan stok? Laporkan di sini"
+    override val stockCorrectionToast = "Fitur koreksi stok belum tersedia — hubungi Kilang untuk perbaikan catatan."
+    override val stockHistoryToast = "Riwayat lengkap pergerakan stok"
     override val stockIncoming = "Masuk"
     override val stockWaiting = "Menunggu"
     override val stockCancelled = "Dibatalkan"
     override fun transactionDash(name: String) = "Transaksi — $name"
 
     // ============================================================ Agen Pickup
+    override val pickupTitle = "Info Pickup"
     override val pickupSectionTitle = "Status penjemputan"
     override val pickupNoneScheduled = "Belum ada penjemputan yang dijadwalkan Kilang."
     override val pickupStatusAssigned = "Driver ditugaskan"
@@ -104,6 +108,11 @@ object IdStrings : BioStrings {
     override val pickupNoteOtw = "Driver sedang menuju lokasi Anda."
     override val pickupNoteCompleted = "Minyak sudah diambil Driver — stok akan diperbarui Kilang."
     override fun pickupUpdatedAt(time: String) = "Diperbarui $time"
+    override val pickupStepAssigned = "Ditugaskan"
+    override val pickupStepOtw = "Dalam perjalanan"
+    override val pickupStepCompleted = "Selesai"
+    override val pickupIdLabel = "ID Pickup"
+    override val pickupScheduleLabel = "Jadwal pickup"
 
     // ============================================================ Agen Transactions
     override val transactionsTitle = "Transaksi"

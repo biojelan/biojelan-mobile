@@ -77,8 +77,6 @@ fun AgenStockTab(state: AgenUiState, user: UserDto, vm: AgenViewModel) {
                 if (reached) s.aboveThresholdNote else s.remainingToThreshold(formatLiter(threshold - stock)),
                 if (reached) ChipKind.Done else ChipKind.Pending,
             )
-            Spacer(Modifier.height(16.dp))
-            NoteBox(s.stockThresholdInfo, icon = BioIcons.Info)
         }
 
         Column(Modifier.padding(horizontal = ScreenPad)) {
@@ -110,8 +108,6 @@ fun AgenStockTab(state: AgenUiState, user: UserDto, vm: AgenViewModel) {
                     }
                 }
             }
-            Spacer(Modifier.height(16.dp))
-            NoteBox(s.stockCorrectionNote)
         }
     }
 }

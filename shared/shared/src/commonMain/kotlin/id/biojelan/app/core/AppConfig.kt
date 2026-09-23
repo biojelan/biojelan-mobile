@@ -5,7 +5,7 @@ package id.biojelan.app.core
  * dikumpulkan di sini supaya gampang diganti begitu backend menyediakannya.
  */
 object AppConfig {
-    /** Base URL backend live (Laravel, deploy oda). */
+    /** Base URL dari API-DOC. Masih http:// — ganti ke https:// begitu backend siap. */
     const val BASE_URL = "https://biojelan.callmeoda.web.id"
 
     const val CONNECT_TIMEOUT_MS = 10_000L

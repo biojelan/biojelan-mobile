@@ -43,6 +43,7 @@ import id.biojelan.app.ui.components.ChipKind
 import id.biojelan.app.ui.components.CircleIconButton
 import id.biojelan.app.ui.components.Drip
 import id.biojelan.app.ui.components.DropGauge
+import id.biojelan.app.ui.components.DropGaugeTone
 import id.biojelan.app.ui.components.ErrorBlock
 import id.biojelan.app.ui.components.NoteBox
 import id.biojelan.app.ui.components.NoteTone
@@ -101,7 +102,11 @@ fun AgenHomeTab(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            DropGauge(fill = (stock / threshold).toFloat(), modifier = Modifier.size(width = 46.dp, height = 57.dp))
+            DropGauge(
+                fill = (stock / threshold).toFloat(),
+                tone = DropGaugeTone.Primary,
+                modifier = Modifier.size(width = 46.dp, height = 57.dp),
+            )
             Column(Modifier.weight(1f)) {
                 Text(s.currentStockLabel, style = BioTheme.type.eyebrow, color = c.muted)
                 Text(formatLiter(stock), style = BioTheme.type.display, color = c.ink)

@@ -47,6 +47,7 @@ object EnStrings : BioStrings {
     override val tabFindAgent = "Find Agent"
     override val tabTransactions = "Transactions"
     override val tabStock = "Stock"
+    override val tabPickup = "Pickup"
     override val tabHistory = "History"
     override val tabProfile = "Profile"
 
@@ -80,19 +81,22 @@ object EnStrings : BioStrings {
     override val noTransactionsAgenHint = "No transactions yet. Record the first sale from a Client using the button above."
 
     // ============================================================ Agen Stock
-    override val stockTitle = "Stock"
+    override val stockTitle = "Oil Stock"
     override fun thresholdCaption(threshold: String) = "of $threshold threshold"
     override val aboveThresholdNote = "Above threshold — awaiting Kilang pickup schedule"
     override val stockThresholdInfo = "After stock exceeds the threshold, Kilang will schedule a pickup. The threshold is set by Kilang."
-    override val stockMovement = "Stock movement"
+    override val stockMovement = "Stock movement history"
     override val noStockMovement = "No movement yet. Stock increases when a Client accepts a transaction."
-    override val stockCorrectionNote = "Stock discrepancy? Contact the Kilang team — stock correction is not yet available in the app."
+    override val stockCorrectionLink = "Notice a stock discrepancy? Report it here"
+    override val stockCorrectionToast = "Stock correction isn't available yet — contact Kilang to fix the record."
+    override val stockHistoryToast = "Full stock movement history"
     override val stockIncoming = "Incoming"
     override val stockWaiting = "Waiting"
     override val stockCancelled = "Cancelled"
     override fun transactionDash(name: String) = "Transaction — $name"
 
     // ============================================================ Agen Pickup
+    override val pickupTitle = "Pickup Info"
     override val pickupSectionTitle = "Pickup status"
     override val pickupNoneScheduled = "No pickup scheduled by Kilang yet."
     override val pickupStatusAssigned = "Driver assigned"
@@ -103,6 +107,11 @@ object EnStrings : BioStrings {
     override val pickupNoteOtw = "The driver is heading to your location."
     override val pickupNoteCompleted = "Your oil has been collected — Kilang will update your stock."
     override fun pickupUpdatedAt(time: String) = "Updated $time"
+    override val pickupStepAssigned = "Assigned"
+    override val pickupStepOtw = "On the way"
+    override val pickupStepCompleted = "Completed"
+    override val pickupIdLabel = "Pickup ID"
+    override val pickupScheduleLabel = "Pickup schedule"
 
     // ============================================================ Agen Transactions
     override val transactionsTitle = "Transactions"

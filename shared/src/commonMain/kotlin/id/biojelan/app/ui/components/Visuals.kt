@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -48,6 +49,13 @@ import id.biojelan.app.ui.theme.BioTheme
 private const val DROP_PATH = "M50 4 C24 40 10 64 10 82 C10 105 28 120 50 120 C72 120 90 105 90 82 C90 64 76 40 50 4 Z"
 
 /**
+ * Warna isi [DropGauge]. Prototype pakai isian berbeda tergantung konteks:
+ * - `Amber` (gradient emas) untuk drop dekoratif di [PriceBand] (harga minyak).
+ * - `Primary` (hijau solid, opacity 0.92) untuk gauge stok Agen (mini di Beranda & besar di tab Stok).
+ */
+enum class DropGaugeTone { Amber, Primary }
+
+/**
  * Tetesan minyak. [fill] 0..1 = tinggi isi (untuk gauge stok). [outline] menggambar garis tepi.
  * Viewbox 100×124, jadi beri modifier dengan rasio kira-kira 0,8.
  */
@@ -56,6 +64,7 @@ fun DropGauge(
     fill: Float,
     modifier: Modifier = Modifier,
     outline: Boolean = true,
+    tone: DropGaugeTone = DropGaugeTone.Amber,
 ) {
     val c = BioTheme.colors
     val path = remember { PathParser().parsePathString(DROP_PATH).toPath() }
@@ -68,14 +77,17 @@ fun DropGauge(
             if (level > 0f) {
                 val top = 120f - 116f * level
                 clipRect(left = 0f, top = top, right = 100f, bottom = 124f) {
-                    drawPath(
-                        path,
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFFE9BA55), c.amberDeep),
-                            startY = 4f,
-                            endY = 120f,
-                        ),
-                    )
+                    when (tone) {
+                        DropGaugeTone.Amber -> drawPath(
+                            path,
+                            brush = Brush.verticalGradient(
+                                colors = listOf(Color(0xFFE9BA55), c.amberDeep),
+                                startY = 4f,
+                                endY = 120f,
+                            ),
+                        )
+                        DropGaugeTone.Primary -> drawPath(path, color = c.primary.copy(alpha = 0.92f))
+                    }
                 }
             }
             if (outline) {
@@ -250,6 +262,37 @@ fun TxRow(
             Text(amount, style = BioTheme.type.mono, color = c.ink)
             Spacer(Modifier.height(4.dp))
             BioChip(statusText, statusKind)
+        }
+    }
+}
+
+/**
+ * Baris ringkas untuk "Riwayat pergerakan stok" (`.stock-hrow` di prototype): ikon +/×, label,
+ * nilai mono, dan waktu — sengaja tanpa avatar/chip supaya beda tampilan dari [TxRow] transaksi biasa.
+ */
+@Composable
+fun StockHistoryRow(label: String, value: String, time: String, cancelled: Boolean, modifier: Modifier = Modifier) {
+    val c = BioTheme.colors
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .alpha(if (cancelled) 0.7f else 1f)
+            .bioCard(14.dp)
+            .padding(horizontal = 13.dp, vertical = 11.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(11.dp),
+    ) {
+        Icon(
+            if (cancelled) BioIcons.Close else BioIcons.Plus,
+            contentDescription = null,
+            tint = if (cancelled) c.rust else c.primary,
+            modifier = Modifier.size(16.dp),
+        )
+        Text(label, style = BioTheme.type.label, color = c.ink, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Column(horizontalAlignment = Alignment.End) {
+            Text(value, style = BioTheme.type.monoSmall, color = if (cancelled) c.rust else c.primary)
+            Spacer(Modifier.height(2.dp))
+            Text(time, style = BioTheme.type.caption, color = c.muted)
         }
     }
 }
