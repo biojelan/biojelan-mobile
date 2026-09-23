@@ -536,6 +536,11 @@
           <h2>Siti Rahayu 👋</h2>
         </div>
 
+        <div class="cash-note" id="klienApprovalBanner" style="display:none; cursor:pointer;" onclick="openKlienApprovalSheet()">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <span><b id="klienApprovalAgen">Agen Barokah Jaya</b> mencatat Anda menjual <b class="mono" id="klienApprovalVol">6 L</b> jelantah seharga <b class="mono" id="klienApprovalTotal">Rp 39.000</b>. Ketuk untuk konfirmasi.</span>
+        </div>
+
         <div class="price-band">
           <div class="drop-gauge">
             <svg viewBox="0 0 100 124">
@@ -546,7 +551,7 @@
           <div class="price-info">
             <p class="label">Harga jelantah hari ini</p>
             <p class="amount">Rp 6.500<span>/liter</span></p>
-            <p class="updated"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Diperbarui 07.00 oleh Kilang</p>
+            <p class="updated"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span id="klienUpdatedTime">Diperbarui 07.00 oleh Kilang</span></p>
           </div>
         </div>
 
@@ -585,6 +590,11 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
           <p><strong>Bawa langsung ke Agen</strong> untuk transaksi tercepat. Layanan jemput ke rumah dikenakan biaya terpisah dan diatur lewat WhatsApp.</p>
         </div>
+
+        <button class="btn btn-outline" id="klienRefreshBtn" onclick="refreshKlienBeranda()" style="margin-top:2px;">
+          <svg id="klienRefreshIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 4v5h-5"/></svg>
+          Refresh Halaman
+        </button>
       </div>
     </section>
 
@@ -735,6 +745,11 @@
           </div>
         </div>
 
+        <div class="cash-note" id="agenPayBanner" style="display:none; cursor:pointer;" onclick="openAgenPayConfirmSheet()">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          <span>Driver <b id="agenPayDriverName">Ahmad Fauzi</b> baru saja lapor bayar tunai <b class="mono" id="agenPayAmount">Rp 3.510.000</b> untuk pickup hari ini. Ketuk untuk konfirmasi penerimaan.</span>
+        </div>
+
         <div class="price-band">
           <div class="drop-gauge">
             <svg viewBox="0 0 100 124">
@@ -809,31 +824,31 @@
           <div class="sum-card"><div class="n mono" style="font-size:14px" id="sumTotal">Rp 273rb</div><div class="l">Total</div></div>
         </div>
         <div class="tx-list" id="txListFull">
-          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-1" data-name="Rini Wulandari" data-time="Hari ini, 10.42" data-vol="6 L" data-total="Rp 39.000" data-day="today" data-status="ok">
+          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-1" data-name="Rini Wulandari" data-phone="0812-3456-7890" data-guest="false" data-time="Hari ini, 10.42" data-vol="6 L" data-total="Rp 39.000" data-day="today" data-status="ok">
             <div class="tx-avatar">RW</div>
             <div class="tx-mid"><h4>Rini Wulandari</h4><div class="d">Hari ini, 10.42 &middot; 6 L</div></div>
             <div class="tx-right"><div class="amt">Rp 39.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
-          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-2" data-name="Dedi Prasetyo" data-time="Hari ini, 09.15" data-vol="10 L" data-total="Rp 65.000" data-day="today" data-status="ok">
+          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-2" data-name="Dedi Prasetyo" data-phone="0813-9988-2211" data-guest="false" data-time="Hari ini, 09.15" data-vol="10 L" data-total="Rp 65.000" data-day="today" data-status="ok">
             <div class="tx-avatar">DP</div>
             <div class="tx-mid"><h4>Dedi Prasetyo</h4><div class="d">Hari ini, 09.15 &middot; 10 L</div></div>
             <div class="tx-right"><div class="amt">Rp 65.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
-          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-3" data-name="Ahmad Solihin" data-time="Hari ini, 08.50" data-vol="4 L" data-total="Rp 26.000" data-day="today" data-status="ok">
-            <div class="tx-avatar">AS</div>
-            <div class="tx-mid"><h4>Ahmad Solihin</h4><div class="d">Hari ini, 08.50 &middot; 4 L</div></div>
+          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-3" data-name="Sutrisno" data-phone="0857-1122-3344" data-guest="true" data-time="Hari ini, 08.50" data-vol="4 L" data-total="Rp 26.000" data-day="today" data-status="ok">
+            <div class="tx-avatar">SU</div>
+            <div class="tx-mid"><h4>Sutrisno <span class="chip chip-todo" style="font-size:9.5px; padding:2px 8px; vertical-align:middle;">Tamu</span></h4><div class="d">Hari ini, 08.50 &middot; 4 L</div></div>
             <div class="tx-right"><div class="amt">Rp 26.000</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
-          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-4" data-name="Nia Fitriani" data-time="Kemarin, 16.20" data-vol="5 L" data-total="Rp 32.500" data-day="past" data-status="cancelled" data-reason="Transaksi tercatat dobel">
+          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-4" data-name="Nia Fitriani" data-phone="0821-4455-6677" data-guest="false" data-time="Kemarin, 16.20" data-vol="5 L" data-total="Rp 32.500" data-day="past" data-status="cancelled" data-reason="Transaksi tercatat dobel">
             <div class="tx-avatar cancel">NF</div>
             <div class="tx-mid"><h4>Nia Fitriani</h4><div class="d">Kemarin, 16.20 &middot; 5 L</div></div>
             <div class="tx-right"><div class="amt">Rp 32.500</div><div class="st no">Dibatalkan</div></div>
             <svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </div>
-          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-5" data-name="Bambang Santoso" data-time="Kemarin, 14.05" data-vol="12 L" data-total="Rp 75.600" data-day="past" data-status="ok">
+          <div class="tx-row" onclick="openTxDetail(this)" data-id="tx-5" data-name="Bambang Santoso" data-phone="0838-7766-5544" data-guest="false" data-time="Kemarin, 14.05" data-vol="12 L" data-total="Rp 75.600" data-day="past" data-status="ok">
             <div class="tx-avatar">BS</div>
             <div class="tx-mid"><h4>Bambang Santoso</h4><div class="d">Kemarin, 14.05 &middot; 12 L</div></div>
             <div class="tx-right"><div class="amt">Rp 75.600</div><div class="st ok">Selesai</div></div>
@@ -1090,6 +1105,7 @@
         <p style="font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 18px;">Menjadi Agen BioJelan — membeli minyak jelantah dari Klien di sekitar Anda dan menjualnya ke Kilang. Isi data usaha di bawah, tim Kilang akan meninjau sebelum akun Anda aktif sebagai Agen.</p>
         <div class="field"><label>Nama usaha / Agen</label><input type="text" id="uaName" placeholder="cth. Agen Berkah Jaya"></div>
         <div class="field"><label>Alamat lengkap</label><input type="text" id="uaAddress" placeholder="Jl. ..., Kotabumi"></div>
+        <div class="field"><label>Link Google Maps</label><input type="url" id="uaMapsLink" placeholder="https://maps.app.goo.gl/..."><div class="hint">Buka Google Maps di lokasi usaha, ketuk "Bagikan", lalu tempel link-nya di sini.</div></div>
         <div class="field"><label>No. telepon usaha</label><input type="text" id="uaPhone" placeholder="08xx-xxxx-xxxx"></div>
         <div class="camera-box" id="uaCamera" onclick="uaTakePhoto()">
           <svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
@@ -1097,6 +1113,30 @@
         </div>
         <p style="font-size:10.5px; color:var(--muted); margin:-12px 0 16px; text-align:center;">Dirigen dan banner dipinjamkan Kilang setelah disetujui — foto ini untuk verifikasi kesiapan lokasi.</p>
         <button class="btn btn-primary" onclick="submitUpgradeAgen()">Ajukan Upgrade ke Agen</button>
+      </div>
+    </div>
+
+    <!-- ===================== KLIEN: KONFIRMASI TRANSAKSI DARI AGEN ===================== -->
+    <div class="modal-overlay" id="klienApprovalSheet">
+      <div class="modal-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head"><h3>Konfirmasi Transaksi</h3><div class="sheet-close" onclick="closeSheet('klienApprovalSheet')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+        <p style="font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 16px;"><b id="kaAgenName">Agen Barokah Jaya</b> mencatat transaksi penjualan minyak jelantah berikut atas nama Anda. Cek dulu sebelum konfirmasi.</p>
+        <div class="detail-row"><span class="k">Volume</span><span class="v mono" id="kaVol">6 L</span></div>
+        <div class="detail-row"><span class="k">Harga per liter</span><span class="v mono">Rp 6.500</span></div>
+        <div class="total-preview" style="margin-bottom:18px;"><span class="k">Total diterima</span><span class="v" id="kaTotal">Rp 39.000</span></div>
+        <div class="qc-toggle" style="margin-bottom:6px;">
+          <div class="qc-opt" id="kaYesOpt" onclick="setKlienApprovalChoice(true)">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Terima Transaksi</span>
+          </div>
+          <div class="qc-opt" id="kaNoOpt" onclick="setKlienApprovalChoice(false)">
+            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Batalkan</span>
+          </div>
+        </div>
+        <p style="font-size:11px; color:var(--muted); margin:-2px 0 16px; line-height:1.5;">Kalau ini bukan transaksi Anda atau datanya salah, pilih "Batalkan".</p>
+        <button class="btn btn-primary" id="kaConfirmBtn" onclick="confirmKlienApproval()" disabled>Kirim Konfirmasi</button>
       </div>
     </div>
 
@@ -1111,6 +1151,7 @@
           <div><h4 id="tdName" style="margin:0 0 3px; font-size:15px; font-weight:800;">Rini Wulandari</h4><span id="tdMeta" style="font-size:12px; color:var(--muted); font-weight:600;">Hari ini, 10.42</span></div>
         </div>
 
+        <div class="detail-row"><span class="k">No. Telepon</span><span class="v mono" id="tdPhone">—</span></div>
         <div class="detail-row"><span class="k">Volume</span><span class="v mono" id="tdVol">6 L</span></div>
         <div class="detail-row"><span class="k">Harga per liter</span><span class="v mono">Rp 6.500</span></div>
         <div class="detail-row"><span class="k">Total dibayar tunai</span><span class="v mono" id="tdTotal">Rp 39.000</span></div>
@@ -1137,12 +1178,47 @@
       </div>
     </div>
 
+    <!-- ===================== AGEN: KONFIRMASI PEMBAYARAN TUNAI DARI DRIVER ===================== -->
+    <div class="modal-overlay" id="agenPayConfirmSheet">
+      <div class="modal-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head"><h3>Konfirmasi Pembayaran Tunai</h3><div class="sheet-close" onclick="closeSheet('agenPayConfirmSheet')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+        <p style="font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 16px;">Driver <b id="apDriverName">Ahmad Fauzi</b> melaporkan sudah membayar tunai untuk pickup minyak jelantah hari ini. Konfirmasi kalau uangnya sudah benar-benar Anda terima.</p>
+        <div class="total-preview" style="margin-bottom:18px;"><span class="k">Jumlah diterima</span><span class="v" id="apAmount">Rp 3.510.000</span></div>
+        <div class="qc-toggle" style="margin-bottom:6px;">
+          <div class="qc-opt" id="apYesOpt" onclick="setAgenPayConfirm(true)">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Ya, Sudah Diterima</span>
+          </div>
+          <div class="qc-opt" id="apNoOpt" onclick="setAgenPayConfirm(false)">
+            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Belum / Ada Masalah</span>
+          </div>
+        </div>
+        <p style="font-size:11px; color:var(--muted); margin:-2px 0 16px; line-height:1.5;">Kalau pilih "Belum / Ada Masalah", laporan ini otomatis dikirim ke Kilang sebagai sengketa pembayaran.</p>
+        <button class="btn btn-primary" id="apConfirmBtn" onclick="confirmAgenPayment()" disabled>Kirim Konfirmasi</button>
+      </div>
+    </div>
+
     <!-- ===================== AGEN: INPUT TRANSAKSI SHEET ===================== -->
     <div class="modal-overlay" id="txSheet">
       <div class="modal-sheet">
         <div class="sheet-handle"></div>
         <div class="sheet-head"><h3>Input Transaksi Baru</h3><div class="sheet-close" onclick="closeSheet('txSheet')"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
-        <div class="field"><label>Email Klien</label><input type="email" id="txEmail" placeholder="nama@email.com"><div class="hint">Dipakai untuk mencocokkan akun Klien — nama saja tidak unik.</div></div>
+
+        <div class="pay-tabs">
+          <div class="pay-tab active" id="txTabRegistered" onclick="setTxMode('registered')">Klien Terdaftar</div>
+          <div class="pay-tab" id="txTabGuest" onclick="setTxMode('guest')">Tamu (Belum Punya Akun)</div>
+        </div>
+
+        <div id="txRegisteredWrap">
+          <div class="field"><label>Email Klien</label><input type="email" id="txEmail" placeholder="nama@email.com"><div class="hint">Dipakai untuk mencocokkan akun Klien — nama saja tidak unik.</div></div>
+        </div>
+        <div id="txGuestWrap" style="display:none">
+          <div class="field"><label>Nama Tamu</label><input type="text" id="txGuestName" placeholder="Nama pemilik minyak"><div class="hint">Tamu belum punya akun BioJelan — dicatat pakai nama &amp; no. telepon saja.</div></div>
+        </div>
+        <div class="field"><label>No. Telepon</label><input type="tel" id="txPhone" placeholder="08xx-xxxx-xxxx"><div class="hint" id="txPhoneHint">Buat konfirmasi dan menghubungi Klien kalau perlu.</div></div>
+
         <div class="field">
           <label>Volume (liter)</label>
           <input type="number" id="txVol" placeholder="Contoh: 8" oninput="calcTotal()">
@@ -1212,13 +1288,7 @@
         <div id="payCashWrap">
           <div class="cash-note">
             <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
-            <span>Bayarkan <b class="mono">Rp 3.510.000</b> tunai ke Agen, lalu minta Agen masukkan OTP di bawah ini sebagai bukti terima.</span>
-          </div>
-          <div class="otp-row">
-            <input class="otp-box" maxlength="1" oninput="otpMove(this)">
-            <input class="otp-box" maxlength="1" oninput="otpMove(this)">
-            <input class="otp-box" maxlength="1" oninput="otpMove(this)">
-            <input class="otp-box" maxlength="1" oninput="otpMove(this)">
+            <span>Bayarkan <b class="mono">Rp 3.510.000</b> tunai ke Agen. Setelah Anda kirim, Agen yang mengonfirmasi penerimaan lewat app mereka sendiri — bukan lewat HP Anda.</span>
           </div>
         </div>
 
@@ -1380,6 +1450,8 @@
     document.querySelectorAll('.tab[data-role="'+currentMobileRole+'"]').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
     const c = el.querySelector('.content'); if(c) c.scrollTop = 0;
     if(currentMobileRole==='driver' && name==='route') renderStopList();
+    if(currentMobileRole==='agen' && name==='home') refreshAgenPaymentBanner();
+    if(currentMobileRole==='klien' && name==='home') refreshKlienApprovalBanner();
   }
 
   function tabTap(name){
@@ -1532,11 +1604,29 @@
     showToast('Redirect ke WhatsApp Agen untuk atur jemput ke rumah');
   }
 
+  function refreshKlienBeranda(){
+    const icon = document.getElementById('klienRefreshIcon');
+    const btn = document.getElementById('klienRefreshBtn');
+    btn.disabled = true;
+    icon.style.transition = 'transform .6s ease';
+    icon.style.transform = 'rotate(360deg)';
+    setTimeout(()=>{
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      document.getElementById('klienUpdatedTime').textContent = 'Diperbarui ' + hh + '.' + mm + ' oleh Kilang';
+      icon.style.transform = 'rotate(0deg)';
+      btn.disabled = false;
+      showToast('Harga & Agen terdekat diperbarui');
+    }, 650);
+  }
+
   /* ---------- Upgrade ke Agen (baru) ---------- */
   function openUpgradeAgenSheet(){
     if(klienAgenStatus === 'pending'){ showToast('Pengajuan Anda masih ditinjau Kilang.'); return; }
     document.getElementById('uaName').value = '';
     document.getElementById('uaAddress').value = '';
+    document.getElementById('uaMapsLink').value = '';
     document.getElementById('uaPhone').value = '';
     const box = document.getElementById('uaCamera');
     box.classList.remove('filled');
@@ -1553,7 +1643,10 @@
   function submitUpgradeAgen(){
     const name = document.getElementById('uaName').value.trim();
     const addr = document.getElementById('uaAddress').value.trim();
+    const mapsLink = document.getElementById('uaMapsLink').value.trim();
     if(!name || !addr){ showToast('Lengkapi nama usaha dan alamat dulu.'); return; }
+    if(!mapsLink){ showToast('Tempel link Google Maps lokasi usaha dulu.'); return; }
+    if(!/^https?:\/\//i.test(mapsLink)){ showToast('Link Google Maps tidak valid.'); return; }
     klienAgenStatus = 'pending';
     closeSheet('upgradeAgenSheet');
     document.getElementById('upgradeAgenLabel').textContent = 'Menunggu Persetujuan Kilang';
@@ -1577,9 +1670,24 @@
 
   function openTxSheet(){
     document.getElementById('txEmail').value = '';
+    document.getElementById('txGuestName').value = '';
+    document.getElementById('txPhone').value = '';
     document.getElementById('txVol').value = '';
     document.getElementById('txTotal').textContent = 'Rp 0';
+    setTxMode('registered');
     openSheet('txSheet');
+  }
+
+  let txMode = 'registered'; // 'registered' | 'guest'
+  function setTxMode(mode){
+    txMode = mode;
+    document.getElementById('txTabRegistered').classList.toggle('active', mode === 'registered');
+    document.getElementById('txTabGuest').classList.toggle('active', mode === 'guest');
+    document.getElementById('txRegisteredWrap').style.display = mode === 'registered' ? 'block' : 'none';
+    document.getElementById('txGuestWrap').style.display = mode === 'guest' ? 'block' : 'none';
+    document.getElementById('txPhoneHint').textContent = mode === 'guest'
+      ? 'Wajib diisi — satu-satunya cara menghubungi tamu karena belum punya akun.'
+      : 'Buat konfirmasi dan menghubungi Klien kalau perlu.';
   }
 
   let activeTxRow = null;
@@ -1590,8 +1698,10 @@
 
     document.getElementById('tdAvatar').textContent = initials;
     document.getElementById('tdAvatar').className = 'tx-avatar' + (el.dataset.status === 'cancelled' ? ' cancel' : '');
-    document.getElementById('tdName').textContent = name;
+    const guestTag = el.dataset.guest === 'true' ? ' <span class="chip chip-todo" style="font-size:9.5px; padding:2px 8px; vertical-align:middle;">Tamu</span>' : '';
+    document.getElementById('tdName').innerHTML = name + guestTag;
     document.getElementById('tdMeta').textContent = el.dataset.time;
+    document.getElementById('tdPhone').textContent = el.dataset.phone || '—';
     document.getElementById('tdVol').textContent = el.dataset.vol;
     document.getElementById('tdTotal').textContent = el.dataset.total;
     document.getElementById('tdReason').value = '';
@@ -1610,12 +1720,17 @@
       statusEl.textContent = 'Dibatalkan';
       statusEl.style.color = 'var(--rust)';
       cancelledNote.style.display = 'flex';
-      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Komplain disetujui Kilang — ' + el.dataset.reason) : 'Transaksi ini sudah dibatalkan.';
+      document.getElementById('tdCancelledReason').textContent = el.dataset.reason ? ('Alasan: ' + el.dataset.reason) : 'Transaksi ini sudah dibatalkan.';
     } else if(el.dataset.status === 'pending_cancel'){
       statusEl.textContent = 'Dalam Peninjauan';
       statusEl.style.color = 'var(--amber-deep)';
       pendingNote.style.display = 'flex';
       document.getElementById('tdPendingReason').textContent = 'Sedang ditinjau Kilang — alasan komplain: ' + (el.dataset.reason || '-');
+    } else if(el.dataset.status === 'pending_klien'){
+      statusEl.textContent = 'Menunggu Klien';
+      statusEl.style.color = 'var(--amber-deep)';
+      pendingNote.style.display = 'flex';
+      document.getElementById('tdPendingReason').textContent = 'Menunggu Klien menekan Terima/Batalkan di app-nya sendiri.';
     } else {
       statusEl.style.color = 'var(--primary)';
       if(el.dataset.day === 'today'){
@@ -1659,41 +1774,126 @@
   }
 
   function saveTx(){
-    const email = document.getElementById('txEmail').value.trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('Masukkan email Klien yang valid.'); return; }
+    const phone = document.getElementById('txPhone').value.trim();
+    if(!/^(\+62|0)8[0-9]{8,12}$/.test(phone.replace(/[\s-]/g,''))){ showToast('Masukkan no. telepon yang valid.'); return; }
+
+    let name, isGuestTx = false;
+    if(txMode === 'guest'){
+      name = document.getElementById('txGuestName').value.trim();
+      if(!name){ showToast('Isi nama tamu terlebih dahulu.'); return; }
+      isGuestTx = true;
+    } else {
+      const email = document.getElementById('txEmail').value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('Masukkan email Klien yang valid.'); return; }
+      name = email; // ditampilkan apa adanya; nama asli Klien didapat dari akun saat sudah tersinkron
+    }
+
     const vol = parseFloat(document.getElementById('txVol').value) || 0;
     if(vol <= 0){ showToast('Isi volume terlebih dahulu.'); return; }
     const total = vol * 6500;
-    const name = email; // ditampilkan apa adanya; nama asli Klien didapat dari akun saat sudah tersinkron
-    const localPart = email.split('@')[0];
-    const initials = localPart.substring(0,2).toUpperCase();
+    const initials = name.replace(/[^a-zA-Z ]/g,' ').trim().split(/\s+/).map(w=>w[0]).join('').substring(0,2).toUpperCase() || 'TM';
+
+    const guestTag = isGuestTx ? ' <span class="chip chip-todo" style="font-size:9.5px; padding:2px 8px; vertical-align:middle;">Tamu</span>' : '';
 
     const row = document.createElement('div');
     row.className = 'tx-row';
     row.setAttribute('onclick', 'openTxDetail(this)');
     row.dataset.id = 'tx-new-' + Date.now();
     row.dataset.name = name;
+    row.dataset.phone = phone;
+    row.dataset.guest = isGuestTx ? 'true' : 'false';
     row.dataset.time = 'Baru saja';
     row.dataset.vol = vol + ' L';
     row.dataset.total = 'Rp ' + total.toLocaleString('id-ID');
     row.dataset.day = 'today';
-    row.dataset.status = 'ok';
+    row.dataset.status = isGuestTx ? 'ok' : 'pending_klien';
+    const stBadge = isGuestTx ? '<div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div>' : '<div class="st pending">Menunggu Klien</div>';
     row.innerHTML = '<div class="tx-avatar">'+initials+'</div>'
-      + '<div class="tx-mid"><h4>'+name+'</h4><div class="d">Baru saja &middot; '+vol+' L</div></div>'
-      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div><div class="st ok">Tercatat</div><div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div></div>'
+      + '<div class="tx-mid"><h4>'+name+guestTag+'</h4><div class="d">Baru saja &middot; '+vol+' L</div></div>'
+      + '<div class="tx-right"><div class="amt">Rp '+total.toLocaleString('id-ID')+'</div>'+stBadge+'</div>'
       + '<svg class="tx-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>';
     document.getElementById('txListFull').prepend(row);
 
+    if(!isGuestTx){
+      pendingKlienApprovals.push({ rowEl: row, klienName: name, vol: vol+' L', total: 'Rp '+total.toLocaleString('id-ID') });
+      refreshKlienApprovalBanner();
+    }
+
     closeSheet('txSheet');
     showScreen('transaksi');
-    showToast('Transaksi '+name+' tersimpan');
+    showToast(isGuestTx ? 'Transaksi '+name+' tersimpan' : 'Transaksi terkirim — menunggu konfirmasi Klien');
+  }
+
+  /* ---------- Konfirmasi transaksi dari sisi Klien (approval Agen -> Klien) ---------- */
+  let pendingKlienApprovals = []; // queue: {rowEl, klienName, vol, total} — transaksi input Agen yang menunggu Terima/Batalkan dari Klien
+  let klienApprovalChoice = null;
+
+  function refreshKlienApprovalBanner(){
+    const banner = document.getElementById('klienApprovalBanner');
+    if(!banner) return;
+    if(pendingKlienApprovals.length > 0){
+      const next = pendingKlienApprovals[0];
+      document.getElementById('klienApprovalVol').textContent = next.vol;
+      document.getElementById('klienApprovalTotal').textContent = next.total;
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+  function openKlienApprovalSheet(){
+    if(pendingKlienApprovals.length === 0) return;
+    const next = pendingKlienApprovals[0];
+    document.getElementById('kaVol').textContent = next.vol;
+    document.getElementById('kaTotal').textContent = next.total;
+    klienApprovalChoice = null;
+    document.getElementById('kaYesOpt').className = 'qc-opt';
+    document.getElementById('kaNoOpt').className = 'qc-opt';
+    document.getElementById('kaConfirmBtn').disabled = true;
+    openSheet('klienApprovalSheet');
+  }
+  function setKlienApprovalChoice(val){
+    klienApprovalChoice = val;
+    document.getElementById('kaYesOpt').className = 'qc-opt' + (val === true ? ' sel-good' : '');
+    document.getElementById('kaNoOpt').className = 'qc-opt' + (val === false ? ' sel-bad' : '');
+    document.getElementById('kaConfirmBtn').disabled = false;
+  }
+  function confirmKlienApproval(){
+    if(klienApprovalChoice === null) return;
+    const pending = pendingKlienApprovals.shift();
+    closeSheet('klienApprovalSheet');
+    refreshKlienApprovalBanner();
+    // Catatan prototipe: baris transaksi Agen (rowEl) dimutasi langsung di sini karena satu
+    // sesi browser dipakai buat semua role. Di app KMP nanti ini lewat API accept/cancel,
+    // bukan referensi DOM seperti ini.
+    const row = pending ? pending.rowEl : null;
+    if(row){
+      const stEl = row.querySelector('.st');
+      if(klienApprovalChoice === true){
+        row.dataset.status = 'ok';
+        stEl.textContent = 'Tercatat';
+        stEl.className = 'st ok';
+        const rightWrap = row.querySelector('.tx-right');
+        if(rightWrap && !rightWrap.querySelector('.cancel-hint')){
+          rightWrap.insertAdjacentHTML('beforeend', '<div class="cancel-hint"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>Bisa diajukan komplain</div>');
+        }
+      } else {
+        row.dataset.status = 'cancelled';
+        row.dataset.reason = 'Dibatalkan oleh Klien';
+        stEl.textContent = 'Dibatalkan';
+        stEl.className = 'st no';
+        const hintEl = row.querySelector('.cancel-hint');
+        if(hintEl) hintEl.remove();
+        row.querySelector('.tx-avatar').classList.add('cancel');
+      }
+    }
+    showToast(klienApprovalChoice === true ? 'Transaksi diterima' : 'Transaksi dibatalkan');
   }
 
   /* ============================================================
      DRIVER
      ============================================================ */
-  const ORDER = ['assigned','onway','arrived','checked','completed'];
-  const LABELS = {assigned:'Assigned', onway:'On the Way', arrived:'Arrived', checked:'Checked', completed:'Completed'};
+  const ORDER = ['assigned','onway','arrived','checked','awaiting_confirm','completed'];
+  const LABELS = {assigned:'Assigned', onway:'On the Way', arrived:'Arrived', checked:'Checked', awaiting_confirm:'Menunggu Konfirmasi', completed:'Completed'};
   const ACTION_LABEL = {assigned:'Mulai Perjalanan', onway:'Saya Sudah Tiba', arrived:'Hitung Dirigen & Cek Kualitas', checked:'Foto & Selesaikan Pembayaran'};
 
   let stops = [
@@ -1704,6 +1904,8 @@
   let activeIndex = 1;
   let qcResult = null;
   let payMethod = 'cash';
+  let pendingCashConfirm = null; // {stopIndex, driverName, amount} — laporan tunai yang menunggu dikonfirmasi Agen di app-nya sendiri
+  let agenPayConfirmChoice = null;
 
   function renderStopList(){
     const wrap = document.getElementById('stopList');
@@ -1716,6 +1918,7 @@
       if(s.status === 'completed') chip = '<span class="chip chip-done">Selesai</span>';
       else if(s.status === 'cancelled') chip = '<span class="chip chip-skip">Dilewati</span>';
       else if(s.status === 'rejected') chip = '<span class="chip chip-skip">Ditolak QC</span>';
+      else if(s.status === 'awaiting_confirm') chip = '<span class="chip chip-todo">Menunggu Agen</span>';
       else if(isCurrent) chip = '<span class="chip chip-active">'+LABELS[s.status]+'</span>';
       const numContent = s.status === 'completed' ? '&#10003;' : (i+1);
       const row = document.createElement('div');
@@ -1770,6 +1973,11 @@
       btn.disabled = true;
       skip.style.display = 'none';
       proofWrap.innerHTML = '<div class="proof-thumb"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><span>Foto bukti &amp; pembayaran sudah terkirim ke Kilang</span></div>';
+    } else if(s.status === 'awaiting_confirm'){
+      btn.textContent = 'Menunggu Agen Konfirmasi...';
+      btn.disabled = true;
+      skip.style.display = 'none';
+      proofWrap.innerHTML = '<div class="proof-thumb" style="border-color:var(--amber); background:var(--amber-tint);"><div class="ic" style="background:var(--amber-deep);"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><span>Laporan tunai sudah dikirim — menunggu Agen konfirmasi di app-nya sendiri</span></div>';
     } else if(s.status === 'cancelled'){
       btn.textContent = 'Stop dilewati';
       btn.disabled = true;
@@ -1887,37 +2095,91 @@
     document.getElementById('payTabTransfer').classList.toggle('active', method==='transfer');
     document.getElementById('payCashWrap').style.display = method==='cash' ? 'block' : 'none';
     document.getElementById('payTransferWrap').style.display = method==='transfer' ? 'block' : 'none';
-    document.getElementById('payConfirmBtn').textContent = method==='cash' ? 'Konfirmasi Diterima & Selesaikan Stop' : 'Bayar Sekarang & Selesaikan Stop';
-  }
-  function otpMove(el){
-    if(el.value.length === 1){
-      const next = el.nextElementSibling;
-      if(next && next.classList.contains('otp-box')) next.focus();
-    }
-    el.classList.toggle('filled', el.value.length === 1);
+    document.getElementById('payConfirmBtn').textContent = method==='cash' ? 'Kirim ke Agen untuk Konfirmasi' : 'Bayar Sekarang & Selesaikan Stop';
   }
   function confirmPayment(){
     if(!document.getElementById('cameraBox').classList.contains('filled')){
       showToast('Ambil foto bukti dulu sebelum menyelesaikan stop');
       return;
     }
-    if(payMethod === 'cash'){
-      const boxes = document.querySelectorAll('#payCashWrap .otp-box');
-      const filled = Array.from(boxes).every(b => b.value.length === 1);
-      if(!filled){ showToast('Minta Agen isi OTP lengkap dulu sebagai bukti terima'); return; }
-    }
+    const chosenMethod = payMethod;
     const s = stops[activeIndex];
-    s.status = 'completed';
+    const stopIndex = activeIndex;
+
     closeSheet('payModal');
     document.getElementById('cameraBox').classList.remove('filled');
     document.getElementById('cameraLabel').textContent = 'Foto 5 dirigen + banner bersama Agen';
-    document.querySelectorAll('#payCashWrap .otp-box').forEach(b=>{ b.value=''; b.classList.remove('filled'); });
     setPayMethod('cash');
-    renderStepper(s.status);
-    renderAction(s);
-    showToast(payMethod === 'cash' ? 'Pembayaran tunai dikonfirmasi, laporan terkirim ke Kilang' : 'Transfer Midtrans terkirim, laporan terkirim ke Kilang');
-    const next = stops.findIndex(st => st.status === 'assigned' || st.status === 'onway' || st.status === 'arrived' || st.status === 'checked');
-    if(next !== -1){ activeIndex = next; }
+
+    if(chosenMethod === 'cash'){
+      s.status = 'awaiting_confirm';
+      pendingCashConfirm = { stopIndex: stopIndex, driverName: 'Ahmad Fauzi', amount: 'Rp 3.510.000' };
+      renderStepper(s.status);
+      renderAction(s);
+      renderStopList();
+      showToast('Laporan tunai terkirim — menunggu Agen konfirmasi di app-nya');
+      refreshAgenPaymentBanner();
+    } else {
+      s.status = 'completed';
+      renderStepper(s.status);
+      renderAction(s);
+      renderStopList();
+      showToast('Transfer Midtrans terkirim, laporan terkirim ke Kilang');
+      const next = stops.findIndex(st => st.status === 'assigned' || st.status === 'onway' || st.status === 'arrived' || st.status === 'checked');
+      if(next !== -1){ activeIndex = next; }
+    }
+  }
+
+  /* ---------- Konfirmasi pembayaran tunai dari sisi Agen ---------- */
+  function refreshAgenPaymentBanner(){
+    const banner = document.getElementById('agenPayBanner');
+    if(!banner) return;
+    if(pendingCashConfirm){
+      document.getElementById('agenPayDriverName').textContent = pendingCashConfirm.driverName;
+      document.getElementById('agenPayAmount').textContent = pendingCashConfirm.amount;
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+  function openAgenPayConfirmSheet(){
+    if(!pendingCashConfirm) return;
+    document.getElementById('apDriverName').textContent = pendingCashConfirm.driverName;
+    document.getElementById('apAmount').textContent = pendingCashConfirm.amount;
+    agenPayConfirmChoice = null;
+    document.getElementById('apYesOpt').className = 'qc-opt';
+    document.getElementById('apNoOpt').className = 'qc-opt';
+    document.getElementById('apConfirmBtn').disabled = true;
+    openSheet('agenPayConfirmSheet');
+  }
+  function setAgenPayConfirm(val){
+    agenPayConfirmChoice = val;
+    document.getElementById('apYesOpt').className = 'qc-opt' + (val === true ? ' sel-good' : '');
+    document.getElementById('apNoOpt').className = 'qc-opt' + (val === false ? ' sel-bad' : '');
+    document.getElementById('apConfirmBtn').disabled = false;
+  }
+  function confirmAgenPayment(){
+    if(agenPayConfirmChoice === null) return;
+    const pending = pendingCashConfirm;
+    closeSheet('agenPayConfirmSheet');
+    pendingCashConfirm = null;
+    refreshAgenPaymentBanner();
+    // Catatan prototipe: Driver & Agen berbagi satu sesi browser yang sama di sini,
+    // jadi status stop Driver langsung disinkronkan begitu Agen menekan konfirmasi.
+    // Di app KMP nanti ini lewat notifikasi/API, bukan variabel bersama seperti ini.
+    const s = pending ? stops[pending.stopIndex] : null;
+    if(agenPayConfirmChoice === true){
+      if(s) s.status = 'completed';
+      showToast('Konfirmasi terkirim — laporan pickup selesai ke Kilang');
+    } else {
+      if(s) s.status = 'checked';
+      showToast('Dilaporkan sebagai sengketa pembayaran ke Kilang');
+    }
+    if(s && document.getElementById('screen-driver-stop').classList.contains('active') && activeIndex === pending.stopIndex){
+      renderStepper(s.status);
+      renderAction(s);
+    }
+    renderStopList();
   }
 
   let selectedReason = null;
