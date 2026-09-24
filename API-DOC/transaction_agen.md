@@ -1,7 +1,10 @@
 # Agent-to-Driver Transaction - API Documentation
+
 ---
+
 Base URL: `http://biojelan.id`
 This transaction is used for selling oil from an Agent to a Refinery. In the application, a Driver represents the Refinery, creates the transaction, and collects oil from the Agent.
+
 ## Endpoint Driver
 | Method | Endpoint                                               | Description                               | User Authorized |
 | ------ | ------------------------------------------------------ | ----------------------------------------- | --------------- |
@@ -17,7 +20,9 @@ This transaction is used for selling oil from an Agent to a Refinery. In the app
 | GET    | `/api/agent/driver/transactions`                        | Agent gets all transactions with drivers  | Agent            |
 | POST   | `/api/agent/transaction/{transaction_id}/cancel-accept` | Agent accepts cancellation                | Agent            |
 | POST   | `/api/agent/transaction/{transaction_id}/cancel-reject` | Agent rejects cancellation                   | Agent            |
+
 ---
+
 # Section Driver
 ## **1. Driver Create Transaction**
 Endpoint: `/api/driver/transaction`
