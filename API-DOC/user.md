@@ -56,7 +56,7 @@ Response Body - Success: (agen)
             "account_number": "xxx",
             "open_at": "08:00",
             "close_at": "20:00",
-            "open_day": [
+            "open_days": [
                 "senin",
                 "selasa",
                 "rabu",
@@ -95,7 +95,6 @@ Request Body: (klien and kilang)
 {
     "name": "Test Update",
     "email": "testupdate@mail.com",
-    "password": "new-password",
     "phone": "081319306263"
 }
 ```
@@ -105,7 +104,6 @@ Request Body: (agen)
 {
     "name": "Test Update",
     "email": "testupdate@mail.com",
-    "password": "new-password",
     "phone": "081319306263",
     "agen": {
         "address": "xxx",
@@ -115,7 +113,7 @@ Request Body: (agen)
         "account_number": "xxx",
         "open_at": "08:00",
         "close_at": "20:00",
-        "open_day": [
+        "open_days": [
             "senin",
             "selasa",
             "rabu",
@@ -151,7 +149,7 @@ Response Body - Success: (agen)
 {
     "data": {
         "user_id": "userid123",
-        "role_id": 7,
+        "role_id": 6,
         "name": "Test Update",
         "email": "testupdate@mail.com",
         "phone": "081319306263",
@@ -166,7 +164,7 @@ Response Body - Success: (agen)
             "account_number": "xxx",
             "open_at": "08:00",
             "close_at": "20:00",
-            "open_day": [
+            "open_days": [
                 "senin",
                 "selasa",
                 "rabu",
@@ -221,7 +219,6 @@ Response Body - Error:
 
 Method: `GET`
 Endpoint: `/api/user/agen`
-Authorization: `Bearer <token>`
 
 Response Body - Success:
 ```json
@@ -238,7 +235,7 @@ Response Body - Success:
             "open_at": "08:00",
             "close_at": "20:00",
             "is_open": true,
-            "open_day": [
+            "open_days": [
                 "senin",
                 "selasa",
                 "rabu",
@@ -259,7 +256,7 @@ Response Body - Success:
             "open_at": "08:00",
             "close_at": "20:00",
             "is_open": true,
-            "open_day": [
+            "open_days": [
                 "senin",
                 "selasa",
                 "rabu",
