@@ -1,10 +1,12 @@
 package id.biojelan.app.data.mock
 
+import id.biojelan.app.data.remote.AgenSummaryDto
 import id.biojelan.app.data.remote.ApiResult
-import id.biojelan.app.data.remote.CheckClientByEmailRequest
-import id.biojelan.app.data.remote.CheckClientByPhoneRequest
+import id.biojelan.app.data.remote.AuthPayload
 import id.biojelan.app.data.remote.LoginRequest
+import id.biojelan.app.data.remote.PickupStatusDto
 import id.biojelan.app.data.remote.RegisterRequest
+import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.remote.TransactionStatusDto
 import id.biojelan.app.data.remote.UserDto
 import io.ktor.http.HttpMethod
@@ -12,9 +14,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 
 /**
- * Fallback API client: meniru respons backend Laravel asli (`biojelan-be-dashboard`) dengan data
- * dummy dari [MockData]. Path & alur sudah dicocokkan ke routes/api.php + controller-nya, bukan
- * ke API-DOC/*.md lama.
+ * Fallback API client: meniru respons backend dengan data dummy dari [MockData].
  *
  * Dipanggil oleh `ApiClient` saat request ke server gagal (network error) dan
  * `AppConfig.ENABLE_FALLBACK` aktif. Semua method mengembalikan [ApiResult] supaya
@@ -77,83 +77,64 @@ class MockApiClient(private val json: Json) {
 
         // ============ User ============
 
-        method == HttpMethod.Get && path == "/api/user" -> currentMockUser()
+        method == HttpMethod.Get && path == "/api/user" -> {
+            currentMockUser()
+        }
 
-        method == HttpMethod.Patch && path == "/api/user" -> currentMockUser() // anggap update berhasil
+        method == HttpMethod.Patch && path == "/api/user" -> {
+            // Return user saat ini (anggap update berhasil)
+            currentMockUser()
+        }
 
         method == HttpMethod.Delete && path == "/api/user" -> Unit
 
-        // ============ Agen List (publik, GET /api/user/agen) ============
+        // ============ Agen List ============
 
-        method == HttpMethod.Get && path.startsWith("/api/user/agen") -> MockData.agenList
+        method == HttpMethod.Get && path == "/api/user/agen" -> {
+            MockData.agenList
+        }
 
-        // ============ Agent transactions ============
+        // ============ Transactions ============
 
-        method == HttpMethod.Post && path == "/api/agent/transaction" -> {
-            // Buat transaksi baru (return data yang masuk akal, status awal selalu PENDING)
+        method == HttpMethod.Post && path == "/api/agen-transaction" -> {
+            // Buat transaksi baru (return data yang masuk akal)
             MockData.agenTransactions.first().copy(
-                transactionId = "trx-clients-mock-${System.currentTimeMillis()}",
-                status = "PENDING",
+                transactionId = "TXN-MOCK-${System.currentTimeMillis()}",
+                status = "pending",
             )
         }
 
-        method == HttpMethod.Get && path == "/api/agent/clients/transactions" -> MockData.agenTransactions
-
-        method == HttpMethod.Post && path == "/api/agent/check-clients-email" -> {
-            val req = json.decodeFromString(CheckClientByEmailRequest.serializer(), bodyJson!!)
-            if (req.clientEmail == MockData.clientLookup.clientEmail) MockData.clientLookup
-            else MockData.clientLookup.copy(isExist = false, clientId = "", clientName = "")
+        method == HttpMethod.Get && path == "/api/klien-transaction/status" -> {
+            MockData.klienLatestPending
         }
 
-        method == HttpMethod.Post && path == "/api/agent/check-clients-phone" -> {
-            val req = json.decodeFromString(CheckClientByPhoneRequest.serializer(), bodyJson!!)
-            if (req.clientPhone == MockData.clientLookup.clientPhone) MockData.clientLookup
-            else MockData.clientLookup.copy(isExist = false, clientId = "", clientName = "")
+        method == HttpMethod.Post && path == "/api/klien-transaction/accept" -> {
+            TransactionStatusDto(transactionId = "TXN-002", status = "accepted")
         }
 
-        method == HttpMethod.Post && matchesTransactionAction(path, "agent", null, "cancel") != null -> {
-            TransactionStatusDto(transactionId = matchesTransactionAction(path, "agent", null, "cancel")!!, status = "CANCEL_REQUESTED")
+        method == HttpMethod.Post && path == "/api/klien-transaction/cancel" -> {
+            TransactionStatusDto(transactionId = "TXN-002", status = "cancelled")
         }
 
-        // ============ Client transactions ============
-
-        method == HttpMethod.Get && path == "/api/client/transactions" -> MockData.klienTransactions
-
-        method == HttpMethod.Post && matchesTransactionAction(path, "client", null, "accept") != null -> {
-            TransactionStatusDto(transactionId = matchesTransactionAction(path, "client", null, "accept")!!, status = "ACCEPTED")
+        method == HttpMethod.Get && path == "/api/agen-transactions" -> {
+            MockData.agenTransactions
         }
 
-        method == HttpMethod.Post && matchesTransactionAction(path, "client", null, "reject") != null -> {
-            TransactionStatusDto(transactionId = matchesTransactionAction(path, "client", null, "reject")!!, status = "REJECTED")
+        method == HttpMethod.Get && path == "/api/klien-transactions" -> {
+            MockData.klienTransactions
         }
 
-        method == HttpMethod.Post && matchesTransactionAction(path, "client", null, "cancel-accept") != null -> {
-            TransactionStatusDto(transactionId = matchesTransactionAction(path, "client", null, "cancel-accept")!!, status = "CANCELLED")
+        // ============ Pickup (Driver) ============
+
+        method == HttpMethod.Get && path == "/api/agen/pickup/status" -> {
+            MockData.agenPickupStatus
         }
-
-        method == HttpMethod.Post && matchesTransactionAction(path, "client", null, "cancel-reject") != null -> {
-            TransactionStatusDto(transactionId = matchesTransactionAction(path, "client", null, "cancel-reject")!!, status = "ACCEPTED")
-        }
-
-        // ============ Pickup (Driver) — endpoint fiktif, lihat Dtos.kt ============
-
-        method == HttpMethod.Get && path == "/api/agen/pickup/status" -> MockData.agenPickupStatus
 
         // ============ Fallback ============
         else -> {
-            // Endpoint tidak dikenal, return null supaya tidak crash (parse() hanya dipanggil di
-            // ApiClient asli; jalur mock ini langsung cast, jadi null aman untuk tipe nullable).
+            // Endpoint tidak dikenal, return empty supaya tidak crash
             null
         }
-    }
-
-    /** Cocokkan path `/api/{role}/transaction/{id}/{action}`, kembalikan id-nya kalau cocok. */
-    private fun matchesTransactionAction(path: String, role: String, unused: String?, action: String): String? {
-        val prefix = "/api/$role/transaction/"
-        val suffix = "/$action"
-        if (!path.startsWith(prefix) || !path.endsWith(suffix)) return null
-        val id = path.removePrefix(prefix).removeSuffix(suffix)
-        return id.ifBlank { null }
     }
 
     private fun currentMockUser(): UserDto =

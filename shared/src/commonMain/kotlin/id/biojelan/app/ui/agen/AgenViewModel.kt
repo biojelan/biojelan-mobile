@@ -5,7 +5,6 @@ import id.biojelan.app.core.AppConfig
 import id.biojelan.app.core.isToday
 import id.biojelan.app.core.parseIsoMillis
 import id.biojelan.app.data.remote.ApiResult
-import id.biojelan.app.data.remote.ClientLookupDto
 import id.biojelan.app.data.remote.PickupStatusDto
 import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.remote.UserDto
@@ -37,13 +36,8 @@ data class AgenUiState(
     val togglingOpen: Boolean = false,
     val pickup: PickupStatusDto? = null,
     val pickupLoading: Boolean = true,
-    /** transaction_id yang lagi diproses (mis. ajukan pembatalan). */
-    val busyTxId: String? = null,
-    /** Hasil POST /api/agent/check-clients-email|phone terakhir, buat validasi sebelum submit. */
-    val clientLookup: ClientLookupDto? = null,
-    val checkingClient: Boolean = false,
 ) {
-    private val todays get() = transactions.filter { isToday(it.createdAt) && it.txStatus != TxStatus.Cancelled && it.txStatus != TxStatus.Rejected }
+    private val todays get() = transactions.filter { isToday(it.createdAt) && it.txStatus != TxStatus.Cancelled }
     val todayCount: Int get() = todays.size
     val todayLiters: Double get() = todays.sumOf { it.volumeLiter }
     val todayValue: Long get() = todays.sumOf { it.totalPrice }
@@ -78,7 +72,12 @@ class AgenViewModel(
                 _state.update { it.copy(price = price) }
             }
             launch { refreshPickup() }
-            when (val result = transactions.agentTransactions()) {
+            val agenId = session.currentUser?.agen?.agenId
+            if (agenId.isNullOrBlank()) {
+                _state.update { it.copy(loading = false, error = "Data Agen tidak ditemukan pada akun ini.") }
+                return@launch
+            }
+            when (val result = transactions.agenTransactions(agenId)) {
                 is ApiResult.Success -> {
                     val sorted = result.data.sortedByDescending { tx -> parseIsoMillis(tx.createdAt) ?: 0L }
                     _state.update { it.copy(transactions = sorted, loading = false) }
@@ -88,66 +87,22 @@ class AgenViewModel(
         }
     }
 
-    /**
-     * POST /api/agent/check-clients-email atau -phone — dipanggil sambil Agen mengetik di form
-     * transaksi baru, supaya nama Client kelihatan sebelum submit (atau ketahuan belum terdaftar).
-     */
-    fun checkClient(email: String?, phone: String?) {
-        val e = email?.trim().orEmpty()
-        val p = phone?.trim().orEmpty()
-        if (e.isBlank() && p.isBlank()) {
-            _state.update { it.copy(clientLookup = null, checkingClient = false) }
-            return
-        }
-        viewModelScope.launch {
-            _state.update { it.copy(checkingClient = true) }
-            val result = if (e.isNotBlank()) transactions.checkClientByEmail(e) else transactions.checkClientByPhone(p)
-            when (result) {
-                is ApiResult.Success -> _state.update { it.copy(clientLookup = result.data, checkingClient = false) }
-                is ApiResult.Failure -> _state.update { it.copy(clientLookup = null, checkingClient = false) }
-            }
-        }
-    }
-
-    fun clearClientLookup() = _state.update { it.copy(clientLookup = null, checkingClient = false) }
-
-    /**
-     * POST /api/agent/transaction. Isi salah satu [clientEmail]/[clientPhone] — harga & total
-     * dihitung server, app tidak pernah kirim angka harga. Client lalu menerima/menolak lewat
-     * app-nya sendiri.
-     */
-    fun createTransaction(clientEmail: String?, clientPhone: String?, volumeLiter: Double, note: String?, onSuccess: () -> Unit) {
+    /** POST /api/agen-transaction. Klien lalu menerima/membatalkan lewat app-nya. */
+    fun createTransaction(klienId: String, klienName: String, volumeLiter: Double, onSuccess: () -> Unit) {
+        val agenId = session.currentUser?.agen?.agenId ?: return
         if (_state.value.creating) return
         viewModelScope.launch {
             _state.update { it.copy(creating = true) }
-            when (val result = transactions.create(clientEmail, clientPhone, volumeLiter, note)) {
+            val price = _state.value.price
+            when (val result = transactions.createAsAgen(agenId, klienId, klienName, volumeLiter, price)) {
                 is ApiResult.Success -> {
-                    toast("Transaksi dikirim — menunggu konfirmasi Klien")
+                    toast("Transaksi dikirim ke ${klienName.trim()} — menunggu konfirmasi Klien")
                     onSuccess()
                     refresh()
                 }
                 is ApiResult.Failure -> toast(result.message)
             }
-            _state.update { it.copy(creating = false, clientLookup = null) }
-        }
-    }
-
-    /**
-     * POST /api/agent/transaction/{id}/cancel — MENGAJUKAN pembatalan (bukan cancel final). Cuma
-     * valid dari status Pending/Accepted; Client yang final terima/tolak pengajuannya.
-     */
-    fun requestCancel(transactionId: String) {
-        if (_state.value.busyTxId != null) return
-        viewModelScope.launch {
-            _state.update { it.copy(busyTxId = transactionId) }
-            when (val result = transactions.agentRequestCancel(transactionId)) {
-                is ApiResult.Success -> {
-                    toast("Pengajuan pembatalan dikirim — menunggu persetujuan Klien")
-                    refresh()
-                }
-                is ApiResult.Failure -> toast(result.message)
-            }
-            _state.update { it.copy(busyTxId = null) }
+            _state.update { it.copy(creating = false) }
         }
     }
 
@@ -167,16 +122,9 @@ class AgenViewModel(
         }
     }
 
-    /** Ikon jam di topbar tab Stok (`#screen-agen-stok`) — di prototype cuma munculin info, bukan aksi nyata. */
-    fun infoStockHistory() = toast("Riwayat lengkap pergerakan stok")
-
-    /** Link "Ada selisih catatan stok?" di bawah tab Stok — koreksi stok belum ada endpoint-nya. */
-    fun infoStockCorrection() = toast("Fitur koreksi stok belum tersedia — hubungi Kilang untuk perbaikan catatan.")
-
     /**
-     * GET /api/agen/pickup/status — endpoint ini TIDAK ADA di backend asli (lihat catatan di
-     * Dtos.kt), jadi selalu gagal dan [pickup] selalu null. Dibiarkan aman (tidak memblokir
-     * transaksi/profil) sampai backend beneran punya fitur pickup.
+     * GET /api/agen/pickup/status. Dipanggil bersamaan dengan [refresh]; kegagalan di sini tidak
+     * memblokir tampilan transaksi/profil — status penjemputan cuma disembunyikan (null).
      */
     private suspend fun refreshPickup() {
         _state.update { it.copy(pickupLoading = true) }

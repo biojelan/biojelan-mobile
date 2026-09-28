@@ -5,11 +5,10 @@ import id.biojelan.app.core.AppConfig
 import id.biojelan.app.data.local.SessionStore
 import id.biojelan.app.data.mock.MockApiClient
 import id.biojelan.app.data.remote.ApiClient
-import id.biojelan.app.data.repository.ApiPriceProvider
 import id.biojelan.app.data.repository.AuthRepository
+import id.biojelan.app.data.repository.ConfigPriceProvider
 import id.biojelan.app.data.repository.PickupRepository
 import id.biojelan.app.data.repository.PriceProvider
-import id.biojelan.app.data.repository.PriceRepository
 import id.biojelan.app.data.repository.SessionManager
 import id.biojelan.app.data.repository.TransactionRepository
 import id.biojelan.app.data.repository.UserRepository
@@ -49,12 +48,11 @@ private val dataModule = module {
     single { SessionManager(get(), get()) }
     single { MockApiClient(get()) }
     single { ApiClient(get(), get(), get(), get()) }
-    single<PriceProvider> { ApiPriceProvider(get()) }
+    single<PriceProvider> { ConfigPriceProvider() }
     single { AuthRepository(get(), get(), get()) }
     single { UserRepository(get(), get(), get()) }
     single { TransactionRepository(get(), get()) }
     single { PickupRepository(get(), get()) }
-    single { PriceRepository(get(), get()) }
 }
 
 private val viewModelModule = module {

@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import id.biojelan.app.core.AppConfig
 import id.biojelan.app.core.formatDateTime
 import id.biojelan.app.core.formatLiter
 import id.biojelan.app.core.formatNumber
@@ -35,7 +36,6 @@ import id.biojelan.app.core.formatRelativeDateTime
 import id.biojelan.app.core.formatRupiah
 import id.biojelan.app.core.formatRupiahCompact
 import id.biojelan.app.core.initialsOf
-import id.biojelan.app.data.remote.ClientLookupDto
 import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.repository.TxStatus
 import id.biojelan.app.data.repository.txStatus
@@ -44,7 +44,6 @@ import id.biojelan.app.ui.chipKind
 import id.biojelan.app.ui.components.BioButton
 import id.biojelan.app.ui.components.BioField
 import id.biojelan.app.ui.components.BioSheet
-import id.biojelan.app.ui.components.BtnStyle
 import id.biojelan.app.ui.components.CircleIconButton
 import id.biojelan.app.ui.components.DetailRow
 import id.biojelan.app.ui.components.EmptyBlock
@@ -126,82 +125,65 @@ fun AgenTransactionsTab(state: AgenUiState, vm: AgenViewModel, onNewTransaction:
 
     val selected = state.transactions.firstOrNull { it.transactionId == selectedId }
     if (selected != null) {
-        AgenTxDetailSheet(
-            tx = selected,
-            busy = state.busyTxId == selected.transactionId,
-            onRequestCancel = { vm.requestCancel(selected.transactionId) },
-            onDismiss = { selectedId = null },
-        )
+        AgenTxDetailSheet(selected) { selectedId = null }
     }
 }
 
 @Composable
-private fun AgenTxDetailSheet(tx: TransactionDto, busy: Boolean, onRequestCancel: () -> Unit, onDismiss: () -> Unit) {
+private fun AgenTxDetailSheet(tx: TransactionDto, onDismiss: () -> Unit) {
     val c = BioTheme.colors
     val s = BioText.current
     BioSheet(s.transactionDetailTitle, onDismiss) {
         DetailRow(s.labelTransactionId, tx.transactionId, mono = true)
         DetailRow(s.labelDate, formatDateTime(tx.createdAt))
         DetailRow(s.labelClient, tx.counterpartName(Viewer.Agen))
+        DetailRow(s.labelClientId, tx.klienId, mono = true)
         DetailRow(s.labelVolume, formatLiter(tx.volumeLiter))
         DetailRow(s.labelPricePerLiter, formatRupiah(tx.price))
         DetailRow(s.labelTotal, formatRupiah(tx.totalPrice), mono = true, valueColor = c.primary)
         DetailRow(
             s.labelStatus, tx.txStatus.label(Viewer.Agen), last = true,
             valueColor = when (tx.txStatus) {
-                TxStatus.Cancelled, TxStatus.Rejected -> c.rust
-                TxStatus.Pending, TxStatus.CancelRequested -> c.amberDeep
+                TxStatus.Cancelled -> c.rust
+                TxStatus.Pending -> c.amberDeep
                 else -> c.primary
             },
         )
         Spacer(Modifier.height(14.dp))
         when (tx.txStatus) {
             TxStatus.Pending -> NoteBox(s.pendingAgenNote, tone = NoteTone.Amber)
-            TxStatus.Rejected -> NoteBox(s.rejectedAgenNote, tone = NoteTone.Rust, icon = BioIcons.Alert)
-            TxStatus.CancelRequested -> NoteBox(s.cancelRequestedAgenNote, tone = NoteTone.Amber)
             TxStatus.Cancelled -> NoteBox(s.cancelledAgenNote, tone = NoteTone.Rust, icon = BioIcons.Alert)
             else -> Unit
-        }
-        // Agen cuma bisa MENGAJUKAN pembatalan (status jadi CancelRequested) — Klien yang final
-        // menentukan lewat cancel-accept/cancel-reject di app-nya sendiri.
-        if (tx.txStatus == TxStatus.Pending || tx.txStatus == TxStatus.Accepted) {
-            Spacer(Modifier.height(14.dp))
-            BioButton(s.requestCancelTransaction, onClick = onRequestCancel, style = BtnStyle.Rust, loading = busy, modifier = Modifier.fillMaxWidth())
         }
     }
 }
 
 @Composable
 fun NewTransactionSheet(
-    clientLookup: ClientLookupDto?,
-    checkingClient: Boolean,
+    price: Long,
     creating: Boolean,
-    onCheckClient: (email: String?, phone: String?) -> Unit,
-    onSubmit: (clientEmail: String?, clientPhone: String?, volumeLiter: Double, note: String?) -> Unit,
+    onSubmit: (klienId: String, klienName: String, volumeLiter: Double) -> Unit,
     onDismiss: () -> Unit,
 ) {
     val c = BioTheme.colors
     val s = BioText.current
-    var email by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
+    var klienId by remember { mutableStateOf("") }
+    var klienName by remember { mutableStateOf("") }
     var volumeText by remember { mutableStateOf("") }
-    var note by remember { mutableStateOf("") }
     var errors by remember { mutableStateOf(emptyMap<String, String>()) }
 
     val volume = volumeText.trim().replace(',', '.').toDoubleOrNull()
-
-    fun checkNow() = onCheckClient(email.trim().ifBlank { null }, phone.trim().ifBlank { null })
+    val total = if (volume != null && volume > 0) kotlin.math.round(volume * price).toLong() else 0L
 
     fun submit() {
         val found = buildMap {
-            if (email.isBlank() && phone.isBlank()) put("contact", s.errorClientContactRequired)
+            if (klienId.isBlank()) put("klienId", s.errorClientIdRequired)
+            if (klienName.isBlank()) put("klienName", s.errorClientNameRequired)
             if (volume == null || volume <= 0) put("volume", s.errorVolumeRequired)
             else if (volume > 1000) put("volume", s.errorVolumeTooLarge)
         }
         errors = found
-        if (found.isEmpty() && volume != null) {
-            onSubmit(email.trim().ifBlank { null }, phone.trim().ifBlank { null }, volume, note.trim().ifBlank { null })
-        }
+        if (found.isEmpty() && volume != null) onSubmit(klienId.trim(), klienName.trim(), volume)
     }
 
     BioSheet(s.newTransactionTitle, onDismiss) {
@@ -210,40 +192,27 @@ fun NewTransactionSheet(
             icon = BioIcons.IdCard,
             modifier = Modifier.padding(bottom = 16.dp),
         )
-        BioField(
-            s.fieldClientEmail, email, { email = it },
-            placeholder = s.placeholderClientEmail,
-            keyboardType = KeyboardType.Email,
-            imeAction = ImeAction.Done,
-            onDone = ::checkNow,
-            error = errors["contact"],
-        )
-        BioField(
-            s.fieldClientPhone, phone, { phone = it },
-            placeholder = s.placeholderClientPhone,
-            keyboardType = KeyboardType.Phone,
-            imeAction = ImeAction.Done,
-            onDone = ::checkNow,
-        )
-        when {
-            checkingClient -> NoteBox(s.checkingClientNote)
-            clientLookup?.isExist == true -> NoteBox(s.clientFoundNote(clientLookup.clientName), tone = NoteTone.Neutral, icon = BioIcons.Check)
-            clientLookup?.isExist == false -> NoteBox(s.clientNotFoundNote, tone = NoteTone.Rust, icon = BioIcons.Alert)
-        }
+        BioField(s.fieldClientId, klienId, { klienId = it }, placeholder = s.placeholderClientId, error = errors["klienId"])
+        BioField(s.fieldClientName, klienName, { klienName = it }, placeholder = s.placeholderClientName, error = errors["klienName"])
         BioField(
             s.fieldVolume, volumeText, { volumeText = it },
             placeholder = s.placeholderVolume,
             keyboardType = KeyboardType.Decimal,
-            imeAction = ImeAction.Next,
-            error = errors["volume"],
-        )
-        BioField(
-            s.fieldTransactionNote, note, { note = it },
-            placeholder = s.placeholderTransactionNote,
             imeAction = ImeAction.Done,
             onDone = { submit() },
+            error = errors["volume"],
         )
-        NoteBox(s.priceCalculatedByServerNote, icon = BioIcons.Info, modifier = Modifier.padding(bottom = 16.dp))
+        BioField(s.fieldPricePerLiter, formatRupiah(price), {}, readOnly = true, hint = s.hintReferencePriceKilang)
+
+        Row(
+            Modifier.fillMaxWidth().background(c.primaryTint, RoundedCornerShape(14.dp)).padding(14.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(s.total, style = BioTheme.type.bodyBold, color = c.primary)
+            Text(formatRupiah(total), style = BioTheme.type.monoLarge, color = c.primary)
+        }
+        Spacer(Modifier.height(16.dp))
         BioButton(s.submitToClient, onClick = { submit() }, loading = creating, modifier = Modifier.fillMaxWidth())
     }
 }

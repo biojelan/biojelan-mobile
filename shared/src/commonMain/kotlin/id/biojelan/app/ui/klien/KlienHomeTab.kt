@@ -43,6 +43,7 @@ import id.biojelan.app.ui.components.ChipKind
 import id.biojelan.app.ui.components.CircleIconButton
 import id.biojelan.app.ui.components.ErrorBlock
 import id.biojelan.app.ui.components.LoadingBlock
+import id.biojelan.app.ui.components.NoteBox
 import id.biojelan.app.ui.components.NoteTone
 import id.biojelan.app.ui.components.PriceBand
 import id.biojelan.app.ui.components.ScreenPad
@@ -82,29 +83,10 @@ fun KlienHomeTab(
             Spacer(Modifier.height(16.dp))
             PendingTxCard(
                 tx = tx,
-                title = s.confirmTransaction,
-                counterpartName = tx.counterpartName(Viewer.Klien) { id -> state.agens.firstOrNull { it.agenId == id }?.name },
+                agenName = tx.counterpartName(Viewer.Klien) { id -> state.agens.firstOrNull { it.agenId == id }?.name },
                 busy = state.busyTxId == tx.transactionId,
-                body = s::pendingTxBody,
-                acceptLabel = s.accept,
-                cancelLabel = s.reject,
                 onAccept = { vm.accept(tx.transactionId) },
-                onCancel = { vm.reject(tx.transactionId) },
-            )
-        }
-
-        state.cancelRequestedTx?.let { tx ->
-            Spacer(Modifier.height(16.dp))
-            PendingTxCard(
-                tx = tx,
-                title = s.cancelRequestTitle,
-                counterpartName = tx.counterpartName(Viewer.Klien) { id -> state.agens.firstOrNull { it.agenId == id }?.name },
-                busy = state.busyTxId == tx.transactionId,
-                body = s::cancelRequestedTxBody,
-                acceptLabel = s.approveCancelLabel,
-                cancelLabel = s.keepTransactionLabel,
-                onAccept = { vm.acceptCancellation(tx.transactionId) },
-                onCancel = { vm.rejectCancellation(tx.transactionId) },
+                onCancel = { vm.cancel(tx.transactionId) },
             )
         }
 
@@ -127,6 +109,12 @@ fun KlienHomeTab(
                 state.agens.take(8).forEach { agen -> AgenMiniCard(agen) { onOpenAgen(agen.agenId) } }
             }
         }
+
+        Spacer(Modifier.height(20.dp))
+        NoteBox(
+            s.klienInfoNote,
+            icon = BioIcons.Info,
+        )
     }
 }
 
@@ -164,31 +152,28 @@ private fun AgenMiniCard(agen: AgenSummaryDto, onClick: () -> Unit) {
     }
 }
 
-/** Kartu konfirmasi pending: pihak lain mengajukan sesuatu (transaksi baru / pembatalan), pengguna menyetujui atau menolak. */
+/** Kartu konfirmasi: Agen sudah mencatat transaksi, Klien menerima atau membatalkan. */
 @Composable
 fun PendingTxCard(
     tx: TransactionDto,
-    title: String,
-    counterpartName: String,
+    agenName: String,
     busy: Boolean,
-    body: (counterpartName: String, volume: String) -> String,
-    acceptLabel: String,
-    cancelLabel: String,
     onAccept: () -> Unit,
     onCancel: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val c = BioTheme.colors
+    val s = BioText.current
     Column(
         modifier.fillMaxWidth().bioCard(20.dp, background = c.amberTint, border = c.amber.copy(alpha = 0.5f)).padding(16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Icon(BioIcons.Bell, contentDescription = null, tint = c.amberDeep, modifier = Modifier.size(18.dp))
-            Text(title, style = BioTheme.type.sectionTitle, color = c.amberText)
+            Text(s.confirmTransaction, style = BioTheme.type.sectionTitle, color = c.amberText)
         }
         Spacer(Modifier.height(8.dp))
         Text(
-            body(counterpartName, formatLiter(tx.volumeLiter)),
+            s.pendingTxBody(agenName, formatLiter(tx.volumeLiter)),
             style = BioTheme.type.body,
             color = c.amberText,
         )
@@ -196,8 +181,8 @@ fun PendingTxCard(
         Text(formatRupiah(tx.totalPrice), style = BioTheme.type.monoLarge, color = c.amberText)
         Spacer(Modifier.height(14.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            BioButton(cancelLabel, onCancel, Modifier.weight(1f), style = BtnStyle.Rust, enabled = !busy)
-            BioButton(acceptLabel, onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
+            BioButton(s.cancel, onCancel, Modifier.weight(1f), style = BtnStyle.Rust, enabled = !busy)
+            BioButton(s.accept, onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
         }
     }
 }

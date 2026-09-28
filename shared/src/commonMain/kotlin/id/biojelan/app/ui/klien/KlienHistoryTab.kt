@@ -106,9 +106,7 @@ fun KlienHistoryTab(state: KlienUiState, vm: KlienViewModel) {
             agenName = selected.counterpartName(Viewer.Klien, agenName),
             busy = state.busyTxId == selected.transactionId,
             onAccept = { vm.accept(selected.transactionId) { selectedId = null } },
-            onReject = { vm.reject(selected.transactionId) { selectedId = null } },
-            onApproveCancel = { vm.acceptCancellation(selected.transactionId) { selectedId = null } },
-            onKeepTransaction = { vm.rejectCancellation(selected.transactionId) { selectedId = null } },
+            onCancel = { vm.cancel(selected.transactionId) { selectedId = null } },
             onDismiss = { selectedId = null },
         )
     }
@@ -120,14 +118,12 @@ private fun KlienTxDetailSheet(
     agenName: String,
     busy: Boolean,
     onAccept: () -> Unit,
-    onReject: () -> Unit,
-    onApproveCancel: () -> Unit,
-    onKeepTransaction: () -> Unit,
+    onCancel: () -> Unit,
     onDismiss: () -> Unit,
 ) {
     val c = BioTheme.colors
     val s = BioText.current
-    var confirmStep by remember { mutableStateOf(false) }
+    var confirmCancel by remember { mutableStateOf(false) }
     BioSheet(s.transactionDetailTitle, onDismiss) {
         DetailRow(s.labelTransactionId, tx.transactionId, mono = true)
         DetailRow(s.labelDate, formatDateTime(tx.createdAt))
@@ -136,54 +132,32 @@ private fun KlienTxDetailSheet(
         DetailRow(s.labelPricePerLiter, formatRupiah(tx.price))
         DetailRow(s.labelTotal, formatRupiah(tx.totalPrice), mono = true, valueColor = c.primary)
         DetailRow(s.labelStatus, tx.txStatus.label(Viewer.Klien), last = true, valueColor = when (tx.txStatus) {
-            TxStatus.Cancelled, TxStatus.Rejected -> c.rust
-            TxStatus.Pending, TxStatus.CancelRequested -> c.amberDeep
+            TxStatus.Cancelled -> c.rust
+            TxStatus.Pending -> c.amberDeep
             else -> c.primary
         })
 
         if (tx.txStatus == TxStatus.Pending) {
             Spacer(Modifier.height(14.dp))
-            NoteBox(s.pendingKlienNote, tone = NoteTone.Amber, icon = BioIcons.Info)
+            NoteBox(
+                s.pendingKlienNote,
+                tone = NoteTone.Amber,
+                icon = BioIcons.Info,
+            )
             Spacer(Modifier.height(14.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 BioButton(
-                    if (confirmStep) s.yesReject else s.reject,
-                    onClick = { if (confirmStep) onReject() else confirmStep = true },
+                    if (confirmCancel) s.yesCancel else s.cancel,
+                    onClick = { if (confirmCancel) onCancel() else confirmCancel = true },
                     modifier = Modifier.weight(1f),
                     style = BtnStyle.Rust,
                     enabled = !busy,
                 )
                 BioButton(s.accept, onAccept, Modifier.weight(1f), loading = busy, icon = BioIcons.Check)
             }
-            if (confirmStep) {
+            if (confirmCancel) {
                 Spacer(Modifier.height(8.dp))
-                Text(s.rejectNotUndoable, style = BioTheme.type.small, color = c.rust)
-            }
-        }
-
-        if (tx.txStatus == TxStatus.CancelRequested) {
-            Spacer(Modifier.height(14.dp))
-            NoteBox(s.cancelRequestedTxBody(agenName, formatLiter(tx.volumeLiter)), tone = NoteTone.Amber, icon = BioIcons.Info)
-            Spacer(Modifier.height(14.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                BioButton(
-                    s.keepTransactionLabel,
-                    onClick = onKeepTransaction,
-                    modifier = Modifier.weight(1f),
-                    style = BtnStyle.Rust,
-                    enabled = !busy,
-                )
-                BioButton(
-                    if (confirmStep) s.yesApproveCancel else s.approveCancelLabel,
-                    onClick = { if (confirmStep) onApproveCancel() else confirmStep = true },
-                    modifier = Modifier.weight(1f),
-                    loading = busy,
-                    icon = BioIcons.Check,
-                )
-            }
-            if (confirmStep) {
-                Spacer(Modifier.height(8.dp))
-                Text(s.approveCancelNotUndoable, style = BioTheme.type.small, color = c.rust)
+                Text(s.cancelNotUndoable, style = BioTheme.type.small, color = c.rust)
             }
         }
     }

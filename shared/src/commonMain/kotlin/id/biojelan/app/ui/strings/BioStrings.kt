@@ -17,9 +17,9 @@ interface BioStrings {
     val back: String
     val save: String
     val cancel: String
-    val reject: String
     val accept: String
     val close: String
+    val total: String
     val or: String
 
     // ============================================================ Auth
@@ -54,7 +54,6 @@ interface BioStrings {
     val tabFindAgent: String
     val tabTransactions: String
     val tabStock: String
-    val tabPickup: String
     val tabHistory: String
     val tabProfile: String
 
@@ -71,13 +70,6 @@ interface BioStrings {
     val open: String
     val closed: String
     fun pendingTxBody(agenName: String, volume: String): String
-    /** Judul banner saat Agen mengajukan pembatalan transaksi yang sudah berjalan. */
-    val cancelRequestTitle: String
-    fun cancelRequestedTxBody(agenName: String, volume: String): String
-    /** Label tombol "setuju" di banner permintaan pembatalan — beda dari [accept] biasa. */
-    val approveCancelLabel: String
-    /** Label tombol "tolak, pertahankan transaksi" di banner permintaan pembatalan. */
-    val keepTransactionLabel: String
 
     // ============================================================ Agen Home
     val priceCaptionAgen: String
@@ -100,16 +92,13 @@ interface BioStrings {
     val stockThresholdInfo: String
     val stockMovement: String
     val noStockMovement: String
-    val stockCorrectionLink: String
-    val stockCorrectionToast: String
-    val stockHistoryToast: String
+    val stockCorrectionNote: String
     val stockIncoming: String
     val stockWaiting: String
     val stockCancelled: String
     fun transactionDash(name: String): String
 
     // ============================================================ Agen Pickup
-    val pickupTitle: String
     val pickupSectionTitle: String
     val pickupNoneScheduled: String
     val pickupStatusAssigned: String
@@ -120,11 +109,6 @@ interface BioStrings {
     val pickupNoteOtw: String
     val pickupNoteCompleted: String
     fun pickupUpdatedAt(time: String): String
-    val pickupStepAssigned: String
-    val pickupStepOtw: String
-    val pickupStepCompleted: String
-    val pickupIdLabel: String
-    val pickupScheduleLabel: String
 
     // ============================================================ Agen Transactions
     val transactionsTitle: String
@@ -135,16 +119,14 @@ interface BioStrings {
     val noTransactionsHint: String
     val transactionButton: String
     val pendingAgenNote: String
-    val rejectedAgenNote: String
-    val cancelRequestedAgenNote: String
     val cancelledAgenNote: String
-    val requestCancelTransaction: String
 
     // ---- Transaction detail labels
     val labelTransactionId: String
     val labelDate: String
     val labelAgent: String
     val labelClient: String
+    val labelClientId: String
     val labelVolume: String
     val labelPricePerLiter: String
     val labelTotal: String
@@ -153,22 +135,19 @@ interface BioStrings {
     // ---- New transaction sheet
     val newTransactionTitle: String
     val newTransactionNote: String
-    val fieldClientEmail: String
-    val fieldClientPhone: String
+    val fieldClientId: String
+    val fieldClientName: String
     val fieldVolume: String
-    val fieldTransactionNote: String
-    val placeholderClientEmail: String
-    val placeholderClientPhone: String
+    val fieldPricePerLiter: String
+    val placeholderClientId: String
+    val placeholderClientName: String
     val placeholderVolume: String
-    val placeholderTransactionNote: String
-    val checkingClientNote: String
-    fun clientFoundNote(name: String): String
-    val clientNotFoundNote: String
-    val priceCalculatedByServerNote: String
+    val hintReferencePriceKilang: String
     val submitToClient: String
 
     // ---- New transaction validation
-    val errorClientContactRequired: String
+    val errorClientIdRequired: String
+    val errorClientNameRequired: String
     val errorVolumeRequired: String
     val errorVolumeTooLarge: String
 
@@ -180,11 +159,8 @@ interface BioStrings {
     val noHistoryTitle: String
     val noHistoryHint: String
     val pendingKlienNote: String
-    val rejectNotUndoable: String
-    val yesReject: String
-    /** Judul konfirmasi kedua di detail transaksi saat status CancelRequested. */
-    val approveCancelNotUndoable: String
-    val yesApproveCancel: String
+    val cancelNotUndoable: String
+    val yesCancel: String
 
     // ============================================================ Guest
     val guestBannerTitle: String

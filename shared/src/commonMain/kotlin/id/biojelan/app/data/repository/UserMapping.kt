@@ -17,13 +17,11 @@ data class AgenEdit(
 /**
  * Bentuk body PATCH /api/user dari data user saat ini + perubahan.
  *
- * Backend asli: PATCH bersifat parsial (field yang tidak dikirim tidak diubah) — KECUALI saat
- * pertama kali membuat profil Agen (role_id sudah 6 tapi `agen` masih null), semua field Agen jadi
- * wajib diisi sekaligus. App tetap SELALU mengirim set lengkap field yang bisa diubah dari app (nama,
- * telepon, dan data Agen) dengan perubahan diterapkan, supaya kedua kasus itu sama-sama terpenuhi.
- * Sengaja TIDAK dikirim: `password` (punya endpoint sendiri), `email` (tidak bisa diubah dari app;
- * mengirim ulang email yang sama berisiko kena validasi unik di backend), dan `stock_liter` (dimiliki
- * server, berubah lewat transaksi, sehingga menulisnya dari app berisiko menimpa data terbaru).
+ * API-DOC tidak menjelaskan apakah PATCH bersifat parsial, jadi app SELALU mengirim set lengkap field yang
+ * bisa diubah dari app (nama, telepon, dan data Agen) dengan perubahan diterapkan. Sengaja TIDAK dikirim:
+ * `password` (punya endpoint sendiri), `email` (tidak bisa diubah dari app; mengirim ulang email yang sama
+ * berisiko kena validasi unik di backend), dan `stock_liter` (dimiliki server, berubah lewat transaksi,
+ * sehingga menulisnya dari app berisiko menimpa data terbaru).
  */
 fun UserDto.toUpdateRequest(
     name: String = this.name,
@@ -34,13 +32,13 @@ fun UserDto.toUpdateRequest(
     val a = agen
     val agenRequest = if (a == null) null else UpdateAgenRequest(
         address = agenEdit?.address ?: a.address,
-        latitude = a.latitude.takeIf { it != 0.0 },
-        longitude = a.longitude.takeIf { it != 0.0 },
+        latitude = a.latitude.takeIf { it != 0.0 }?.toString(),
+        longitude = a.longitude.takeIf { it != 0.0 }?.toString(),
         bankName = agenEdit?.bankName ?: a.bankName,
         accountNumber = agenEdit?.accountNumber ?: a.accountNumber,
         openAt = agenEdit?.openAt ?: a.openAt,
         closeAt = agenEdit?.closeAt ?: a.closeAt,
-        openDays = agenEdit?.openDays ?: a.openDays,
+        openDay = agenEdit?.openDays ?: a.openDay,
         isOpen = isOpen ?: a.isOpen,
     )
     return UpdateUserRequest(name = name, phone = phone, agen = agenRequest)

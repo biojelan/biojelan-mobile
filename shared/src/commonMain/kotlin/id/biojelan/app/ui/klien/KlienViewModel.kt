@@ -7,9 +7,9 @@ import id.biojelan.app.data.remote.AgenSummaryDto
 import id.biojelan.app.data.remote.ApiResult
 import id.biojelan.app.data.remote.TransactionDto
 import id.biojelan.app.data.remote.UserDto
+import id.biojelan.app.data.repository.SessionState
 import id.biojelan.app.data.repository.PriceProvider
 import id.biojelan.app.data.repository.SessionManager
-import id.biojelan.app.data.repository.SessionState
 import id.biojelan.app.data.repository.TransactionRepository
 import id.biojelan.app.data.repository.TxStatus
 import id.biojelan.app.data.repository.UserRepository
@@ -17,10 +17,10 @@ import id.biojelan.app.data.repository.txStatus
 import id.biojelan.app.ui.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -31,15 +31,16 @@ data class KlienUiState(
     val transactions: List<TransactionDto> = emptyList(),
     val txLoading: Boolean = true,
     val txError: String? = null,
+    /** Hasil GET /api/klien-transaction/status. */
+    val statusTx: TransactionDto? = null,
     val price: Long = AppConfig.DEFAULT_PRICE_PER_LITER,
-    /** transaction_id yang sedang diproses (accept/reject/cancel-accept/cancel-reject). */
+    /** transaction_id yang sedang diproses (accept/cancel). */
     val busyTxId: String? = null,
 ) {
-    /** Transaksi baru dari Agen yang menunggu Terima/Tolak Klien. */
-    val pendingTx: TransactionDto? get() = transactions.firstOrNull { it.txStatus == TxStatus.Pending }
-
-    /** Agen mengajukan pembatalan transaksi ini — menunggu Klien setuju/tolak. */
-    val cancelRequestedTx: TransactionDto? get() = transactions.firstOrNull { it.txStatus == TxStatus.CancelRequested }
+    /** Transaksi yang menunggu konfirmasi Klien (dari endpoint status, fallback ke daftar). */
+    val pendingTx: TransactionDto?
+        get() = statusTx?.takeIf { it.txStatus == TxStatus.Pending }
+            ?: transactions.firstOrNull { it.txStatus == TxStatus.Pending }
 
     fun agenName(agenId: String, fallback: String = ""): String =
         agens.firstOrNull { it.agenId == agenId }?.name ?: fallback.ifBlank { "Agen" }
@@ -82,39 +83,31 @@ class KlienViewModel(
         }
     }
 
-    /** GET /api/client/transactions — satu daftar ini jadi sumber riwayat + banner pending + banner cancel-request. */
     fun loadTransactions() {
+        val klienId = session.currentUser?.userId ?: return
         viewModelScope.launch {
             _state.update { it.copy(txLoading = true, txError = null) }
-            when (val result = transactions.clientTransactions()) {
+            when (val result = transactions.klienTransactions(klienId)) {
                 is ApiResult.Success -> {
                     val sorted = result.data.sortedByDescending { tx -> parseIsoMillis(tx.createdAt) ?: 0L }
                     _state.update { it.copy(transactions = sorted, txLoading = false) }
                 }
                 is ApiResult.Failure -> _state.update { it.copy(txLoading = false, txError = result.message) }
             }
+            when (val status = transactions.klienStatus()) {
+                is ApiResult.Success -> _state.update { it.copy(statusTx = status.data) }
+                is ApiResult.Failure -> Unit // opsional; daftar transaksi sudah cukup
+            }
         }
     }
 
-    /** POST /api/client/transaction/{id}/accept — PENDING -> ACCEPTED. */
     fun accept(transactionId: String, onDone: () -> Unit = {}) = act(transactionId, "Transaksi diterima. Terima kasih!", onDone) {
-        transactions.clientAccept(transactionId)
+        transactions.accept(transactionId)
     }
 
-    /** POST /api/client/transaction/{id}/reject — PENDING -> REJECTED. */
-    fun reject(transactionId: String, onDone: () -> Unit = {}) = act(transactionId, "Transaksi ditolak.", onDone) {
-        transactions.clientReject(transactionId)
+    fun cancel(transactionId: String, onDone: () -> Unit = {}) = act(transactionId, "Transaksi dibatalkan.", onDone) {
+        transactions.cancel(transactionId)
     }
-
-    /** POST /api/client/transaction/{id}/cancel-accept — setuju pembatalan yang diajukan Agen (final). */
-    fun acceptCancellation(transactionId: String, onDone: () -> Unit = {}) =
-        act(transactionId, "Pembatalan disetujui.", onDone) { transactions.clientAcceptCancellation(transactionId) }
-
-    /** POST /api/client/transaction/{id}/cancel-reject — tolak pembatalan, transaksi balik jadi Accepted. */
-    fun rejectCancellation(transactionId: String, onDone: () -> Unit = {}) =
-        act(transactionId, "Pengajuan pembatalan ditolak — transaksi tetap berjalan.", onDone) {
-            transactions.clientRejectCancellation(transactionId)
-        }
 
     private fun act(
         transactionId: String,

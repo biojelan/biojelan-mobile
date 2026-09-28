@@ -25,10 +25,8 @@ enum class PickupStatus {
 val PickupStatusDto.pickupStatus: PickupStatus get() = PickupStatus.from(status)
 
 /**
- * Endpoint di pickup.md. Hanya sisi Agen yang diimplementasikan di sini — Kilang membuat
- * penugasan dari dashboard web (di luar app ini). Sisi Driver ada dalam cakupan app mobile
- * ini juga (satu app buat Klien/Agen/Driver, bukan app terpisah), cuma belum dibangun — lihat
- * README untuk gap deteksi role Driver di `GET /api/user`.
+ * Endpoint di pickup.md. Hanya sisi Agen yang relevan untuk app mobile ini — Kilang membuat
+ * penugasan dari dashboard web, Driver punya app lapangan terpisah (lihat README).
  */
 class PickupRepository(
     private val api: ApiClient,

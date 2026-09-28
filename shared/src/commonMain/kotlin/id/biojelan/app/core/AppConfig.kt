@@ -6,7 +6,7 @@ package id.biojelan.app.core
  */
 object AppConfig {
     /** Base URL dari API-DOC. Masih http:// — ganti ke https:// begitu backend siap. */
-    const val BASE_URL = "https://biojelan.callmeoda.web.id"
+    const val BASE_URL = "http://biojelan.id"
 
     const val CONNECT_TIMEOUT_MS = 10_000L
     const val REQUEST_TIMEOUT_MS = 20_000L
@@ -27,8 +27,8 @@ object AppConfig {
     const val DEFAULT_LANGUAGE = "id"
 
     /**
-     * Nilai cadangan kalau `GET /api/price` gagal dipanggil (offline/error) atau server belum
-     * punya data harga aktif. Lihat [id.biojelan.app.data.repository.ApiPriceProvider].
+     * TODO(backend): belum ada endpoint harga. Prototype menampilkan "harga aktif dari Kilang".
+     * Sampai ada, dipakai nilai default ini (lihat [id.biojelan.app.data.repository.PriceProvider]).
      */
     const val DEFAULT_PRICE_PER_LITER = 6_500L
 

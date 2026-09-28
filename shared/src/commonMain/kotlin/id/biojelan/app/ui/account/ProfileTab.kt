@@ -98,7 +98,7 @@ fun ProfileTab(user: UserDto, account: AccountViewModel) {
             Column(Modifier.fillMaxWidth().bioCard(16.dp)) {
                 InfoItem(BioIcons.Pin, s.labelAddress, agen.address.ifBlank { "-" })
                 HairLine()
-                InfoItem(BioIcons.Clock, s.labelOperatingHours, formatOperatingHours(agen.openAt, agen.closeAt, agen.openDays))
+                InfoItem(BioIcons.Clock, s.labelOperatingHours, formatOperatingHours(agen.openAt, agen.closeAt, agen.openDay))
                 HairLine()
                 InfoItem(
                     BioIcons.Bank, s.labelBankAccount,
@@ -158,7 +158,7 @@ private fun EditProfileSheet(user: UserDto, account: AccountViewModel, onClose: 
     var accountNumber by remember { mutableStateOf(agen?.accountNumber.orEmpty()) }
     var openAt by remember { mutableStateOf(agen?.openAt.orEmpty()) }
     var closeAt by remember { mutableStateOf(agen?.closeAt.orEmpty()) }
-    var days by remember { mutableStateOf(agen?.openDays?.map { it.lowercase() }.orEmpty()) }
+    var days by remember { mutableStateOf(agen?.openDay?.map { it.lowercase() }.orEmpty()) }
     var errors by remember { mutableStateOf(emptyMap<String, String>()) }
 
     BioSheet(s.editProfileTitle, onDismiss = onClose) {
