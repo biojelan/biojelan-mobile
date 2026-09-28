@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  API BioJelan saat ini masih http:// (lihat API-DOC). Cleartext HANYA diizinkan untuk biojelan.id.
+  Begitu backend sudah punya HTTPS: ubah AppConfig.BASE_URL ke https:// dan hapus file ini
+  beserta atribut android:networkSecurityConfig di AndroidManifest.xml.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">biojelan.id</domain>
+    </domain-config>
+</network-security-config>
