@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="36eaaeb0-721a-4847-bcc0-5f82abc94c09" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/authentication.md" beforeDir="false" afterPath="$PROJECT_DIR$/API-DOC/authentication.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenPickupTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/transaction_agen.md" beforeDir="false" afterPath="$PROJECT_DIR$/API-DOC/transaction_agen.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/transaction_klien.md" beforeDir="false" afterPath="$PROJECT_DIR$/API-DOC/transaction_klien.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API-DOC/user.md" beforeDir="false" afterPath="$PROJECT_DIR$/API-DOC/user.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioJelan-Prototype-Mobile.html" beforeDir="false" afterPath="$PROJECT_DIR$/BioJelan-Prototype-Mobile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biojelan-Vault/Changelog" beforeDir="false" afterPath="$PROJECT_DIR$/Biojelan-Vault/Changelog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/licenses/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared-build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/authentication.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/pickup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/price.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/transaction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/transaction_agen.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/transaction_klien.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/API-DOC/user.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/BioJelan-Prototype-Kilang-Web.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/Biojelan-Vault/Changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/kotlin/id/biojelan/mobile/BioJelanApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/kotlin/id/biojelan/mobile/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/androidApp/src/main/res/xml/network_security_config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradle/gradle-daemon-jvm.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/Configuration/Config.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app-icon-1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/ContentView.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/iosApp/iosApp/iOSApp.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/BioJelan-Prototype-Mobile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/fonts/ibm-plex-mono-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/fonts/manrope-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/fonts/sora-OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/licenses/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/androidMain/kotlin/id/biojelan/app/core/PlatformTime.android.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/ibmplexmono_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/ibmplexmono_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/manrope_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/manrope_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/manrope_medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/manrope_regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/manrope_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/sora_bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/sora_extrabold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/composeResources/font/sora_semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/core/PlatformTime.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/local/SessionStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/ApiResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/FlexibleSerializers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/SessionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/RootViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/AccountViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthScreens.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/auth/AuthViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Basics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Inputs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Overlays.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/guest/GuestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/icons/BioIcons.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/AgenDetailScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienLocatorTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienMainScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/StringProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/commonMain/kotlin/id/biojelan/app/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/iosMain/kotlin/id/biojelan/app/MainViewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared/src/iosMain/kotlin/id/biojelan/app/core/PlatformTime.ios.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/core/AppConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/core/Format.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockApiClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/mock/MockData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/remote/Dtos.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PickupRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/PriceRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/TransactionRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/data/repository/UserMapping.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/di/Koin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/TxUi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/account/ProfileTab.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenFlow.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenHomeTab.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenPickupTab.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenStockTab.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenTransactionsTab.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/agen/AgenViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/components/Visuals.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHistoryTab.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienHomeTab.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/klien/KlienViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/BioStrings.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/EnStrings.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/commonMain/kotlin/id/biojelan/app/ui/strings/IdStrings.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[LocalEmulator::path=C:\Users\seven\.android\avd\Pixel_10_Pro_XL.avd]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Flywzen"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/biojelan/biojelan-mobile.git",
+    "accountId": "ccafd858-c1a4-45de-9afd-12702e93efa0"
+  }
+}]]></component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\seven\.gradle\wrapper\dists\gradle-9.6.1-bin\4ticwg1pgcbps2hj28r8so764\gradle-9.6.1" javaHome="C:\Program Files\Android\Android Studio1\jbr" gradleVersion="9.6.1">
+    <option name="jvmArguments">
+      <list>
+        <option value="-Didea.compose.hot-reload=true" />
+        <option value="-Didea.compose.hot-reload.version=2" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="3JwQLDsQcFY8MTThJR2mQMGDINL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.androidApp.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="androidApp" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="BioJelan.androidApp" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="36eaaeb0-721a-4847-bcc0-5f82abc94c09" name="Changes" comment="" />
+      <created>1790569595476</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1790569595476</updated>
+    </task>
+    <servers />
+  </component>
+</project>
